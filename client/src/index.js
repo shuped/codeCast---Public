@@ -5,7 +5,7 @@ import Root from './Root.jsx';
 import * as serviceWorker from './serviceWorker.js';
 import './styles/css/index.css';
 
-ReactDOM.render(
+ReactDOM.hydrate(
   <Root store={ store } />, 
   document.getElementById('root')
 );
