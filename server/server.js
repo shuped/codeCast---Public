@@ -1,33 +1,34 @@
 //const ENV = require ('dotenv');
 const express = require('express');
+const http = require('http');
 const path = require('path');
 const fs = require('fs');
-const io = require('socket.io')();
+const socket = require('socket.io');
 const morgan = require('morgan');
 
 const PORT = 8080;
-
 const app = express();
+
+const server = app.listen(PORT, () => {
+  console.log('App listening on ' + PORT)
+})
+const io = socket(server);
 
 app.use(morgan('dev', {
   skip: (req, res) => {
       return res.statusCode < 400;
   }, stream: process.stderr
 }));
-
 app.use(morgan('dev', {
   skip: (req, res) => {
       return res.statusCode >= 400;
   }, stream: process.stdout
 }));
 
-app.get('/', (req, res) => {
-  res.send('App listening');
-})
+io.on('connection', (socket) => {
+  console.log(`Socket for ${socket.id} connected`);
 
-io.on('connection', (client) => {
-
+  socket.on('disconnet', () => {
+    console.log('Socket disconnected')
+  });
 });
-
-
-io.listen(app.listen(PORT), console.log('App listening on ' + PORT));
