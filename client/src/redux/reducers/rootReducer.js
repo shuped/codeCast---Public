@@ -9,11 +9,6 @@ const counter = (state = {
   case 'DECREMENT':
     return state = state - action.payload;
   case 'ADD_MESSAGE':
-    return [
-      ...state,
-      {action.payload.message,
-      action.payload.username}
-    ]
   default:
     return state;
   }
