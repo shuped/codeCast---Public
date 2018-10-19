@@ -1,30 +1,33 @@
 //const ENV = require ('dotenv');
+const express = require('express');
+const path = require('path');
+const fs = require('fs');
+const io = require('socket.io')();
+const morgan = require('morgan');
 
-import React from 'React';
-import express from 'express';
-import path from 'path';
-import fs from 'fs';
-
-import App from '../client/src/App';
-
-const PORT = process.env.PATH || 8080;
+const PORT = 8080;
 
 const app = express();
 
-// const clientPath = '../client/public/';
+app.use(morgan('dev', {
+  skip: (req, res) => {
+      return res.statusCode < 400;
+  }, stream: process.stderr
+}));
 
-// app.use(express.static(clientPath));
+app.use(morgan('dev', {
+  skip: (req, res) => {
+      return res.statusCode >= 400;
+  }, stream: process.stdout
+}));
 
-// app.get('/*', (req, res) => {
-//   const app = ReactDOM.renderToString(<App />);
-//   const index = path.resolve(path.join(clientPath, 'index.html'));
-//   fs.readFile(index, 'utf8', (err, data) => {
-//     if (err) {
-//       console.error('Something went wrong:', err);
-//       return res.status(500).send('');
-//     }
-//   })
+app.get('/', (req, res) => {
+  res.send('App listening');
+})
 
-// });
+io.on('connection', (client) => {
 
-app.listen(PORT, console.log('server listening on ' + PORT));
+});
+
+
+io.listen(app.listen(PORT), console.log('App listening on ' + PORT));

@@ -1,10 +1,19 @@
-const counter = (state = 0, action) => {
+const counter = (state = {
+  counter: 0,
+  messages: [{},{}]
+}, action) => {
   switch (action.type) {
   case 'INCREMENT':
-    return state = state + 1;
+    return state = state + action.payload;
 
   case 'DECREMENT':
-    return state = state - 1;
+    return state = state - action.payload;
+  case 'ADD_MESSAGE':
+    return [
+      ...state,
+      {action.payload.message,
+      action.payload.username}
+    ]
   default:
     return state;
   }
