@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import io from 'socket.io-client';
-
+import Chat from './StreamComponents/chat/ChatMain';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
+        <Chat />
       </div>
     );
   }
