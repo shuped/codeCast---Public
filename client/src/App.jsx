@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+
+
 import { connect } from 'react-redux'
 import io from 'socket.io-client';
+
+//components
+import FileDirectory from './functionalComponents/fileDirectory/FileDirectory.jsx';
 
 // import logo from './assets/logo.svg';
 
@@ -13,7 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
+        <FileDirectory />
       </div>
     );
   }
