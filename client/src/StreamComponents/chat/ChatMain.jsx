@@ -4,9 +4,9 @@ import MessageList from './MessageList.jsx';
 import Chatbar from './ChatBar.jsx';
 import { messages, notifications } from './dummyMessages/messages.json';
 import uuid from 'uuid/v1';
-import socketIO from 'socket.io-client';
+import { connect } from 'react-redux';
 
-const io = socketIO.connect('localhost:8080');
+
 
 class Chat extends Component {
   constructor() {
@@ -18,13 +18,6 @@ class Chat extends Component {
       notifications: notifications,
       connections: 0
     };
-
-    io.on('connect', () => {
-      console.log('socket connected');    
-      io.emit('message', { message: 'New connection from React'}, () => {
-        console.log('connection made');
-      });
-    });
   
   }
 
@@ -78,43 +71,37 @@ class Chat extends Component {
 
   componentDidMount() {
     this.generateRandomHexColor();
-  
     
   }
-
-  // componentWillReceiveProps() {
-  //   this.io.on('message', (socket) => {
-      
-  //     socket.emit('message', { message: 'New connection from React'}, () => {
-  //       console.log('message recieved');
-  //     });
-  //   });
-
-  //   this.io.on('error', (err) => {throw err;});
-
-  //   this.io.on('message', (event) => {
-  //     io.broadcast.emit('message', { message: event.data });
-  //   });
-  //   // this.io.on('message', (event) => {
-  //   //   let dataString = event.data;
-  //   //   let data = JSON.parse(dataString);
-      
-  //   //   data.type === 'connections' ? this.setState({'connections': data.content}) : this.updateState(data.type, data); 
-  //   // });
-  // }
 
   render() {
     return (
       <div className='chat-main'>
         <div className='chat-container'>
           <Messages>
-            <MessageList uuid={ uuid } images={ this.state.images } notifications={ this.state.notifications } messages={ this.state.messages } />
-            <Chatbar addMessage={ this.addMessage } updateCurrentUser={ this.updateCurrentUser } currentUser={ this.state.currentUser } />
+            <MessageList uuid={ uuid } 
+              images={ this.state.images } 
+              notifications={ this.state.notifications } 
+              messages={ this.state.messages } 
+            />
+            <Chatbar addMessage={ this.addMessage } 
+              updateCurrentUser={ this.updateCurrentUser } 
+              currentUser={ this.state.currentUser } 
+              bobSaget={ this.props.sendMessage } 
+            />
           </Messages>
         </div>
       </div>
     );
   }
 }
+const message = () => ({ type: 'server/message', payload: { username: 'Bob Saget', messageContent: 'Woooo look at me I\'m Bob Saget' } });
 
-export default Chat;
+function mapDispatchToProps(dispatch) {
+  return {
+    sendMessage: () => dispatch(message())
+    //dispatch actions here
+  };   
+}
+
+export default connect(null, mapDispatchToProps)(Chat);

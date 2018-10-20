@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Chatbar ({ addMessage, updateCurrentUser, currentUser }) {
+function Chatbar ({ addMessage, updateCurrentUser, currentUser, bobSaget }) {
 
   let textInput = React.createRef();
 
@@ -18,6 +18,7 @@ function Chatbar ({ addMessage, updateCurrentUser, currentUser }) {
       let content = event.target.value;
       if(content.length > 0) {
         if (event.target.name === 'msgInput') {
+          bobSaget();
           submitMessage(content);
           event.target.value = '';
         } else if (event.target.name === 'usernameInput') {
