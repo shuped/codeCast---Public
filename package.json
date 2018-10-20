@@ -4,9 +4,10 @@
   "description": "First commit",
   "main": "client/src/index.js",
   "scripts": {
+    "install": "concurrently 'npm install --prefix server' 'npm install --prefix client'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js",
-    "react": "npm start start --prefix client",
+    "react": "npm start --prefix client",
     "start": "concurrently 'npm run react' 'npm run server'"
   },
   "repository": {

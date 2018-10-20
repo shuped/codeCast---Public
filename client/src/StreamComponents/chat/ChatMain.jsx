@@ -18,7 +18,7 @@ class App extends Component {
       notifications: notifications,
       connections: 0
     };
-    this.socket = new WebSocket('ws://localhost:3001');
+    // this.socket = new WebSocket('ws://localhost:3001');
   }
 
   updateState = (entry, data) => {
@@ -47,7 +47,7 @@ class App extends Component {
       user: { username: this.state.currentUser, userColor: this.state.userColor },
       content: message
     };
-    this.sock.send(JSON.stringify(newMsg));
+    this.setState({ messages: this.state.messages.concat(newMsg)});
   }
 
   addNotification = (notification) => {
@@ -58,7 +58,7 @@ class App extends Component {
       timestamp: new Date(),
       content: notification
     };
-    this.sock.send(JSON.stringify(newNote));
+    this.setState({ notifications: this.state.notifications.concat(newNote)});
   }
 
   updateCurrentUser = (user) => {
@@ -72,18 +72,18 @@ class App extends Component {
   componentDidMount() {
     this.generateRandomHexColor();
 
-    this.sock.onerror = (err) => {throw err;};
+    // this.sock.onerror = (err) => {throw err;};
 
-    this.sock.onopen = () => {
-      this.sock.send('YEET');
-    };
+    // this.sock.onopen = () => {
+    //   this.sock.send('YEET');
+    // };
 
-    this.sock.onmessage = (event) => {
-      let dataString = event.data;
-      let data = JSON.parse(dataString);
+    // this.sock.onmessage = (event) => {
+    //   let dataString = event.data;
+    //   let data = JSON.parse(dataString);
       
-      data.type === 'connections' ? this.setState({'connections': data.content}) : this.updateState(data.type, data); 
-    };
+    //   data.type === 'connections' ? this.setState({'connections': data.content}) : this.updateState(data.type, data); 
+    // };
   }
 
   render() {

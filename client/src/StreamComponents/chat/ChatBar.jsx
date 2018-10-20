@@ -1,5 +1,4 @@
 import React from 'react';
-import Popup from './Popup.jsx';
 
 function Chatbar ({ addMessage, updateCurrentUser, currentUser }) {
 
@@ -34,7 +33,6 @@ function Chatbar ({ addMessage, updateCurrentUser, currentUser }) {
     <footer className="chatbar">
       <input name="usernameInput" className="chatbar-username" onKeyDown={ handleEnter } defaultValue={ currentUser } />
       <input name="msgInput" className="chatbar-message" onKeyDown={ handleEnter } ref={ textInput } placeholder="Type a message and hit ENTER" />
-      <Popup />
     </footer>
   );
 }

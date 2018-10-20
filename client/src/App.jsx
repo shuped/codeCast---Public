@@ -21,12 +21,14 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
+    state
     //state mapping here    
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
+    dispatch
     //dispatch actions here
   };   
 }
