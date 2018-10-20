@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom'
+
 import { connect } from 'react-redux'
 import io from 'socket.io-client';
+
+//components
 import FileDirectory from './functionalComponents/fileDirectory/FileDirectory.jsx';
 
 // import logo from './assets/logo.svg';
