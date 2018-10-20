@@ -1,4 +1,5 @@
 .chat-main {
+  overflow: hidden;
   display: flex;
   justify-content: start;
   min-height: 100vh;
@@ -8,14 +9,22 @@
   font-size: 16px;
 }
 .chat-container {
+  min-height: 100vh;
   max-width: 40vw;
+  display: flex;
+  flex-direction: column-reverse;
 
   .chatbar {
+    flex-grow: 1;
     background-color: black;
     border-top: 1px solid black;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     align-content: center;
     justify-content: center;
 
@@ -25,97 +34,70 @@
       border: 1px solid black;
       border-radius: 5px;
       display: flex;
-      height: 40px;
-      line-height: 40px;
+      height: 2.5rem;
+      line-height: 2.5rem;
       margin: 5px;
-      padding: 0 9px;
+      padding: 0 0.5rem;
     }
   }
-}
 
-.chatbar-info {
-  display: none;
-}
-
-.messages-container {
-  display: flex;
-
-  .message-list-container {
-    margin: 5px;
+  .messages-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    position: relative;
+    
+    .message-system {
+      display: flex;
+      flex-direction: column;
+      .message-list-container {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        margin: 1rem 1rem 10rem 1rem;
+        
+        .unreverse {
+          flex-direction: column;
+          .messages {
+            display: block;
+  
+            padding: 0.5rem;
+            margin: 0.5rem 0rem;
+          }
+          
+          .message-system {
+            width: 100%;
+            padding: 5px 20px;
+          }
+          
+          .messages-content,
+          .message-username {
+            overflow: hidden;
+            margin: 5px;
+            padding: 0 10px;
+          }
+          
+          .messages-content {
+            flex: 8;
+          }
+          
+          .message-username {
+            flex: 2;
+            font-weight: 700;
+          }
+          
+          .notifications {
+            font-weight: 600;
+            margin: 1rem 1rem 2rem 3rem;
+          }
+        }
+      }
+    }
   }
+  
 }
 
-.messages {
-  background-color: rgba(226, 226, 226, 0.486);
-  border: 1px solid rgba(155, 155, 155, 0.5);
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  padding: 0.5rem;
-  margin: 0.5rem 0rem 2rem 0rem;
-}
 
-.message-system {
-  width: 100%;
-  padding: 5px 20px;
-}
 
-.messages-content,
-.message-username {
-  overflow: hidden;
-  margin: 5px;
-  padding: 0 10px;
-}
 
-.messages-content {
-  flex: 8;
-}
-
-.message-username {
-  flex: 2;
-  font-weight: 700;
-}
-
-.notifications {
-  font-weight: 600;
-  margin: 1rem 1rem 2rem 3rem;
-}
-
-.navbar {
-  background-color: black;
-  border-bottom: 1px solid black;
-  height: 60px;
-  padding: 0 10px;
-  position: fixed;
-  display: flex;
-  justify-content: space-between;
-  align-content: center;
-  left: 0;
-  right: 0;
-  top: 0;
-
-  .user-count {
-    color: inherit;
-    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.6);
-    opacity: 0.8;
-    font-weight: 600;
-    font-size: 1.25rem;
-    margin-right: 2rem;
-    padding: 0 10px;
-  }
-}
-
-.navbar-brand {
-  color: inherit;
-  display: flex;
-  font-weight: 700;
-  font-size: 2.5rem;
-  letter-spacing: 3px;
-  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.6);
-  height: 60px;
-  line-height: 60px;
-  padding: 0 10px;
-  margin-left: 2rem;
-  text-decoration: none;
-}

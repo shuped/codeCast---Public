@@ -113,7 +113,7 @@ function MessageList({ messages, notifications, uuid }) {
           </div>}
 
         <div className={`${message.type}-content`}>
-          {parsed}
+          {message.type === 'messages' ? `$ ${parsed.join(' ')}` : parsed}
         </div>
 
       </div>
@@ -121,7 +121,11 @@ function MessageList({ messages, notifications, uuid }) {
   });
 
   return (
-    <div className="message-list-container">{elemArr}</div>
+    <div className="message-list-container">
+      <div className="unreverse">
+        {elemArr}
+      </div>
+    </div>
   );
 }
 
