@@ -30,10 +30,10 @@ function Chatbar ({ addMessage, updateCurrentUser, currentUser }) {
     }
   }
   return (
-    <footer className="chatbar">
+    <div className="chatbar">
       <input name="usernameInput" className="chatbar-username" onKeyDown={ handleEnter } defaultValue={ currentUser } />
       <input name="msgInput" className="chatbar-message" onKeyDown={ handleEnter } ref={ textInput } placeholder="Type a message and hit ENTER" />
-    </footer>
+    </div>
   );
 }
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Navbar from './Nav.jsx';
 import Messages from './Message.jsx';
 import MessageList from './MessageList.jsx';
 import Chatbar from './ChatBar.jsx';
@@ -15,8 +14,7 @@ class App extends Component {
       currentUser: 'Anonymous',
       userColor: '',
       messages: messages,
-      notifications: notifications,
-      connections: 0
+      notifications: notifications
     };
     // this.socket = new WebSocket('ws://localhost:3001');
   }
@@ -88,12 +86,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className='app-container'>
-        <Navbar userCount={ this.state.connections } />
-        <Messages>
-          <MessageList uuid={uuid} images={ this.state.images } notifications={ this.state.notifications } messages={ this.state.messages }/>
-        </Messages>
-        <Chatbar addMessage={ this.addMessage } updateCurrentUser={ this.updateCurrentUser } currentUser={ this.state.currentUser }/>
+      <div className='chat-main'>
+        <div className='chat-container'>
+          <Messages>
+            <MessageList uuid={ uuid } images={ this.state.images } notifications={ this.state.notifications } messages={ this.state.messages } />
+            <Chatbar addMessage={ this.addMessage } updateCurrentUser={ this.updateCurrentUser } currentUser={ this.state.currentUser } />
+          </Messages>
+        </div>
       </div>
     );
   }

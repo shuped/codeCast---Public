@@ -1,48 +1,36 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
-
-body {
-  background-image: black;
+.chat-main {
+  display: flex;
+  justify-content: start;
+  min-height: 100vh;
+  background-color: black;
   color: white;
   font-family: 'Courier New';
   font-size: 16px;
-  margin: 70px 0;
 }
+.chat-container {
+  max-width: 40vw;
 
-.chatbar {
-  background-color: black;
-  border-top: 1px solid black;
-  bottom: 0;
-  display: flex;
-  left: 0;
-  padding: 5px;
-  position: fixed;
-  right: 0;
-}
+  .chatbar {
+    background-color: black;
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    align-content: center;
+    justify-content: center;
 
-.chatbar-message,
-.chatbar-username,
-.chatbar-button {
-  opacity: 0.8;
-  border: 1px solid black;
-  border-radius: 5px;
-  display: block;
-  height: 40px;
-  line-height: 40px;
-  margin: 5px;
-  padding: 0 9px;
-}
-
-.chatbar-message {
-  flex: 8;
-}
-
-.chatbar-username {
-  flex: 2;
-}
-
-button .chatbar-button {
-  flex: 1;
-  background-color: rgb(177, 177, 177);
+    .chatbar-message,
+    .chatbar-username {
+      opacity: 0.8;
+      border: 1px solid black;
+      border-radius: 5px;
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      margin: 5px;
+      padding: 0 9px;
+    }
+  }
 }
 
 .chatbar-info {
@@ -51,7 +39,10 @@ button .chatbar-button {
 
 .messages-container {
   display: flex;
-  max-width: 100vw;
+
+  .message-list-container {
+    margin: 5px;
+  }
 }
 
 .messages {
@@ -59,8 +50,10 @@ button .chatbar-button {
   border: 1px solid rgba(155, 155, 155, 0.5);
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
+  justify-content: start;
   padding: 0.5rem;
-  margin: 0.5rem 1rem 2rem 0rem;
+  margin: 0.5rem 0rem 2rem 0rem;
 }
 
 .message-system {
@@ -125,9 +118,4 @@ button .chatbar-button {
   padding: 0 10px;
   margin-left: 2rem;
   text-decoration: none;
-}
-
-img.img-msg {
-  max-height: 200px;
-  max-width: 200px;
 }

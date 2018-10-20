@@ -108,20 +108,20 @@ function MessageList({ messages, notifications, uuid }) {
       <div key={id.toString()} data-time={timestamp} className={`${message.type}`}>
 
         {message.type === 'messages' &&
-          <span className='message-username' style={colorStyles}>
+          <div className='message-username' style={colorStyles}>
             {user.username || 'Anonymous'}
-          </span>}
+          </div>}
 
-        <span className={`${message.type}-content`}>
+        <div className={`${message.type}-content`}>
           {parsed}
-        </span>
+        </div>
 
       </div>
     );
   });
 
   return (
-    <div>{elemArr}</div>
+    <div className="message-list-container">{elemArr}</div>
   );
 }
 
