@@ -4,19 +4,28 @@ import MessageList from './MessageList.jsx';
 import Chatbar from './ChatBar.jsx';
 import { messages, notifications } from './dummyMessages/messages.json';
 import uuid from 'uuid/v1';
+import socketIO from 'socket.io-client';
 
+const io = socketIO.connect('localhost:8080');
 
-
-class App extends Component {
+class Chat extends Component {
   constructor() {
     super();
     this.state = {
       currentUser: 'Anonymous',
       userColor: '',
       messages: messages,
-      notifications: notifications
+      notifications: notifications,
+      connections: 0
     };
-    // this.socket = new WebSocket('ws://localhost:3001');
+
+    io.on('connect', () => {
+      console.log('socket connected');    
+      io.emit('message', { message: 'New connection from React'}, () => {
+        console.log('connection made');
+      });
+    });
+  
   }
 
   updateState = (entry, data) => {
@@ -56,7 +65,7 @@ class App extends Component {
       timestamp: new Date(),
       content: notification
     };
-    this.setState({ notifications: this.state.notifications.concat(newNote)});
+    this.setState({ notifications: this.state.notifications.concat(newNote) });
   }
 
   updateCurrentUser = (user) => {
@@ -69,20 +78,30 @@ class App extends Component {
 
   componentDidMount() {
     this.generateRandomHexColor();
-
-    // this.sock.onerror = (err) => {throw err;};
-
-    // this.sock.onopen = () => {
-    //   this.sock.send('YEET');
-    // };
-
-    // this.sock.onmessage = (event) => {
-    //   let dataString = event.data;
-    //   let data = JSON.parse(dataString);
-      
-    //   data.type === 'connections' ? this.setState({'connections': data.content}) : this.updateState(data.type, data); 
-    // };
+  
+    
   }
+
+  // componentWillReceiveProps() {
+  //   this.io.on('message', (socket) => {
+      
+  //     socket.emit('message', { message: 'New connection from React'}, () => {
+  //       console.log('message recieved');
+  //     });
+  //   });
+
+  //   this.io.on('error', (err) => {throw err;});
+
+  //   this.io.on('message', (event) => {
+  //     io.broadcast.emit('message', { message: event.data });
+  //   });
+  //   // this.io.on('message', (event) => {
+  //   //   let dataString = event.data;
+  //   //   let data = JSON.parse(dataString);
+      
+  //   //   data.type === 'connections' ? this.setState({'connections': data.content}) : this.updateState(data.type, data); 
+  //   // });
+  // }
 
   render() {
     return (
@@ -98,4 +117,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Chat;

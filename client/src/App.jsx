@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import io from 'socket.io-client';
 import Chat from './StreamComponents/chat/ChatMain';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
-
-  componentDidMount(){
-    this.socket = io('localhost:8080');
-  }
+  
   
   render() {
     return (

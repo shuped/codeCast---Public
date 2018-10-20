@@ -26,9 +26,17 @@ app.use(morgan('dev', {
 }));
 
 io.on('connection', (socket) => {
-  console.log(`Socket for ${socket.id} connected`);
+  console.log(`Socket ${socket.id} connected`);
 
-  socket.on('disconnet', () => {
-    console.log('Socket disconnected')
+  socket.on('message', (data) => {
+    socket.emit(console.log('Message:', data));
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`Socket ${socket.id} disconnected`)
+  });
+
+  socket.on('error', (err) => {
+    console.log(err, `from ${socket.id}`);
   });
 });
