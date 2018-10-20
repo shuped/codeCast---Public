@@ -44,7 +44,7 @@ io.on('connection', (socket) => {
     
     const broadcast__action = action[type] ? action[type](payload) : { type: type, payload: payload };
     console.log('Got payload:', payload);
-    socket.emit('action', broadcast__action);
+    socket.broadcast.emit('action', broadcast__action);
 
   });
 
