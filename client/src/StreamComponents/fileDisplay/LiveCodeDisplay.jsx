@@ -1,5 +1,5 @@
 import React, { Component } from 'react';  
-// import { connect } from 'react-redux';  
+import { connect } from 'react-redux';  
 // import { bindActionCreators } from 'redux';
 
 //code mirror
@@ -15,6 +15,17 @@ import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
+
+import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
+
+const mapStateToProps = (state) => ({
+  theme: state.theme
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  updateFile: (file) => dispatch(updateFile(file)),
+  changeMirrorTheme: (theme) => dispatch(changeMirrorTheme(theme))
+});
 
 class LiveCodeDisplay extends Component {  
 
@@ -60,4 +71,4 @@ class LiveCodeDisplay extends Component {
   }
 }
 
-export default LiveCodeDisplay;
+export default connect(mapStateToProps, mapDispatchToProps)(LiveCodeDisplay);

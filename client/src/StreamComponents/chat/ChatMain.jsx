@@ -11,7 +11,7 @@ import { newConnection, newMessage } from '../../redux/actions/index';
 function mapDispatchToProps(dispatch) {
   return {
     sendMessage: (msg) => dispatch(newMessage(msg)),
-    alertConnection: () => dispatch(newConnection())
+    alertConnection: () => dispatch(newConnection('New connection established from React'))
   };   
 }
 
