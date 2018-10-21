@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+
+
 import { connect } from 'react-redux'
 import io from 'socket.io-client';
 
+//components
+import LiveCodeDisplay from './functionalComponents/liveCodeDisplay/LiveCodeDisplay.jsx';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -13,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        
+        <LiveCodeDisplay />
       </div>
     );
   }
