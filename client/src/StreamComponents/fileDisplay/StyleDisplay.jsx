@@ -69,11 +69,17 @@ const styleOptions = ['3024-day','3024-night','abcdef','ambiance','base16-dark',
 function StyleList({ changeDisplayTheme }) {
 
   let styleElems = styleOptions.map((style) => {
-    return (<option className={`editor-style-${style}`}>{style}</option>);
+    let styleSplit = style.split('');
+    let propNoun = styleSplit[0].toUpperCase().concat(styleSplit.slice(1)).split(',');
+    console.log(typeof propNoun);
+    let capitalized = propNoun.join('');
+    console.log(capitalized);
+
+    return (<option key={style} className={`editor-style-${style} style-option`}>{capitalized}</option>);
   });
 
   return (
-    <select defaultValue='dracula' onChange={ changeDisplayTheme } id='select'>
+    <select className="theme-select" defaultValue='dracula' onChange={ changeDisplayTheme } id='theme-select'>
       {styleElems}
     </select>
   );

@@ -11,7 +11,6 @@
 
 .chat-container {
   min-height: 100vh;
-  max-width: 40vw;
   display: flex;
   flex-direction: column-reverse; }
   .chat-container .chatbar {
@@ -74,6 +73,27 @@
             font-weight: 600;
             margin: 1rem 1rem 2rem 3rem; }
 
+.file-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 50vw; }
+  .file-container .ReactCodeMirror, .file-container .CodeMirror {
+    height: 95vh; }
+  .file-container .theme-select-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6); }
+    .file-container .theme-select-container .select-text {
+      color: #EEE;
+      padding: 1rem;
+      margin: 0rem 1rem; }
+    .file-container .theme-select-container .theme-select {
+      padding: 1rem;
+      margin: 1rem; }
+
 body {
   margin: 0;
   padding: 0;
@@ -84,10 +104,19 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 
-
 .App {
-  min-height: 100vh; }
-
+  max-height: 100vh;
+  display: flex;
+  overflow: hidden; }
+  .App .component-container {
+    display: flex;
+    flex-direction: row; }
+    .App .component-container .Chat-display {
+      display: flex;
+      min-width: 50vw; }
+    .App .component-container .Code-display {
+      display: flex;
+      min-width: 50vw; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

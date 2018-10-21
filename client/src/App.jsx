@@ -14,8 +14,14 @@ class App extends Component {
   render() {
     return (
       <div className="App"> 
-        {/*<Chat />*/}
-        <LiveCodeDisplay />
+        <div className="component-container">
+          <div className="Chat-display">
+            <Chat />
+          </div>
+          <div className="Code-display">
+            <LiveCodeDisplay />
+          </div>
+        </div>
       </div>
     );
   }
