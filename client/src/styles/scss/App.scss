@@ -1,3 +1,6 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+@import 'partials/chat';
+
 body {
   margin: 0;
   padding: 0;
@@ -14,9 +17,11 @@ code {
 }
 
 
-// .App {
-//   text-align: center;
-// }
+
+.App {
+  min-height: 100vh;
+}
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

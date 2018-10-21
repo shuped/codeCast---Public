@@ -1,3 +1,79 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
+.chat-main {
+  overflow: hidden;
+  display: flex;
+  justify-content: start;
+  min-height: 100vh;
+  background-color: black;
+  color: white;
+  font-family: 'Courier New';
+  font-size: 16px; }
+
+.chat-container {
+  min-height: 100vh;
+  max-width: 40vw;
+  display: flex;
+  flex-direction: column-reverse; }
+  .chat-container .chatbar {
+    flex-grow: 1;
+    background-color: black;
+    border-top: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    align-content: center;
+    justify-content: center; }
+    .chat-container .chatbar .chatbar-message,
+    .chat-container .chatbar .chatbar-username {
+      opacity: 0.8;
+      border: 1px solid black;
+      border-radius: 5px;
+      display: flex;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      margin: 5px;
+      padding: 0 0.5rem; }
+  .chat-container .messages-container {
+    min-height: 100vh;
+    max-height: 100vh;
+    display: flex;
+    position: relative; }
+    .chat-container .messages-container .message-system {
+      display: flex;
+      flex-direction: column; }
+      .chat-container .messages-container .message-system .message-list-container {
+        display: flex;
+        flex-direction: column-reverse;
+        overflow-y: auto;
+        scroll-behavior: smooth;
+        margin: 1rem 1rem 10rem 1rem; }
+        .chat-container .messages-container .message-system .message-list-container .unreverse {
+          flex-direction: column; }
+          .chat-container .messages-container .message-system .message-list-container .unreverse .messages {
+            display: block;
+            padding: 0.5rem;
+            margin: 0.5rem 0rem; }
+          .chat-container .messages-container .message-system .message-list-container .unreverse .message-system {
+            width: 100%;
+            padding: 5px 20px; }
+          .chat-container .messages-container .message-system .message-list-container .unreverse .messages-content,
+          .chat-container .messages-container .message-system .message-list-container .unreverse .message-username {
+            overflow: hidden;
+            margin: 5px;
+            padding: 0 10px; }
+          .chat-container .messages-container .message-system .message-list-container .unreverse .messages-content {
+            flex: 8; }
+          .chat-container .messages-container .message-system .message-list-container .unreverse .message-username {
+            flex: 2;
+            font-weight: 700; }
+          .chat-container .messages-container .message-system .message-list-container .unreverse .notifications {
+            font-weight: 600;
+            margin: 1rem 1rem 2rem 3rem; }
+
 body {
   margin: 0;
   padding: 0;
@@ -7,8 +83,11 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; 
 }
+
+.App {
+  min-height: 100vh; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
