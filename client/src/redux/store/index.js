@@ -7,8 +7,6 @@ import { reducers } from '../reducers/rootReducer';
 const io = socketIO.connect('localhost:8080');
 const socketMW = createSocketMW(io, 'server/');
 
-
-
 const store = applyMiddleware(socketMW)(createStore)(reducers);
 
 export default store;
