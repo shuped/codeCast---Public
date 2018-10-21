@@ -7,12 +7,23 @@ function createReducer(initialState, handlers) {
   };
 }
 
-const rootReducer = createReducer({}, {
+const rootReducer = (state = {messages: []}, action) => {
+  switch(action.type) {
+  case 'server/message':
+    console.log('Action data:', action.payload);
+    return {...state, messages: action.payload};
+  default:
+    return state;
+  }
+};
+
+const newReducer = createReducer({}, {
  
 });
 
 export const reducers = combineReducers({
-  rootReducer
+  rootReducer,
+  newReducer
 });
 
 export default rootReducer;
