@@ -33,16 +33,15 @@ const actions = {
 }
 
 io.on('connection', (socket) => {
+  const clients = [];
   console.log(`Socket ${socket.id} connected`);
-
-  socket.on('message', (data) => {
-    socket.broadcast.emit(console.log('Message:', data));
-  });
-
+  clients.push(socket.id);
+  
   socket.on('action', (action) => {
+    console.log('Action received:', action);
     const { type, payload } = action;
     
-    const broadcast__action = action[type] ? action[type](payload) : { type: type, payload: payload };
+    const broadcast__action = actions[type] ? actions[type](payload) : { type: type, payload: payload };
     console.log('Got payload:', payload);
     socket.broadcast.emit('action', broadcast__action);
 
