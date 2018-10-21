@@ -74,25 +74,35 @@ import "codemirror/theme/zenburn.css";
 
 
 class LiveCodeDisplay extends React.Component {  
-  constructor(props) {  //remove for read only
-    super(props)  //remove for read only
-    this.theme = {theme: 'dracula'} //remove for read only
-  }  //remove for read only
+
+  constructor(props) {  
+    super(props)  
+    this.state = {
+      theme: 'dracula'
+    } 
+  }  
 
   // // componentDidMount() {
   // // }
 
-  updateThemeInState(newText) {  //remove for read only
-    this.setState({code: newText}) //remove for read only
-  }  //remove for read only
+  // updateThemeInState(newText) {  
+  //   this.setState({code: newText}) 
+  // }  
+
+  changeDisplayTheme = evt => {
+    // typeof evt.target.value
+    this.setState({theme: evt.target.value})
+  }
 
   render() {  
+
+    // codemirror options
     const options = {
        lineNumbers: true,
        styleActiveLine: true,
        matchBrackets: true,
-       mode: 'javascript',
-       theme: 'dracula'
+       mode: 'javascript', // reference options in folder
+       theme: this.state.theme
       //  readOnly: 'nocursor'
     }
 
@@ -109,8 +119,7 @@ class LiveCodeDisplay extends React.Component {
           // onChange={this.updateCodeInState.bind(this)}    //remove for read only
           options={options} />
 
-        <p>Select a theme: <select onchange='selectTheme()' id='select'>
-          <option selected>default</option>
+        <p>Select a theme: <select defaultValue='dracula' onChange={this.changeDisplayTheme} id='select'>
           <option>3024-day</option>
           <option>3024-night</option>
           <option>abcdef</option>
