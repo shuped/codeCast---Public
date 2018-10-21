@@ -1,5 +1,11 @@
 {
   "name": "final-project",
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

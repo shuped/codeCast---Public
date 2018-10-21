@@ -6,14 +6,16 @@ import { messages, notifications } from './dummyMessages/messages.json';
 import uuid from 'uuid/v1';
 import { connect } from 'react-redux';
 import { newConnection, newMessage } from '../../redux/actions/index';
+import store from '../../redux/store/index.js';
 
+const mapDispatchToProps = (dispatch) => ({
+  sendMessage: (msg) => dispatch(newMessage(msg)),
+  alertConnection: () => dispatch(newConnection('New connection established from React')) 
+});
 
-function mapDispatchToProps(dispatch) {
-  return {
-    sendMessage: (msg) => dispatch(newMessage(msg)),
-    alertConnection: () => dispatch(newConnection('New connection established from React'))
-  };   
-}
+const mapStateToProps = (state) => ({
+  messages: state.messages
+});
 
 class Chat extends Component {
   constructor() {
@@ -47,9 +49,8 @@ class Chat extends Component {
 
   addMessage = (message) => {
     const newMsg = {
-      status: 'outgoing',
-      id: uuid(),
       type: 'messages',
+      id: uuid(),
       timestamp: new Date(),
       user: { username: this.state.currentUser, userColor: this.state.userColor },
       content: message
@@ -60,9 +61,8 @@ class Chat extends Component {
 
   addNotification = (notification) => {
     const newNote = {
-      status: 'outgoing',
-      id: uuid(),
       type: 'notifications',
+      id: uuid(),
       timestamp: new Date(),
       content: notification
     };
@@ -81,6 +81,7 @@ class Chat extends Component {
   componentDidMount() {
     this.generateRandomHexColor();
     this.props.alertConnection();
+    console.log(store.getState());
     
   }
 
@@ -105,4 +106,4 @@ class Chat extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(Chat);
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);
