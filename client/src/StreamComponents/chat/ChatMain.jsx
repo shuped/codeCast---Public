@@ -73,7 +73,7 @@ class Chat extends Component {
   updateCurrentUser = (user) => {
     const oldUsername = this.state.currentUser;
     
-    this.setState({'currentUser': user}, () => {
+    this.setState({ 'currentUser': user }, () => {
       this.addNotification(`'${oldUsername}' changed their name to '${this.state.currentUser}'`);
     }); 
   }
