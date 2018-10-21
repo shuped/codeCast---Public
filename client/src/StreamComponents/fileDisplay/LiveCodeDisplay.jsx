@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
 
 //code mirror
-import Codemirror from 'react-codemirror';  
+import { UnControlled as CodeMirror }from 'react-codemirror2';  
 
 import StyleList from './StyleDisplay.jsx';
 
@@ -54,7 +54,7 @@ class LiveCodeDisplay extends Component {
 
     return (
       <div className="file-container">
-        <Codemirror 
+        <CodeMirror 
           value={
             ('const stuff = [1,2,3,4];',
             'var test = function() {a + b};')
