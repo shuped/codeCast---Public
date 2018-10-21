@@ -26,7 +26,6 @@ class LiveCodeDisplay extends Component {
   }
 
   changeDisplayTheme = evt => {
-    // typeof evt.target.value
     this.setState({ theme: evt.target.value });
   }
 
