@@ -70,10 +70,7 @@ function StyleList({ changeDisplayTheme }) {
 
   let styleElems = styleOptions.map((style) => {
     let styleSplit = style.split('');
-    let propNoun = styleSplit[0].toUpperCase().concat(styleSplit.slice(1)).split(',');
-    console.log(typeof propNoun);
-    let capitalized = propNoun.join('');
-    console.log(capitalized);
+    let capitalized = styleSplit[0].toUpperCase().concat(styleSplit.slice(1)).split(',').join('');
 
     return (<option key={style} className={`editor-style-${style} style-option`}>{capitalized}</option>);
   });
