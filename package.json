@@ -4,6 +4,7 @@
   "description": "First commit",
   "main": "client/src/index.js",
   "scripts": {
+    "update-all": "concurrently 'npm update' 'npm update --prefix server' 'npm update --prefix client'",
     "install-all": "concurrently 'npm install' 'npm install --prefix server' 'npm install --prefix client'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js",
@@ -23,8 +24,8 @@
   "homepage": "https://github.com/Benji-Leboe/final#readme",
   "dependencies": {
     "concurrently": "~4.0.1",
-    "react-codemirror": "^1.0.0",
-    "nodemon": "~1.18.4"
+    "nodemon": "~1.18.4",
+    "react-codemirror": "^1.0.0"
   },
   "devDependencies": {
     "remote-redux-devtools": "~0.5.13"
