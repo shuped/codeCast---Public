@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
 
 //components
-import LiveCodeDisplay from './functionalComponents/liveCodeDisplay/LiveCodeDisplay.jsx';
-//<LiveCodeDisplay />
-
-import { connect } from 'react-redux';
 import Chat from './StreamComponents/chat/ChatMain';
-
+import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
+//
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -16,7 +14,8 @@ class App extends Component {
   render() {
     return (
       <div className="App"> 
-        <Chat />
+        {/*<Chat />*/}
+        <LiveCodeDisplay />
       </div>
     );
   }
