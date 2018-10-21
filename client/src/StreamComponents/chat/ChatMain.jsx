@@ -6,7 +6,14 @@ import { messages, notifications } from './dummyMessages/messages.json';
 import uuid from 'uuid/v1';
 import { connect } from 'react-redux';
 
+const socketMessage = (msg) => ({ type: 'server/message', payload: { msg }});
 
+function mapDispatchToProps(dispatch) {
+  return {
+    sendMessage: (msg) => dispatch(socketMessage(msg))
+    //dispatch actions here
+  };   
+}
 
 class Chat extends Component {
   constructor() {
@@ -47,6 +54,7 @@ class Chat extends Component {
       user: { username: this.state.currentUser, userColor: this.state.userColor },
       content: message
     };
+    this.props.sendMessage(newMsg);
     this.setState({ messages: this.state.messages.concat(newMsg)});
   }
 
@@ -58,6 +66,7 @@ class Chat extends Component {
       timestamp: new Date(),
       content: notification
     };
+    this.props.sendMessage(newNote);
     this.setState({ notifications: this.state.notifications.concat(newNote) });
   }
 
@@ -87,21 +96,12 @@ class Chat extends Component {
             <Chatbar addMessage={ this.addMessage } 
               updateCurrentUser={ this.updateCurrentUser } 
               currentUser={ this.state.currentUser } 
-              bobSaget={ this.props.sendMessage } 
             />
           </Messages>
         </div>
       </div>
     );
   }
-}
-const message = () => ({ type: 'server/message', payload: { username: 'Bob Saget', messageContent: 'Woooo look at me I\'m Bob Saget' } });
-
-function mapDispatchToProps(dispatch) {
-  return {
-    sendMessage: () => dispatch(message())
-    //dispatch actions here
-  };   
 }
 
 export default connect(null, mapDispatchToProps)(Chat);
