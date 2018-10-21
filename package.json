@@ -23,6 +23,7 @@
   "homepage": "https://github.com/Benji-Leboe/final#readme",
   "dependencies": {
     "concurrently": "~4.0.1",
+    "react-codemirror": "^1.0.0",
     "nodemon": "~1.18.4"
   },
   "devDependencies": {
