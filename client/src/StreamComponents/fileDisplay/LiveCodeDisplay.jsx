@@ -49,7 +49,8 @@ class LiveCodeDisplay extends Component {
             ('const stuff = [1,2,3,4];',
             'var test = function() {a + b};')
           }
-          options={ options } />
+          options={ options } 
+        />
 
         <p>Select a theme: 
           <StyleList changeDisplayTheme={ this.changeDisplayTheme } />
@@ -58,8 +59,5 @@ class LiveCodeDisplay extends Component {
     );
   }
 }
-
-
-
 
 export default LiveCodeDisplay;
