@@ -1,5 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 @import 'partials/chat';
+@import 'partials/fileViewer';
 
 body {
   margin: 0;
@@ -19,7 +20,24 @@ code {
 
 
 .App {
-  min-height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  overflow: hidden;
+
+  .component-container {
+    display: flex;
+    flex-direction: row;
+
+    .Chat-display {
+      display: flex;
+      min-width: 50vw;
+    }
+
+    .Code-display {
+      display: flex;
+      min-width: 50vw;
+    }
+  }
 }
 
 

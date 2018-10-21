@@ -5,13 +5,13 @@ import Chatbar from './ChatBar.jsx';
 import { messages, notifications } from './dummyMessages/messages.json';
 import uuid from 'uuid/v1';
 import { connect } from 'react-redux';
+import { newConnection, newMessage } from '../../redux/actions/index';
 
-const socketMessage = (msg) => ({ type: 'server/message', payload: { msg }});
 
 function mapDispatchToProps(dispatch) {
   return {
-    sendMessage: (msg) => dispatch(socketMessage(msg))
-    //dispatch actions here
+    sendMessage: (msg) => dispatch(newMessage(msg)),
+    alertConnection: () => dispatch(newConnection())
   };   
 }
 
@@ -80,6 +80,7 @@ class Chat extends Component {
 
   componentDidMount() {
     this.generateRandomHexColor();
+    this.props.alertConnection();
     
   }
 

@@ -36,7 +36,7 @@ io.on('connection', (socket) => {
   console.log(`Socket ${socket.id} connected`);
 
   socket.on('message', (data) => {
-    socket.emit(console.log('Message:', data));
+    socket.broadcast.emit(console.log('Message:', data));
   });
 
   socket.on('action', (action) => {

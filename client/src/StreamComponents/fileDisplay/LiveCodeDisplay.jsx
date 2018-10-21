@@ -26,7 +26,7 @@ class LiveCodeDisplay extends Component {
   }
 
   changeDisplayTheme = evt => {
-    this.setState({ theme: evt.target.value });
+    this.setState({ theme: evt.target.value.toLowerCase() });
   }
 
   render() {  
@@ -42,8 +42,7 @@ class LiveCodeDisplay extends Component {
     };
 
     return (
-      <div>
-        <h1>Lookit this shit bruh</h1>
+      <div className="file-container">
         <Codemirror 
           value={
             ('const stuff = [1,2,3,4];',
@@ -52,9 +51,10 @@ class LiveCodeDisplay extends Component {
           options={ options } 
         />
 
-        <p>Select a theme: 
+        <span className="theme-select-container">
+          <p className="select-text">Select a theme: </p>
           <StyleList changeDisplayTheme={ this.changeDisplayTheme } />
-        </p>
+        </span>
       </div>
     );
   }
