@@ -1,17 +1,15 @@
 //const ENV = require ('dotenv');
-const app = require('express')();
-const http = require('http').Server(app);
-const path = require('path');
-const fs = require('fs');
+const app    = require('express')();
+const http   = require('http').Server(app);
+const path   = require('path');
+const fs     = require('fs');
 const morgan = require('morgan');
 
-const PORT = 8080;
+const PORT   = 8080;
 
-const server = http.listen(PORT, () => {
-  console.log('App listening on ' + PORT)
-});
+const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
-const io = require('socket.io')(server);
+const io     = require('socket.io')(server);
 
 app.use(morgan('dev', {
   skip: (req, res) => {
@@ -23,8 +21,6 @@ app.use(morgan('dev', {
       return res.statusCode >= 400;
   }, stream: process.stdout
 }));
-
-//actions[type](args);
 
 io.on('connection', (socket) => {
   
