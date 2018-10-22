@@ -1,17 +1,17 @@
 //const ENV = require ('dotenv');
-const express = require('express');
+const app = require('express')();
+const http = require('http').Server(app);
 const path = require('path');
 const fs = require('fs');
-const socket = require('socket.io');
 const morgan = require('morgan');
 
 const PORT = 8080;
-const app = express();
 
-const server = app.listen(PORT, () => {
+const server = http.listen(PORT, () => {
   console.log('App listening on ' + PORT)
-})
-const io = socket(server);
+});
+
+const io = require('socket.io')(server);
 
 app.use(morgan('dev', {
   skip: (req, res) => {
@@ -26,29 +26,41 @@ app.use(morgan('dev', {
 
 //actions[type](args);
 
-const actions = {
-  'server/message': () => {
-
-  }
-}
-
 io.on('connection', (socket) => {
+  
   const clients = [];
   console.log(`Socket ${socket.id} connected`);
   clients.push(socket.id);
+  console.log(clients);
   
   socket.on('action', (action) => {
+
+    const actions = {
+      'server/message': (payload) => {
+        console.log("Actions triggered");
+        io.emit('message', payload);
+      },
+      'server/new_connection': (payload) => {
+        console.log('Server message:', payload);
+      }
+    }
+
+    function defaultAction(type, payload) {
+      console.log("Default action triggered");
+      socket.broadcast.emit(type, payload);
+    }
+
     console.log('Action received:', action);
     const { type, payload } = action;
-    
-    const broadcast__action = actions[type] ? actions[type](payload) : { type: type, payload: payload };
-    console.log('Got payload:', payload);
-    socket.broadcast.emit('action', broadcast__action);
+    actions[type] ? actions[type](payload) : defaultAction(type, payload);
 
   });
 
   socket.on('disconnect', () => {
     console.log(`Socket ${socket.id} disconnected`)
+    let clientIndex = clients.findIndex(e => e === socket.id);
+    clients.splice(clientIndex, 1);
+    console.log(clients);
   });
 
   socket.on('error', (err) => {
