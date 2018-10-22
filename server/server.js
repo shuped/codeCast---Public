@@ -23,7 +23,7 @@ app.use(morgan('dev', {
 }));
 
 app.get('/*', (req, res) => {
-  res.statusCode(200).send({ express: 'successful connection to express' })
+  res.statusCode(200).json({ express: 'successful connection to express' })
 });
 
 io.on('connection', (socket) => {
