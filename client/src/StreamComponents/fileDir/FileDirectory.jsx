@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css'; 
 
 const TreeNode = Tree.TreeNode;
 
-class FileDirectory extends React.Component {
+class FileDirectory extends Component {
   onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
   }
