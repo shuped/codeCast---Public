@@ -27,6 +27,7 @@
     "socket.io-client": "~2.1.1",
     "uuid": "~3.3.2"
   },
+  "proxy": "http://localhost:8080",
   "scripts": {
     "electron": "electron ./src/electron-main/electron-starter",
     "start": "react-scripts start",

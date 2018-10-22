@@ -20,7 +20,11 @@
     "rules": {
         "indent": [
             "error",
+<<<<<<< HEAD
             [2,2]
+=======
+            [2, 2]
+>>>>>>> 19e00d954a140e8e15140ac87e5c861abc596452
         ],
         "linebreak-style": [
             "error",
