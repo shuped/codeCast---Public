@@ -7,8 +7,15 @@ body {
 }
 
 code {
+<<<<<<< HEAD
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
+=======
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
+
+/* .App {
+  text-align: center; } */
+>>>>>>> master
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
