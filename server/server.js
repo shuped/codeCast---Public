@@ -23,7 +23,7 @@ app.use(morgan('dev', {
 }));
 
 app.get('/*', (req, res) => {
-  res.render('../client/public/index.html')
+  res.statusCode(201).send({ express: 'successful connection to express' })
 });
 
 io.on('connection', (socket) => {
