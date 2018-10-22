@@ -9,6 +9,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.10.1",
     "pm2": "~3.2.2",
     "prop-types": "~15.6.2",
     "react": "^16.5.2",
