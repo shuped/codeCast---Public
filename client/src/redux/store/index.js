@@ -4,12 +4,9 @@ import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
 const io = socketIO.connect('localhost:8080');
 
-let lastAction = {};
+
 function executor(action, emit, next, dispatch) {
-  if (action && action.type !== lastAction.type && action.payload !== lastAction.payload) {
-    lastAction = action;
-    emit('action', action);
-  }
+  emit('action', action);
   next(action);
 }
 
