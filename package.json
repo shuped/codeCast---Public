@@ -9,7 +9,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js",
     "react": "npm start --prefix client",
-    "start": "concurrently 'npm run react' 'npm run server'"
+    "start": "concurrently --kill-others-on-fail 'npm run react' 'npm run server'"
   },
   "repository": {
     "type": "git",
