@@ -22,6 +22,10 @@ app.use(morgan('dev', {
   }, stream: process.stdout
 }));
 
+app.get('/*', (req, res) => {
+  res.render('../client/public/index.html')
+});
+
 io.on('connection', (socket) => {
   
   const clients = [];
