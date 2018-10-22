@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 //components
 import Chat from './StreamComponents/chat/ChatMain';
 import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
+import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 //
 // import logo from './assets/logo.svg';
 
@@ -15,6 +16,9 @@ class App extends Component {
     return (
       <div className="App"> 
         <div className="component-container">
+          <div className="Code-display">
+            <Video />
+          </div>
           <div className="Chat-display">
             <Chat />
           </div>
