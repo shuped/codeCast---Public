@@ -5,8 +5,12 @@ import { connect } from 'react-redux'
 import io from 'socket.io-client';
 
 //components
+<<<<<<< HEAD
 import FileDirectory from './functionalComponents/fileDirectory/FileDirectory.jsx';
 
+=======
+import LiveCodeDisplay from './functionalComponents/liveCodeDisplay/LiveCodeDisplay.jsx';
+>>>>>>> master
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -18,9 +22,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+<<<<<<< HEAD
         <div>
           <FileDirectory />
         </div>
+=======
+        <LiveCodeDisplay />
+>>>>>>> master
       </div>
     );
   }
