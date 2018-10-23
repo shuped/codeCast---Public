@@ -33,23 +33,32 @@ code {
       "Filetree Video Chat";
 
     .Filetree-display {
+      position: relative;
+      height: 100%;
+      width: 100%; 
       grid-area: Filetree;
       background-color: red;
 
     }
 
     .Video-display {
+      position: relative;
+      height: 100%;
+      width: 100%; 
       grid-area: Video;
     }
   
     .Chat-display {
+      position: relative;
+      height: 100%;
+      width: 100%; 
       grid-area: Chat;
     }
   }
 
   .component-container2 {
     display: grid;
-    height: 48vh;
+    height: 47vh;
     grid-template-columns: 50% 50%;
     grid-template-areas:
       "Code Terminal";

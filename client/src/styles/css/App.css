@@ -140,18 +140,27 @@ code {
   grid-template-areas: "Filetree Video Chat";
 }
 .App .component-container1 .Filetree-display {
+  position: relative;
+  height: 100%;
+  width: 100%;
   grid-area: Filetree;
   background-color: red;
 }
 .App .component-container1 .Video-display {
+  position: relative;
+  height: 100%;
+  width: 100%;
   grid-area: Video;
 }
 .App .component-container1 .Chat-display {
+  position: relative;
+  height: 100%;
+  width: 100%;
   grid-area: Chat;
 }
 .App .component-container2 {
   display: grid;
-  height: 48vh;
+  height: 47vh;
   grid-template-columns: 50% 50%;
   grid-template-areas: "Code Terminal";
 }
