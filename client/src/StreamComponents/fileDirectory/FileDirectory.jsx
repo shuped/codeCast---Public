@@ -2,9 +2,9 @@ import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import compareHashToServer from '../../redux/actions/index.js'
+import { compareHashToServer } from '../../redux/actions/index.js';
 
-const TreeNode = Tree.TreeNodcompareHashToServere;
+const TreeNode = Tree.TreeNode;
 
 
 class FileDirectory extends React.Component {
@@ -80,7 +80,8 @@ class FileDirectory extends React.Component {
     console.log('selected', selectedKeys, info);
     // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
-      this.props.sendHash(info.selectedNodes[0].key);
+      // this.props.sendHash(info.selectedNodes[0].key);
+      console.log(info.selectedNodes[0].key);
     }
   }
 
@@ -126,12 +127,12 @@ class FileDirectory extends React.Component {
 //   fileDir: state.directoryStucture
 // });
 
-const mapDispathToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch) => {
   return {
     sendHash: (hash) => dispatch(compareHashToServer(hash))
   }
 }
 
-export default connect(mapStateToProps, mapDispathToProps)(FileDirectory);
+export default connect(null, mapDispatchToProps)(FileDirectory);
 
 
