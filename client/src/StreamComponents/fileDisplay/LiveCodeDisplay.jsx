@@ -55,11 +55,9 @@ class LiveCodeDisplay extends Component {
     return (
       <div className="file-container">
         <CodeMirror 
-          value={
-            ('const stuff = [1,2,3,4];',
-            'var test = function() {a + b};')
-          }
+          value={'const stuff = [1,2,3,4]; \n    var test = function() {a + b}; '}
           options={ options } 
+          // value={this.state.code}
         />
 
         <span className="theme-select-container">
