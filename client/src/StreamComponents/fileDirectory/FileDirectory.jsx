@@ -2,9 +2,6 @@ import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
 
-
-var fs = require('fs');
-
 const TreeNode = Tree.TreeNode;
 
 
