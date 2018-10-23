@@ -6,10 +6,8 @@ import { connect } from 'react-redux';
 
 import Chat from './StreamComponents/chat/ChatMain';
 import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
-//
 
-import FileDirectory from './functionalComponents/fileDirectory/FileDirectory.jsx';
-
+import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
 
 // import logo from './assets/logo.svg';
 
@@ -25,9 +23,7 @@ class App extends Component {
             <Chat />
           </div>
           <div className="Code-display">
-            <div>
-              <FileDirectory />
-            </div>
+            <FileDirectory />
             <LiveCodeDisplay />
           </div>
         </div>
