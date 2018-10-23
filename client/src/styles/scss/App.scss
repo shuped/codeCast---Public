@@ -1,6 +1,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 @import 'partials/chat';
 @import 'partials/fileViewer';
+@import 'partials/video';
 
 body {
   margin: 0;
@@ -20,22 +21,53 @@ code {
 
 
 .App {
-  max-height: 100vh;
-  display: flex;
-  overflow: hidden;
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw;
+  background-color: black;
 
-  .component-container {
-    display: flex;
-    flex-direction: row;
+  .component-container1 {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: 
+      "Filetree Video Chat";
 
-    .Chat-display {
-      display: flex;
-      min-width: 50vw;
+    .Filetree-display {
+      grid-area: Filetree;
+      background-color: red;
+
     }
 
+    .Video-display {
+      grid-area: Video;
+    }
+  
+    .Chat-display {
+      grid-area: Chat;
+    }
+  }
+
+  .component-container2 {
+    display: grid;
+    height: 48vh;
+    grid-template-columns: 50% 50%;
+    grid-template-areas:
+      "Code Terminal";
+
     .Code-display {
+      position: relative;
+      height: 100%;
+      width: 100%; 
+      grid-area: Code;
+    }
+
+    .Terminal-display {
+      position: relative;
+      height: 100%;
+      width: 100%; 
       display: flex;
-      min-width: 50vw;
+      grid-area: Terminal;
+      background-color: grey;
     }
   }
 }
