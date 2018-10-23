@@ -7,10 +7,21 @@ import store from '../../redux/store/index.js';
 const TreeNode = Tree.TreeNode;
 
 //set directory state
-const mapStateToProps = (state) => ({
-  requestedFile: state.activeFileContents,
-  fileDir: state.directoryStucture
-});
+// const mapStateToProps = (state) => ({
+//   requestedFile: state.activeFileContents,
+//   fileDir: state.directoryStucture
+// });
+
+// const mapDispathToProps = (dispatch) => {
+//   return {
+//     changeView: (view) => {
+//       dispatch(setView(view))
+//     },
+//     selectCategory: (catName) => {
+//       dispatch(setCategory(catName))
+//     }
+//   }
+// }
 
 class FileDirectory extends React.Component {
 
@@ -71,25 +82,45 @@ class FileDirectory extends React.Component {
     };
   }
 
-  componentDidMount() {
 
-    this.props.alertConnection();
-    console.log(store.getState());
- 
+  renderFileContent = event => {
+    console.log("test")
+
+    console.log(event.target.key)
+
   }
+
+
+  // componentDidMount() {
+  //   this.props.alertConnection();
+  //   console.log(store.getState());
+  // }
   
-  
+  onSelect = (selectedKeys, info) => {
+    console.log('selected', selectedKeys, info);
+    console.log(info.node.isLeaf())
+    if (info.node.isLeaf() === true) {
+      console.log("test")
+      
+    }
+  }
+
+
+
   // take in file object and create nested Tree nodes
   buildTree = (treeFrom) => {
-  
+   
     let result = [];
     const fileDir = treeFrom;
     for (let file in fileDir) {
       if (typeof fileDir[file] === 'string') {
-        result.push(<TreeNode title={file} key={file + ((Math.random()*10).toString().slice(2,6))} />)
+        result.push(<TreeNode 
+          title={ file } 
+          key={ file + ((Math.random()*10).toString().slice(2,6)) } 
+        />)
 
       } else if (typeof fileDir[file] === 'object') {
-        result.push(<TreeNode title={file} key={file + ((Math.random()*10).toString().slice(2,6))}>
+        result.push(<TreeNode title={ file } key={ file + ((Math.random()*10).toString().slice(2,6)) }>
           { this.buildTree(fileDir[file]) }
         </TreeNode>)
       }
@@ -102,7 +133,7 @@ class FileDirectory extends React.Component {
       return (
         <Tree
           showLine
-          defaultExpandedKeys={['kfgkaj-0']}
+          // defaultExpandedKeys={[0-0-0']}
           onSelect={this.onSelect}
         >
           {this.buildTree(fileDir)}
@@ -112,6 +143,8 @@ class FileDirectory extends React.Component {
    
 }
 
-export default connect(mapStateToProps)(FileDirectory);
+// export default connect(mapStateToProps)(FileDirectory);
 
-// export default FileDirectory;
+export default FileDirectory;
+
+//left off trying to console.log(key of a leaf)
