@@ -2,26 +2,10 @@ import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import store from '../../redux/store/index.js';
+import compareHashToServer from '../../redux/actions/index.js'
 
-const TreeNode = Tree.TreeNode;
+const TreeNode = Tree.TreeNodcompareHashToServere;
 
-//set directory state
-// const mapStateToProps = (state) => ({
-//   requestedFile: state.activeFileContents,
-//   fileDir: state.directoryStucture
-// });
-
-// const mapDispathToProps = (dispatch) => {
-//   return {
-//     changeView: (view) => {
-//       dispatch(setView(view))
-//     },
-//     selectCategory: (catName) => {
-//       dispatch(setCategory(catName))
-//     }
-//   }
-// }
 
 class FileDirectory extends React.Component {
 
@@ -33,9 +17,9 @@ class FileDirectory extends React.Component {
       fileDir: {"projectRoot": {
   
         "firstDir": {
-          "file1": "hashRef",
-          "file2": "hashRef",
-          "file3": "hashRef",
+          "test": "hashRef1",
+          "file2": "hashRef2",
+          "file3": "hashRef3",
     
           "firstSubDir": {
             "file1":"hashRef",
@@ -83,12 +67,7 @@ class FileDirectory extends React.Component {
   }
 
 
-  renderFileContent = event => {
-    console.log("test")
 
-    console.log(event.target.key)
-
-  }
 
 
   // componentDidMount() {
@@ -96,12 +75,12 @@ class FileDirectory extends React.Component {
   //   console.log(store.getState());
   // }
   
+  //tree click handler
   onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
-    console.log(info.node.isLeaf())
+    // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
-      console.log("test")
-      
+      this.props.sendHash(info.selectedNodes[0].key);
     }
   }
 
@@ -116,7 +95,7 @@ class FileDirectory extends React.Component {
       if (typeof fileDir[file] === 'string') {
         result.push(<TreeNode 
           title={ file } 
-          key={ file + ((Math.random()*10).toString().slice(2,6)) } 
+          key={ fileDir[file] } 
         />)
 
       } else if (typeof fileDir[file] === 'object') {
@@ -140,11 +119,19 @@ class FileDirectory extends React.Component {
         </Tree>
       )
     }
-   
 }
 
-// export default connect(mapStateToProps)(FileDirectory);
 
-export default FileDirectory;
+// const mapStateToProps = (state) => ({
+//   fileDir: state.directoryStucture
+// });
 
-//left off trying to console.log(key of a leaf)
+const mapDispathToProps = (dispatch) => {
+  return {
+    sendHash: (hash) => dispatch(compareHashToServer(hash))
+  }
+}
+
+export default connect(mapStateToProps, mapDispathToProps)(FileDirectory);
+
+
