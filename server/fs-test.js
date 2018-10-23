@@ -15,10 +15,10 @@ function makeRelative(path, root) {
 
 
 function makeJSON(array) {
+  //generates JSON object from array
   let result = {};
   
   for (let file of array) {
-    // console.log(array);
     let current = result;
     let path = file.split('/');
     let targetFile = path.pop();
@@ -40,6 +40,7 @@ function makeJSON(array) {
 function done() {
   return (err, res) => {
     if (err) throw err;
+    console.log(res);
     makeJSON(res);
   }
 }
@@ -86,48 +87,4 @@ const readDir = (dir, done) => {
   });
 };
 
-
 readDir(rootDir, done());
-
-// function makeSubJSON(parent, pathArr) {
-//   let subdir = {};
-//   console.log('Parent:', parent, '; pathArr:', pathArr);
-//   [ next, ...rest ] = pathArr;
-//   console.log('PathArr:', pathArr, '; Next:', next);
-//   if (pathArr.length > 1) {
-//     for (let dir of pathArr) {
-//       console.log(dir);
-//       subdir[parent] = next ? subdir[parent][next] = makeSubJson(rest[0], rest.slice(1)) : subdir[parent] = makeSubJSON(next, rest);
-//     }
-//   } else {
-//     subdir[parent] = next;
-//   }
-//   console.log('Subdir:', subdir);
-//   return subdir;
-// }
-// if (path.length < 2) {
-//   result = {...result, file};
-// } else if (!result.hasOwnProperty(path[0])) {
-//   let rest = path.slice(1);
-//   result = {...result, [path[0]]: makeSubJSON(path[0], rest)}
-// } else if (result.hasOwnProperty(path[0])) {
-//   result[path[0]] = {...result[path[0]], [path[0]]: makeSubJSON(path[0], rest)}
-// }
-// let target = result;
-//     if (path.length > 1) {
-//       console.log('Path:', path);
-//       path.forEach((dir, i) => {
-//         console.log('Index:', i, path.length);
-//         if (i < path.length - 1) {
-//           console.log('Target:', target, '; Dir:', dir);
-//           target[dir] ? target[dir] = {[path[i+1]]: {}} : target[dir] = {[path[i + 1]]: {}};
-//           target = target[dir]
-//         } else {
-//           console.log('End target:', target);
-//           target = {[dir]: 'fileHash'};
-//           console.log(target);
-//         }
-//       });
-//     } else {
-//       target[file] = 'fileHash';
-//     }
