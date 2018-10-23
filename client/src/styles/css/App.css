@@ -144,7 +144,7 @@ code {
   height: 100%;
   width: 100%;
   grid-area: Filetree;
-  background-color: red;
+  background-color: grey;
 }
 .App .component-container1 .Video-display {
   position: relative;
