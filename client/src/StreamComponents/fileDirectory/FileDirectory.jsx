@@ -1,16 +1,23 @@
 import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
+import { connect } from 'react-redux';
+import store from '../../redux/store/index.js';
 
 const TreeNode = Tree.TreeNode;
 
+//set directory state
+const mapStateToProps = (state) => ({
+  requestedFile: state.activeFileContents,
+  fileDir: state.directoryStucture
+});
 
 class FileDirectory extends React.Component {
 
 
   constructor() {
     super();
-    // this.state = { files: this.props.files || [] };
+    // this.state = { fileDir: this.props.files };
     this.state = {
       fileDir: {"projectRoot": {
   
@@ -62,9 +69,17 @@ class FileDirectory extends React.Component {
     }
       
     };
-  
   }
 
+  componentDidMount() {
+
+    this.props.alertConnection();
+    console.log(store.getState());
+ 
+  }
+  
+  
+  // take in file object and create nested Tree nodes
   buildTree = (treeFrom) => {
   
     let result = [];
@@ -72,6 +87,7 @@ class FileDirectory extends React.Component {
     for (let file in fileDir) {
       if (typeof fileDir[file] === 'string') {
         result.push(<TreeNode title={file} key={file + ((Math.random()*10).toString().slice(2,6))} />)
+
       } else if (typeof fileDir[file] === 'object') {
         result.push(<TreeNode title={file} key={file + ((Math.random()*10).toString().slice(2,6))}>
           { this.buildTree(fileDir[file]) }
@@ -79,10 +95,8 @@ class FileDirectory extends React.Component {
       }
     }
     return result;
-  }
+  };
   
-
-
     render() {
       const fileDir = this.state.fileDir;
       return (
@@ -96,11 +110,8 @@ class FileDirectory extends React.Component {
       )
     }
    
-
 }
 
+export default connect(mapStateToProps)(FileDirectory);
 
-
-
-
-export default FileDirectory;
+// export default FileDirectory;
