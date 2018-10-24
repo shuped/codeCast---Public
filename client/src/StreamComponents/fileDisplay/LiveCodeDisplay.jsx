@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 //code mirror
 import { UnControlled as CodeMirror }from 'react-codemirror2';  
-
 import StyleList from './StyleDisplay.jsx';
 
 // syntax highlighting
@@ -16,6 +15,8 @@ import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
+
+//
 
 import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
 
@@ -34,17 +35,18 @@ class LiveCodeDisplay extends Component {
   constructor(props) {  
     super(props); 
     this.state = {
+      mime: 'text/javascript',
       theme: 'dracula',
-      activeFileContents: `round1 = int(raw_input("Enter score for round 1: ")); \n    round2 = int(raw_input("Enter score for round 2: ")) `
+      activeFileContents: `var test = [1,2,3,4]; \n    function stuff() {console.log(test)} `
     };
   }
 
-  changeDisplayMode = () => {
-    editor.setOption("mode", modeInput.value);
-    CodeMirror.autoLoadMode(editor, modeInput.value);
+  // changeDisplayMode = (language) => {
+  //   editor.setOption("mode", language);
+  //   CodeMirror.autoLoadMode(editor, modeInput.value);
 
 
-  }
+  // }
 
   changeDisplayTheme = evt => {
     this.setState({ theme: evt.target.value.toLowerCase() });
@@ -57,7 +59,7 @@ class LiveCodeDisplay extends Component {
       lineNumbers: true,
       styleActiveLine: true,
       matchBrackets: true,
-      mode: 'python', // reference options in folder
+      mode: this.state.mime, // reference options in folder
       theme: this.state.theme
       //  readOnly: 'nocursor'
     };
@@ -80,18 +82,3 @@ class LiveCodeDisplay extends Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LiveCodeDisplay);
-
-
-
-// CodeMirror.modeURL = "../mode/%N/%N.js";
-// var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
-//   lineNumbers: true
-// });
-// var modeInput = document.getElementById("mode");
-// CodeMirror.on(modeInput, "keypress", function(e) {
-//   if (e.keyCode == 13) change();
-// });
-// function change() {
-//    editor.setOption("mode", modeInput.value);
-//    CodeMirror.autoLoadMode(editor, modeInput.value);
-// }
