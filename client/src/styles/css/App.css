@@ -101,13 +101,15 @@ main .currentStream {
   border: 2px solid black;
   background-color: aquamarine;
   width: 75%;
-  margin: 2em 2em; }
+  margin: 2em 4em; }
   main .currentStream .currentStreamBanner {
     display: flex;
     justify-content: space-between; }
     main .currentStream .currentStreamBanner h3 {
       font-size: 2em;
-      margin-left: 2em; }
+      margin-left: 1em; }
+    main .currentStream .currentStreamBanner h4 {
+      font-size: 1.5em; }
     main .currentStream .currentStreamBanner h5 {
       font-size: 1.2em;
       margin-right: 10em; }
