@@ -9,65 +9,57 @@ class ScheduledStream extends Component {
   constructor(props) {  
     super(props); 
     this.state = {
-      scheduledStreams: {
-        stream1: {
+      scheduledStreams: [
+        {
           title: 'Python',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           startDate: 'Thusday, Aug 12 2016',
           image: null
         },
-        stream1: {
+        {
           title: 'Javascript',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           startDate: 'Wednesday, April 11 2017',
           image: null
         }
-      }
+      ]
     };
+  
   }
 
 
 
- MakeStreamCard = (props) => {
-  // const { title, description, startDate, image } = props.message;
-  return (
-    <div className="message" >
-      <span className="message-username" style={{color: color}}>{username}</span>
-      <span className="message-content">{content}</span>
-    </div>
-  )
-}
-
-function MessageList(props) {
-
-  const passedMessages = props.messages.map( (message) => {
+  MakeStreamCard = (props) => {
+    const { title, description, startDate, imagePath } = props;
+    // missing image path
     return (
-      message.type === 'incomingMessage'
-        ? <ChatMessage key={message.id} message={message}/>
-        : <SystemMessage key={message.id} message={message} />
+      <div className="upStream" >
+        <div className="upStreamBanner">
+          <h3>{ title }</h3>
+          <h5>{ startDate }</h5>
+        </div>
+        <p>{ description }</p>
+      </div>
     )
-  });
-  return (
-    <main className="messages">
-      {passedMessages}
-    </main>
-  );
-}
-
-export default MessageList;
+  }
 
   render() {  
+    
+    const renderStreams = this.state.scheduledStreams.map( (stream) => {
+      return this.MakeStreamCard(stream)  
+    });
 
     return (
-      <div className="Upcoming-container">
-        <p>Hello world</p>
-      </div>
+      <main className="streams">
+        {renderStreams}
+      </main>
     );
   }
+
 }
 
 // const mapStateToProps = (state) => ({
 //   theme: state.theme,
 // });
 
-export default connect(mapStateToProps, null)(ScheduledStream);
+export default connect(null, null)(ScheduledStream);
