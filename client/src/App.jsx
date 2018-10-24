@@ -22,7 +22,7 @@ class App extends Component {
       <div className="App">
 
         <div className='index-view'>
-          <ScheduledStreamCard />
+          <ScheduledStreams />
         </div>
 
 
