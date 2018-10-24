@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 //code mirror
 import { UnControlled as CodeMirror }from 'react-codemirror2';  
-
 import StyleList from './StyleDisplay.jsx';
 
 // syntax highlighting
 import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/mode/python/python.js';
 
 // add ons 
 import 'codemirror/addon/selection/active-line.js';
@@ -16,10 +16,13 @@ import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
 
+//
+
 import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
 
 const mapStateToProps = (state) => ({
-  theme: state.theme
+  theme: state.theme,
+  // activeFileContents: 'const stuff = [1,2,3,4]; \n    var test = function() {a + b}; '
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,9 +35,18 @@ class LiveCodeDisplay extends Component {
   constructor(props) {  
     super(props); 
     this.state = {
-      theme: 'dracula'
+      mime: 'text/javascript',
+      theme: 'dracula',
+      activeFileContents: `var test = [1,2,3,4]; \n    function stuff() {console.log(test)} `
     };
   }
+
+  // changeDisplayMode = (language) => {
+  //   editor.setOption("mode", language);
+  //   CodeMirror.autoLoadMode(editor, modeInput.value);
+
+
+  // }
 
   changeDisplayTheme = evt => {
     this.setState({ theme: evt.target.value.toLowerCase() });
@@ -47,7 +59,7 @@ class LiveCodeDisplay extends Component {
       lineNumbers: true,
       styleActiveLine: true,
       matchBrackets: true,
-      mode: 'javascript', // reference options in folder
+      mode: this.state.mime, // reference options in folder
       theme: this.state.theme
       //  readOnly: 'nocursor'
     };
@@ -55,7 +67,7 @@ class LiveCodeDisplay extends Component {
     return (
       <div className="file-container">
         <CodeMirror 
-          value={'const stuff = [1,2,3,4]; \n    var test = function() {a + b}; '}
+          value={ this.state.activeFileContents }
           options={ options } 
           // value={this.state.code}
         />
