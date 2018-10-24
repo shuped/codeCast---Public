@@ -12,7 +12,8 @@
   "dependencies": {
     "express": "~4.16.4",
     "mime-types": "~2.1.21",
-    "socket.io": "~2.1.1"
+    "socket.io": "~2.1.1",
+    "uuid": "~3.3.2"
   },
   "devDependencies": {
     "morgan": "~1.9.1",

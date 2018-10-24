@@ -1,11 +1,12 @@
 const fs = require('fs');
 const util = require('util');
 const path = require('path');
+const uuid = require('uuid/v1');
 
 const rootDir = path.join(__dirname, '..');
 
-function makeRelative(path, root) {
-  let pathArr = path.split('/');
+function makeRelative(fpath, root) {
+  let pathArr = fpath.split('/');
   let rootArr = root.split('/');
   let relative = pathArr.filter((node, i) => {
     return node !== rootArr[i];
@@ -13,34 +14,77 @@ function makeRelative(path, root) {
   return relative.join('/');
 }
 
+let fileStore = {};
+let fileDir;
+
+//returns new promise for async file read
+function readFile(target) {
+  return new Promise((resolve, reject) => {
+    fs.readFile(target, 'utf8', function(err, content) {
+      if (err) reject(err);
+      resolve(content);
+    });
+  });
+}
+
+
+//reads file and stores id and result in fileStore object as key: value pair
+function fileReader(root, fpath, target, id) {
+  
+  let filePath = fpath.join('/');
+    let readTarget = path.join(root, filePath, target);
+    readFile(readTarget).then((result) => {
+      return fileStore[id] = result;
+    }).catch((err) => {
+      throw err;
+    }).then(() => {
+      fs.writeFile('./testFile.js', JSON.stringify(fileStore, null, 2), (err) => {
+        if (err) throw err;
+        // console.log(id + ":", target);
+      })
+    }).catch((err) => {
+      throw err
+    });
+
+}
 
 function makeJSON(array) {
-  //generates JSON object from array
+  //generates JSON object representing directory structure from array
+
   let result = {};
   
   for (let file of array) {
     let current = result;
-    let path = file.split('/');
-    let targetFile = path.pop();
-    if (path.length > 0) {
-      path.forEach((node, i) => {
-        current[node] = {...current[node]};
-        current = current[node];
-        if(i === path.length - 1) {
-          current[targetFile] = 'fileHash';
-        }
-      });
-    } else {
-      current[targetFile] = "fileHash";
+    let fpath = file.split('/');
+    let targetFile = fpath.pop();
+    console.log(file);
+    const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 'node_modules', 'package-lock.json'];
+    const check = new RegExp(ignore.join('|')).test(targetFile);
+
+    if (!check) {
+      if (fpath.length > 0) {
+        fpath.forEach((node, i) => {
+          current[node] = {...current[node]};
+          current = current[node];
+          if(i === fpath.length - 1) {
+            let fileID = uuid();
+            fileReader(rootDir, fpath, targetFile, fileID);
+            current[targetFile] = fileID;
+          }
+        });
+      } else {
+        let fileID = uuid();
+        fileReader(rootDir, fpath, targetFile, fileID);
+        current[targetFile] = fileID;
+      }
     }
   }
-  console.log('Result:', util.inspect(result, false, null, true));
+  
 }
 
 function done() {
   return (err, res) => {
     if (err) throw err;
-    console.log(res);
     makeJSON(res);
   }
 }
@@ -67,7 +111,7 @@ const readDir = (dir, done) => {
         // console.log('defined:', item);
       return fs.stat(item, (err, stat) => {
         if (stat && stat.isDirectory()) {
-          if (item && !item.includes('node_modules') && !item.includes('.')) {
+          if (item && !item.includes('node_modules')) {
             //if dir call self recursively for each subdir
             return readDir(item, function(err, res) {
               results = [...results, ...res];
