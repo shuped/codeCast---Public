@@ -108,6 +108,11 @@ main .currentStream {
     main .currentStream .currentStreamBanner h3 {
       font-size: 2em;
       margin-left: 1em; }
+<<<<<<< HEAD
+=======
+    main .currentStream .currentStreamBanner h4 {
+      font-size: 1.5em; }
+>>>>>>> 0ea4ec5f28ae0005955c8d68660de4fca679c072
     main .currentStream .currentStreamBanner h5 {
       font-size: 1.2em;
       margin-right: 10em; }
