@@ -1,6 +1,5 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-// import { bindActionCreators } from 'redux';
 
 //code mirror
 import { UnControlled as CodeMirror }from 'react-codemirror2';  
@@ -11,18 +10,19 @@ import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/python/python.js';
 
 // add ons 
+import 'codemirror/addon/runmode/runmode'
+import 'codemirror/mode/meta'
+import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
 
-//
 
 import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
 
 const mapStateToProps = (state) => ({
   theme: state.theme,
-  // activeFileContents: 'const stuff = [1,2,3,4]; \n    var test = function() {a + b}; '
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -40,13 +40,6 @@ class LiveCodeDisplay extends Component {
       activeFileContents: `var test = [1,2,3,4]; \n    function stuff() {console.log(test)} `
     };
   }
-
-  // changeDisplayMode = (language) => {
-  //   editor.setOption("mode", language);
-  //   CodeMirror.autoLoadMode(editor, modeInput.value);
-
-
-  // }
 
   changeDisplayTheme = evt => {
     this.setState({ theme: evt.target.value.toLowerCase() });
