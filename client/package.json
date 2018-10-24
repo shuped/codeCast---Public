@@ -8,7 +8,11 @@
   },
   "version": "0.1.0",
   "private": true,
+  "main": "./src/electron-main/electron-main.js",
   "dependencies": {
+    "electron": "^3.0.5",
+    "electron-is-dev": "^1.0.1",
+    "electron-next": "^3.1.5",
     "antd": "^3.10.1",
     "bluebird": "^3.5.2",
     "pm2": "~3.2.2",
@@ -26,8 +30,9 @@
   },
   "proxy": "http://localhost:8080",
   "scripts": {
+    "electron": "electron ./src/electron-main/electron-starter",
     "start": "react-scripts start",
-    "build": "npm sass:build && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass --watch src/styles/scss:src/styles/css",
@@ -43,6 +48,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "next": "^7.0.2",
     "node-sass": "~4.9.4"
   }
 }
