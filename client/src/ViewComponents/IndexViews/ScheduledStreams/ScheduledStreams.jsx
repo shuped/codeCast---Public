@@ -39,7 +39,7 @@ class ScheduledStream extends Component {
     const { title, description, startDate, imagePath } = props;
     // missing image path
     return (
-      <div className="currentStream" >
+      <div className="currentStream" key={(Math.random()*10).toString().slice(2,6)}>
         <div className="currentStreamBanner">
           <h3>{ title }</h3>
           <h5>{ startDate }</h5>
