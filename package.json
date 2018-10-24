@@ -29,5 +29,9 @@
   },
   "devDependencies": {
     "remote-redux-devtools": "~0.5.13"
+  },
+  "engines": {
+    "node": "10.11.0",
+    "npm": "6.4.1"
   }
 }

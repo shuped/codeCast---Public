@@ -1,16 +1,17 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 .chat-main {
+  position: relative;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
   display: flex;
   justify-content: start;
-  min-height: 100vh;
   background-color: black;
   color: white;
   font-family: 'Courier New';
-  font-size: 16px; }
+  font-size: 12px; }
 
 .chat-container {
-  min-height: 100vh;
   display: flex;
   flex-direction: column-reverse; }
   .chat-container .chatbar {
@@ -32,13 +33,13 @@
       border: 1px solid black;
       border-radius: 5px;
       display: flex;
-      height: 2.5rem;
+      height: 1.5rem;
       line-height: 2.5rem;
-      margin: 5px;
+      margin: 1px;
       padding: 0 0.5rem; }
   .chat-container .messages-container {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 50vh;
+    max-height: 50vh;
     display: flex;
     position: relative; }
     .chat-container .messages-container .message-system {
@@ -49,13 +50,13 @@
         flex-direction: column-reverse;
         overflow-y: auto;
         scroll-behavior: smooth;
-        margin: 1rem 1rem 10rem 1rem; }
+        margin: 0.1rem 0.1rem 0.1rem 0.1rem; }
         .chat-container .messages-container .message-system .message-list-container .unreverse {
           flex-direction: column; }
           .chat-container .messages-container .message-system .message-list-container .unreverse .messages {
             display: block;
-            padding: 0.5rem;
-            margin: 0.5rem 0rem; }
+            padding: 0.2rem;
+            margin: 0rem 0rem; }
           .chat-container .messages-container .message-system .message-list-container .unreverse .message-system {
             width: 100%;
             padding: 5px 20px; }
@@ -75,24 +76,44 @@
 
 .file-container {
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  min-width: 50vw; }
-  .file-container .ReactCodeMirror, .file-container .CodeMirror {
-    height: 95vh; }
+  flex-direction: column; }
   .file-container .theme-select-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100px;
     background-color: rgba(0, 0, 0, 0.6); }
     .file-container .theme-select-container .select-text {
       color: #EEE;
-      padding: 1rem;
-      margin: 0rem 1rem; }
+      padding: 0rem;
+      margin: 0rem; }
     .file-container .theme-select-container .theme-select {
-      padding: 1rem;
-      margin: 1rem; }
+      padding: 0.5rem;
+      margin: 0.5rem; }
+
+.video-main .iframe {
+  position: relative;
+  width: 100%;
+  height: 52vh; }
+
+main .currentStream {
+  border: 2px solid black;
+  background-color: aquamarine;
+  width: 75%;
+  margin: 2em 2em; }
+  main .currentStream .currentStreamBanner {
+    display: flex;
+    justify-content: space-between; }
+    main .currentStream .currentStreamBanner h3 {
+      font-size: 2em;
+      margin-left: 2em; }
+    main .currentStream .currentStreamBanner h5 {
+      font-size: 1.2em;
+      margin-right: 10em; }
+  main .currentStream p {
+    font-size: 1em;
+    margin: 2em; }
 
 body {
   margin: 0;
@@ -105,18 +126,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
 
 .App {
-  max-height: 100vh;
-  display: flex;
-  overflow: hidden; }
-  .App .component-container {
-    display: flex;
-    flex-direction: row; }
-    .App .component-container .Chat-display {
+  flex-direction: column;
+  height: 80vh;
+  width: 100vw; }
+  .App .component-container1 {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas: "Filetree Video Chat"; }
+    .App .component-container1 .Filetree-display {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      grid-area: Filetree;
+      background-color: grey; }
+    .App .component-container1 .Video-display {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      grid-area: Video; }
+    .App .component-container1 .Chat-display {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      grid-area: Chat; }
+  .App .component-container2 {
+    display: grid;
+    height: 47vh;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: "Code Terminal"; }
+    .App .component-container2 .Code-display {
+      position: relative;
+      height: 100%;
+      width: 100%;
+      grid-area: Code; }
+    .App .component-container2 .Terminal-display {
+      position: relative;
+      height: 100%;
+      width: 100%;
       display: flex;
-      min-width: 50vw; }
-    .App .component-container .Code-display {
-      display: flex;
-      min-width: 50vw; }
+      grid-area: Terminal;
+      background-color: grey; }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
