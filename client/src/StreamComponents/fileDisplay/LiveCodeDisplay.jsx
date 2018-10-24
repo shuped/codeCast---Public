@@ -1,25 +1,28 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-// import { bindActionCreators } from 'redux';
 
 //code mirror
 import { UnControlled as CodeMirror }from 'react-codemirror2';  
-
 import StyleList from './StyleDisplay.jsx';
 
 // syntax highlighting
 import 'codemirror/mode/javascript/javascript.js';
+import 'codemirror/mode/python/python.js';
 
 // add ons 
+import 'codemirror/addon/runmode/runmode'
+import 'codemirror/mode/meta'
+import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
 
+
 import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
 
 const mapStateToProps = (state) => ({
-  theme: state.theme
+  theme: state.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -32,7 +35,9 @@ class LiveCodeDisplay extends Component {
   constructor(props) {  
     super(props); 
     this.state = {
-      theme: 'dracula'
+      mime: 'text/javascript',
+      theme: 'dracula',
+      activeFileContents: `var test = [1,2,3,4]; \n    function stuff() {console.log(test)} `
     };
   }
 
@@ -47,7 +52,7 @@ class LiveCodeDisplay extends Component {
       lineNumbers: true,
       styleActiveLine: true,
       matchBrackets: true,
-      mode: 'javascript', // reference options in folder
+      mode: this.state.mime, // reference options in folder
       theme: this.state.theme
       //  readOnly: 'nocursor'
     };
@@ -55,11 +60,9 @@ class LiveCodeDisplay extends Component {
     return (
       <div className="file-container">
         <CodeMirror 
-          value={
-            ('const stuff = [1,2,3,4];',
-            'var test = function() {a + b};')
-          }
+          value={ this.state.activeFileContents }
           options={ options } 
+          // value={this.state.code}
         />
 
         <span className="theme-select-container">
