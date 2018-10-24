@@ -9,6 +9,7 @@ import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx'
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import Filetree from './StreamComponents/FileTree/FileTree.jsx';
+import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx'
 //
 // import logo from './assets/logo.svg';
 
@@ -21,7 +22,7 @@ class App extends Component {
 
         <div className='component-container1'>
           <div className="Filetree-display">
-            <Filetree />
+            <FileDirectory />
           </div>
           <div className="Video-display">
             <Video />
@@ -33,7 +34,6 @@ class App extends Component {
 
         <div className="component-container2">
           <div className="Code-display">
-            <FileDirectory />
             <LiveCodeDisplay />
           </div>
           <div className="Terminal-display">
