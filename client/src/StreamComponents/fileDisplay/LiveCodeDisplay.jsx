@@ -11,6 +11,9 @@ import StyleList from './StyleDisplay.jsx';
 import 'codemirror/mode/javascript/javascript.js';
 
 // add ons 
+import 'codemirror/addon/runmode/runmode'
+import 'codemirror/mode/meta'
+import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';

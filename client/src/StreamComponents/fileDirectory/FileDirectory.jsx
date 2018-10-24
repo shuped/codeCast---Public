@@ -6,74 +6,61 @@ import { compareHashToServer } from '../../redux/actions/index.js';
 
 const TreeNode = Tree.TreeNode;
 
-
 class FileDirectory extends React.Component {
-
 
   constructor() {
     super();
-    // this.state = { fileDir: this.props.files };
     this.state = {
-      fileDir: {"projectRoot": {
-  
-        "firstDir": {
-          "test": "hashRef1",
-          "file2": "hashRef2",
-          "file3": "hashRef3",
-    
-          "firstSubDir": {
-            "file1":"hashRef",
-            "file2":"hashRef",
-            "file3":"hashRef",
-    
-            "firstNestedSubDir": {
+      fileDir: {
+        "projectRoot": {
+          "firstDir": {
+            "test": "hashRef1",
+            "file2": "hashRef2",
+            "file3": "hashRef3",
+      
+            "firstSubDir": {
               "file1":"hashRef",
               "file2":"hashRef",
-              "file3":"hashRef"
+              "file3":"hashRef",
+      
+              "firstNestedSubDir": {
+                "file1":"hashRef",
+                "file2":"hashRef",
+                "file3":"hashRef"
+              },
+      
+              "secondNestedSubDir": {
+                "file1":"hashRef",
+                "file2":"hashRef",
+                "file3":"hashRef"
+              }
             },
-    
-            "secondNestedSubDir": {
+            "secondSubDir": {
               "file1":"hashRef",
               "file2":"hashRef",
-              "file3":"hashRef"
+              "file3":"hashRef",
+      
+              "firstNestedSubDir": {
+                "file1":"hashRef",
+                "file2":"hashRef",
+                "file3":"hashRef"
+              }
             }
           },
-          "secondSubDir": {
+          "secondDir": {
             "file1":"hashRef",
             "file2":"hashRef",
-            "file3":"hashRef",
-    
-            "firstNestedSubDir": {
-              "file1":"hashRef",
-              "file2":"hashRef",
-              "file3":"hashRef"
-            }
+            "file3":"hashRef"
+          },
+          "thirdDir": {
+            "file1":"hashRef",
+            "file2":"hashRef",
+            "file3":"hashRef"
           }
-        },
-        "secondDir": {
-          "file1":"hashRef",
-          "file2":"hashRef",
-          "file3":"hashRef"
-        },
-        "thirdDir": {
-          "file1":"hashRef",
-          "file2":"hashRef",
-          "file3":"hashRef"
         }
       }
-    }
-      
     };
   }
-
-
-
-
-
-  // componentDidMount() {
-  //   this.props.alertConnection();
-  //   console.log(store.getState());
-  // }
   
   //tree click handler
   onSelect = (selectedKeys, info) => {
@@ -84,9 +71,6 @@ class FileDirectory extends React.Component {
       console.log(info.selectedNodes[0].key);
     }
   }
-
-
-
   // take in file object and create nested Tree nodes
   buildTree = (treeFrom) => {
    
@@ -106,26 +90,21 @@ class FileDirectory extends React.Component {
       }
     }
     return result;
-  };
+  }
   
-    render() {
-      const fileDir = this.state.fileDir;
-      return (
-        <Tree
-          showLine
-          // defaultExpandedKeys={[0-0-0']}
-          onSelect={this.onSelect}
-        >
-          {this.buildTree(fileDir)}
-        </Tree>
-      )
-    }
+  render() {
+    const fileDir = this.state.fileDir;
+    return (
+      <Tree
+        showLine
+        // defaultExpandedKeys={[0-0-0']}
+        onSelect={this.onSelect}
+      >
+        {this.buildTree(fileDir)}
+      </Tree>
+    );
+  }
 }
-
-
-// const mapStateToProps = (state) => ({
-//   fileDir: state.directoryStucture
-// });
 
 const mapDispatchToProps = (dispatch) => {
   return {
