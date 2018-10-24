@@ -13,14 +13,20 @@ class ScheduledStream extends Component {
         {
           title: 'Python',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          startDate: 'Thusday, Aug 12 2016',
-          image: null
+          startDate: 'Thusday, August 12 2017',
+          imagePath: null
         },
         {
           title: 'Javascript',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           startDate: 'Wednesday, April 11 2017',
-          image: null
+          imagePath: null
+        },
+        {
+          title: 'HTML/CSS',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          startDate: 'Tuesday, March 27 2017',
+          imagePath: null
         }
       ]
     };
@@ -33,8 +39,8 @@ class ScheduledStream extends Component {
     const { title, description, startDate, imagePath } = props;
     // missing image path
     return (
-      <div className="upStream" >
-        <div className="upStreamBanner">
+      <div className="currentStream" >
+        <div className="currentStreamBanner">
           <h3>{ title }</h3>
           <h5>{ startDate }</h5>
         </div>
@@ -46,12 +52,12 @@ class ScheduledStream extends Component {
   render() {  
     
     const renderStreams = this.state.scheduledStreams.map( (stream) => {
-      return this.MakeStreamCard(stream)  
+      return this.MakeStreamCard(stream);  
     });
 
     return (
       <main className="streams">
-        {renderStreams}
+        { renderStreams }
       </main>
     );
   }
