@@ -1,0 +1,36 @@
+
+
+main {
+
+  .currentStream {
+    border: 2px solid black;
+    background-color: aquamarine;
+    width:75%;
+    margin: 2em 4em;
+    .currentStreamBanner {
+      display:flex;
+      justify-content: space-between;
+      
+      h3 {
+        font-size: 2em;
+        margin-left:1em;
+      }
+      h4 {
+        font-size: 1.5em;
+      }
+      h5 {
+        font-size: 1.2em;
+        margin-right: 10em;
+      }
+
+    }
+    p {
+      font-size: 1em;
+      margin:2em;
+    }
+  }
+}
+
+
+
+
