@@ -67,6 +67,8 @@ io.on('connection', (socket) => {
   });
 });
 
+let testFile = `nothing`;
+
 const redux = io
   .of('/redux')
   .on('connection', (socket) => {
@@ -89,6 +91,21 @@ const redux = io
         },
         'server/file_change': (type, payload) => {
           console.log('server/file_change triggered', payload);
+          
+          testFile = `
+          var addPlaylist = function (name) {
+            var newId = uid();
+            var newPlaylist = { id: '1234',
+                             name: 'Chris',
+                             tracks: []
+                           };
+                           
+            library.playlists[newId] = newPlaylist
+            console.log(library)
+          }
+        `;
+        //update the live viewer
+        redux.emit('action', { type: 'FILE_UPDATE', payload: testFile });
         }
       };
       function defaultReduxAction(type, payload) {
@@ -125,18 +142,7 @@ const terminal = io
     });
   });
 
-const testFile = `
-  var addPlaylist = function (name) {
-    var newId = uid();
-    var newPlaylist = { id: '1234',
-                     name: 'Chris',
-                     tracks: []
-                   };
-                   
-    library.playlists[newId] = newPlaylist
-    console.log(library)
-  }
-`;
+
 
 
 const testDirectory = {
