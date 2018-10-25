@@ -9,10 +9,6 @@ class IndexViews extends Component {
 		}
 	}
 
-	// handleClick = () => {
-	// 	this.setState
-	// }
-
 	setRouteState = (route) => {
 		this.setState({pageValue: route})
 		console.log("State:", this.state)
