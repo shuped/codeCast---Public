@@ -57,7 +57,6 @@ class ActiveStreams extends Component {
   
   }
 
-  // this.props['../somestuff/what/#{}']
   GetStreamId = (streamClicked) => {
     console.log(streamClicked)
     // react-router code goes here
@@ -75,6 +74,7 @@ class ActiveStreams extends Component {
             <h1>{ title }</h1>
             <h2>{ presentor }</h2>
           </div>
+          {/* to use for image later */}
           {/* <img src="#imagePath" /> */}
           <div className="imagePlaceholder">p</div>
         </div>
@@ -99,6 +99,8 @@ class ActiveStreams extends Component {
   }
 
 }
+
+// map state to props, keep
 
 // const mapStateToProps = (state) => ({
 //   theme: state.theme,
