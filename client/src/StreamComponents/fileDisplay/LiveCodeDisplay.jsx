@@ -65,7 +65,7 @@ class LiveCodeDisplay extends Component {
           options={ options } 
           // value={this.state.code}
         />
-
+      
         <span className="theme-select-container">
           <p className="select-text">Select a theme: </p>
           <StyleList changeDisplayTheme={ this.changeDisplayTheme } />
