@@ -122,6 +122,19 @@ const terminal = io
     });
   });
 
+const testFile = `
+  var addPlaylist = function (name) {
+    var newId = uid();
+    var newPlaylist = { id: '1234',
+                     name: 'Chris',
+                     tracks: []
+                   };
+                   
+    library.playlists[newId] = newPlaylist
+    console.log(library)
+  }
+`;
+
 
 const testDirectory = {
   "projectRoot": {
@@ -174,4 +187,9 @@ const testDirectory = {
 setTimeout(() => {
   console.log('directory update =================');
   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
+}, 60000);
+
+setTimeout(() => {
+  console.log('file update =================');
+  redux.emit('action', { type: 'FILE_UPDATE', payload: testFile });
 }, 60000);

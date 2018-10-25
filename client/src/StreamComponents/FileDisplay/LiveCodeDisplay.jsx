@@ -26,6 +26,7 @@ class LiveCodeDisplay extends Component {
     this.state = {
       mime: 'text/javascript',
       theme: 'dracula',
+      file: 'test'
     };
   }
 
@@ -44,13 +45,14 @@ class LiveCodeDisplay extends Component {
       theme: this.state.theme
       //  readOnly: 'nocursor'
     };
+    console.log(this.props.activeFileContents);
 
     return (
       <div className="file-container">
         <CodeMirror 
           value={ this.props.activeFileContents }
           options={ options } 
-          // value={this.state.code}
+          
         />
       
         <span className="theme-select-container">
