@@ -16,6 +16,7 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
+// will be useful
 // import 'codemirror/addon/edit/matchtags.js';
 
 class LiveCodeDisplay extends Component {  
@@ -25,6 +26,7 @@ class LiveCodeDisplay extends Component {
     this.state = {
       mime: 'text/javascript',
       theme: 'dracula',
+      file: 'test'
     };
   }
 
@@ -43,13 +45,14 @@ class LiveCodeDisplay extends Component {
       theme: this.state.theme
       //  readOnly: 'nocursor'
     };
+    console.log(this.props.activeFileContents);
 
     return (
       <div className="file-container">
         <CodeMirror 
           value={ this.props.activeFileContents }
           options={ options } 
-          // value={this.state.code}
+          
         />
       
         <span className="theme-select-container">

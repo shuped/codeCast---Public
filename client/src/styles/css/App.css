@@ -82,13 +82,13 @@
     position: relative;
     min-height: 100%; }
     .file-container .react-codemirror2 .CodeMirror {
-      min-height: 40vh; }
+      min-height: 42vh; }
   .file-container .theme-select-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    height: 8vh;
+    height: 6vh;
     background-color: rgba(0, 0, 0, 0.6); }
     .file-container .theme-select-container .select-text {
       color: #EEE;
@@ -191,6 +191,8 @@ code {
     grid-template-areas: "Filetree Video Chat"; }
     .App .component-container1 .Filetree-display {
       position: relative;
+      max-height: 52vh;
+      overflow-y: auto;
       height: 100%;
       width: 100%;
       grid-area: Filetree;

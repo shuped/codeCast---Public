@@ -5,6 +5,7 @@
 @import 'partials/scheduledStreamCard';
 @import 'partials/activeStreamsCard';
 @import 'partials/terminal';
+@import 'partials/fileDirectory';
 
 html {
   box-sizing: border-box;
@@ -38,12 +39,15 @@ code {
 
   .component-container1 {
     display: grid;
+    
     grid-template-columns: 1fr 2fr 1fr;
     grid-template-areas: 
       "Filetree Video Chat";
 
     .Filetree-display {
       position: relative;
+      max-height: 52vh;
+      overflow-y: auto; 
       height: 100%;
       width: 100%; 
       grid-area: Filetree;
