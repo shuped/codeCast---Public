@@ -1,38 +1,58 @@
 import { combineReducers } from 'redux';
 
 
-export default function (state = { activeFileContents: '', directoryStucture: {} } , action) {
+// FILE REDUCER
+const fileState = { activeFileContents: ''}
+const fileReducer = (state = fileState, action) => {
   switch (action.type) {
     case 'FILE_CONTENTS':
       return { ...state, activeFileContents: action.payload }
     
+    default:
+      return state;
+  }
+}
+
+
+// DIRECTORY STRUCTURE
+const directoryState = {directoryStructure: ''};
+const directoryReducer = (state = directoryState, action) => {
+  switch (action.type) {
     case 'DIRECTORY_UPDATE':
-      return {...state, directoryStucture: action.payload }
+      console.log('directory_update action', action)
+      return { ...state, directoryStructure: action.payload };
+    
+    default:
+      console.log('Dir reducer defaulted', action)
+      return state;
   }
 }
 
 
 
-const rootReducer = (state = {messages: []}, action) => {
+// CHAT REDUCER
+const chatState = {messages: []}
+const chatReducer = (state = chatState, action) => {
   switch(action.type) {
     case 'server/message':
-    console.log('Action data:', action.payload);
-    return {...state, messages: action.payload};
+      console.log('server/message', action.payload);
+      return {...state, messages: action.payload};
+
     default:
-    return state;
+      console.log('Chat Reducer Defaulted', action)
+      return state;
   }
 };
 
-const newReducer = createReducer({}, {
-  
+
+
+
+export default combineReducers({
+  chatReducer,
+  directoryReducer,
+  fileReducer
 });
 
-export const reducers = combineReducers({
-  rootReducer,
-  newReducer
-});
-
-export default rootReducer;
 
 
 /******************IN CASE  OF EMERGENCY*******************/
