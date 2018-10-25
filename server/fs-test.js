@@ -1,5 +1,5 @@
 const fs = require('fs');
-const stream = fs.createWriteStream('./testFile.js', {flags:'a'});
+// const stream = fs.createWriteStream('./testFile.js', {flags:'a'});
 const { StringDecoder } = require('string_decoder');
 const decoder = new StringDecoder('utf8');
 const util = require('util');
@@ -10,22 +10,19 @@ const rootDir = path.join(__dirname, '..');
 
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
-
   //collect resolved promises
   let resolved = [];
-
   //check for valid array
-  if (Array.isArray(arr)) return Promise.reject('Must pass an array to .each')
-
+  if (!Array.isArray(arr)) return Promise.reject('Must pass an array to .each');
   //for each promise, resolve and push result
   for (let promise of arr) await fn(promise)
-  .then((result) => {
-    resolved.push[result];
+  .then(async (result) => {
+    await resolved.push(result);
   }).catch((err) => {
     throw err;
-  });
-
+  })
   return await resolved;
+  //return array for resolved promises
 }
 
 //function to resolve promises for Promise.each()
@@ -43,14 +40,12 @@ function makeRelative(fpath, root) {
   let relative = pathArr.filter((node, i) => {
     return node !== rootArr[i];
   });
-
   //return relative path as string
   return relative.join('/');
 }
 
 //returns new promise with Buffer object for async file read
 function readFile(target) {
-
   return new Promise((resolve, reject) => {
     fs.readFile(target, function(err, content) {
       if (err) reject(err);
@@ -65,7 +60,7 @@ async function fileReader(root, fpath, target) {
   let filePath = fpath.join('/');
   let readTarget = path.join(root, filePath, target);
 
-  //return 
+  //return new promise with decoded file
   return readFile(readTarget).then(async (result) => {
     return await decoder.write(result);
   }).catch((err) => {
@@ -77,45 +72,72 @@ async function makeJSON(array) {
   //generates JSON object representing directory structure from array
   let promises = [];
   let fileIDs = [];
+
   let dirObj = {};
   let fileObj = {};
 
   for (let file of array) {
+    //set variable for object traversal
     let current = dirObj;
+    //split filepath and assign filename to variable
     let fpath = file.split('/');
     let targetFile = fpath.pop();
+    //list of files and extensions to ignore
     const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 'node_modules', 'package-lock.json', '.git', '.scssc'];
     const check = new RegExp(ignore.join('|')).test(targetFile);
+
+    //check for valid file extensions
     if (!check) {
+      //check to see if files are in subdirectory
       if (fpath.length > 0) {
-        fpath.forEach((node, i) => {
-          current[node] = {...current[node]};
+        //for each node assign child and move one level deeper
+        fpath.forEach(async (node, i) => {
+          console.log('Current:', current[node]);
+          current[node] ? current[node][fpath[i + i]] : current[node] = {};
           current = current[node];
+          console.log('Next:', current[node]);
+          //if last node: 
+          //1) assign file and hash, and 
+          //2) read file and push returned promise to promises array
           if(i === fpath.length - 1) {
             let fileID = uuid();
-            promises.push(fileReader(rootDir, fpath, targetFile));
-            fileIDs.push(fileID);
+            await promises.push(fileReader(rootDir, fpath, targetFile));
+            await fileIDs.push(fileID);
             current[targetFile] = fileID;
           }
         });
+      //if child of root dir append to root object and do same as above
       } else {
         let fileID = uuid();
-        promises.push(fileReader(rootDir, fpath, targetFile));
-        fileIDs.push(fileID);
+        await promises.push(fileReader(rootDir, fpath, targetFile));
+        await fileIDs.push(fileID);
         current[targetFile] = fileID;
+        
       }
     }
+    console.log(util.inspect(dirObj, false, null));
   }
-
-  Promise.each(promises, resolver);
-
-  return await dirObj;
+  //resolve all promises in array 
+  let resolved = await Promise.each(await promises, resolver);
+  
+  resolved.forEach((res, i) => {
+    fileObj[fileIDs[i]] = res;
+  });
+  fs.writeFile('./content.json', JSON.stringify(fileObj), (err) => {
+    if (err) throw err;
+  });
+  fs.writeFile('./directory.json', JSON.stringify(dirObj), (err) => {
+    if (err) throw err;
+  });
+  //return directory tree as a promise
+  return dirObj;
 }
 
+//when readDir is complete, call function to build directory and file content objects
 function done() {
   return (err, res) => {
     if (err) throw err;
-    makeJSON(res)
+    makeJSON(res);
   }
 }
 
@@ -134,21 +156,20 @@ const readDir = (dir, done) => {
       let item = items[i++];
       // console.log('Item:', item);
       //return when dir is walked
-      if (!item || !items && results) return done(null, results);
+      if (!item) return done(null, results);
       //add to filepath
       item = path.join(dir, item);
       //stat returns quantifiable properties of item, used here to parse files vs. dirs
-        // console.log('defined:', item);
       return fs.stat(item, (err, stat) => {
         if (stat && stat.isDirectory()) {
           if (item && !item.includes('node_modules') && !item.includes('.git')) {
             //if dir call self recursively for each subdir
             return readDir(item, function(err, res) {
               results = [...results, ...res];
-              return next(results);
+              return next();
             });
           } else {
-            //if node_modules or dotfile trigger recursive 
+            //if node_modules or .git trigger recursion
             return next();
           }
         } else {
