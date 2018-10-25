@@ -11,11 +11,10 @@ const directoryState = {directoryStructure: { 'Next Great Thing': null }};
 const directoryReducer = (state = directoryState, action) => {
   switch (action.type) {
     case 'DIRECTORY_UPDATE':
-      console.log('directory_update action', action)
+      console.log('directory_update action', action.payload)
       return { ...state, directoryStructure: action.payload };
     
     default:
-      console.log('Dir reducer defaulted', action)
       return state;
   }
 }
