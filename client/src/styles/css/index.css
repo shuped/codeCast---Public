@@ -151,6 +151,11 @@ main .currentStream {
       .streams .activeStreamCard .description-container p {
         font-size: 1.2em; }
 
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap; }
+
 html {
   box-sizing: border-box;
   font-size: 16px; }
