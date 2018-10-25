@@ -1,0 +1,45 @@
+
+.streams {
+
+  .activeStreamCard {
+
+    .banner {
+
+      div{
+
+        h1 {
+
+        }
+        h2 {
+
+        }
+      }
+      img {
+
+      }
+    }
+    .description-container {
+
+      p {
+
+      }
+    }
+  }
+}
+
+
+
+
+
+      // <div className="activeStreamCard" key={(Math.random()*10).toString().slice(2,6)}>
+      //   <div className="banner">
+      //     <div>
+      //       <h1>{ title }</h1>
+      //       <h2>{ presentor }</h2>
+      //     </div>
+      //     <img src="#imagePath" />
+      //   </div>
+      //   <div className="description-container">
+      //     <p>{ description }</p>
+      //   </div>
+      // </div>

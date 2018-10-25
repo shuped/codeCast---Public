@@ -8,9 +8,8 @@ import Chat from './StreamComponents/chat/ChatMain';
 import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
-import Filetree from './StreamComponents/FileTree/FileTree.jsx';
 import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
-import ScheduledStreams from './ViewComponents/IndexViews/ScheduledStreams/ScheduledStreams.jsx';
+import ActiveStreams from './ViewComponents/IndexViews/ActiveStreams/ActiveStreams.jsx';
 
 // import logo from './assets/logo.svg';
 
@@ -22,7 +21,7 @@ class App extends Component {
       <div className="App">
 
         <div className='index-view'>
-          <ScheduledStreams />
+          <ActiveStreams />
         </div>
 
 
