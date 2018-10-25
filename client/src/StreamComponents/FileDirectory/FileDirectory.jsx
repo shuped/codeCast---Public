@@ -12,54 +12,6 @@ class FileDirectory extends React.Component {
     super();
     this.state = {
       fileDir: {key: 'whoops'}
-      // fileDir: {
-      //   "projectRoot": {
-      //     "firstDir": {
-      //       "test": "hashRef1",
-      //       "file2": "hashRef2",
-      //       "file3": "hashRef3",
-      
-      //       "firstSubDir": {
-      //         "file1":"hashRef",
-      //         "file2":"hashRef",
-      //         "file3":"hashRef",
-      
-      //         "firstNestedSubDir": {
-      //           "file1":"hashRef",
-      //           "file2":"hashRef",
-      //           "file3":"hashRef"
-      //         },
-      
-      //         "secondNestedSubDir": {
-      //           "file1":"hashRef",
-      //           "file2":"hashRef",
-      //           "file3":"hashRef"
-      //         }
-      //       },
-      //       "secondSubDir": {
-      //         "file1":"hashRef",
-      //         "file2":"hashRef",
-      //         "file3":"hashRef",
-      
-      //         "firstNestedSubDir": {
-      //           "file1":"hashRef",
-      //           "file2":"hashRef",
-      //           "file3":"hashRef"
-      //         }
-      //       }
-      //     },
-      //     "secondDir": {
-      //       "file1":"hashRef",
-      //       "file2":"hashRef",
-      //       "file3":"hashRef"
-      //     },
-      //     "thirdDir": {
-      //       "file1":"hashRef",
-      //       "file2":"hashRef",
-      //       "file3":"hashRef"
-      //     }
-      //   }
-      // }
     };
   }
 
@@ -72,6 +24,8 @@ class FileDirectory extends React.Component {
       //do not delete this, what will send hashes 
       // this.props.sendHash(info.selectedNodes[0].key);
       console.log(info.selectedNodes[0].key);
+
+      // need script to disable click event on currently active file
     }
   }
   // take in file object and create nested Tree nodes
