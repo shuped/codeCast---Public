@@ -2,7 +2,7 @@ const fs = require('fs');
 // const stream = fs.createWriteStream('./testFile.js', {flags:'a'});
 const { StringDecoder } = require('string_decoder');
 const decoder = new StringDecoder('utf8');
-const util = require('util');
+// const util = require('util');
 const path = require('path');
 const uuid = require('uuid/v1');
 
@@ -20,7 +20,7 @@ Promise.each = async function(arr, fn) {
     await resolved.push(result);
   }).catch((err) => {
     throw err;
-  })
+  });
   return await resolved;
   //return array for resolved promises
 }
@@ -72,7 +72,6 @@ async function makeJSON(array) {
   //generates JSON object representing directory structure from array
   let promises = [];
   let fileIDs = [];
-
   let dirObj = {};
   let fileObj = {};
 
@@ -115,14 +114,14 @@ async function makeJSON(array) {
         
       }
     }
-    console.log(util.inspect(dirObj, false, null));
   }
   //resolve all promises in array 
   let resolved = await Promise.each(await promises, resolver);
-  
+  //iterate through resolved promises and assign id hashes to file contents
   resolved.forEach((res, i) => {
     fileObj[fileIDs[i]] = res;
   });
+  //write directory and content objects to file
   fs.writeFile('./content.json', JSON.stringify(fileObj), (err) => {
     if (err) throw err;
   });
