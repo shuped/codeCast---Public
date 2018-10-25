@@ -199,13 +199,13 @@ code {
       height: 100%;
       width: 100%;
       grid-area: Code; }
-    .App .component-container2 .Terminal-display {
+    /* .App .component-container2 .Terminal-display {
       position: relative;
       height: 100%;
       width: 100%;
       display: flex;
       grid-area: Terminal;
-      background-color: grey; }
+      background-color: grey; } */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

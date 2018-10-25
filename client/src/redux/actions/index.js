@@ -1,7 +1,7 @@
 
-export const OUTGOING_MESSAGE = 'message';
-export const NEW_CONNECTION = 'new_connection';
-export const FILE_REQUEST = 'file_change';
+export const OUTGOING_MESSAGE = 'server/message';
+export const NEW_CONNECTION = 'server/new_connection';
+export const FILE_REQUEST = 'server/file_change';
 export const CODE_THEME_CHANGE = 'change_theme';
 
 //TODO: deconstruct parameters and construct payload explicitly

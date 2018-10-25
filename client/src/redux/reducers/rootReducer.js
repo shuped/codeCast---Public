@@ -1,6 +1,3 @@
-import { combineReducers } from 'redux';
-
-
 // FILE REDUCER
 const fileState = { activeFileContents: ''}
 const fileReducer = (state = fileState, action) => {
@@ -34,7 +31,7 @@ const directoryReducer = (state = directoryState, action) => {
 const chatState = {messages: []}
 const chatReducer = (state = chatState, action) => {
   switch(action.type) {
-    case 'server/message':
+    case 'MESSAGE':
       console.log('server/message', action.payload);
       return {...state, messages: action.payload};
 
@@ -44,15 +41,7 @@ const chatReducer = (state = chatState, action) => {
   }
 };
 
-
-
-
-export default combineReducers({
-  chatReducer,
-  directoryReducer,
-  fileReducer
-});
-
+export {chatReducer, directoryReducer, fileReducer}
 
 
 /******************IN CASE  OF EMERGENCY*******************/
