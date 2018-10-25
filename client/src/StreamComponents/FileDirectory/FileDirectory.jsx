@@ -62,7 +62,8 @@ class FileDirectory extends React.Component {
       // }
     };
   }
-  
+
+
   //tree click handler
   onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
@@ -96,6 +97,7 @@ class FileDirectory extends React.Component {
   
   render() {
     const fileDir = this.props.fileDir;
+    console.log(this.state.fileDir)
     return (
       <Tree
         showLine

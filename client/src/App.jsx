@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 
 //components
 
-import Chat from './StreamComponents/Chat/ChatMain';
+import Chat from './StreamComponents/Chat/ChatMain.jsx';
 import LiveCodeDisplay from './StreamComponents/FileDisplay/LiveCodeDisplay.jsx';
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
-import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
+import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
 import ArchivedStreams from './ViewComponents/IndexViews/ArchivedStreams/ArchivedStreams.jsx';
 
 // import logo from './assets/logo.svg';
