@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from '../reducers/Ducktator';
+import { rootReducer } from '../ducks/Ducktator';
 import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
 const io = socketIO.connect('http://localhost:8080/redux');

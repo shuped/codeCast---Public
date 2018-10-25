@@ -7,7 +7,7 @@ const FILE_UPDATE = 'FILE_UPDATE'
 
 // FILE REDUCER
 const fileState = { activeFileContents: 'Welcome to codeCast! Click on a file in the explorer to see its contents!'}
-const fileReducer = (state = fileState, action) => {
+export const fileReducer = (state = fileState, action) => {
   switch (action.type) {
     case FILE_UPDATE:
       console.log('File Update', action.payload)
@@ -17,5 +17,3 @@ const fileReducer = (state = fileState, action) => {
       return state;
   }
 }
-
-export default fileReducer;
