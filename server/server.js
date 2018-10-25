@@ -172,4 +172,4 @@ const testDirectory = {"projectRoot": {
 setTimeout(() => {
   console.log('directory update =================')
   redux.emit('action', {type: 'DIRECTORY_UPDATE', payload: testDirectory })
-},30000)
+},20000)
