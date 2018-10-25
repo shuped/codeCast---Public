@@ -2,9 +2,10 @@
 @import 'partials/chat';
 @import 'partials/fileViewer';
 @import 'partials/video';
-@import 'partials/_scheduledStreamCard';
-@import 'partials/_activeStreamsCard';
-@import 'partials/_archivedStreamsCards';
+@import 'partials/scheduledStreamCard';
+@import 'partials/activeStreamsCard';
+@import 'partials/terminal';
+@import 'partials/fileDirectory';
 
 html {
   box-sizing: border-box;
