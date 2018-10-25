@@ -19,7 +19,7 @@ import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
 
 
-import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
+import { updateFile, changeMirrorTheme } from '../../redux/ducks/fileDuck';
 
 const mapStateToProps = (state) => ({
   theme: state.file.theme,
