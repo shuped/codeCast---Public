@@ -16,6 +16,7 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/selection/active-line.js';
 import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
+// will be useful
 // import 'codemirror/addon/edit/matchtags.js';
 
 

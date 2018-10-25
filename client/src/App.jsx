@@ -35,7 +35,7 @@ class App extends Component {
           <div className="Chat-display">
             <Chat />
           </div>
-        </div> */}
+        </div>  */}
 
         {/* <div className="component-container2">
           <div className="Code-display">
