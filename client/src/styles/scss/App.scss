@@ -2,6 +2,7 @@
 @import 'partials/chat';
 @import 'partials/fileViewer';
 @import 'partials/video';
+@import 'partials/indexviews';
 
 body {
   margin: 0;
@@ -17,8 +18,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
-
 
 .App {
   flex-direction: column;
@@ -37,7 +36,7 @@ code {
       height: 100%;
       width: 100%; 
       grid-area: Filetree;
-      background-color: grey;
+      background-color: white;
 
     }
 

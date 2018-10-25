@@ -9,7 +9,6 @@ const TreeNode = Tree.TreeNode;
 
 class FileDirectory extends React.Component {
 
-
   constructor() {
     super();
     // this.state = { fileDir: this.props.files };
