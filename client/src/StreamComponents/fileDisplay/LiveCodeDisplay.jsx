@@ -22,7 +22,7 @@ import 'codemirror/addon/edit/closetag.js';
 import { updateFile, changeMirrorTheme } from '../../redux/actions/index';
 
 const mapStateToProps = (state) => ({
-  theme: state.theme,
+  theme: state.file.theme,
 });
 
 const mapDispatchToProps = (dispatch) => ({

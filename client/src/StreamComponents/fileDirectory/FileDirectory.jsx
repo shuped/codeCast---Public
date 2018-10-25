@@ -110,7 +110,7 @@ class FileDirectory extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    fileDir: state.directoryReducer.directoryStructure
+    fileDir: state.directory.directoryStructure
   }
 }
 

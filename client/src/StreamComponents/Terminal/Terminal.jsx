@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Terminal } from 'xterm';
 import socket from 'socket.io-client';
+import 'xterm/src/xterm.css';
 
 class Console extends Component {
+  
+
   componentWillMount() {
     this.terminal = new Terminal({scrollback: 99999999});
   }
@@ -15,18 +18,11 @@ class Console extends Component {
   }
 
   render() {
-    // const styles = {
-    //   // Absolute positioning
-    //   position: 'absolute',
-    //   top: 0, bottom: 0,
-    //   right: 0, left: 0,
-
-    //   display:'flex',
-    //   alignItems: 'center',
-    //   justifyContent: 'center'
-    // };
+    
+    this.terminal.open(this.__term)
     return (
-      <div className='terminal-main'>
+      <div className='terminal-main'
+        ref={(e) => this.__term = e}>
       </div>
     );
   };
