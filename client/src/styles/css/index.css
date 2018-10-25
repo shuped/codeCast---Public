@@ -108,17 +108,53 @@ main .currentStream {
     main .currentStream .currentStreamBanner h3 {
       font-size: 2em;
       margin-left: 1em; }
-<<<<<<< HEAD
-=======
     main .currentStream .currentStreamBanner h4 {
       font-size: 1.5em; }
->>>>>>> 0ea4ec5f28ae0005955c8d68660de4fca679c072
     main .currentStream .currentStreamBanner h5 {
       font-size: 1.2em;
       margin-right: 10em; }
   main .currentStream p {
     font-size: 1em;
     margin: 2em; }
+
+.streams {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around; }
+  .streams .activeStreamCard {
+    border: 2px solid black;
+    background-color: salmon;
+    width: 25vw;
+    height: 25vw;
+    margin: 3em; }
+    .streams .activeStreamCard .banner {
+      display: flex;
+      justify-content: space-between;
+      height: 30%; }
+      .streams .activeStreamCard .banner div {
+        margin: 1em; }
+        .streams .activeStreamCard .banner div h1 {
+          font-size: 2.2em;
+          margin: 0; }
+        .streams .activeStreamCard .banner div h2 {
+          font-size: 1.5em;
+          margin: 0; }
+      .streams .activeStreamCard .banner .imagePlaceholder {
+        width: 4em;
+        height: 4em;
+        margin: 1em;
+        background-color: black; }
+    .streams .activeStreamCard .description-container {
+      margin: 1em;
+      height: 70%; }
+      .streams .activeStreamCard .description-container p {
+        font-size: 1.2em;
+        overflow-y: scroll; }
+
+html {
+  box-sizing: border-box;
+  font-size: 16px; }
 
 body {
   margin: 0;
