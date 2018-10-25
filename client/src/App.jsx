@@ -24,7 +24,6 @@ class App extends Component {
         </div> */}
 
 
-
         <div className='component-container1'>
           <div className="Filetree-display">
             <FileDirectory />
