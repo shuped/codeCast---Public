@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 //components
 import Chat from './StreamComponents/chat/ChatMain';
 import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
+import FileDirectory from './StreamComponents/fileDirectory/FileDirectory';
+import Console from './StreamComponents/Terminal/Terminal'
 //
 // import logo from './assets/logo.svg';
 
@@ -12,6 +14,8 @@ class App extends Component {
   
   
   render() {
+    
+
     return (
       <div className="App"> 
         <div className="component-container">
@@ -20,6 +24,9 @@ class App extends Component {
           </div>
           <div className="Code-display">
             <LiveCodeDisplay />
+          </div>
+          <div>
+            <FileDirectory />
           </div>
         </div>
       </div>
