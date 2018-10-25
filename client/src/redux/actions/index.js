@@ -1,28 +1,26 @@
-function actionCreator(type, ...argNames) {
-  return function(...args) {
-    const action = { type };
-    argNames.forEach((arg, i) => {
-      action[argNames[i]] = args[i];
-    });
-    return action;
-  };
-}
 
-const message = 'server/message';
-const newConn = 'server/new_connection';
-const fileChange = 'server/file_change';
-const changeTheme = 'server/change_theme'; 
-const lookUpFileHash = 'server/look_up_file_hash';
+export const OUTGOING_MESSAGE = 'message';
+export const NEW_CONNECTION = 'new_connection';
+export const FILE_REQUEST = 'file_change';
+export const CODE_THEME_CHANGE = 'change_theme';
 
-export const newConnection = actionCreator(newConn, 'payload');
+//TODO: deconstruct parameters and construct payload explicitly
+export const newConnection = () => ({ type: NEW_CONNECTION, payload: {} });
+export const newMessage = (message) => ({ type: OUTGOING_MESSAGE, payload: message });
 
-export const newMessage = actionCreator(message, 'payload');
+export const updateFile = (fileID) => ({ type: FILE_REQUEST, payload: fileID });
+export const changeMirrorTheme = (theme) => ({ type: CODE_THEME_CHANGE, payload: theme })
 
-export const updateFile = actionCreator(fileChange, 'payload');
-
-export const changeMirrorTheme = actionCreator(changeTheme, 'payload');
-
-// export const getRequestedFile = actionCreator(getDiplayFile, hash);
-
-export const compareHashToServer = (hash) => ({type: lookUpFileHash, payload: hash});
-
+/**********IN CASE  OF EMERGENCY**************/
+/***********BREAK COMMENT BLOCK***************/
+ function actionCreator(type, ...argNames) { //
+   return function(...args) {                //
+     const action = { type };                //
+     argNames.forEach((arg, i) => {          //
+       action[argNames[i]] = args[i];        //
+     });                                     //
+     return action;                          //
+   };                                        //
+ }                                           //
+ /********************************************/
+ /********************************************/

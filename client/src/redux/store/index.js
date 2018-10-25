@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { reducers } from '../reducers/rootReducer';
 import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
-const io = socketIO.connect('localhost:8080');
+const io = socketIO.connect('http://localhost:8080/chat');
 
 
 function executor(action, emit, next, dispatch) {
@@ -16,5 +16,7 @@ const store = applyMiddleware(socketMW)(createStore)(reducers);
 store.subscribe(() => {
   console.log('New state:', store.getState());
 });
+
+
 
 export default store;

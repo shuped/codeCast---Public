@@ -39,10 +39,6 @@ io.on('connection', (socket) => {
   socket.on('action', (action) => {
 
     const actions = {
-      'server/message': (payload) => {
-        console.log("Actions triggered");
-        io.emit('message', payload);
-      },
       'server/new_connection': (payload) => {
         console.log('Server message:', payload);
       }
@@ -70,3 +66,38 @@ io.on('connection', (socket) => {
     console.log(err, `from ${socket.id}`);
   });
 });
+
+const chat = io
+  .of('/chat')
+  .on('connection', (socket) => {
+    
+    const clients = [];
+    console.log(`Socket ${socket.id} connected`);
+    clients.push(socket.id);
+    console.log(clients);
+    
+    chat.on('action', (action) => {
+      
+      const actions = {
+        'server/message': (payload) => {
+          console.log('server/message action triggered', payload);
+          chat.emit('message', payload);
+        },
+      }
+    });
+});
+
+const terminal = io
+  .of('/terminal')
+  .on('connection', (socket) => {
+    const termClients = [];
+    console.log(`Terminal Socket ${socket.id} connected`);
+    termClients.push(socket.id);
+    console.log(termClients);
+    
+    socket.on('data', (data) => {
+      console.log('terminal data:', data)
+      terminal.emit('terminal', data)
+    });
+  });
+  
