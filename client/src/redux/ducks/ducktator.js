@@ -1,3 +1,15 @@
+import { combineReducers } from 'redux'
+
+import { chatReducer }  from './chatDuck'
+import { directoryReducer } from './directoryDuck'
+import { fileReducer } from './fileDuck'
+
+export const rootReducer = combineReducers({
+  chat: chatReducer,
+  directory: directoryReducer,
+  file: fileReducer
+})
+
 /******************IN CASE  OF EMERGENCY*******************/
 /*******************BREAK COMMENT BLOCK********************/
 function createReducer(initialState, handlers) {          //
@@ -6,7 +18,6 @@ function createReducer(initialState, handlers) {          //
       handlers[action.type](state, action) : state;       //
   };                                                      //
 }                                                         //
-                                                          //
 function actionCreator(type, ...argNames) {               //
   return function(...args) {                              //
     const action = { type };                              //

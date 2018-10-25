@@ -8,7 +8,7 @@ export const updateFile = (fileID) => ({ type: FILE_REQUEST, payload: { fileID }
 
 // DIRECTORY REDUCER
 const directoryState = {directoryStructure: { 'Next Great Thing': null }};
-const directoryReducer = (state = directoryState, action) => {
+export const directoryReducer = (state = directoryState, action) => {
   switch (action.type) {
     case 'DIRECTORY_UPDATE':
       console.log('directory_update action', action.payload)
@@ -18,5 +18,3 @@ const directoryReducer = (state = directoryState, action) => {
       return state;
   }
 }
-
-export default directoryReducer;
