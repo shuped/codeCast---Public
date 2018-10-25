@@ -14,6 +14,9 @@ const io = require('socket.io')(server);
 const rootPath = path.join(__dirname, '..');
 const buildPath = path.join(rootPath, 'client/build');
 
+let ActiveViewFile = `nothing`;
+
+
 app.use(morgan('dev', {
   skip: (req, res) => {
     return res.statusCode < 400;
@@ -67,7 +70,7 @@ io.on('connection', (socket) => {
   });
 });
 
-let testFile = `nothing`;
+
 
 const redux = io
   .of('/redux')
@@ -92,7 +95,7 @@ const redux = io
         'server/file_change': (type, payload) => {
           console.log('server/file_change triggered', payload);
           
-          testFile = `
+          ActiveViewFile = `
           var addPlaylist = function (name) {
             var newId = uid();
             var newPlaylist = { id: '1234',
@@ -104,8 +107,8 @@ const redux = io
             console.log(library)
           }
         `;
-        //update the live viewer
-        redux.emit('action', { type: 'FILE_UPDATE', payload: testFile });
+        //update the code viewer
+        redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
         }
       };
       function defaultReduxAction(type, payload) {
@@ -200,5 +203,5 @@ setTimeout(() => {
 
 setTimeout(() => {
   console.log('file update =================');
-  redux.emit('action', { type: 'FILE_UPDATE', payload: testFile });
+  redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
 }, 40000);
