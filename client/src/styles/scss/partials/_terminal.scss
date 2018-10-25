@@ -2,4 +2,11 @@
   position: relative;
   display: flex;
   flex-wrap: nowrap;
+
+  canvas[class^="xterm-"] {
+    display: flex;
+    min-width: 50vw !important;
+    min-height: 48vh;
+  }
+
 }
