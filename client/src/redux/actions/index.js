@@ -22,7 +22,7 @@ export const updateFile = actionCreator(fileChange, 'payload');
 
 export const changeMirrorTheme = actionCreator(changeTheme, 'payload');
 
-// export const getRequestedFile = actionCreator(getDiplayFile, hash);
+// export const getRequestedFile = actionCreator(getDisplayFile, hash);
 
 export const compareHashToServer = (hash) => ({type: lookUpFileHash, payload: hash});
 

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 //components
 
-import Chat from './StreamComponents/chat/ChatMain';
-import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
+import Chat from './StreamComponents/Chat/ChatMain';
+import LiveCodeDisplay from './StreamComponents/FileDisplay/LiveCodeDisplay.jsx';
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
