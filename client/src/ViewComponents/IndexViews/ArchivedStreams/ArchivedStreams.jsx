@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 
 
-class ScheduledStream extends Component {  
+class ArchivedStreams extends Component {  
 
   constructor(props) {  
     super(props); 
@@ -14,21 +14,48 @@ class ScheduledStream extends Component {
           title: 'Python',
           presentor: 'Spencer',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          startDate: 'Thusday, August 12 2017',
+          broadcastDate: 'Thusday, August 12 2017',
+          archivedId: 1,
           imagePath: null
         },
         {
           title: 'Javascript',
           presentor: 'Benji',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          startDate: 'Wednesday, April 11 2017',
+          broadcastDate: 'Wednesday, April 11 2017',
+          archivedId: 2,
           imagePath: null
         },
         {
           title: 'HTML/CSS',
           presentor: 'Jeff',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          startDate: 'Tuesday, March 27 2017',
+          broadcastDate: 'Tuesday, March 27 2017',
+          archivedId: 3,
+          imagePath: null
+        },
+        {
+          title: 'Node',
+          presentor: 'Space G',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          broadcastDate: 'Thusday, August 12 2017',
+          archivedId: 4,
+          imagePath: null
+        },
+        {
+          title: 'Ruby',
+          presentor: 'Mandy',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          broadcastDate: 'Wednesday, April 11 2017',
+          archivedId: 5,
+          imagePath: null
+        },
+        {
+          title: 'Express',
+          presentor: 'Silvia',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          broadCastDate: 'Tuesday, March 27 2017',
+          archivedId: 6,
           imagePath: null
         }
       ]
@@ -39,16 +66,22 @@ class ScheduledStream extends Component {
 
 
   MakeStreamCard = (props) => {
-    const { title, presentor, description, startDate, imagePath } = props;
+    const { title, presentor, description, broadcastDate, archivedId, imagePath } = props;
     // missing image path
     return (
-      <div className="currentStream" key={(Math.random()*10).toString().slice(2,6)}>
-        <div className="currentStreamBanner">
-          <h3>{ title }</h3>
-          <h4>{ presentor }</h4>
-          <h5>{ startDate }</h5>
+      <div className="archievedStreamCard" key={ archivedId } onClick={ () => this.GetStreamId(archivedId) }>
+        <div className="banner">
+          <div>
+            <h1>{ title }</h1>
+            <h2>{ presentor }</h2>
+            <h3>{ broadcastDate }</h3>
+          </div>
+          {/* <img src="#imagePath" /> */}
+          <div className="imagePlaceholder">p</div>
         </div>
-        <p>{ description }</p>
+        <div className="description-container">
+          { description }
+        </div>
       </div>
     )
   }
