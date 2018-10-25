@@ -1,3 +1,5 @@
+import uuid from 'uuid'
+
 // Outgoing
 const OUTGOING_MESSAGE = 'server/message';
 const NEW_CONNECTION = 'server/new_connection';
@@ -6,8 +8,8 @@ const NEW_CONNECTION = 'server/new_connection';
 const INCOMING_MESSAGE = 'NEW_MESSAGE'
 
 // Action Creator
-const newConnection = () => ({ type: NEW_CONNECTION, payload: {} });
-const newMessage = (message) => ({ type: OUTGOING_MESSAGE, payload: { message } });
+export const newConnection = () => ({ type: NEW_CONNECTION, payload: {} });
+export const newMessage = (message) => ({ type: OUTGOING_MESSAGE, payload: { message } });
 
 // CHAT REDUCER
 const chatState = { messages: [randomMessage()] }
@@ -31,7 +33,7 @@ function randomMessage() {
       type: 'messages',
       id: uuid(),
       timestamp: new Date(),
-      user: { username: 'Joel@LHL', userColor: '#101010'},
+      user: { username: 'Joel@LHL', userColor: '#101010' },
       content: 'A monad is just a monoid in the category of endofunctors, what\'s the problem?'
     }
   ]

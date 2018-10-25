@@ -5,7 +5,7 @@ import Chatbar from './ChatBar.jsx';
 import { messages, notifications } from './dummyMessages/messages.json';
 import uuid from 'uuid/v1';
 import { connect } from 'react-redux';
-import { newConnection, newMessage } from '../../redux/actions/index';
+import { newConnection, newMessage } from '../../redux/ducks/chatDuck';
 import store from '../../redux/store/index.js';
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { rootReducer } from '../reducers/Ducktator';
 import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
