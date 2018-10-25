@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 
 //components
@@ -9,7 +8,7 @@ import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx'
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
-import ActiveStreams from './ViewComponents/IndexViews/ActiveStreams/ActiveStreams.jsx';
+import ArchivedStreams from './ViewComponents/IndexViews/ArchivedStreams/ArchivedStreams.jsx';
 
 // import logo from './assets/logo.svg';
 
@@ -21,7 +20,7 @@ class App extends Component {
       <div className="App">
 
         <div className='index-view'>
-          <ActiveStreams />
+          <ArchivedStreams />
         </div>
 
 
