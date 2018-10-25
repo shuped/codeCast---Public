@@ -76,7 +76,7 @@ const redux = io
     clients.push(socket.id);
     console.log(clients);
 
-    redux.on('action', (action) => {
+    socket.on('action', (action) => {
 
       const actions = {
         'server/message': (type, payload) => {
@@ -84,10 +84,13 @@ const redux = io
           redux.emit('action', { type, payload });
         },
         'server/directory_pushed': (type, payload) => {
-          console.log('server/dir_push triggered', payload)
-          redux.emit('action', { type, payload })
+          console.log('server/dir_push triggered', payload);
+          redux.emit('action', { type, payload });
+        },
+        'server/file_change': (type, payload) => {
+          console.log('server/file_change triggered', payload);
         }
-      }
+      };
       function defaultReduxAction(type, payload) {
         console.log("Default redux action triggered");
         return null
@@ -187,9 +190,9 @@ const testDirectory = {
 setTimeout(() => {
   console.log('directory update =================');
   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
-}, 60000);
+}, 40000);
 
 setTimeout(() => {
   console.log('file update =================');
   redux.emit('action', { type: 'FILE_UPDATE', payload: testFile });
-}, 60000);
+}, 40000);

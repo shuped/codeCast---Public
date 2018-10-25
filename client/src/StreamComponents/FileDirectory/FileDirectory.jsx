@@ -21,10 +21,9 @@ class FileDirectory extends React.Component {
     console.log('selected', selectedKeys, info);
     // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
-      //do not delete this, what will send hashes 
-      // this.props.sendHash(info.selectedNodes[0].key);
-      console.log(info.selectedNodes[0].key);
 
+      console.log(info.selectedNodes[0].key);
+      this.props.sendFileID(info.selectedNodes[0].key);
       // need script to disable click event on currently active file
     }
   }
@@ -33,6 +32,7 @@ class FileDirectory extends React.Component {
    
     let result = [];
     const fileDir = treeFrom;
+    // for each item in the file state, build node based of if object or string
     for (let file in fileDir) {
       if (typeof fileDir[file] === 'string') {
         result.push(<TreeNode 
@@ -51,7 +51,6 @@ class FileDirectory extends React.Component {
   
   render() {
     const fileDir = this.props.fileDir;
-    console.log(this.state.fileDir)
     return (
       <Tree
         showLine
