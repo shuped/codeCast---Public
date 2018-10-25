@@ -14,42 +14,42 @@ class ActiveStreams extends Component {
           title: 'Python',
           presentor: 'Spencer',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          ActiveStreamId: 1,
+          activeStreamId: 1,
           imagePath: null
         },
         {
           title: 'Javascript',
           presentor: 'Benji',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          ActiveStreamId: 2,
+          activeStreamId: 2,
           imagePath: null
         },
         {
           title: 'HTML/CSS',
           presentor: 'Jeff',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          ActiveStreamId: 3,
+          activeStreamId: 3,
           imagePath: null
         },
         {
           title: 'Node',
           presentor: 'Space G',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          ActiveStreamId: 1,
+          activeStreamId: 4,
           imagePath: null
         },
         {
           title: 'Ruby',
           presentor: 'Mandy',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          ActiveStreamId: 2,
+          activeStreamId: 5,
           imagePath: null
         },
         {
           title: 'Express',
           presentor: 'Silvia',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet,',
-          ActiveStreamId: 3,
+          activeStreamId: 6,
           imagePath: null
         }
       ]
@@ -58,13 +58,18 @@ class ActiveStreams extends Component {
   }
 
   // this.props['../somestuff/what/#{}']
-
+  GetStreamId = (streamClicked) => {
+    console.log(streamClicked)
+    // react-router code goes here
+    // react-router code goes here
+    // react-router code goes here
+  }
 
   MakeActiveStreamCard = (props) => {
-    const { title, presentor, description, ActiveStreamId, imagePath } = props;
+    const { title, presentor, description, activeStreamId, imagePath } = props;
     // missing image path
     return (
-      <div className="activeStreamCard" key={ (Math.random()*10).toString().slice(2,6) }>
+      <div className="activeStreamCard" key={ activeStreamId } onClick={ () => this.GetStreamId( activeStreamId) }>
         <div className="banner">
           <div>
             <h1>{ title }</h1>
