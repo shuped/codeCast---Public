@@ -67,6 +67,7 @@ class FileDirectory extends React.Component {
     console.log('selected', selectedKeys, info);
     // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
+      //do not delete this, what will send hashes 
       // this.props.sendHash(info.selectedNodes[0].key);
       console.log(info.selectedNodes[0].key);
     }
