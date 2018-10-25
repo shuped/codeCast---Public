@@ -2,7 +2,7 @@ import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import { compareHashToServer } from '../../redux/actions/index.js';
+import { updateFile } from '../../redux/ducks/directoryDuck';
 
 const TreeNode = Tree.TreeNode;
 
@@ -11,54 +11,55 @@ class FileDirectory extends React.Component {
   constructor() {
     super();
     this.state = {
-      fileDir: {
-        "projectRoot": {
-          "firstDir": {
-            "test": "hashRef1",
-            "file2": "hashRef2",
-            "file3": "hashRef3",
+      fileDir: {key: 'whoops'}
+      // fileDir: {
+      //   "projectRoot": {
+      //     "firstDir": {
+      //       "test": "hashRef1",
+      //       "file2": "hashRef2",
+      //       "file3": "hashRef3",
       
-            "firstSubDir": {
-              "file1":"hashRef",
-              "file2":"hashRef",
-              "file3":"hashRef",
+      //       "firstSubDir": {
+      //         "file1":"hashRef",
+      //         "file2":"hashRef",
+      //         "file3":"hashRef",
       
-              "firstNestedSubDir": {
-                "file1":"hashRef",
-                "file2":"hashRef",
-                "file3":"hashRef"
-              },
+      //         "firstNestedSubDir": {
+      //           "file1":"hashRef",
+      //           "file2":"hashRef",
+      //           "file3":"hashRef"
+      //         },
       
-              "secondNestedSubDir": {
-                "file1":"hashRef",
-                "file2":"hashRef",
-                "file3":"hashRef"
-              }
-            },
-            "secondSubDir": {
-              "file1":"hashRef",
-              "file2":"hashRef",
-              "file3":"hashRef",
+      //         "secondNestedSubDir": {
+      //           "file1":"hashRef",
+      //           "file2":"hashRef",
+      //           "file3":"hashRef"
+      //         }
+      //       },
+      //       "secondSubDir": {
+      //         "file1":"hashRef",
+      //         "file2":"hashRef",
+      //         "file3":"hashRef",
       
-              "firstNestedSubDir": {
-                "file1":"hashRef",
-                "file2":"hashRef",
-                "file3":"hashRef"
-              }
-            }
-          },
-          "secondDir": {
-            "file1":"hashRef",
-            "file2":"hashRef",
-            "file3":"hashRef"
-          },
-          "thirdDir": {
-            "file1":"hashRef",
-            "file2":"hashRef",
-            "file3":"hashRef"
-          }
-        }
-      }
+      //         "firstNestedSubDir": {
+      //           "file1":"hashRef",
+      //           "file2":"hashRef",
+      //           "file3":"hashRef"
+      //         }
+      //       }
+      //     },
+      //     "secondDir": {
+      //       "file1":"hashRef",
+      //       "file2":"hashRef",
+      //       "file3":"hashRef"
+      //     },
+      //     "thirdDir": {
+      //       "file1":"hashRef",
+      //       "file2":"hashRef",
+      //       "file3":"hashRef"
+      //     }
+      //   }
+      // }
     };
   }
   
@@ -67,7 +68,7 @@ class FileDirectory extends React.Component {
     console.log('selected', selectedKeys, info);
     // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
-      // this.props.sendHash(info.selectedNodes[0].key);
+      // this.props.sendFileID(info.selectedNodes[0].key);
       console.log(info.selectedNodes[0].key);
     }
   }
@@ -93,7 +94,7 @@ class FileDirectory extends React.Component {
   }
   
   render() {
-    const fileDir = this.state.fileDir;
+    const fileDir = this.props.fileDir;
     return (
       <Tree
         showLine
@@ -106,12 +107,18 @@ class FileDirectory extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
   return {
-    sendHash: (hash) => dispatch(compareHashToServer(hash))
+    fileDir: state.directory.directoryStructure
   }
 }
 
-export default connect(null, mapDispatchToProps)(FileDirectory);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendFileID: (fileID) => dispatch(updateFile(fileID))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FileDirectory);
 
 

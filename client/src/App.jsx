@@ -19,13 +19,13 @@ class App extends Component {
     return (
       <div className="App">
 
-        <div className='index-view'>
+        {/* <div className='index-view'>
           <ArchivedStreams />
-        </div>
+        </div> */}
 
 
 
-        {/* <div className='component-container1'>
+        <div className='component-container1'>
           <div className="Filetree-display">
             <FileDirectory />
           </div>
@@ -35,16 +35,16 @@ class App extends Component {
           <div className="Chat-display">
             <Chat />
           </div>
-        </div> */}
+        </div>
 
-        {/* <div className="component-container2">
+        <div className="component-container2">
           <div className="Code-display">
             <LiveCodeDisplay />
           </div>
           <div className="Terminal-display">
             <Terminal />
           </div>
-        </div> */}
+        </div>
 
 
       </div>
