@@ -3,13 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 //components
-
 import Chat from './StreamComponents/chat/ChatMain';
 import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx';
-import Video from './StreamComponents/VideoStream/VideoStream.jsx';
-import Terminal from './StreamComponents/Terminal/Terminal.jsx';
-import Filetree from './StreamComponents/FileTree/FileTree.jsx';
-import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx'
+import Console from './StreamComponents/Terminal/Terminal'
 //
 // import logo from './assets/logo.svg';
 
@@ -17,31 +13,20 @@ class App extends Component {
   
   
   render() {
-    return (
-      <div className="App">
+    
 
-        <div className='component-container1'>
-          <div className="Filetree-display">
-            <FileDirectory />
-          </div>
-          <div className="Video-display">
-            <Video />
-          </div>
+    return (
+      <div className="App"> 
+        <div className="component-container">
           <div className="Chat-display">
             <Chat />
           </div>
-        </div>
-
-        <div className="component-container2">
           <div className="Code-display">
             <LiveCodeDisplay />
           </div>
-          <div className="Terminal-display">
-            <Terminal />
+          <div>
           </div>
         </div>
-
-
       </div>
     );
   }

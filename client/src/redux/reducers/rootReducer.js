@@ -1,24 +1,30 @@
 import { combineReducers } from 'redux';
 
-function createReducer(initialState, handlers) {
-  return function reducer(state = initialState, action) {
-    return handlers.hasOwnProperty(action.type) ? 
-      handlers[action.type](state, action) : state;
-  };
+
+export default function (state = { activeFileContents: '', directoryStucture: {} } , action) {
+  switch (action.type) {
+    case 'FILE_CONTENTS':
+      return { ...state, activeFileContents: action.payload }
+    
+    case 'DIRECTORY_UPDATE':
+      return {...state, directoryStucture: action.payload }
+  }
 }
+
+
 
 const rootReducer = (state = {messages: []}, action) => {
   switch(action.type) {
-  case 'server/message':
+    case 'server/message':
     console.log('Action data:', action.payload);
     return {...state, messages: action.payload};
-  default:
+    default:
     return state;
   }
 };
 
 const newReducer = createReducer({}, {
- 
+  
 });
 
 export const reducers = combineReducers({
@@ -27,3 +33,16 @@ export const reducers = combineReducers({
 });
 
 export default rootReducer;
+
+
+/******************IN CASE  OF EMERGENCY*******************/
+/*******************BREAK COMMENT BLOCK********************/
+function createReducer(initialState, handlers) {          //
+  return function reducer(state = initialState, action) { //
+    return handlers.hasOwnProperty(action.type) ?         // 
+      handlers[action.type](state, action) : state;       //
+  };                                                      //
+}                                                         // 
+/**********************************************************/
+/**********************************************************/
+
