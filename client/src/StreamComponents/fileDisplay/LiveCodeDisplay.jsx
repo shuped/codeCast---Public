@@ -18,18 +18,6 @@ import 'codemirror/addon/edit/matchbrackets.js';
 import 'codemirror/addon/edit/closetag.js';
 // import 'codemirror/addon/edit/matchtags.js';
 
-
-import { updateFile, changeMirrorTheme } from '../../redux/ducks/fileDuck';
-
-const mapStateToProps = (state) => ({
-  theme: state.file.theme,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  updateFile: (file) => dispatch(updateFile(file)),
-  changeMirrorTheme: (theme) => dispatch(changeMirrorTheme(theme))
-});
-
 class LiveCodeDisplay extends Component {  
 
   constructor(props) {  
@@ -37,7 +25,6 @@ class LiveCodeDisplay extends Component {
     this.state = {
       mime: 'text/javascript',
       theme: 'dracula',
-      activeFileContents: `var test = [1,2,3,4]; \n    function stuff() {console.log(test)} `
     };
   }
 
@@ -60,7 +47,7 @@ class LiveCodeDisplay extends Component {
     return (
       <div className="file-container">
         <CodeMirror 
-          value={ this.state.activeFileContents }
+          value={ this.props.activeFileContents }
           options={ options } 
           // value={this.state.code}
         />
@@ -74,4 +61,8 @@ class LiveCodeDisplay extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LiveCodeDisplay);
+const mapStateToProps = (state) => ({
+  activeFileContents: state.file.activeFileContents,
+});
+
+export default connect(mapStateToProps)(LiveCodeDisplay);
