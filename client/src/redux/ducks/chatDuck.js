@@ -1,4 +1,4 @@
-import randomMessage from '../../StreamComponents/chat/messages/initialMessageUtil'
+import randomMessage from '../../StreamComponents/Chat/messages/initialMessageUtil'
 
 // Outgoing
 const OUTGOING_MESSAGE = 'server/message';
