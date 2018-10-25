@@ -9,7 +9,8 @@ import LiveCodeDisplay from './StreamComponents/fileDisplay/LiveCodeDisplay.jsx'
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import Filetree from './StreamComponents/FileTree/FileTree.jsx';
-import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx'
+import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
+import IndexViews from './ViewComponents/IndexViews/IndexViews'
 //
 // import logo from './assets/logo.svg';
 
@@ -20,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
 
-        <div className='component-container1'>
+        {/* <div className='component-container1'>
           <div className="Filetree-display">
             <FileDirectory />
           </div>
@@ -39,8 +40,11 @@ class App extends Component {
           <div className="Terminal-display">
             <Terminal />
           </div>
-        </div>
+        </div> */}
 
+        <div>
+          <IndexViews />
+        </div>
 
       </div>
     );
