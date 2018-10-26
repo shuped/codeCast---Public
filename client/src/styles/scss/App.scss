@@ -127,63 +127,103 @@ code {
   height: 600px;
   background-color: lightgrey;
 
-  .scheduledStreamCard {
-    width: 90%;
-    height: 8%;
+  .dashboard {
     display:flex;
-    justify-content: space-between;
-    border:2px solid black;
-    margin: 1em 0 ; 
-    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height:100%;
+    width: 100%;
 
-    p{
-      font-size: 1.5em;;
-    }
-    div {
-      display:inline-flex;
+    .header {
+      height:35%;
       
-      .date-time{
-        display:flex;
-        flex-direction: column;
-        
+      justify-content: center;
+      align-items: center;     
 
-        #date{
-          font-size: 1em;
-          display:block;
-          margin: 0;
+      .image-placeholder{
+        
+        width:50px;
+        height:50px;
+        margin: .5em;
+        background-color:black;
+      }
+      .stream-controls{
+        display:flex;
+        justify-content: center;
+        border: 2px solid black;
+        padding: 1em 2em;
+
+        #instant {
+          margin: .5em;
         }
-        #time {
-          font-size: 1em;
-          display:block;
-          margin: 0;
+
+        #scheduleNew {
+          margin: .5em;
         }
       }
     }
-    .controls{
-      display:flex;
-      flex-direction: column;
-      justify-content: space-evenly;
+    .streams {
+      height: 65%;
 
-      #edit-btn {
-        background-color: skyblue;
-        padding:3px;
-        font-size:1em;
+      .scheduledStreamCard {
+        width: 90%;
+        height: 15%;
+        display:flex;
+        justify-content: space-between;
+        border:2px solid black;
+        margin: 1em 0 ; 
+        align-items: center;
 
-        &:hover {
-          background: rgba(0,0,0,0);
-          color: #3a7999;
-          box-shadow: inset 0 0 0 3px #3a7999;
+        p{
+          font-size: 1.5em;;
         }
-      }
-      #delete-btn {
-        background-color: darkred;
-        padding:3px;
-        font-size:1em;
+        div {
+          display:inline-flex;
+          
+          .date-time{
+            display:flex;
+            flex-direction: column;
+            
 
-        &:hover {
-          background: rgba(0,0,0,0);
-          color: #3a7999;
-          box-shadow: inset 0 0 0 3px #3a7999;
+            #date{
+              font-size: 1em;
+              display:block;
+              margin: 0;
+            }
+            #time {
+              font-size: 1em;
+              display:block;
+              margin: 0;
+            }
+          }
+        }
+        .controls{
+          display:flex;
+          flex-direction: column;
+          justify-content: space-evenly;
+
+          #edit-btn {
+            background-color: skyblue;
+            padding:3px;
+            font-size:1em;
+
+            &:hover {
+              background: rgba(0,0,0,0);
+              color: #3a7999;
+              box-shadow: inset 0 0 0 3px #3a7999;
+            }
+          }
+          #delete-btn {
+            background-color: darkred;
+            padding:3px;
+            font-size:1em;
+
+            &:hover {
+              background: rgba(0,0,0,0);
+              color: #3a7999;
+              box-shadow: inset 0 0 0 3px #3a7999;
+            }
+          }
         }
       }
     }
