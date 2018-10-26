@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 //components
 
-import Chat from './StreamComponents/Chat/ChatMain';
+import Chat from './StreamComponents/Chat/ChatMain.jsx';
 import LiveCodeDisplay from './StreamComponents/FileDisplay/LiveCodeDisplay.jsx';
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
@@ -24,7 +24,6 @@ class App extends Component {
         </div> */}
 
 
-
         <div className='component-container1'>
           <div className="Filetree-display">
             <FileDirectory />
@@ -35,7 +34,7 @@ class App extends Component {
           <div className="Chat-display">
             <Chat />
           </div>
-        </div>
+        </div>  
 
         <div className="component-container2">
           <div className="Code-display">

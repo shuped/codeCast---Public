@@ -12,64 +12,19 @@ class FileDirectory extends React.Component {
     super();
     this.state = {
       fileDir: {key: 'whoops'}
-      // fileDir: {
-      //   "projectRoot": {
-      //     "firstDir": {
-      //       "test": "hashRef1",
-      //       "file2": "hashRef2",
-      //       "file3": "hashRef3",
-      
-      //       "firstSubDir": {
-      //         "file1":"hashRef",
-      //         "file2":"hashRef",
-      //         "file3":"hashRef",
-      
-      //         "firstNestedSubDir": {
-      //           "file1":"hashRef",
-      //           "file2":"hashRef",
-      //           "file3":"hashRef"
-      //         },
-      
-      //         "secondNestedSubDir": {
-      //           "file1":"hashRef",
-      //           "file2":"hashRef",
-      //           "file3":"hashRef"
-      //         }
-      //       },
-      //       "secondSubDir": {
-      //         "file1":"hashRef",
-      //         "file2":"hashRef",
-      //         "file3":"hashRef",
-      
-      //         "firstNestedSubDir": {
-      //           "file1":"hashRef",
-      //           "file2":"hashRef",
-      //           "file3":"hashRef"
-      //         }
-      //       }
-      //     },
-      //     "secondDir": {
-      //       "file1":"hashRef",
-      //       "file2":"hashRef",
-      //       "file3":"hashRef"
-      //     },
-      //     "thirdDir": {
-      //       "file1":"hashRef",
-      //       "file2":"hashRef",
-      //       "file3":"hashRef"
-      //     }
-      //   }
-      // }
     };
   }
-  
+
+
   //tree click handler
   onSelect = (selectedKeys, info) => {
     console.log('selected', selectedKeys, info);
     // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
-      // this.props.sendFileID(info.selectedNodes[0].key);
+
       console.log(info.selectedNodes[0].key);
+      this.props.sendFileID(info.selectedNodes[0].key);
+      // need script to disable click event on currently active file
     }
   }
   // take in file object and create nested Tree nodes
@@ -77,6 +32,7 @@ class FileDirectory extends React.Component {
    
     let result = [];
     const fileDir = treeFrom;
+    // for each item in the file state, build node based of if object or string
     for (let file in fileDir) {
       if (typeof fileDir[file] === 'string') {
         result.push(<TreeNode 
