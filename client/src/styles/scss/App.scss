@@ -176,6 +176,11 @@ code {
         margin: 1em 0 ; 
         align-items: center;
 
+        .startPlaceholder {
+          width:50px;
+          height: 50px;
+          background-color: aquamarine;
+        }
         p{
           font-size: 1.5em;
           height:20%;

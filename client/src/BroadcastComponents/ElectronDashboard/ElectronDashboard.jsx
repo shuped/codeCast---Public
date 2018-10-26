@@ -24,11 +24,15 @@ class Dashboard extends React.Component {
   }
 
 
-  OpenEditControls = (clickedID) => {
-
+  LaunchScheduledStream = (clickedID) => {
     console.log(clickedID)
   }
 
+  OpenEditControls = (clickedID) => {
+    console.log(clickedID)
+  }
+
+  
   DeleteCard = (clickedID) => {
 
     this.setState({scheduledStreams: this.state.scheduledStreams.filter( (stream) => {
@@ -46,6 +50,7 @@ class Dashboard extends React.Component {
     const { title, scheduledDate, scheduledTime, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
+        <div className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }></div>
         <p>{ title }</p>
         <div>
           <div className="date-time">
@@ -74,9 +79,9 @@ class Dashboard extends React.Component {
             <div className="image-placeholder">p</div>
           
             <div className="stream-controls">
-              <Button id="instant"  type="primary">Start a Stream</Button>
+              <Button id="instant"  type="primary" onClick={ console.log("new instant stream")}>Start a Stream</Button>
               {/* missing confirm button delete button on click */}
-              <Button id="scheduleNew" type="primary">Schedule a Stream</Button>
+              <Button id="scheduleNew" type="primary" onClick={ console.log("schedule upcoming")}>Schedule a Stream</Button>
             </div>
           </div>
           <div className="streams">

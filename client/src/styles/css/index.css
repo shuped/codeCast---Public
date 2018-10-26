@@ -284,6 +284,10 @@ code {
         border: 2px solid black;
         margin: 1em 0;
         align-items: center; }
+        .electron .dashboard .streams .scheduledStreamCard .startPlaceholder {
+          width: 50px;
+          height: 50px;
+          background-color: aquamarine; }
         .electron .dashboard .streams .scheduledStreamCard p {
           font-size: 1.5em;
           height: 20%; }
