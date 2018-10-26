@@ -127,6 +127,7 @@ code {
   height: 600px;
   background-color: lightgrey;
 
+  // dashboard
   .dashboard {
     display:flex;
     flex-direction: column;
@@ -235,24 +236,13 @@ code {
         }
       }
     }
+  }   // dashboard
+
+  .new-stream {
+
   }
 }
 
 
 
 
-
-
-// <div className="scheduledStreamCard" key={ id } >
-// <h1>{ title }</h1>
-// <div>
-//   <div className="date-time">
-//     <p>{ scheduledDate }</p>
-//     <p>{ scheduledTime }</p>
-//   </div>
-//   <div className="controls">
-//     <Button id="edit-btn"  type="primary">Edit</Button>
-//     <Button id="delete-btn" type="primary">Delete</Button>
-//   </div>
-// </div>
-// </div>
