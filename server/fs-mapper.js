@@ -97,16 +97,14 @@ async function makeJSON(array) {
           //2) read file and push returned promise to promises array
           if(i === fpath.length - 1) {
             let fileID = uuid();
-            await promises.push({id: [fileID],
-                                 promise: fileReader(rootDir, fpath, targetFile)});
+            await promises.push({ id: [fileID], promise: fileReader(rootDir, fpath, targetFile) });
             current[targetFile] = fileID;
           }
         });
       //if child of root dir append to root object and do same as above
       } else {
         let fileID = uuid();
-        await promises.push({id: [fileID],
-                             promise: fileReader(rootDir, fpath, targetFile)});
+        await promises.push({ id: [fileID], promise: fileReader(rootDir, fpath, targetFile) });
         current[targetFile] = fileID;
         
       }
@@ -138,7 +136,7 @@ function done() {
 }
 
 //takes directory path and callback
-const readDir = (dir, done) => {
+function readDir(dir, done) {
   // collects results
   let results = [];
   // reads directory passed to readDir()
@@ -175,4 +173,9 @@ const readDir = (dir, done) => {
   });
 };
 
-readDir(rootDir, done());
+// readDir(rootDir, done());
+
+module.exports = {
+  readDir,
+  done
+};
