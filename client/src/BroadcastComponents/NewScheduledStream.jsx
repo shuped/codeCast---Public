@@ -11,7 +11,7 @@ class ScheduleNewStream extends React.Component {
     super();
     this.state = {
       title: 'placeholder',
-      user: 'Spencer Mc-Whhite'
+      user: 'Spencer Mc-Whhite',
       description: 'asdasdas',
       scheduledDate: '',
       languageImage: ''
@@ -28,13 +28,13 @@ class ScheduleNewStream extends React.Component {
     this.setState({description: event.target.value})
   }
 
-  onChange = (value) => {
-    this.setState({scheduledDate: value})
-  }
+  // onChange = (value) => {
+  //   this.setState({scheduledDate: value})
+  // }
   
   onOk = (value) => {
-    this.setState({scheduledDate: value})
-    console.log('onOk: ', value);
+    this.setState({scheduledDate: value['_d']})
+    // console.log('onOk: ', value);
   }
 
   HandleImageSelection = (value) => {
@@ -46,7 +46,7 @@ class ScheduleNewStream extends React.Component {
     event.preventDefault();
     //redirect to broadcast page
 
-    console.log(this.state.newStream
+    console.log(this.state)
     
   }
 
@@ -56,7 +56,7 @@ class ScheduleNewStream extends React.Component {
 
         <main className="new-stream">
           <header className="header">
-            <Button id="dashboard" type="primary" onClick={ console.log("dashboard route")}>Dashboard</Button>
+            <Button id="dashboard" type="primary">Dashboard</Button>
             <div className="logoPlaceholder">p</div>
           </header>
           <div className="inputs-container">
@@ -82,8 +82,8 @@ class ScheduleNewStream extends React.Component {
                   onOk={this.onOk}
                 />
                 {/* Language image selector */}
-                <InputGroup compact onChange={this.HandleImageSelection} >
-                  <Select className="image-select" defaultValue="default">
+                <InputGroup compact>
+                  <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
                     <Option value="default">----</Option>
                     <Option value="image/path1">Node</Option>
                     <Option value="image/path2">Ruby</Option>
