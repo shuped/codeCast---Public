@@ -285,7 +285,8 @@ code {
         margin: 1em 0;
         align-items: center; }
         .electron .dashboard .streams .scheduledStreamCard p {
-          font-size: 1.5em; }
+          font-size: 1.5em;
+          height: 20%; }
         .electron .dashboard .streams .scheduledStreamCard div {
           display: inline-flex; }
           .electron .dashboard .streams .scheduledStreamCard div .date-time {
