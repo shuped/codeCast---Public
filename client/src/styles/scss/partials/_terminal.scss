@@ -3,10 +3,17 @@
   display: flex;
   flex-wrap: nowrap;
 
+  div.xterm-screen {
+    min-width: 50vw;
+    min-height: 47vh;
+  }
   canvas[class^="xterm-"] {
     display: flex;
     min-width: 50vw !important;
     min-height: 48vh;
+  }
+  canvas.xterm-text-layer, canvas.xterm-cursor-layer {
+    padding: 0.5rem 3rem 1rem 2rem;
   }
 
 }
