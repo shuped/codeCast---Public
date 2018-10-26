@@ -53,10 +53,22 @@ class Dashboard extends React.Component {
     return (
 
       
-
-      <main className="streams">
-        { renderStreams }
-      </main>
+        <main className="dashboard">
+          <div className="header">
+            <div className="image-placeholder">p</div>
+          
+            <div className="stream-controls">
+              <Button id="instant"  type="primary">Start a Stream</Button>
+              <Button id="scheduleNew" type="primary">Schedule a Stream</Button>
+            </div>
+          </div>
+          <div className="streams">
+            <h2>Your Scheduled Streams</h2>
+            { renderStreams }
+          </div>
+          
+        </main>
+      
     );
   }
 
