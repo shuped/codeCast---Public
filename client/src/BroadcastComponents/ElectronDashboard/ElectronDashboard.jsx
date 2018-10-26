@@ -1,6 +1,5 @@
 import React from 'react';
-import 'antd/dist/antd.css';
-
+import { Button } from 'antd';
 
 
 
@@ -8,40 +7,38 @@ class Dashboard extends React.Component {
 
   constructor() {
     super();
-    this.state = [
-      {
-        title: 'HTML/CSS',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        scheduledDate: "2018-03-25",
-        scheduledTime: "9am"
-      },
-      {
-        title: 'Node',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-        scheduledDate: "2019-05-30",
-        scheduledTime: "3pm"
-      }
-  ]
+    this.state = {
+      scheduledStreams: [
+        {
+          title: 'HTML/CSS',
+          scheduledDate: "2018-03-25",
+          scheduledTime: "9am",
+          id: 1
+        },
+        {
+          title: 'Node',
+          scheduledDate: "2019-05-30",
+          scheduledTime: "3pm",
+          id: 2
+        }
+      ]
+    }
   }
 
-
-  
   MakeScheduledStreamCard = (props) => {
-    const { title, presentor, description, activeStreamId, imagePath } = props;
-    // missing image path
+    const { title, scheduledDate, scheduledTime, id } = props;
     return (
-      <div className="activeStreamCard" key={ activeStreamId } onClick={ () => this.GetStreamId( activeStreamId) }>
-        <div className="banner">
-          <div>
-            <h1>{ title }</h1>
-            <h2>{ presentor }</h2>
+      <div className="scheduledStreamCard" key={ id } >
+        <p>{ title }</p>
+        <div>
+          <div className="date-time">
+            <p id="date">{ scheduledDate }</p>
+            <p id="time">{ scheduledTime }</p>
           </div>
-          {/* to use for image later */}
-          {/* <img src="#imagePath" /> */}
-          <div className="imagePlaceholder">p</div>
-        </div>
-        <div className="description-container">
-          { description }
+          <div className="controls">
+            <Button id="edit-btn"  type="primary">Edit</Button>
+            <Button id="delete-btn" type="primary">Delete</Button>
+          </div>
         </div>
       </div>
     )
@@ -49,13 +46,13 @@ class Dashboard extends React.Component {
 
   render() {  
     
-    const renderStreams = this.state.activeStreams.map( (stream) => {
-      return this.MakeActiveStreamCard(stream);  
+    const renderStreams = this.state.scheduledStreams.map( (stream) => {
+      return this.MakeScheduledStreamCard(stream);  
     });
 
     return (
 
-
+      
 
       <main className="streams">
         { renderStreams }
@@ -80,6 +77,6 @@ class Dashboard extends React.Component {
 //   }
 // }
 
-export default connect(null, null)(Dashboard);
+export default Dashboard;
 
 

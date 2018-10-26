@@ -120,3 +120,91 @@ code {
     transform: rotate(360deg);
   }
 }
+
+// testing purposes delete me once electron can host its own content
+.electron {
+  width: 800px;
+  height: 600px;
+  background-color: lightgrey;
+
+  .scheduledStreamCard {
+    width: 90%;
+    height: 8%;
+    display:flex;
+    justify-content: space-between;
+    border:2px solid black;
+    margin: 1em 0 ; 
+    align-items: center;
+
+    p{
+      font-size: 1.5em;;
+    }
+    div {
+      display:inline-flex;
+      
+      .date-time{
+        display:flex;
+        flex-direction: column;
+        
+
+        #date{
+          font-size: 1em;
+          display:block;
+          margin: 0;
+        }
+        #time {
+          font-size: 1em;
+          display:block;
+          margin: 0;
+        }
+      }
+    }
+    .controls{
+      display:flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      #edit-btn {
+        background-color: skyblue;
+        padding:3px;
+        font-size:1em;
+
+        &:hover {
+          background: rgba(0,0,0,0);
+          color: #3a7999;
+          box-shadow: inset 0 0 0 3px #3a7999;
+        }
+      }
+      #delete-btn {
+        background-color: darkred;
+        padding:3px;
+        font-size:1em;
+
+        &:hover {
+          background: rgba(0,0,0,0);
+          color: #3a7999;
+          box-shadow: inset 0 0 0 3px #3a7999;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+// <div className="scheduledStreamCard" key={ id } >
+// <h1>{ title }</h1>
+// <div>
+//   <div className="date-time">
+//     <p>{ scheduledDate }</p>
+//     <p>{ scheduledTime }</p>
+//   </div>
+//   <div className="controls">
+//     <Button id="edit-btn"  type="primary">Edit</Button>
+//     <Button id="delete-btn" type="primary">Delete</Button>
+//   </div>
+// </div>
+// </div>
