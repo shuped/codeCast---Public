@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from 'antd';
 
 
-
 class Dashboard extends React.Component {
 
   constructor() {
@@ -52,7 +51,6 @@ class Dashboard extends React.Component {
 
     return (
 
-      
         <main className="dashboard">
           <div className="header">
             <div className="image-placeholder">p</div>

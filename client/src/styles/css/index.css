@@ -255,7 +255,9 @@ code {
     width: 100%; }
     .electron .dashboard .header {
       height: 35%;
+      display: flex;
       justify-content: center;
+      flex-direction: column;
       align-items: center; }
       .electron .dashboard .header .image-placeholder {
         width: 50px;
@@ -266,7 +268,8 @@ code {
         display: flex;
         justify-content: center;
         border: 2px solid black;
-        padding: 1em 2em; }
+        padding: 1em 2em;
+        width: 60%; }
         .electron .dashboard .header .stream-controls #instant {
           margin: .5em; }
         .electron .dashboard .header .stream-controls #scheduleNew {
