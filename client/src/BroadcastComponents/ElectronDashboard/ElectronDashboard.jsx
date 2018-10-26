@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
 
-
 class Dashboard extends React.Component {
 
   constructor() {
@@ -12,22 +11,33 @@ class Dashboard extends React.Component {
           title: 'HTML/CSS',
           scheduledDate: "2018-03-25",
           scheduledTime: "9am",
-          id: 1
+          streamID: 1
         },
         {
           title: 'Node',
           scheduledDate: "2019-05-30",
           scheduledTime: "3pm",
-          id: 2
+          streamID: 2
         }
       ]
     }
   }
 
+
+  OpenEditControls = (clickedID) => {
+    console.log(clickedID)
+  }
+
+  DeleteCard = (clickedID) => {
+    console.log(clickedID)
+  }
+
+  // need data structure for scheduled streams, for edit purposes
+
   MakeScheduledStreamCard = (props) => {
-    const { title, scheduledDate, scheduledTime, id } = props;
+    const { title, scheduledDate, scheduledTime, streamID } = props;
     return (
-      <div className="scheduledStreamCard" key={ id } >
+      <div className="scheduledStreamCard" key={ streamID } >
         <p>{ title }</p>
         <div>
           <div className="date-time">
@@ -35,8 +45,8 @@ class Dashboard extends React.Component {
             <p id="time">{ scheduledTime }</p>
           </div>
           <div className="controls">
-            <Button id="edit-btn"  type="primary">Edit</Button>
-            <Button id="delete-btn" type="primary">Delete</Button>
+            <Button id="edit-btn"  type="primary" onClick={ () => this.OpenEditControls(streamID) }>Edit</Button>
+            <Button id="delete-btn" type="primary" onClick={ () => this.DeleteCard(streamID) }>Delete</Button>
           </div>
         </div>
       </div>
@@ -57,6 +67,7 @@ class Dashboard extends React.Component {
           
             <div className="stream-controls">
               <Button id="instant"  type="primary">Start a Stream</Button>
+              {/* missing confirm button delete button on click */}
               <Button id="scheduleNew" type="primary">Schedule a Stream</Button>
             </div>
           </div>
@@ -69,10 +80,6 @@ class Dashboard extends React.Component {
       
     );
   }
-
-
-
-
 }
 
 // const mapStateToProps = (state) => {
@@ -90,3 +97,12 @@ class Dashboard extends React.Component {
 export default Dashboard;
 
 
+
+// {
+//   title: 'HTML/CSS',
+//   broadcaster: '#'
+//   scheduledDate: "2018-03-25",
+//   scheduledTime: "9am",
+//   description: 
+//   id: 1
+// }
