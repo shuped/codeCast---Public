@@ -25,11 +25,19 @@ class Dashboard extends React.Component {
 
 
   OpenEditControls = (clickedID) => {
+
     console.log(clickedID)
   }
 
   DeleteCard = (clickedID) => {
-    console.log(clickedID)
+
+    this.setState({scheduledStreams: this.state.scheduledStreams.filter( (stream) => {
+      return stream.streamID !== clickedID;
+    }) })
+    
+    //make as promise? since set state takes to long
+    // leave in delete function
+    // this.props.deleteStream(this.state.scheduledStreams);
   }
 
   // need data structure for scheduled streams, for edit purposes
@@ -54,7 +62,7 @@ class Dashboard extends React.Component {
   }
 
   render() {  
-    
+    console.log(this.state.scheduledStreams, "render");
     const renderStreams = this.state.scheduledStreams.map( (stream) => {
       return this.MakeScheduledStreamCard(stream);  
     });
@@ -82,6 +90,8 @@ class Dashboard extends React.Component {
   }
 }
 
+// leave in 
+
 // const mapStateToProps = (state) => {
 //   return {
 //     fileDir: state.directory.directoryStructure
@@ -90,14 +100,14 @@ class Dashboard extends React.Component {
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     sendFileID: (fileID) => dispatch(updateFile(fileID))
+//     deleteStream: (fileID) => dispatch(updateFile(fileID))
 //   }
 // }
 
 export default Dashboard;
+// export default connect(null, null)(ActiveStreams);
 
-
-
+// data representation
 // {
 //   title: 'HTML/CSS',
 //   broadcaster: '#'
