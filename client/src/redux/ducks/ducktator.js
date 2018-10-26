@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 
-import { chatReducer }  from './chatDuck'
-import { directoryReducer } from './directoryDuck'
-import { fileReducer } from './fileDuck'
+import { chatReducer }  from './ChatDuck'
+import { directoryReducer } from './DirectoryDuck'
+import { fileReducer } from './FileDuck'
 
 export const rootReducer = combineReducers({
   chat: chatReducer,

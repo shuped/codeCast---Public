@@ -2,7 +2,7 @@ import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import { updateFile } from '../../redux/ducks/directoryDuck';
+import { updateFile } from '../../redux/ducks/DirectoryDuck';
 
 const TreeNode = Tree.TreeNode;
 

@@ -9,27 +9,21 @@ import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
 import ArchivedStreams from './ViewComponents/IndexViews/ArchivedStreams/ArchivedStreams.jsx';
-import Filetree from './StreamComponents/FileTree/FileTree.jsx';
-import FileDirectory from './StreamComponents/fileDirectory/FileDirectory.jsx';
-import IndexViews from './ViewComponents/IndexViews/IndexViews'
+import IndexViews from './ViewComponents/IndexViews/IndexViews.jsx'
 //
 // import logo from './assets/logo.svg';
 
 class App extends Component {
-  
-  
+   
   render() {
     return (
-      {/* <div className="App">
+      <div className="App">
+        <div>
+          <IndexViews />
+        </div>
 
-        <div className='index-view'>
-          <ArchivedStreams />
-        </div> */}
-
-
-
-        <div className='component-container1'>
         {/* <div className='component-container1'>
+        <div className='component-container1'>
           <div className="Filetree-display">
             <FileDirectory />
           </div>
@@ -48,31 +42,20 @@ class App extends Component {
           <div className="Terminal-display">
             <Terminal />
           </div>
-        </div> */}
+        </div>
 
         <div>
           <IndexViews />
         </div>
-
-      </div>
+        </div> */}
+      </div> 
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    state
-    //state mapping here    
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-    //dispatch actions here
-  };   
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default (App);
 
 
