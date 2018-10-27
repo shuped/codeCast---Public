@@ -11,6 +11,7 @@
   "main": "./src/electron-main/electron-main.js",
   "dependencies": {
     "antd": "^3.10.1",
+    "axios": "~0.18.0",
     "bluebird": "^3.5.2",
     "codemirror": "~5.41.0",
     "electron": "^3.0.5",

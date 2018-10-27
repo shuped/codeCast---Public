@@ -33,6 +33,7 @@ code {
 .App {
   flex-direction: column;
   min-height: 100vh;
+  max-height: 100vh;
   min-width: 100vw;
   overflow: hidden;
   // background-color: black;
