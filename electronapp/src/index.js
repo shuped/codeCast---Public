@@ -1,6 +1,11 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import store from './redux/store/index.js';
+import Root from './Root.jsx';
+import * as serviceWorker from './serviceWorker.js';
+import './styles/css/index.css';
 
+<<<<<<< HEAD
 var Entry = React.createClass({
   render: function() {
     return (
@@ -9,5 +14,14 @@ var Entry = React.createClass({
       </div>
     );
   }
+=======
+ReactDOM.render(
+  <Root store={ store } />, 
+  document.getElementById('root')
+);
+>>>>>>> feature/electronReact
 
-ReactDOM.render(<Entry />, document.getElementById('root'));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();

@@ -31,9 +31,5 @@ xterm1.on('data', (data) => {
 
 ptyProcess.on('data', function (data) {
   xterm1.write(data);
-<<<<<<< HEAD
-  
-=======
->>>>>>> f9cbaaa8726c5ed0689cc765f57b361353117e70
   io.emit('data', data);
 });

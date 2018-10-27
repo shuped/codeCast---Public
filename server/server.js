@@ -32,10 +32,42 @@ app.use(morgan('dev', {
 app.get('/api/filecontent', (req, res) => {
 
   let fileID = req.body;
+<<<<<<< HEAD
   fileCache[fileID] ? 
     res.status(200).json(JSON.stringify(fileCache[fileID])) : 
     res.status(204).json({ "error": "Whoops! File not found :(" });
     
+=======
+  fileCache ? res.status(200).json(JSON.stringify(fileCache[fileID])) : res.status(204).send('File not found');
+});
+
+app.get('/api/scheduledStreams/', (req, res) => {
+  const testStreams = {
+    "asdass": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: Date.now(),
+      youtubeURL: 'www.youtube.com',
+      userID: 1,
+      streamID: 'asdass',
+      languageImage: 'image'
+    },
+    "asdfad": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: Date.now(),
+      youtubeURL: 'www.youtube.com',
+      userID: 1,
+      streamID: 'asdfad',
+      languageImage: 'image'
+    }
+  };
+
+console.log('Get success');
+  res.status(200).json(testStreams);
+>>>>>>> feature/electronReact
 });
 
 //recieve file dir/content from electron
@@ -52,6 +84,10 @@ app.post('/api/electron', (req, res) => {
     throw e;
   }
 
+});
+
+app.get('/*', (req, res) => {
+  res.status(200).json({ express: 'successful connection to express' });
 });
 
 io.on('connection', (socket) => {
@@ -161,6 +197,7 @@ const terminal = io
     termClients.push(socket.id);
     console.log(termClients);
 
+<<<<<<< HEAD
   socket.on('data', (data) => {
     let now = Date.now();
     terminalRecord[now] = data;
@@ -174,6 +211,24 @@ const terminal = io
     console.log(termClients);
   });
 });
+=======
+    socket.on('data', (data) => {
+      let now = Date.now();
+      terminalRecord[now] = data;
+      terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+    });
+  
+
+
+    socket.on('disconnect', () => {
+      console.log(`Terminal socket ${socket.id} disconnected`)
+      let clientIndex = termClients.findIndex(e => e === socket.id);
+      termClients.splice(clientIndex, 1);
+      console.log(termClients);
+    });
+  });
+
+>>>>>>> feature/electronReact
 
 
 // setTimeout(() => {
