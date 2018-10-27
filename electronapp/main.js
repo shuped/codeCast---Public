@@ -3,10 +3,12 @@ const electron = require('electron')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
-
 const path = require('path')
 const url = require('url')
 
+const { readDir, done } = require('../server/fs-mapper');
+
+const rootDir = path.join(__dirname, '..');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -21,7 +23,7 @@ function createWindow () {
     protocol: 'file:',
     slashes: true
   }))
-
+  readDir(rootDir, done(__dirname));
   // Open the DevTools.
   mainWindow.webContents.openDevTools()
 

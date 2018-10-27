@@ -80,15 +80,16 @@ const redux = io
     console.log(`Socket ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
-
-    socket.on('action', (action) => {
+   
+    socket.on('action', (action) => {      
 
       const actions = {
         'server/message': (type, payload) => {
           console.log('server/message action triggered', payload);
-          redux.emit('action', { type, payload });
+          redux.emit('action', { type: 'NEW_MESSAGE', payload });
         },
         'server/directory_pushed': (type, payload) => {
+
           console.log('server/dir_push triggered', payload);
           redux.emit('action', { type, payload });
         },
