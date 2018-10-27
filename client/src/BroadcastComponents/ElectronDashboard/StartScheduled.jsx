@@ -10,25 +10,13 @@ class StartScheduled extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: 'placeholder',
-      description: 'asdasdas',
+      title: 'New Stream About Stuff',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     }
 
   }
 
   //handlers
-  TitleOnChange = (event) => {
-    this.setState({title: event.target.value});
-  }
-  
-  DescriptionOnChange = (event) => {
-    this.setState({description: event.target.value})
-  }
-
-  HandleImageSelection = (value) => {
-    this.setState({languageImage: value});
-    console.log(value)
-  }
 
   YoutubeUrlInput = (event) => {
     this.setState({youtubeURL: event.target.value})
