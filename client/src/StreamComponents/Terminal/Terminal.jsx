@@ -21,9 +21,7 @@ class Console extends Component {
     this.terminal = new Terminal({
       scrollback: 99999999,
       cursorBlink: true
-    })
-    
-    
+    });
   };
 
   componentDidMount() {
