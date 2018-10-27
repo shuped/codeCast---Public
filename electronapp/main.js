@@ -19,7 +19,7 @@ function createMainWindow () {
 		backgroundColor: '#F7F7F7',
 		minWidth: 880,
 		height: 860,
-		width: 1280,
+		width: 1280
 	});
 
 	// mainWindow.loadURL(
@@ -27,11 +27,12 @@ function createMainWindow () {
   // 		? 'http://localhost:3000'
   // 		: `file://${path.join(__dirname, '../build/index.html')}`,
   // );
+
   mainWindow.loadURL(url.format({
     pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
-  }))
+  }));
   
 	if (isDev) {
     const {
@@ -49,14 +50,13 @@ function createMainWindow () {
 			});
       
 		installExtension(REDUX_DEVTOOLS)
-    .then(name => {
-      console.log(`Added Extension: ${name}`);
-    })
+      .then(name => {
+        console.log(`Added Extension: ${name}`);
+      })
 			.catch(err => {
         console.log('An error occurred: ', err);
       });
-      mainWindow.webContents.openDevTools()
-      
+    mainWindow.webContents.openDevTools();      
 	}
   
 	mainWindow.once('ready-to-show', () => {
@@ -71,7 +71,6 @@ function createMainWindow () {
 let terminalWindow
 async function createTerminalWindow() {
   const decoder = new StringDecoder('utf8');
-
   //temp root targets project directory
   //**TODO: get rootDir from shell command**
   const rootDir = path.join(__dirname, '..');
