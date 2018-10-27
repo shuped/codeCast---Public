@@ -12,6 +12,7 @@ class StartScheduled extends React.Component {
     this.state = {
       title: 'New Stream About Stuff',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      streamID: 1,
     }
 
   }
@@ -26,6 +27,8 @@ class StartScheduled extends React.Component {
     event.preventDefault();
     //redirect to broadcast page
 
+    // based off of id, start stream 
+    // startScheduledStream(IDTOSTART)
     console.log(this.state)
     
   }
@@ -71,7 +74,7 @@ class StartScheduled extends React.Component {
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {
-//     newScheduledStream: (fileID) => dispatch(updateFile(fileID))
+//     startScheduledStream: (fileID) => dispatch(updateFile(fileID))
 //   }
 // }
 
