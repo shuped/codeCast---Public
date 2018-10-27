@@ -16,11 +16,10 @@ class IndexViews extends Component {
 		this.setState({pageValue: route})
 		console.log("State:", this.state)
 	}
-	
+
 	render() {
 		
 		let pageVal = () => {
-			console.log("HELLOWORLD?")
 			if (this.state.pageValue === '/current') {
 				return (
 					<div className='index-view'>
@@ -45,18 +44,21 @@ class IndexViews extends Component {
 		}
 		
 		return (
-			<div>
+			<div className="pageGrid">
+				<div>
 				<button className="tablink" onClick={() => this.setRouteState('/current')} id="defaultOpen">
-					Current Streams
+					CURRENT STREAMS
 				</button>
 				<button className="tablink" onClick={() => this.setRouteState('/scheduled')}>
-					Scheduled Streams
+					SCHEDULED STREAMS
 				</button>
 				<button className="tablink" onClick={() => this.setRouteState('/archived')}>
-					Archived Streams
+					ARCHIVED STREAMS
 				</button>
-					{this.state.pageValue}
+
 				{pageVal()}
+
+				</div>
 			</div>
 		)
 	}
