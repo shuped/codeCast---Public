@@ -8,7 +8,7 @@ const fs = require ('fs');
 //require mapper function. Function call format: readDir(rootDirectory, done());
 const { readDir, done } = require('../server/fs-mapper');
 // axios to send content to the server
-const axios = require('./api');
+const axios = require('./src/redux/ducks/api');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
