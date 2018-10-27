@@ -1,5 +1,5 @@
 {
-  "name": "node-pty-electron-example",
+  "name": "node-pty-electron",
   "version": "1.0.0",
   "description": "A minimal node-pty Electron example",
   "main": "main.js",
@@ -7,8 +7,8 @@
     "start": "electron . --ignore-gpu-blacklist"
   },
   "proxy": "http://localhost:8080",
-  "repository": "https://github.com/Tyriar/node-pty",
-  "author": "Tyriar",
+  "repository": "https://github.com/benji-leboe/codeCast",
+  "author": "Spencer Shupe, Benji Leboe",
   "dependencies": {
     "axios": "~0.18.0",
     "electron": "^2.0.9",
