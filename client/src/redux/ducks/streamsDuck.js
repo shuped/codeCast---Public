@@ -14,7 +14,7 @@ export const updateViewerStreams = (scheduledStreams) => ({ type: BROADCASTER_ST
 export const streamsReducer = (state = {}, action) => {
   switch(action.type) {
     case VIEWER_STREAMS_UPDATE:
-      console.log('broadcaster streams update', action.payload);
+      console.log('userstreams update', action.payload);
       return { ...state, scheduledStreams: action.payload }
 
     default:
