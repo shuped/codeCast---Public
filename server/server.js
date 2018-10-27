@@ -30,7 +30,6 @@ app.use(morgan('dev', {
 }));
 
 app.get('/api/filecontent', (req, res) => {
-
   let fileID = req.body;
   fileCache ? res.status(200).json(JSON.stringify(fileCache[fileID])) : res.status(204).send('File not found');
 });
@@ -122,7 +121,6 @@ io.on('connection', (socket) => {
   socket.on('error', (err) => {
     console.log(err, `from ${socket.id}`);
   });
-
 });
 
 
@@ -131,54 +129,51 @@ const redux = io
   .of('/redux')
   .on('connection', (socket) => {
 
-  const clients = [];
-  console.log(`Socket ${socket.id} connected`);
-  clients.push(socket.id);
-  console.log(clients);
-  
-  socket.on('action', (action) => {      
+    const clients = [];
+    console.log(`Socket ${socket.id} connected`);
+    clients.push(socket.id);
+    console.log(clients);
+   
+    socket.on('action', (action) => {      
 
-    const actions = {
-      'server/message': (type, payload) => {
-        console.log('server/message action triggered', payload);
-        redux.emit('action', { type: 'NEW_MESSAGE', payload });
-      },
-      'server/directory_update': (type, payload) => {
-        console.log('server/dir_update triggered', payload);
-        redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
-      },
-      'server/file_change': (type, payload) => {
+      const actions = {
+        'server/message': (type, payload) => {
+          console.log('server/message action triggered', payload);
+          redux.emit('action', { type: 'NEW_MESSAGE', payload });
+        },
+        'server/directory_update': (type, payload) => {
+          console.log('server/dir_update triggered', payload);
+          redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
+        },
+        'server/file_change': (type, payload) => {
 
-        //**TODO: TRIGGER PUSH TO DIR TREE ON FILE UPDATE**//
-        console.log('server/file_change triggered', payload);
-        newFileVersion = payload;
+          //**TODO: TRIGGER PUSH TO DIR TREE ON FILE UPDATE**//
+          console.log('server/file_change triggered', payload);
+          newFileVersion = payload;
 
-        //update the code viewer
-        redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
+          //update the code viewer
+          redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
+        }
+      };
+      function defaultReduxAction(type, payload) {
+        console.log("Default redux action triggered");
+        return null
       }
-    }
+      const { type, payload } = action;
+      actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
 
-    function defaultReduxAction(type, payload) {
-      console.log("Default redux action triggered");
-      return null
-    }
-    
-    const { type, payload } = action;
-    actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
+      socket.on('disconnect', () => {
+        console.log(`Socket ${socket.id} disconnected`)
+        let clientIndex = clients.findIndex(e => e === socket.id);
+        clients.splice(clientIndex, 1);
+        console.log(clients);
+      });
 
-    socket.on('disconnect', () => {
-      console.log(`Socket ${socket.id} disconnected`)
-      let clientIndex = clients.findIndex(e => e === socket.id);
-      clients.splice(clientIndex, 1);
-      console.log(clients);
+      socket.on('error', (err) => {
+        console.log(err, `from ${socket.id}`);
+      });
     });
-
-    socket.on('error', (err) => {
-      console.log(err, `from ${socket.id}`);
-    });
-
   });
-});
 
 const terminalRecord = {};
 
@@ -190,19 +185,22 @@ const terminal = io
     termClients.push(socket.id);
     console.log(termClients);
 
-  socket.on('data', (data) => {
-    let now = Date.now();
-    terminalRecord[now] = data;
-    terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+    socket.on('data', (data) => {
+      let now = Date.now();
+      terminalRecord[now] = data;
+      terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+    });
+  
+
+
+    socket.on('disconnect', () => {
+      console.log(`Terminal socket ${socket.id} disconnected`)
+      let clientIndex = termClients.findIndex(e => e === socket.id);
+      termClients.splice(clientIndex, 1);
+      console.log(termClients);
+    });
   });
 
-  socket.on('disconnect', () => {
-    console.log(`Terminal socket ${socket.id} disconnected`)
-    let clientIndex = termClients.findIndex(e => e === socket.id);
-    termClients.splice(clientIndex, 1);
-    console.log(termClients);
-  });
-});
 
 
 // setTimeout(() => {
