@@ -10,7 +10,7 @@ import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
 
 // import ElectronDashboard from './BroadcastComponents/ElectronDashboard/ElectronDashboard.jsx';
-import NewScheduledStream from './BroadcastComponents/NewScheduledStream.jsx';
+import StartScheduled from './BroadcastComponents/ElectronDashboard/StartScheduled.jsx';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -21,9 +21,7 @@ class App extends Component {
       <div className="App">
 
         <div className='electron'>
-
-          
-
+          <StartScheduled />
         </div>
 
 
