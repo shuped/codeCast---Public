@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var HtmlWebpackPlugin = require('webpack-html-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public/build'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: path.join(__dirname,'public/build/') // change in production to '/'
   },
 
   module: {
@@ -28,7 +28,7 @@ module.exports = {
       },
       { 
         test: /\.s$css/,
-        use: ['sass-loader', 'css-loader']
+        use: ['style-loadr', 'sass-loader', 'css-loader']
       },
     ]
   },
@@ -36,7 +36,7 @@ module.exports = {
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
-      template: './index.html',
+      template: 'index.html',
     })
   ]
 }
