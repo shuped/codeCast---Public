@@ -13,4 +13,4 @@ var Entry = React.createClass({
   }
 });
 
-ReactDOM.render(<Entry />, document.getElementById('content'));)
+ReactDOM.render(<Entry />, document.getElementById('root'));

@@ -1,18 +1,20 @@
-const { electron, app, BrowserWindow, shell, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, shell, ipcMain, Menu } = require('electron');
+const { StringDecoder } = require('string_decoder');
 const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
+const fs = require ('fs');
 
+//require mapper function. Function call format: readDir(rootDirectory, done());
 const { readDir, done } = require('../server/fs-mapper');
+// axios to send content to the server
+const axios = require('./api');
 
-const rootDir = path.join(__dirname, '..');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
-
-
 let mainWindow;
-createWindow = () => {
-	mainWindow = new BrowserWindow({
+function createMainWindow () {
+  mainWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 880,
 		
@@ -21,57 +23,102 @@ createWindow = () => {
 	});
 
 	// mainWindow.loadURL(
-	// 	isDev
-	// 		? 'http://localhost:3000'
-	// 		: `file://${path.join(__dirname, '../build/index.html')}`,
-  // );
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
+    // 	isDev
+    // 		? 'http://localhost:3000'
+    // 		: `file://${path.join(__dirname, '../build/index.html')}`,
+    // );
+    mainWindow.loadURL(url.format({
+      pathname: path.join(__dirname, 'index.html'),
     protocol: 'file:',
     slashes: true
   }))
-  // >>>>>>>>>>TODO<<<<<<<<<<< put in proper window
-  // readDir(rootDir, done(__dirname)); 
-
+  
 	if (isDev) {
-		const {
+    const {
 			default: installExtension,
 			REACT_DEVELOPER_TOOLS,
 			REDUX_DEVTOOLS,
 		} = require('electron-devtools-installer');
-
+    
 		installExtension(REACT_DEVELOPER_TOOLS)
 			.then(name => {
-				console.log(`Added Extension: ${name}`);
+        console.log(`Added Extension: ${name}`);
 			})
 			.catch(err => {
-				console.log('An error occurred: ', err);
+        console.log('An error occurred: ', err);
 			});
-
+      
 		installExtension(REDUX_DEVTOOLS)
-			.then(name => {
-				console.log(`Added Extension: ${name}`);
-			})
+    .then(name => {
+      console.log(`Added Extension: ${name}`);
+    })
 			.catch(err => {
-				console.log('An error occurred: ', err);
+        console.log('An error occurred: ', err);
       });
-    mainWindow.webContents.openDevTools()
-
+      mainWindow.webContents.openDevTools()
+      
 	}
-
+  
 	mainWindow.once('ready-to-show', () => {
-		mainWindow.show();
+    mainWindow.show();
 
 		ipcMain.on('open-external-window', (event, arg) => {
-			shell.openExternal(arg);
+      shell.openExternal(arg);
 		});
 	});
 };
 
+let terminalWindow
+async function createTerminalWindow() {
+  const decoder = new StringDecoder('utf8');
+
+  //temp root targets project directory
+  //**TODO: get rootDir from shell command**
+  const rootDir = path.join(__dirname, '..');
+
+  //run fs-mapper module and map dir on window open
+  //**TODO: pass variables from shell script that echos PWD**
+  fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(__dirname));
+
+  let directory = null;
+  let content = null;
+
+  if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
+    directory = await decoder.write(fs.readFileSync('./directory.json'));
+    content = await decoder.write(fs.readFileSync('./content.json'));
+  }
+
+  if (directory !== null && content !== null) {
+    axios({
+      method: 'post',
+      url: '/api/electron',
+      data: {
+        directory: JSON.stringify(directory),
+        content: JSON.stringify(content)
+      }
+    }).then((res) => {
+      console.log(res.data);
+    }).catch((err) => {
+      console.error('Error:', err.data);
+      throw err;
+    });
+  }
+  // Open the DevTools.
+  terminalWindow.webContents.openDevTools();
+
+  // Emitted when the window is closed.
+  terminalWindow.on('closed', function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    terminalWindow = null;
+  });
+}
+
 generateMenu = () => {
-	const template = [
-		{
-			label: 'File',
+  const template = [
+    {
+      label: 'File',
 			submenu: [{ role: 'about' }, { role: 'quit' }],
 		},
 		{
@@ -128,26 +175,26 @@ generateMenu = () => {
 			],
 		},
 	];
-
+  
 	Menu.setApplicationMenu(Menu.buildFromTemplate(template));
 };
 
 app.on('ready', () => {
-	createWindow();
+  createMainWindow();
 	generateMenu();
 });
 
 app.on('window-all-closed', () => {
-	app.quit();
+  app.quit();
 });
 
 app.on('activate', () => {
 	if (mainWindow === null) {
-		createWindow();
+		createMainWindow();
 	}
 });
 
-electron.ipcMain.on('load-page', (event, arg) => {
+ipcMain.on('load-page', (event, arg) => {
 	mainWindow.loadURL(arg);
 });
 
@@ -164,7 +211,7 @@ electron.ipcMain.on('load-page', (event, arg) => {
 // // be closed automatically when the JavaScript object is garbage collected.
 // let mainWindow
 
-// function createWindow () {
+// function createMainWindow () {
 //   // Create the browser window.
 //   mainWindow = new BrowserWindow({width: 800, height: 600})
 
@@ -190,7 +237,7 @@ electron.ipcMain.on('load-page', (event, arg) => {
 // // This method will be called when Electron has finished
 // // initialization and is ready to create browser windows.
 // // Some APIs can only be used after this event occurs.
-// app.on('ready', createWindow)
+// app.on('ready', createMainWindow)
 
 // // Quit when all windows are closed.
 // app.on('window-all-closed', function () {
@@ -205,9 +252,6 @@ electron.ipcMain.on('load-page', (event, arg) => {
 //   // On OS X it's common to re-create a window in the app when the
 //   // dock icon is clicked and there are no other windows open.
 //   if (mainWindow === null) {
-//     createWindow()
+//     createMainWindow()
 //   }
 // })
-
-// // In this file you can include the rest of your app's specific main process
-// // code. You can also put them in separate files and require them here.

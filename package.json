@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/Benji-Leboe/final#readme",
   "dependencies": {
-    "axios": "~0.18.0",
     "concurrently": "~4.0.1",
     "nodemon": "~1.18.4",
     "xterm": "^3.8.0"
