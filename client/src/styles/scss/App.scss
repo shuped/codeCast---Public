@@ -28,8 +28,6 @@ code {
     monospace;
 }
 
-
-
 .App {
   flex-direction: column;
   min-height: 100vh;
@@ -95,7 +93,6 @@ code {
     }
   }
 }
-
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -241,8 +238,8 @@ code {
         }
       }
     }
-  }   // dashboard
-
+  }
+  // dashboard
   .new-stream {
     .header {
       display:flex;
@@ -276,36 +273,37 @@ code {
             h3{
               justify-content: space-around;
             }
-            input{
+            // input{
 
-            }
+            // }
           }
-          .description-input{
-            h3{
+          // .description-input{
+          //   h3{
 
-            }
-            textarea{
+          //   }
+          //   textarea{
 
-            }
-          }
+          //   }
+          // }
           .bottom-container{
             display:inline-flex;
             justify-content: space-between;
 
-            .date-selection{
+            // .date-selection{
 
-            }
-            .image-select{
+            // }
+            // .image-select{
 
-            }
-            input{
+            // }
+            // input{
 
-            }
+            // }
           }
         }
       }
     }
-  } // new-stream
+  } 
+  // new-stream
   .start-scheduled {
     height: 100%;
 
@@ -315,9 +313,9 @@ code {
       display: flex;
       justify-content: center;
 
-      .dashboard-btn {
+      // .dashboard-btn {
         
-      }
+      // }
       .logoPlaceholder {
         width: 50px;
         height: 50px;
@@ -340,36 +338,9 @@ code {
           font-size: 1em;
         }
       }
-      .forms-container{
-        
-        
-      }
+      // .forms-container{
+         
+      // }
     }
   }
-} //electron
-
-// delete me
-
-// <main className="start-scheduled">
-  // <header className="header">
-  //   <Button id="dashboard-btn" type="primary">Dashboard</Button>
-  //   <div className="logoPlaceholder">p</div>
-  // </header>
-  // <div className="main-container">
-  //   <div>
-  //    <h1>{this.state.title}</h1>
-  //    <p>{this.state.description}</p>
-  //  </div>
-
-//   <div className="forms-container">
-//     <form onSubmit={this.HandleSubmit}>
-
-//         <div className="youtube-container">
-//           <h3>YouTube URL:</h3>
-//           <input type="text" placeholder="https://www.youtube.com/channel/PLACEHOLDER" onChange={this.YoutubeUrlInput} />
-//         </div>
-//         <input type="submit" value="Go live!" />
-//     </form>
-//   </div>
-// </div>
-// </main>
+} 
