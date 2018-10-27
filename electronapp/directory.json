@@ -1,0 +1,114 @@
+{
+  "README.md": "52410dc0-d97b-11e8-9888-23c884fcdf26",
+  "client": {
+    "public": {
+      "index.html": "524134d1-d97b-11e8-9888-23c884fcdf26",
+      "manifest.json": "524134d2-d97b-11e8-9888-23c884fcdf26"
+    },
+    "src": {
+      "HelperComponents": {
+        "FilterLink.jsx": "524134d5-d97b-11e8-9888-23c884fcdf26",
+        "ReduxBoilerplate.jsx": "524134d6-d97b-11e8-9888-23c884fcdf26"
+      },
+      "StreamComponents": {
+        "Chat": {
+          "messages": {
+            "initialMessageUtil.js": "524134dc-d97b-11e8-9888-23c884fcdf26"
+          },
+          "ChatBar.jsx": "524134d8-d97b-11e8-9888-23c884fcdf26",
+          "ChatMain.jsx": "524134d9-d97b-11e8-9888-23c884fcdf26",
+          "Message.jsx": "524134da-d97b-11e8-9888-23c884fcdf26",
+          "MessageList.jsx": "524134db-d97b-11e8-9888-23c884fcdf26"
+        },
+        "FileDirectory": {
+          "FileDirectory.jsx": "524134dd-d97b-11e8-9888-23c884fcdf26"
+        },
+        "FileDisplay": {
+          "LiveCodeDisplay.jsx": "524134de-d97b-11e8-9888-23c884fcdf26",
+          "StyleDisplay.jsx": "524134df-d97b-11e8-9888-23c884fcdf26"
+        },
+        "Terminal": {
+          "Terminal.jsx": "52415be0-d97b-11e8-9888-23c884fcdf26"
+        },
+        "VideoStream": {
+          "VideoStream.jsx": "52415be1-d97b-11e8-9888-23c884fcdf26"
+        }
+      },
+      "ViewComponents": {
+        "IndexViews": {
+          "ActiveStreams": {
+            "ActiveStreams.jsx": "52415be4-d97b-11e8-9888-23c884fcdf26"
+          },
+          "ArchivedStreams": {
+            "ArchivedStreams.jsx": "52415be5-d97b-11e8-9888-23c884fcdf26"
+          },
+          "ScheduledStreams": {
+            "ScheduledStreams.jsx": "52415be7-d97b-11e8-9888-23c884fcdf26"
+          },
+          "IndexViews.jsx": "52415be6-d97b-11e8-9888-23c884fcdf26"
+        },
+        "Footer.jsx": "52415be2-d97b-11e8-9888-23c884fcdf26",
+        "Header.jsx": "52415be3-d97b-11e8-9888-23c884fcdf26"
+      },
+      "redux": {
+        "actions": {
+          "fetch-example.js": "52415be9-d97b-11e8-9888-23c884fcdf26",
+          "index.js": "52415bea-d97b-11e8-9888-23c884fcdf26"
+        },
+        "ducks": {
+          "Ducktator.js": "52415beb-d97b-11e8-9888-23c884fcdf26",
+          "chatDuck.js": "52415bec-d97b-11e8-9888-23c884fcdf26",
+          "directoryDuck.js": "52415bed-d97b-11e8-9888-23c884fcdf26",
+          "fileDuck.js": "52415bee-d97b-11e8-9888-23c884fcdf26"
+        },
+        "store": {
+          "index.js": "52415bef-d97b-11e8-9888-23c884fcdf26"
+        }
+      },
+      "styles": {
+        "css": {
+          "App.css": "524182f0-d97b-11e8-9888-23c884fcdf26",
+          "App.css.map": "524182f1-d97b-11e8-9888-23c884fcdf26",
+          "index.css": "524182f2-d97b-11e8-9888-23c884fcdf26",
+          "index.css.map": "524182f3-d97b-11e8-9888-23c884fcdf26"
+        },
+        "scss": {
+          "partials": {
+            "_activeStreamsCard.scss": "524182f6-d97b-11e8-9888-23c884fcdf26",
+            "_archivedStreamsCards.scss": "524182f7-d97b-11e8-9888-23c884fcdf26",
+            "_chat.scss": "524182f8-d97b-11e8-9888-23c884fcdf26",
+            "_fileDirectory.scss": "524182f9-d97b-11e8-9888-23c884fcdf26",
+            "_fileViewer.scss": "524182fa-d97b-11e8-9888-23c884fcdf26",
+            "_scheduledStreamCard.scss": "524182fb-d97b-11e8-9888-23c884fcdf26",
+            "_terminal.scss": "524182fc-d97b-11e8-9888-23c884fcdf26",
+            "_video.scss": "524182fd-d97b-11e8-9888-23c884fcdf26"
+          },
+          "App.scss": "524182f4-d97b-11e8-9888-23c884fcdf26",
+          "index.scss": "524182f5-d97b-11e8-9888-23c884fcdf26"
+        }
+      },
+      "App.jsx": "524134d3-d97b-11e8-9888-23c884fcdf26",
+      "App.test.jsx": "524134d4-d97b-11e8-9888-23c884fcdf26",
+      "Root.jsx": "524134d7-d97b-11e8-9888-23c884fcdf26",
+      "index.js": "52415be8-d97b-11e8-9888-23c884fcdf26",
+      "serviceWorker.js": "52415bf0-d97b-11e8-9888-23c884fcdf26"
+    },
+    ".eslintrc.json": "52410dc1-d97b-11e8-9888-23c884fcdf26",
+    "package.json": "524134d0-d97b-11e8-9888-23c884fcdf26"
+  },
+  "electronapp": {
+    "index.html": "524182fe-d97b-11e8-9888-23c884fcdf26",
+    "main.js": "524182ff-d97b-11e8-9888-23c884fcdf26",
+    "npm_install.sh": "52418300-d97b-11e8-9888-23c884fcdf26",
+    "package.json": "52418301-d97b-11e8-9888-23c884fcdf26",
+    "renderer.js": "5241aa00-d97b-11e8-9888-23c884fcdf26"
+  },
+  "nodemon.json": "5241aa01-d97b-11e8-9888-23c884fcdf26",
+  "package.json": "5241aa02-d97b-11e8-9888-23c884fcdf26",
+  "server": {
+    "fs-mapper.js": "5241d110-d97b-11e8-9888-23c884fcdf26",
+    "logger.js": "5241d111-d97b-11e8-9888-23c884fcdf26",
+    "package.json": "5241d112-d97b-11e8-9888-23c884fcdf26",
+    "server.js": "5241d113-d97b-11e8-9888-23c884fcdf26"
+  }
+}
