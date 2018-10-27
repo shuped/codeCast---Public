@@ -10,6 +10,7 @@ import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
 import ArchivedStreams from './ViewComponents/IndexViews/ArchivedStreams/ArchivedStreams.jsx';
 import IndexViews from './ViewComponents/IndexViews/IndexViews.jsx'
+import Header from './ViewComponents/Header.jsx'
 //
 // import logo from './assets/logo.svg';
 
@@ -18,6 +19,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div>
+          <Header />
+        </div>
         <div>
           <IndexViews />
         </div>
