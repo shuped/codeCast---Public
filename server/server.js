@@ -220,12 +220,12 @@ const testDirectory = {
     }
   }
 };
-setTimeout(() => {
-  console.log('directory update =================');
-  redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
-}, 40000);
+// setTimeout(() => {
+//   console.log('directory update =================');
+//   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
+// }, 40000);
 
-setTimeout(() => {
-  console.log('file update =================');
-  redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
-}, 40000);
+// setTimeout(() => {
+//   console.log('file update =================');
+//   redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
+// }, 40000);
