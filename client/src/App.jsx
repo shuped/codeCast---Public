@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-//components
 
+//component
 import Chat from './StreamComponents/Chat/ChatMain.jsx';
 import LiveCodeDisplay from './StreamComponents/FileDisplay/LiveCodeDisplay.jsx';
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
-
-// import ElectronDashboard from './BroadcastComponents/ElectronDashboard/ElectronDashboard.jsx';
-import StartScheduled from './BroadcastComponents/ElectronDashboard/StartScheduled.jsx';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -19,13 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-
-        <div className='electron'>
-          <StartScheduled />
-        </div>
-
-
-        {/* <div className='component-container1'>
+        <div className='component-container1'>
           <div className="Filetree-display">
             <FileDirectory />
           </div>
@@ -44,9 +35,7 @@ class App extends Component {
           <div className="Terminal-display">
             <Terminal />
           </div>
-        </div> */}
-
-
+        </div>
       </div>
     );
   }
