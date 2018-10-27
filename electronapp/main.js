@@ -27,11 +27,11 @@ function createMainWindow () {
     // 		? 'http://localhost:3000'
     // 		: `file://${path.join(__dirname, '../build/index.html')}`,
     // );
-    mainWindow.loadURL(url.format({
-      pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+	mainWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'public/build/index.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
   
 	if (isDev) {
     const {
