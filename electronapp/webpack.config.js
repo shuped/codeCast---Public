@@ -25,5 +25,12 @@ module.exports = {
         loader: 'style-loader!css-loader'
       },
     ]
-  }
+  },
+  plugins: [
+    // Generates an `index.html` file with the <script> injected.
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: paths.appHtml,
+    })
+  ]
 }
