@@ -32,12 +32,6 @@ app.use(morgan('dev', {
 app.get('/api/filecontent', (req, res) => {
 
   let fileID = req.body;
-<<<<<<< HEAD
-  fileCache[fileID] ? 
-    res.status(200).json(JSON.stringify(fileCache[fileID])) : 
-    res.status(204).json({ "error": "Whoops! File not found :(" });
-    
-=======
   fileCache ? res.status(200).json(JSON.stringify(fileCache[fileID])) : res.status(204).send('File not found');
 });
 
@@ -67,7 +61,6 @@ app.get('/api/scheduledStreams/', (req, res) => {
 
 console.log('Get success');
   res.status(200).json(testStreams);
->>>>>>> feature/electronReact
 });
 
 //recieve file dir/content from electron
@@ -197,7 +190,6 @@ const terminal = io
     termClients.push(socket.id);
     console.log(termClients);
 
-<<<<<<< HEAD
   socket.on('data', (data) => {
     let now = Date.now();
     terminalRecord[now] = data;
@@ -211,24 +203,6 @@ const terminal = io
     console.log(termClients);
   });
 });
-=======
-    socket.on('data', (data) => {
-      let now = Date.now();
-      terminalRecord[now] = data;
-      terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
-    });
-  
-
-
-    socket.on('disconnect', () => {
-      console.log(`Terminal socket ${socket.id} disconnected`)
-      let clientIndex = termClients.findIndex(e => e === socket.id);
-      termClients.splice(clientIndex, 1);
-      console.log(termClients);
-    });
-  });
-
->>>>>>> feature/electronReact
 
 
 // setTimeout(() => {
