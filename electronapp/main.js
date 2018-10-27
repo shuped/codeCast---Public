@@ -4,11 +4,15 @@ const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require ('fs');
+const directoryWatcher = require('./src/fileServices/directoryWatcher.js');
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
-const { readDir, done } = require('../server/fs-mapper');
+const { readDir, done } = require('./src/fileServices/fs-mapper');
 // axios to send content to the server
 const axios = require('./src/redux/ducks/api');
+
+// For testing things
+const log = console.log.bind(console);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -37,18 +41,18 @@ function createMainWindow () {
     
 		installExtension(REACT_DEVELOPER_TOOLS)
 			.then(name => {
-        console.log(`Added Extension: ${name}`);
+        log(`Added Extension: ${name}`);
 			})
 			.catch(err => {
-        console.log('An error occurred: ', err);
+        log('An error occurred: ', err);
 			});
       
 		installExtension(REDUX_DEVTOOLS)
       .then(name => {
-        console.log(`Added Extension: ${name}`);
+        log(`Added Extension: ${name}`);
       })
 			.catch(err => {
-        console.log('An error occurred: ', err);
+        log('An error occurred: ', err);
       });
     mainWindow.webContents.openDevTools();      
 	}
@@ -78,7 +82,7 @@ async function createTerminalWindow() {
   const rootDir = path.join(__dirname, '..');
 
   //run fs-mapper module and map dir on window open
-  //**TODO: pass variables from shell script that echos PWD**
+	//**TODO: pass variables from shell script that echos PWD**
   fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(__dirname));
 
   let directory = null;
@@ -87,11 +91,13 @@ async function createTerminalWindow() {
   if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
     directory = await decoder.write(fs.readFileSync('./directory.json'));
 		content = await decoder.write(fs.readFileSync('./content.json'));
-		console.log(typeof content)
-  }
+	}
+
+	// start the chokidar watcher
+	log('=======')
+	directoryWatcher()
 
   if (directory !== null && content !== null) {
-		console.log('if director')
     axios({
       method: 'post',
       url: '/api/electron',
@@ -100,12 +106,13 @@ async function createTerminalWindow() {
         content: JSON.stringify(content)
       }
     }).then((res) => {
-      console.log(res.data);
+      log(res.data);
     }).catch((err) => {
       console.error('Error:', err.data);
       throw err;
     });
-  }
+	}
+	
   // Open the DevTools.
   terminalWindow.webContents.openDevTools();
   // Emitted when the window is closed.
@@ -196,6 +203,7 @@ app.on('activate', () => {
 });
 
 ipcMain.on('terminalOpen', (event, arg) => {
-	console.log('terminalOpen in createWindow')
+	log('terminalOpen in createWindow')
 	createTerminalWindow()
 });
+
