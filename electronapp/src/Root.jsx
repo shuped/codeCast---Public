@@ -2,12 +2,12 @@ import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { PropTypes } from 'prop-types';
 import { Provider } from 'react-redux';
-import Dashboard from './ElectronDashboard.jsx';
+import App from './App.jsx';
 
 const Root = ({ store }) => (
   <Provider store={ store }>
     <Router>
-      <Route path="/:filter?" component={Dashboard} />
+      <Route path="/:filter?" component={App} />
     </Router>
   </Provider>
 );
