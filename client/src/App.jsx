@@ -21,7 +21,7 @@ class App extends Component {
       <div className="App">
 
         <div className='electron'>
-          <FileDirectory />
+          <StartScheduled />
         </div>
 
 
