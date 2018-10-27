@@ -7,7 +7,7 @@ import { fetchBroadcasterStreams } from './ajaxDuck'
 const VIEWER_STREAMS_UPDATE = 'UPDATE_USER_STREAMS'
 
 // Action Creators
-export const updateViewerStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
+export const updateViewerStreams = (scheduledStreams) => ({ type: VIEWER_STREAMS_UPDATE, payload: scheduledStreams  });
 
 // STREAM REDUCER
 
