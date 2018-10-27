@@ -125,10 +125,12 @@
 }
 
 main .currentStream {
-  border: 2px solid black;
-  background-color: aquamarine;
+  border: 3px solid #555;
+  background-color: #cacaca;
+  border-radius: 5px;
   width: 75%;
   margin: 2em 4em;
+  padding: 1em;
 }
 main .currentStream .currentStreamBanner {
   display: flex;
@@ -137,17 +139,21 @@ main .currentStream .currentStreamBanner {
 main .currentStream .currentStreamBanner h3 {
   font-size: 2em;
   margin-left: 1em;
+  color: #444444;
 }
 main .currentStream .currentStreamBanner h4 {
   font-size: 1.5em;
+  color: #444444;
 }
 main .currentStream .currentStreamBanner h5 {
   font-size: 1.2em;
   margin-right: 10em;
+  color: #444444;
 }
 main .currentStream p {
   font-size: 1em;
   margin: 2em;
+  margin-bottom: 1em;
 }
 
 .streams {
@@ -157,14 +163,16 @@ main .currentStream p {
   justify-content: space-around;
 }
 .streams .activeStreamCard {
-  border: 2px solid black;
-  background-color: salmon;
+  border: 3px solid #555;
+  background-color: #cacaca;
+  border-radius: 5px;
   width: 25vw;
   height: 25vw;
   margin: 3em;
+  padding: 1.5em;
 }
 .streams .activeStreamCard:hover {
-  opacity: 0.5;
+  opacity: 0.8;
 }
 .streams .activeStreamCard .banner {
   display: flex;
@@ -176,10 +184,12 @@ main .currentStream p {
 .streams .activeStreamCard .banner div h1 {
   font-size: 2.2em;
   margin: 0;
+  color: #444444;
 }
 .streams .activeStreamCard .banner div h2 {
   font-size: 1.5em;
   margin: 0;
+  color: #444444;
 }
 .streams .activeStreamCard .banner .imagePlaceholder {
   width: 4em;
