@@ -8,7 +8,7 @@ import LiveCodeDisplay from './StreamComponents/FileDisplay/LiveCodeDisplay.jsx'
 import Video from './StreamComponents/VideoStream/VideoStream.jsx';
 import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
-import ElectronDashboard from './BroadcastComponents/ElectronDashboard/ElectronDashboard.jsx';
+import LiveStreamNow from './BroadcastComponents/ElectronDashboard/LiveStreamNow.jsx';
 
 // import logo from './assets/logo.svg';
 
@@ -20,7 +20,7 @@ class App extends Component {
       <div className="App">
 
         <div className='electron'>
-          <ElectronDashboard />
+          <LiveStreamNow />
         </div>
 
 
