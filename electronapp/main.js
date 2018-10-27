@@ -93,25 +93,25 @@ async function createTerminalWindow() {
 		content = await decoder.write(fs.readFileSync('./content.json'));
 	}
 
-	// start the chokidar watcher
-	log('=======')
-	directoryWatcher()
-
+	
   if (directory !== null && content !== null) {
-    axios({
-      method: 'post',
+		axios({
+			method: 'post',
       url: '/api/electron',
       data: {
-        directory: JSON.stringify(directory),
+				directory: JSON.stringify(directory),
         content: JSON.stringify(content)
       }
     }).then((res) => {
-      log(res.data);
+			log(res.data);
     }).catch((err) => {
-      console.error('Error:', err.data);
+			console.error('Error:', err.data);
       throw err;
     });
 	}
+	// start the chokidar watcher
+	log('=======')
+	directoryWatcher()
 	
   // Open the DevTools.
   terminalWindow.webContents.openDevTools();
