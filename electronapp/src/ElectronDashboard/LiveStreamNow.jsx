@@ -1,15 +1,15 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
-import { ipcMain } from 'electron'
+import { ipcRenderer } from 'electron'
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
 
 class LiveStreamNow extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       title: 'placeholder',
       user: 'Spencer Mc-Whhite',
@@ -18,7 +18,6 @@ class LiveStreamNow extends React.Component {
       youtubeURL: '',
       languageImage: 'image'
     }
-
   }
 
   //handlers
@@ -42,16 +41,12 @@ class LiveStreamNow extends React.Component {
   HandleSubmit = (event) => {
     event.preventDefault();
     //redirect to broadcast page
-    ipcMain.emit('openTerminal', true)
-
+    ipcRenderer.send('terminalOpen', true)
     console.log(this.state)
-    
   }
 
   render() {  
-    
     return (
-
       <main className="new-stream">
         <header className="header">
           <Button id="dashboard-btn" type="primary">Dashboard</Button>
