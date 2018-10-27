@@ -1,32 +1,25 @@
 .Terminal-display {
   position: relative;
-  
+  overflow: scroll;
   
   .wrapper {
-    
+    position: absolute;
+    bottom: 0;
     display: flex;
     flex-wrap: nowrap;
     .terminal-main {
-      
-      div.terminal.xterm {
-        position: absolute;
-        bottom: 0;
-        overflow: scroll;
-        div.xterm-screen {
-          display: flex;
-          min-width: 50vw;
-          min-height: 48vh;
-          
-        }
-        canvas[class^="xterm-"] {
-          display: flex;
-          min-width: 50vw !important;
-          min-height: 48vh;
-          
-        }
-        canvas.xterm-text-layer, canvas.xterm-cursor-layer {
-          padding: 0.5rem 3rem 1rem 2rem;
-        }
+      div.xterm-screen {
+        display: flex;
+        min-width: 50vw;
+        min-height: 48vh;
+      }
+      canvas[class^="xterm-"] {
+        display: flex;
+        min-width: 50vw !important;
+        min-height: 48vh;
+      }
+      canvas.xterm-text-layer, canvas.xterm-cursor-layer {
+        padding: 0.5rem 3rem 1rem 2rem;
       }
     }
   }
