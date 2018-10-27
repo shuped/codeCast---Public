@@ -13,13 +13,10 @@ const io = require('socket.io')(server);
 const rootPath = path.join(__dirname, '..');
 const buildPath = path.join(rootPath, 'client/build');
 
-let ActiveViewFile = `nothing`;
-
 let fileCache = null;
 let dirCache = null;
 
-app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser({ limit: '50mb' }));
 
 app.use(morgan('dev', {
   skip: (req, res) => {
@@ -32,19 +29,27 @@ app.use(morgan('dev', {
   }, stream: process.stdout
 }));
 
-app.get('/*', (req, res) => {
-  res.statusCode(200).json({ express: 'successful connection to express' });
-});
-
 app.get('/api/filecontent', (req, res) => {
   let fileID = req.body;
-  fileCache ? res.status(200).json(JSON.stringify(fileCache[fileID])) : res.status(204).send('File not found');
+  fileCache[fileID] ? 
+    res.status(200).json(JSON.stringify(fileCache[fileID])) : 
+    res.status(204).json({ "error": "Whoops! File not found :(" });
 })
 
 //recieve file dir/content from electron
 app.post('/api/electron', (req, res) => {
-  
-  res.status(200).send('Post success');
+
+  try {
+    fileCache = req.body.content;
+    dirCache = req.body.directory;
+    res.status(200).send('Post request success');
+  }
+  catch (e) {
+    res.status(500).send('Post request failed');
+    console.log('Post to server failed:', e);
+    throw e;
+  }
+
 });
 
 io.on('connection', (socket) => {
@@ -59,6 +64,9 @@ io.on('connection', (socket) => {
     const actions = {
       'server/new_connection': (type, payload) => {
         console.log('Server message:', payload);
+        if (dirCache !== null) {
+          sendDirTree(dirCache);
+        }
       }
     }
 
@@ -103,28 +111,18 @@ const redux = io
           console.log('server/message action triggered', payload);
           redux.emit('action', { type: 'NEW_MESSAGE', payload });
         },
-        'server/directory_pushed': (type, payload) => {
-
-          console.log('server/dir_push triggered', payload);
-          redux.emit('action', { type, payload });
+        'server/directory_update': (type, payload) => {
+          console.log('server/dir_update triggered', payload);
+          redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
         },
         'server/file_change': (type, payload) => {
+
+          //**TODO: TRIGGER PUSH TO DIR TREE ON FILE UPDATE**//
           console.log('server/file_change triggered', payload);
-          
-          ActiveViewFile = `
-          var addPlaylist = function (name) {
-            var newId = uid();
-            var newPlaylist = { id: '1234',
-                             name: 'Chris',
-                             tracks: []
-                           };
-                           
-            library.playlists[newId] = newPlaylist
-            console.log(library)
-          }
-        `;
-        //update the code viewer
-        redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
+          newFileVersion = payload;
+
+          //update the code viewer
+          redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
         }
       };
       function defaultReduxAction(type, payload) {
@@ -147,7 +145,7 @@ const redux = io
     });
   });
 
-const terminalOutput = {};
+const terminalRecord = {};
 
 const terminal = io
   .of('/terminal')
@@ -159,8 +157,8 @@ const terminal = io
 
     socket.on('data', (data) => {
       let now = Date.now();
-      terminalOutput[now] = data;
-      terminal.emit('terminal', terminalOutput[now]); // refactor to action when we store data
+      terminalRecord[now] = data;
+      terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
     });
 
     socket.on('disconnect', () => {
@@ -172,60 +170,12 @@ const terminal = io
 });
 
 
-const testDirectory = {
-  "projectRoot": {
-    "firstDir": {
-      "test": "hashRef1",
-      "file2": "hashRef2",
-      "file3": "hashRef3",
+// setTimeout(() => {
+//   console.log('directory update =================');
+//   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
+// }, 40000);
 
-      "firstSubDir": {
-        "file1": "hashRef",
-        "file2": "hashRef",
-        "file3": "hashRef",
-
-        "firstNestedSubDir": {
-          "file1": "hashRef",
-          "file2": "hashRef",
-          "file3": "hashRef"
-        },
-
-        "secondNestedSubDir": {
-          "file1": "hashRef",
-          "file2": "hashRef",
-          "file3": "hashRef"
-        }
-      },
-      "secondSubDir": {
-        "file1": "hashRef",
-        "file2": "hashRef",
-        "file3": "hashRef",
-
-        "firstNestedSubDir": {
-          "file1": "hashRef",
-          "file2": "hashRef",
-          "file3": "hashRef"
-        }
-      }
-    },
-    "secondDir": {
-      "file1": "hashRef",
-      "file2": "hashRef",
-      "file3": "hashRef"
-    },
-    "thirdDir": {
-      "file1": "hashRef",
-      "file2": "hashRef",
-      "file3": "hashRef"
-    }
-  }
-};
-setTimeout(() => {
-  console.log('directory update =================');
-  redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
-}, 40000);
-
-setTimeout(() => {
-  console.log('file update =================');
-  redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
-}, 40000);
+// setTimeout(() => {
+//   console.log('file update =================');
+//   redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
+// }, 40000);
