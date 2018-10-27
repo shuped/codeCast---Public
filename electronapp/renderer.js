@@ -20,7 +20,7 @@ const ptyProcess = pty.spawn(shell, [], {
 });
 
 // Initialize xterm.js and attach it to the DOM
-const xterm1 = new Terminal({scrollback: 9999999});
+const xterm1 = new Terminal({ scrollback: 9999999 });
 
 xterm1.open(document.getElementById('xterm1'));
 
