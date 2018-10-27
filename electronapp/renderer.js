@@ -31,6 +31,5 @@ xterm1.on('data', (data) => {
 
 ptyProcess.on('data', function (data) {
   xterm1.write(data);
-  
   io.emit('data', data);
 });
