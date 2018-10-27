@@ -1,5 +1,5 @@
 {
-  "name": "node-pty-electron-example",
+  "name": "node-pty-electron",
   "version": "1.0.0",
   "description": "A minimal node-pty Electron example",
   "main": "main.js",
@@ -8,8 +8,8 @@
     "build": "webpack"
   },
   "proxy": "http://localhost:8080",
-  "repository": "https://github.com/Tyriar/node-pty",
-  "author": "Tyriar",
+  "repository": "https://github.com/benji-leboe/codeCast",
+  "author": "Spencer Shupe, Benji Leboe",
   "dependencies": {
     "axios": "~0.18.0",
     "electron": "^2.0.9",
@@ -26,11 +26,11 @@
     "babel-loader": "^8.0.4",
     "electron-devtools-installer": "^2.2.4",
     "electron-is-dev": "^1.0.1",
-    "electron-packager": "^4.1.3",
-    "html-webpack-plugin": "^3.2.0",
+    "electron-packager": "^12.2.0",
+    "html-webpack-plugin": "~3.2.0",
     "node-libs-browser": "^0.5.2",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.12.4",
+    "style-loader": "~0.12.4",
     "webpack": "^4.23.1",
     "webpack-cli": "^3.1.2"
   }

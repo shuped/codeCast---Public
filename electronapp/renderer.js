@@ -2,8 +2,10 @@ const os = require('os');
 const pty = require('node-pty');
 const Terminal = require('xterm').Terminal;
 const socket = require('socket.io-client');
-const fs = require('fs');
-const path = require('path');
+// const fs = require('fs');
+// const { StringDecoder } = require('string_decoder');
+// const { exec }= require('child_process');
+// const path = require('path');
 
 var io = socket.connect('http://localhost:8080/terminal');
 
@@ -18,19 +20,20 @@ const ptyProcess = pty.spawn(shell, [], {
 });
 
 // Initialize xterm.js and attach it to the DOM
-const xterm1 = new Terminal({scrollback: 9999999});
+const xterm1 = new Terminal({ scrollback: 9999999 });
 
 xterm1.open(document.getElementById('xterm1'));
-
 
 // Setup communication between xterm.js and node-pty
 xterm1.on('data', (data) => {
   ptyProcess.write(data);
 });
 
-
 ptyProcess.on('data', function (data) {
   xterm1.write(data);
+<<<<<<< HEAD
   
+=======
+>>>>>>> f9cbaaa8726c5ed0689cc765f57b361353117e70
   io.emit('data', data);
 });
