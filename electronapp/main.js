@@ -60,7 +60,7 @@ function createMainWindow () {
       shell.openExternal(arg);
 		});
 	});
-};
+}
 
 let terminalWindow
 async function createTerminalWindow() {
@@ -169,7 +169,7 @@ generateMenu = () => {
 		},
 	];
 	Menu.setApplicationMenu(Menu.buildFromTemplate(template));
-};
+}
 
 app.on('ready', () => {
   createMainWindow();
