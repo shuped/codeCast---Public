@@ -10,7 +10,7 @@ import Terminal from './StreamComponents/Terminal/Terminal.jsx';
 import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
 
 // import ElectronDashboard from './BroadcastComponents/ElectronDashboard/ElectronDashboard.jsx';
-import StartScheduled from './BroadcastComponents/ElectronDashboard/StartScheduled.jsx';
+// import StartScheduled from './BroadcastComponents/ElectronDashboard/StartScheduled.jsx';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
@@ -23,29 +23,6 @@ class App extends Component {
         <div className='electron'>
           <StartScheduled />
         </div>
-
-
-        {/* <div className='component-container1'>
-          <div className="Filetree-display">
-            <FileDirectory />
-          </div>
-          <div className="Video-display">
-            <Video />
-          </div>
-          <div className="Chat-display">
-            <Chat />
-          </div>
-        </div>  
-
-        <div className="component-container2">
-          <div className="Code-display">
-            <LiveCodeDisplay />
-          </div>
-          <div className="Terminal-display">
-            <Terminal />
-          </div>
-        </div> */}
-
 
       </div>
     );
