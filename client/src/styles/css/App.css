@@ -367,9 +367,5 @@ code {
         font-size: 2em; }
       .electron .start-scheduled .main-container div p {
         font-size: 1em; }
-      .electron .start-scheduled .main-container .forms-container .form {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly; }
 
 /*# sourceMappingURL=App.css.map */
