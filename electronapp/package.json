@@ -1,7 +1,7 @@
 {
   "name": "node-pty-electron",
   "version": "1.0.0",
-  "description": "A minimal node-pty Electron example",
+  "description": "codeCast Broadcaster electron app, with xterm and react.",
   "main": "main.js",
   "scripts": {
     "start": "electron . --ignore-gpu-blacklist",
