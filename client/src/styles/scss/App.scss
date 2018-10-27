@@ -301,52 +301,70 @@ code {
       }
     }
   } // new-stream
+  .start-scheduled {
+    height: 100%;
 
+    .header {
+      height:20%;
+
+      display: flex;
+      justify-content: center;
+
+      .dashboard-btn {
+        
+      }
+      .logoPlaceholder {
+        width: 50px;
+        height: 50px;
+        background-color:black;
+      }
+    }
+    .main-container{
+      height: 60%;
+      border: 2px solid black;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      div {
+        h1{
+          font-size: 2em;
+        }
+        p {
+          font-size: 1em;
+        }
+      }
+      .forms-container{
+        
+        
+      }
+    }
+  }
 } //electron
 
 // delete me
 
-        // <main className="new-stream">
-        //   <header className="header">
-        //     <Button id="dashboard-btn" type="primary">Dashboard</Button>
-        //     <div className="logoPlaceholder">p</div>
-        //   </header>
+// <main className="start-scheduled">
+  // <header className="header">
+  //   <Button id="dashboard-btn" type="primary">Dashboard</Button>
+  //   <div className="logoPlaceholder">p</div>
+  // </header>
+  // <div className="main-container">
+  //   <div>
+  //    <h1>{this.state.title}</h1>
+  //    <p>{this.state.description}</p>
+  //  </div>
 
-        //   <div className="inputs-container">
-        //     <h1>New Scheduled Stream</h1>
+//   <div className="forms-container">
+//     <form onSubmit={this.HandleSubmit}>
 
-        //     <div className="forms-container">
-        //       <form onSubmit={this.HandleSubmit}>
-        //         <div className="title-input">
-        //           <h3>Title:</h3>
-        //           <input type="text" title={this.state.title} onChange={this.TitleOnChange} />
-        //         </div>
-
-        //         <div className="description-input">
-        //           <h3>Description:</h3>
-        //           <textarea type="text" rows="4" cols="90" description={this.state.description} onChange={this.DescriptionOnChange} />
-        //         </div>
-
-        //         <div className=" bottom-container">
-        //           <DatePicker
-        //             className="date-selection"
-        //             showTime
-        //             format="YYYY-MM-DD HH:mm:ss"
-        //             placeholder="Select Time"
-        //             onChange={this.onChange}
-        //             onOk={this.onOk}
-        //           />
-            
-        //           <InputGroup compact>
-        //             <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
-        //               <Option value="default">----</Option>
-        //               <Option value="image/path1">Node</Option>
-        //               <Option value="image/path2">Ruby</Option>
-        //             </Select>
-        //           </InputGroup>
-        //           <input type="submit" value="Submit" />
-        //         </div>
-        //       </form>
-        //     </div>
-        //   </div>
-        // </main>
+//         <div className="youtube-container">
+//           <h3>YouTube URL:</h3>
+//           <input type="text" placeholder="https://www.youtube.com/channel/PLACEHOLDER" onChange={this.YoutubeUrlInput} />
+//         </div>
+//         <input type="submit" value="Go live!" />
+//     </form>
+//   </div>
+// </div>
+// </main>
