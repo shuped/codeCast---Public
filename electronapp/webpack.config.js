@@ -1,13 +1,15 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('webpack-html-plugin');
+var path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: ['./src/index.js']
   },
 
   output: {
-    path: './public/built',
+    path: path.join(__dirname, 'public/build'),
     filename: 'bundle.js',
     publicPath: '/'
   },
@@ -20,15 +22,13 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-          presets: ['react', 'es2015', 'stage-0']
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
       { 
-        test: /\.css$/,
-        use: {
-          loader: 'style-loader!css-loader'
-        }
+        test: /\.s$css/,
+        use: ['sass-loader', 'css-loader']
       },
     ]
   },

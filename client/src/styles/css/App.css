@@ -157,19 +157,24 @@ main .currentStream {
       .streams .activeStreamCard .description-container p {
         font-size: 1.2em; }
 
-.wrapper {
+.Terminal-display {
   position: relative;
-  display: flex;
-  flex-wrap: nowrap; }
-  .wrapper div.xterm-screen {
-    min-width: 50vw;
-    min-height: 47vh; }
-  .wrapper canvas[class^="xterm-"] {
+  overflow: scroll; }
+  .Terminal-display .wrapper {
+    position: absolute;
+    bottom: 0;
     display: flex;
-    min-width: 50vw !important;
-    min-height: 48vh; }
-  .wrapper canvas.xterm-text-layer, .wrapper canvas.xterm-cursor-layer {
-    padding: 0.5rem 3rem 1rem 2rem; }
+    flex-wrap: nowrap; }
+    .Terminal-display .wrapper .terminal-main div.xterm-screen {
+      display: flex;
+      min-width: 50vw;
+      min-height: 48vh; }
+    .Terminal-display .wrapper .terminal-main canvas[class^="xterm-"] {
+      display: flex;
+      min-width: 50vw !important;
+      min-height: 48vh; }
+    .Terminal-display .wrapper .terminal-main canvas.xterm-text-layer, .Terminal-display .wrapper .terminal-main canvas.xterm-cursor-layer {
+      padding: 0.5rem 3rem 1rem 2rem; }
 
 .Filetree-display {
   background-color: #282a36 !important; }
@@ -197,6 +202,7 @@ code {
 .App {
   flex-direction: column;
   min-height: 100vh;
+  max-height: 100vh;
   min-width: 100vw;
   overflow: hidden; }
   .App .component-container1 {
