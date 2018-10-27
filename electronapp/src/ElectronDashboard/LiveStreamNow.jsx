@@ -40,11 +40,13 @@ class LiveStreamNow extends React.Component {
 
   HandleSubmit = (event) => {
     event.preventDefault();
-    //redirect to broadcast page
-    ipcRenderer.send('terminalOpen', true)
-    console.log(this.state)
-  }
-
+    
+    // TODO: check form validation before terminalOpen
+    
+    ipcRenderer.send('terminalOpen', true);
+    
+    // TODO: show broadcasting view
+  };
   render() {  
     return (
       <main className="new-stream">
