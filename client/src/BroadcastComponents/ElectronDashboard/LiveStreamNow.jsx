@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import { Input, Select, DatePicker } from 'antd';
+import { Input, Select } from 'antd';
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -14,6 +14,7 @@ class LiveStreamNow extends React.Component {
       user: 'Spencer Mc-Whhite',
       description: 'asdasdas',
       scheduledDate: Date.now(),
+      youtubeURL: '',
       languageImage: 'image'
     }
 
@@ -33,8 +34,8 @@ class LiveStreamNow extends React.Component {
     console.log(value)
   }
 
-  YoutubeUrlInput = (value) => {
-    console.log(value);
+  YoutubeUrlInput = (event) => {
+    this.setState({youtubeURL: event.target.value})
   }
 
   HandleSubmit = (event) => {
@@ -49,45 +50,49 @@ class LiveStreamNow extends React.Component {
     
     return (
 
-        <main className="new-stream">
-          <header className="header">
-            <Button id="dashboard-btn" type="primary">Dashboard</Button>
-            <div className="logoPlaceholder">p</div>
-          </header>
-          <div className="inputs-container">
-            <h1>New Scheduled Stream</h1>
+      <main className="new-stream">
+        <header className="header">
+          <Button id="dashboard-btn" type="primary">Dashboard</Button>
+          <div className="logoPlaceholder">p</div>
+        </header>
+        <div className="inputs-container">
+          <h1>Start New Stream</h1>
 
-            <div className="forms-container">
-              <form onSubmit={this.HandleSubmit}>
-                <div className="title-input">
-                  <h3>Title:</h3>
-                  <input type="text" title={this.state.title} onChange={this.TitleOnChange} />
+          <div className="forms-container">
+
+            <form onSubmit={this.HandleSubmit}>
+
+              <div className="title-input">
+                <h3>Title:</h3>
+                <input type="text" title={this.state.title} onChange={this.TitleOnChange} />
+              </div>
+              <div className="description-input">
+                <h3>Description:</h3>
+                <textarea type="text" rows="4" cols="90" description={this.state.description} onChange={this.DescriptionOnChange} />
+              </div>
+
+              <div className=" bottom-container">
+
+                <div className="youtube-container">
+                  <h3>YouTube URL:</h3>
+                  <input type="text" placeholder="https://www.youtube.com/channel/PLACEHOLDER" onChange={this.YoutubeUrlInput} />
                 </div>
-                <div className="description-input">
-                  <h3>Description:</h3>
-                  <textarea type="text" rows="4" cols="90" description={this.state.description} onChange={this.DescriptionOnChange} />
+                <div className="b-bottom-container">
+                  <InputGroup compact>
+                    <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
+                      <Option value="default">----</Option>
+                      <Option value="image/path1">Node</Option>
+                      <Option value="image/path2">Ruby</Option>
+                    </Select>
+                  </InputGroup>
+                  <input type="submit" value="Go live!" />
                 </div>
-                <div className=" bottom-container">
-                  <div className="youtube-container"></div>
-                    <h3>YouTube URL:</h3>
-                    <Input onChange={this.YoutubeUrlInput(value)} placeholder="https://www.youtube.com/channel/PLACEHOLDER" />
-                  </div>
-                  <div className="b-bottom-container">
-                    <InputGroup compact>
-                      <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
-                        <Option value="default">----</Option>
-                        <Option value="image/path1">Node</Option>
-                        <Option value="image/path2">Ruby</Option>
-                      </Select>
-                    </InputGroup>
-                    <input type="submit" value="Submit">Go Live!</input>
-                  </div>
-                </div>
-              </form>
-            </div>
+
+              </div>
+            </form>
           </div>
-        </main>
-      
+        </div>
+      </main>
     );
   }
 }
