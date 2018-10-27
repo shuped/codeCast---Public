@@ -1,12 +1,8 @@
 const fs = require('fs');
-// const stream = fs.createWriteStream('./testFile.js', {flags:'a'});
 const { StringDecoder } = require('string_decoder');
 const decoder = new StringDecoder('utf8');
-// const util = require('util');
 const path = require('path');
 const uuid = require('uuid/v1');
-
-const rootDir = path.join(__dirname, '..');
 
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
@@ -68,7 +64,7 @@ async function fileReader(root, fpath, target) {
   });
 }
 
-async function makeJSON(array) {
+async function makeJSON(array, root, targetDir) {
   //generates JSON object representing directory structure from array
   let promises = [];
   let dirObj = {};
@@ -97,14 +93,14 @@ async function makeJSON(array) {
           //2) read file and push returned promise to promises array
           if(i === fpath.length - 1) {
             let fileID = uuid();
-            await promises.push({ id: [fileID], promise: fileReader(rootDir, fpath, targetFile) });
+            await promises.push({ id: [fileID], promise: fileReader(root, fpath, targetFile) });
             current[targetFile] = fileID;
           }
         });
       //if child of root dir append to root object and do same as above
       } else {
         let fileID = uuid();
-        await promises.push({ id: [fileID], promise: fileReader(rootDir, fpath, targetFile) });
+        await promises.push({ id: [fileID], promise: fileReader(root, fpath, targetFile) });
         current[targetFile] = fileID;
         
       }
@@ -117,10 +113,10 @@ async function makeJSON(array) {
     fileObj[res.id] = res.content;
   });
   //write directory and content objects to file
-  fs.writeFile('./content.json', JSON.stringify(fileObj), (err) => {
+  fs.writeFile(`${targetDir}/content.json`, JSON.stringify(fileObj), (err) => {
     if (err) throw err;
   });
-  fs.writeFile('./directory.json', JSON.stringify(dirObj), (err) => {
+  fs.writeFile(`${targetDir}/directory.json`, JSON.stringify(dirObj), (err) => {
     if (err) throw err;
   });
   //return directory tree as a promise
@@ -128,15 +124,15 @@ async function makeJSON(array) {
 }
 
 //when readDir is complete, call function to build directory and file content objects
-function done() {
-  return (err, res) => {
+function done(targetDir) {
+  return (err, res, root) => {
     if (err) throw err;
-    makeJSON(res);
+    makeJSON(res, root, targetDir);
   }
 }
 
 //takes directory path and callback
-function readDir(dir, done) {
+function readDir(dir, done, root = dir) {
   // collects results
   let results = [];
   // reads directory passed to readDir()
@@ -150,7 +146,7 @@ function readDir(dir, done) {
       let item = items[i++];
       // console.log('Item:', item);
       //return when dir is walked
-      if (!item) return done(null, results);
+      if (!item) return done(null, results, root);
       //add to filepath
       item = path.join(dir, item);
       //stat returns quantifiable properties of item, used here to parse files vs. dirs
@@ -161,11 +157,11 @@ function readDir(dir, done) {
             return readDir(item, function(err, res) {
               results = [...results, ...res];
               return next();
-            });
+            }, root);
           }
         } else {
           //if files push to results
-          results.push(makeRelative(item, rootDir));
+          results.push(makeRelative(item, root));
         }
         return next();
       });
@@ -173,9 +169,7 @@ function readDir(dir, done) {
   });
 };
 
-// readDir(rootDir, done());
-
 module.exports = {
   readDir,
   done
-};
+}
