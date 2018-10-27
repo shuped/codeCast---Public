@@ -13,8 +13,8 @@ class ScheduleNewStream extends React.Component {
       title: 'placeholder',
       user: 'Spencer Mc-Whhite',
       description: 'asdasdas',
-      scheduledDate: '',
-      languageImage: ''
+      scheduledDate: 'time',
+      languageImage: 'image'
     }
 
   }
@@ -28,9 +28,9 @@ class ScheduleNewStream extends React.Component {
     this.setState({description: event.target.value})
   }
 
-  // onChange = (value) => {
-  //   this.setState({scheduledDate: value})
-  // }
+  onChange = (value) => {
+    this.setState({scheduledDate: value})
+  }
   
   onOk = (value) => {
     this.setState({scheduledDate: value['_d']})
@@ -56,43 +56,42 @@ class ScheduleNewStream extends React.Component {
 
         <main className="new-stream">
           <header className="header">
-            <Button id="dashboard" type="primary">Dashboard</Button>
+            <Button id="dashboard-btn" type="primary">Dashboard</Button>
             <div className="logoPlaceholder">p</div>
           </header>
           <div className="inputs-container">
             <h1>New Scheduled Stream</h1>
 
             <div className="forms-container">
-            <form onSubmit={this.HandleSubmit}>
-              <div className="title-input">
-                <h3>Title:</h3>
-                <input type="text" title={this.state.title} onChange={this.TitleOnChange} />
-              </div>
-              <div className="description-input">
-                <h3>Description:</h3>
-                <textarea type="text" rows="4" cols="90" description={this.state.description} onChange={this.DescriptionOnChange} />
-              </div>
-              <div className=" bottom-container">
-                <DatePicker
-                  className="date-selection"
-                  showTime
-                  format="YYYY-MM-DD HH:mm:ss"
-                  placeholder="Select Time"
-                  onChange={this.onChange}
-                  onOk={this.onOk}
-                />
-                {/* Language image selector */}
-                <InputGroup compact>
-                  <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
-                    <Option value="default">----</Option>
-                    <Option value="image/path1">Node</Option>
-                    <Option value="image/path2">Ruby</Option>
-                  </Select>
-                </InputGroup>
-                <input type="submit" value="Submit" />
-              </div>
-
-            </form>
+              <form onSubmit={this.HandleSubmit}>
+                <div className="title-input">
+                  <h3>Title:</h3>
+                  <input type="text" title={this.state.title} onChange={this.TitleOnChange} />
+                </div>
+                <div className="description-input">
+                  <h3>Description:</h3>
+                  <textarea type="text" rows="4" cols="90" description={this.state.description} onChange={this.DescriptionOnChange} />
+                </div>
+                <div className=" bottom-container">
+                  <DatePicker
+                    className="date-selection"
+                    showTime
+                    format="YYYY-MM-DD HH:mm:ss"
+                    placeholder="Select Time"
+                    onChange={this.onChange}
+                    onOk={this.onOk}
+                  />
+                  {/* Language image selector */}
+                  <InputGroup compact>
+                    <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
+                      <Option value="default">----</Option>
+                      <Option value="image/path1">Node</Option>
+                      <Option value="image/path2">Ruby</Option>
+                    </Select>
+                  </InputGroup>
+                  <input type="submit" value="Submit" />
+                </div>
+              </form>
             </div>
           </div>
         </main>
