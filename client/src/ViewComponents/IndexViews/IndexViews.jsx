@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'; 
+
 import ArchivedStreams from './ArchivedStreams/ArchivedStreams.jsx';
 import ScheduledStreams from './ScheduledStreams/ScheduledStreams.jsx';
 import ActiveStreams from './ActiveStreams/ActiveStreams.jsx';
@@ -43,6 +45,9 @@ class IndexViews extends Component {
 			}
 		}
 		
+
+
+
 		return (
 			<div className="pageGrid">
 				<div>
