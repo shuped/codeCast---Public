@@ -18,7 +18,7 @@ const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 let fileCache = null;
 let dirCache = null;
 
-app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///', 'codecast', {
+app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
   'dynamicJson': true,
   'watchPg': true,
   'showErrorStack': 'json',
@@ -27,7 +27,8 @@ app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///', 'codecast', {
   'bodySizeLimit': '50mb'
 }));
 
-app.use(bodyParser({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+app.use(bodyParser.json({limit: '50mb'}));
 
 app.use(morgan('dev', {
   skip: (req, res) => {

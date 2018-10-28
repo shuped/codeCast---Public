@@ -1,92 +1,40 @@
 const { app, BrowserWindow, shell, ipcMain, Menu } = require('electron');
+const {	default: installExtension,	REACT_DEVELOPER_TOOLS,	REDUX_DEVTOOLS } = require('electron-devtools-installer');
 const {	StringDecoder } = require('string_decoder');
+//require mapper function. Function call format: readDir(rootDirectory, done());
+const {	readDir,	done } = require('../../server/fs-mapper');
+
 const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require('fs');
 
-//require mapper function. Function call format: readDir(rootDirectory, done());
-const {	readDir,	done } = require('../server/fs-mapper');
+const buildDir = path.join('file://', __dirname, '..', 'build');
+
 // axios to send content to the server
-const axios = require('./src/redux/ducks/api');
+const axios = require('../src/redux/ducks/api');
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-let mainWindow;
-
-function createMainWindow() {
-	mainWindow = new BrowserWindow({
-		backgroundColor: '#F7F7F7',
-		minWidth: 880,
-		height: 860,
-		width: 1280
-	});
-
-	mainWindow.loadURL(url.format({
-		pathname: path.join(__dirname, 'public/build/index.html'),
-		protocol: 'file:',
-		slashes: true
-	}));
-
-	if (isDev) {
-		const {
-			default: installExtension,
-			REACT_DEVELOPER_TOOLS,
-			REDUX_DEVTOOLS,
-		} = require('electron-devtools-installer');
-
-		installExtension(REACT_DEVELOPER_TOOLS)
-			.then(name => {
-				console.log(`Added Extension: ${name}`);
-			})
-			.catch(err => {
-				console.log('An error occurred: ', err);
-			});
-
-		installExtension(REDUX_DEVTOOLS)
-			.then(name => {
-				console.log(`Added Extension: ${name}`);
-			})
-			.catch(err => {
-				console.log('An error occurred: ', err);
-			});
-		mainWindow.webContents.openDevTools();
-	}
-
-	mainWindow.once('ready-to-show', () => {
-		mainWindow.show();
-	});
-}
-
-let terminalWindow
-async function createTerminalWindow() {
-	terminalWindow = new BrowserWindow({
-		backgroundColor: '#F7F7F7',
-		minWidth: 40,
-		height: 800,
-		width: 800
-	});
-
-	terminalWindow.loadURL(url.format({
-		pathname: path.join(__dirname, 'indexTerminal.html'),
-		protocol: 'file:',
-		slashes: true
-	}));
-	const decoder = new StringDecoder('utf8');
+const decoder = new StringDecoder('utf8');
 	//temp root targets project directory
 	//**TODO: get rootDir from shell command**
-	const rootDir = path.join(__dirname, '..');
+const rootDir = path.join(__dirname, '..', '..');
 
-	//run fs-mapper module and map dir on window open
-	//**TODO: pass variables from shell script that echos PWD**
-	fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(path.join(__dirname, 'fileData')));
+let directory = null;
+let content = null;
+let filepaths = null;
 
-	let directory = null;
-	let content = null;
+//**TODO: pass variables from shell script that echos PWD**
+async function getAllFiles() {
+	fs.existsSync('./fileData/directory.json') ? 
+	null : await readDir(rootDir, done(path.join(__dirname, 'fileData')));
+	postAllFiles();
+}
 
+async function postAllFiles() {
 	if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
 		directory = await decoder.write(fs.readFileSync('./directory.json'));
 		content = await decoder.write(fs.readFileSync('./content.json'));
+		filepaths = await decoder.write(fs.readFileSync('./content.json'));
 		console.log(typeof content)
 	}
 
@@ -96,7 +44,8 @@ async function createTerminalWindow() {
 			url: '/api/electron',
 			data: {
 				directory: JSON.stringify(directory),
-				content: JSON.stringify(content)
+				content: JSON.stringify(content),
+				filepaths: JSON.stringify(filepaths)
 			}
 		}).then((res) => {
 			console.log(res.data);
@@ -105,6 +54,77 @@ async function createTerminalWindow() {
 			throw err;
 		});
 	}
+}
+
+async function isDevMode() {
+	return await new Promise((resolve, reject) => {
+		installExtension(REACT_DEVELOPER_TOOLS)
+		.then(name => {
+			console.log(`Added Extension: ${name}`);
+		}).catch(err => {
+			console.log('An error occurred: ', err);
+		});
+
+		installExtension(REDUX_DEVTOOLS)
+		.then(name => {
+			console.log(`Added Extension: ${name}`);
+		}).catch(err => {
+			console.log('An error occurred: ', err);
+		});
+		isDev ? resolve(true) : reject(false);
+	});
+}
+
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow;
+
+const startUrl = process.env.ELECTRON_START_URL || url.format({
+	pathname: isDev ? 'http://localhost:4000/' : path.join(__dirname, '/build', '/index.html'),
+	protocol: 'file:',
+	slashes: true
+});
+
+async function createMainWindow() {
+	mainWindow = new BrowserWindow({
+		backgroundColor: '#F7F7F7',
+		minWidth: 880,
+		height: 860,
+		width: 1280,
+		show: false
+	});
+
+	mainWindow.loadURL(process.env.ELECTRON_START_URL || startUrl);
+	// mainWindow.loadURL(url.format({
+	// 	pathname: path.join(__dirname, 'public/build/index.html'),
+	// 	protocol: 'file:',
+	// 	slashes: true
+	// }));
+	isDevMode().then((res) => {
+		res ? mainWindow.webContents.openDevTools() : null;
+	}).catch((err) => {
+		throw err;
+	}).finally(() => {
+		mainWindow.once('ready-to-show', () => {
+			mainWindow.show();
+		});
+	})
+}
+
+let terminalWindow
+function createTerminalWindow() {
+	terminalWindow = new BrowserWindow({
+		backgroundColor: '#F7F7F7',
+		minWidth: 40,
+		height: 800,
+		width: 800
+	});
+
+	terminalWindow.loadURL(url.format({
+		pathname: isDev ? 'http://localhost:4000/' : path.join(__dirname, '/build', 'indexTerminal.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
 	// Open the DevTools.
 	terminalWindow.webContents.openDevTools();
 	// Emitted when the window is closed.
@@ -220,6 +240,7 @@ generateMenu = () => {
 }
 
 app.on('ready', () => {
+	getAllFiles();
 	createMainWindow();
 	generateMenu();
 });

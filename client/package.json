@@ -1,5 +1,6 @@
 {
-  "name": "final-project",
+  "name": "codecast-web",
+  "description": "CodeCast Web App",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx}",
@@ -8,16 +9,13 @@
   },
   "version": "0.1.0",
   "private": true,
-  "main": "./src/electron-main/electron-main.js",
+  "main": "./src/index.js",
   "dependencies": {
     "antd": "^3.10.1",
     "axios": "~0.18.0",
     "bluebird": "^3.5.2",
     "codemirror": "~5.41.0",
     "connected-react-router": "~4.5.0",
-    "electron": "^3.0.5",
-    "electron-is-dev": "^1.0.1",
-    "electron-next": "^3.1.5",
     "history": "~4.7.2",
     "pm2": "~3.2.2",
     "prop-types": "~15.6.2",
@@ -35,7 +33,6 @@
   },
   "proxy": "http://localhost:8080",
   "scripts": {
-    "electron": "electron ./src/electron-main/electron-starter",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
