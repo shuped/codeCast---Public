@@ -70,7 +70,6 @@ class ScheduledStreams extends Component {
   }
 
   render() {  
-    console.log(this.props.scheduledStreams)
     const renderStreams = this.props.scheduledStreams.map( (stream) => {
       return this.MakeStreamCard(stream);  
     });
