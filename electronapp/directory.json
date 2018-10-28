@@ -1,1 +1,151 @@
-{".vscode":{"settings.json":"cfc73ff0-da0a-11e8-84a4-c1a784006548"},"README.md":"cfc76700-da0a-11e8-84a4-c1a784006548","client":{"public":{"index.html":"cfc76703-da0a-11e8-84a4-c1a784006548","manifest.json":"cfc76704-da0a-11e8-84a4-c1a784006548"},"src":{"HelperComponents":{"FilterLink.jsx":"cfc78e12-da0a-11e8-84a4-c1a784006548","ReduxBoilerplate.jsx":"cfc78e13-da0a-11e8-84a4-c1a784006548"},"StreamComponents":{"Chat":{"messages":{"initialMessageUtil.js":"cfc7b520-da0a-11e8-84a4-c1a784006548"},"ChatBar.jsx":"cfc78e15-da0a-11e8-84a4-c1a784006548","ChatMain.jsx":"cfc78e16-da0a-11e8-84a4-c1a784006548","Message.jsx":"cfc78e17-da0a-11e8-84a4-c1a784006548","MessageList.jsx":"cfc78e18-da0a-11e8-84a4-c1a784006548"},"FileDirectory":{"FileDirectory.jsx":"cfc7b521-da0a-11e8-84a4-c1a784006548"},"FileDisplay":{"LiveCodeDisplay.jsx":"cfc7b522-da0a-11e8-84a4-c1a784006548","StyleDisplay.jsx":"cfc7b523-da0a-11e8-84a4-c1a784006548"},"Terminal":{"Terminal.jsx":"cfc7b524-da0a-11e8-84a4-c1a784006548"},"VideoStream":{"VideoStream.jsx":"cfc7b525-da0a-11e8-84a4-c1a784006548"}},"ViewComponents":{"IndexViews":{"ActiveStreams":{"ActiveStreams.jsx":"cfc7dc30-da0a-11e8-84a4-c1a784006548"},"ArchivedStreams":{"ArchivedStreams.jsx":"cfc7dc31-da0a-11e8-84a4-c1a784006548"},"ScheduledStreams":{"ScheduledStreams.jsx":"cfc7dc33-da0a-11e8-84a4-c1a784006548"},"IndexViews.jsx":"cfc7dc32-da0a-11e8-84a4-c1a784006548"},"Footer.jsx":"cfc7b526-da0a-11e8-84a4-c1a784006548","Header.jsx":"cfc7b527-da0a-11e8-84a4-c1a784006548"},"redux":{"actions":{"fetch-example.js":"cfc7dc35-da0a-11e8-84a4-c1a784006548"},"ducks":{"Ducktator.js":"cfc7dc36-da0a-11e8-84a4-c1a784006548","ajaxDuck.js":"cfc7dc37-da0a-11e8-84a4-c1a784006548","api.js":"cfc7dc38-da0a-11e8-84a4-c1a784006548","chatDuck.js":"cfc80340-da0a-11e8-84a4-c1a784006548","directoryDuck.js":"cfc80341-da0a-11e8-84a4-c1a784006548","fileDuck.js":"cfc80342-da0a-11e8-84a4-c1a784006548","streamsDuck.js":"cfc80343-da0a-11e8-84a4-c1a784006548"},"store":{"index.js":"cfc80344-da0a-11e8-84a4-c1a784006548"}},"styles":{"css":{"App.css":"cfc80346-da0a-11e8-84a4-c1a784006548","App.css.map":"cfc80347-da0a-11e8-84a4-c1a784006548","index.css":"cfc80348-da0a-11e8-84a4-c1a784006548","index.css.map":"cfc80349-da0a-11e8-84a4-c1a784006548"},"scss":{"partials":{"_activeStreamsCard.scss":"cfc82a52-da0a-11e8-84a4-c1a784006548","_archivedStreamsCards.scss":"cfc82a53-da0a-11e8-84a4-c1a784006548","_chat.scss":"cfc82a54-da0a-11e8-84a4-c1a784006548","_fileDirectory.scss":"cfc87870-da0a-11e8-84a4-c1a784006548","_fileViewer.scss":"cfc87871-da0a-11e8-84a4-c1a784006548","_scheduledStreamCard.scss":"cfc87872-da0a-11e8-84a4-c1a784006548","_terminal.scss":"cfc87873-da0a-11e8-84a4-c1a784006548","_video.scss":"cfc87874-da0a-11e8-84a4-c1a784006548"},"App.scss":"cfc82a50-da0a-11e8-84a4-c1a784006548","index.scss":"cfc82a51-da0a-11e8-84a4-c1a784006548"}},"App.jsx":"cfc78e10-da0a-11e8-84a4-c1a784006548","App.test.jsx":"cfc78e11-da0a-11e8-84a4-c1a784006548","Root.jsx":"cfc78e14-da0a-11e8-84a4-c1a784006548","index.js":"cfc7dc34-da0a-11e8-84a4-c1a784006548","serviceWorker.js":"cfc80345-da0a-11e8-84a4-c1a784006548"},".eslintrc.json":"cfc76701-da0a-11e8-84a4-c1a784006548","package.json":"cfc76702-da0a-11e8-84a4-c1a784006548"},"electronapp":{"public":{"build":{"bundle.js":"cfc89f81-da0a-11e8-84a4-c1a784006548","index.html":"cfc89f82-da0a-11e8-84a4-c1a784006548"}},"src":{"ElectronDashboard":{"ElectronDashboard.jsx":"cfc89f85-da0a-11e8-84a4-c1a784006548","LiveStreamNow.jsx":"cfc89f86-da0a-11e8-84a4-c1a784006548","ScheduleNewStream.jsx":"cfc89f87-da0a-11e8-84a4-c1a784006548","StartScheduled.jsx":"cfc89f88-da0a-11e8-84a4-c1a784006548"},"redux":{"actions":{"fetch-example.js":"cfc89f8b-da0a-11e8-84a4-c1a784006548"},"ducks":{"Ducktator.js":"cfc8c690-da0a-11e8-84a4-c1a784006548","api.js":"cfc8c691-da0a-11e8-84a4-c1a784006548","streamsDuck.js":"cfc8c692-da0a-11e8-84a4-c1a784006548"},"store":{"index.js":"cfc8c693-da0a-11e8-84a4-c1a784006548"}},"styles":{"css":{"index.css":"cfc8c695-da0a-11e8-84a4-c1a784006548"}},"App.jsx":"cfc89f84-da0a-11e8-84a4-c1a784006548","Root.jsx":"cfc89f89-da0a-11e8-84a4-c1a784006548","index.js":"cfc89f8a-da0a-11e8-84a4-c1a784006548","serviceWorker.js":"cfc8c694-da0a-11e8-84a4-c1a784006548"},".babelrc":"cfc87875-da0a-11e8-84a4-c1a784006548","index.html":"cfc87876-da0a-11e8-84a4-c1a784006548","indexTerminal.html":"cfc87877-da0a-11e8-84a4-c1a784006548","main.js":"cfc87878-da0a-11e8-84a4-c1a784006548","npm_install.sh":"cfc87879-da0a-11e8-84a4-c1a784006548","package.json":"cfc89f80-da0a-11e8-84a4-c1a784006548","renderer.js":"cfc89f83-da0a-11e8-84a4-c1a784006548","webpack.config.js":"cfc8c696-da0a-11e8-84a4-c1a784006548"},"nodemon.json":"cfc8c697-da0a-11e8-84a4-c1a784006548","package.json":"cfc8eda0-da0a-11e8-84a4-c1a784006548","server":{"fs-mapper.js":"cfc8eda1-da0a-11e8-84a4-c1a784006548","logger.js":"cfc8eda2-da0a-11e8-84a4-c1a784006548","package.json":"cfc8eda3-da0a-11e8-84a4-c1a784006548","server.js":"cfc8eda4-da0a-11e8-84a4-c1a784006548"}}
+{
+  ".vscode": { "staticUuid": {
+    "uuid": ["cfc73ff0-da0a-11e8-84a4-c1a784006548"] ,
+    "names":["settings.json"]
+  },
+  "README.md": "cfc76700-da0a-11e8-84a4-c1a784006548",
+  "client": {
+    "public": {
+      "index.html": "cfc76703-da0a-11e8-84a4-c1a784006548",
+      "manifest.json": "cfc76704-da0a-11e8-84a4-c1a784006548"
+    },
+    "src": {
+      "HelperComponents": {
+        "FilterLink.jsx": "cfc78e12-da0a-11e8-84a4-c1a784006548",
+        "ReduxBoilerplate.jsx": "cfc78e13-da0a-11e8-84a4-c1a784006548"
+      },
+      "StreamComponents": {
+        "Chat": {
+          "messages": {
+            "initialMessageUtil.js": "cfc7b520-da0a-11e8-84a4-c1a784006548"
+          },
+          "ChatBar.jsx": "cfc78e15-da0a-11e8-84a4-c1a784006548",
+          "ChatMain.jsx": "cfc78e16-da0a-11e8-84a4-c1a784006548",
+          "Message.jsx": "cfc78e17-da0a-11e8-84a4-c1a784006548",
+          "MessageList.jsx": "cfc78e18-da0a-11e8-84a4-c1a784006548"
+        },
+        "FileDirectory": {
+          "FileDirectory.jsx": "cfc7b521-da0a-11e8-84a4-c1a784006548"
+        },
+        "FileDisplay": {
+          "LiveCodeDisplay.jsx": "cfc7b522-da0a-11e8-84a4-c1a784006548",
+          "StyleDisplay.jsx": "cfc7b523-da0a-11e8-84a4-c1a784006548"
+        },
+        "Terminal": { "Terminal.jsx": "cfc7b524-da0a-11e8-84a4-c1a784006548" },
+        "VideoStream": {
+          "VideoStream.jsx": "cfc7b525-da0a-11e8-84a4-c1a784006548"
+        }
+      },
+      "ViewComponents": {
+        "IndexViews": {
+          "ActiveStreams": {
+            "ActiveStreams.jsx": "cfc7dc30-da0a-11e8-84a4-c1a784006548"
+          },
+          "ArchivedStreams": {
+            "ArchivedStreams.jsx": "cfc7dc31-da0a-11e8-84a4-c1a784006548"
+          },
+          "ScheduledStreams": {
+            "ScheduledStreams.jsx": "cfc7dc33-da0a-11e8-84a4-c1a784006548"
+          },
+          "IndexViews.jsx": "cfc7dc32-da0a-11e8-84a4-c1a784006548"
+        },
+        "Footer.jsx": "cfc7b526-da0a-11e8-84a4-c1a784006548",
+        "Header.jsx": "cfc7b527-da0a-11e8-84a4-c1a784006548"
+      },
+      "redux": {
+        "actions": {
+          "fetch-example.js": "cfc7dc35-da0a-11e8-84a4-c1a784006548"
+        },
+        "ducks": {
+          "Ducktator.js": "cfc7dc36-da0a-11e8-84a4-c1a784006548",
+          "ajaxDuck.js": "cfc7dc37-da0a-11e8-84a4-c1a784006548",
+          "api.js": "cfc7dc38-da0a-11e8-84a4-c1a784006548",
+          "chatDuck.js": "cfc80340-da0a-11e8-84a4-c1a784006548",
+          "directoryDuck.js": "cfc80341-da0a-11e8-84a4-c1a784006548",
+          "fileDuck.js": "cfc80342-da0a-11e8-84a4-c1a784006548",
+          "streamsDuck.js": "cfc80343-da0a-11e8-84a4-c1a784006548"
+        },
+        "store": { "index.js": "cfc80344-da0a-11e8-84a4-c1a784006548" }
+      },
+      "styles": {
+        "css": {
+          "App.css": "cfc80346-da0a-11e8-84a4-c1a784006548",
+          "App.css.map": "cfc80347-da0a-11e8-84a4-c1a784006548",
+          "index.css": "cfc80348-da0a-11e8-84a4-c1a784006548",
+          "index.css.map": "cfc80349-da0a-11e8-84a4-c1a784006548"
+        },
+        "scss": {
+          "partials": {
+            "_activeStreamsCard.scss": "cfc82a52-da0a-11e8-84a4-c1a784006548",
+            "_archivedStreamsCards.scss": "cfc82a53-da0a-11e8-84a4-c1a784006548",
+            "_chat.scss": "cfc82a54-da0a-11e8-84a4-c1a784006548",
+            "_fileDirectory.scss": "cfc87870-da0a-11e8-84a4-c1a784006548",
+            "_fileViewer.scss": "cfc87871-da0a-11e8-84a4-c1a784006548",
+            "_scheduledStreamCard.scss": "cfc87872-da0a-11e8-84a4-c1a784006548",
+            "_terminal.scss": "cfc87873-da0a-11e8-84a4-c1a784006548",
+            "_video.scss": "cfc87874-da0a-11e8-84a4-c1a784006548"
+          },
+          "App.scss": "cfc82a50-da0a-11e8-84a4-c1a784006548",
+          "index.scss": "cfc82a51-da0a-11e8-84a4-c1a784006548"
+        }
+      },
+      "App.jsx": "cfc78e10-da0a-11e8-84a4-c1a784006548",
+      "App.test.jsx": "cfc78e11-da0a-11e8-84a4-c1a784006548",
+      "Root.jsx": "cfc78e14-da0a-11e8-84a4-c1a784006548",
+      "index.js": "cfc7dc34-da0a-11e8-84a4-c1a784006548",
+      "serviceWorker.js": "cfc80345-da0a-11e8-84a4-c1a784006548"
+    },
+    ".eslintrc.json": "cfc76701-da0a-11e8-84a4-c1a784006548",
+    "package.json": "cfc76702-da0a-11e8-84a4-c1a784006548"
+  },
+  "electronapp": {
+    "public": {
+      "build": {
+        "bundle.js": "cfc89f81-da0a-11e8-84a4-c1a784006548",
+        "index.html": "cfc89f82-da0a-11e8-84a4-c1a784006548"
+      }
+    },
+    "src": {
+      "ElectronDashboard": {
+        "ElectronDashboard.jsx": "cfc89f85-da0a-11e8-84a4-c1a784006548",
+        "LiveStreamNow.jsx": "cfc89f86-da0a-11e8-84a4-c1a784006548",
+        "ScheduleNewStream.jsx": "cfc89f87-da0a-11e8-84a4-c1a784006548",
+        "StartScheduled.jsx": "cfc89f88-da0a-11e8-84a4-c1a784006548"
+      },
+      "redux": {
+        "actions": {
+          "fetch-example.js": "cfc89f8b-da0a-11e8-84a4-c1a784006548"
+        },
+        "ducks": {
+          "Ducktator.js": "cfc8c690-da0a-11e8-84a4-c1a784006548",
+          "api.js": "cfc8c691-da0a-11e8-84a4-c1a784006548",
+          "streamsDuck.js": "cfc8c692-da0a-11e8-84a4-c1a784006548"
+        },
+        "store": { "index.js": "cfc8c693-da0a-11e8-84a4-c1a784006548" }
+      },
+      "styles": {
+        "css": { "index.css": "cfc8c695-da0a-11e8-84a4-c1a784006548" }
+      },
+      "App.jsx": "cfc89f84-da0a-11e8-84a4-c1a784006548",
+      "Root.jsx": "cfc89f89-da0a-11e8-84a4-c1a784006548",
+      "index.js": "cfc89f8a-da0a-11e8-84a4-c1a784006548",
+      "serviceWorker.js": "cfc8c694-da0a-11e8-84a4-c1a784006548"
+    },
+    ".babelrc": "cfc87875-da0a-11e8-84a4-c1a784006548",
+    "index.html": "cfc87876-da0a-11e8-84a4-c1a784006548",
+    "indexTerminal.html": "cfc87877-da0a-11e8-84a4-c1a784006548",
+    "main.js": "cfc87878-da0a-11e8-84a4-c1a784006548",
+    "npm_install.sh": "cfc87879-da0a-11e8-84a4-c1a784006548",
+    "package.json": "cfc89f80-da0a-11e8-84a4-c1a784006548",
+    "renderer.js": "cfc89f83-da0a-11e8-84a4-c1a784006548",
+    "webpack.config.js": "cfc8c696-da0a-11e8-84a4-c1a784006548"
+  },
+  "nodemon.json": "cfc8c697-da0a-11e8-84a4-c1a784006548",
+  "package.json": "cfc8eda0-da0a-11e8-84a4-c1a784006548",
+  "server": {
+    "fs-mapper.js": "cfc8eda1-da0a-11e8-84a4-c1a784006548",
+    "logger.js": "cfc8eda2-da0a-11e8-84a4-c1a784006548",
+    "package.json": "cfc8eda3-da0a-11e8-84a4-c1a784006548",
+    "server.js": "cfc8eda4-da0a-11e8-84a4-c1a784006548"
+  }
+}
