@@ -15,14 +15,17 @@ module.exports = {
   },
 
   module: {
+    noParse: /ws/,
     rules: [
       {
-        test: /\.jsx?/,
+        test: /\.(js|jsx)$/i,
         exclude: /node_modules/,
+        include: path.join(__dirname, 'src'),
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+            plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-modules-commonjs"]
           }
         }
       },
@@ -32,11 +35,12 @@ module.exports = {
       },
     ]
   },
+  externals: ['/ws'],
   plugins: [
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
-      template: 'index.html'
+      template: path.join(__dirname, 'index.html')
     })
   ]
 }

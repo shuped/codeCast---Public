@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
-import { fetchBroadcasterStreams, postDeleteStream } from './redux/ducks/ajaxDuck.js';
+import { fetchBroadcasterStreams, postDeleteStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
 class Dashboard extends React.Component {
