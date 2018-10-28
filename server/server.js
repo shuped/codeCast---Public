@@ -11,7 +11,8 @@ const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io = require('socket.io')(server);
 
 const rootPath = path.join(__dirname, '..');
-const buildPath = path.join(rootPath, 'client/build');
+const buildPath = path.join(rootPath, 'client', 'build');
+const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
 let fileCache = null;
 let dirCache = null;
@@ -79,7 +80,7 @@ app.post('/api/electron', (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-  res.status(200).json({ express: 'successful connection to express' });
+  res.sendFile(devPath);
 });
 
 io.on('connection', (socket) => {
