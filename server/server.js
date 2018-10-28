@@ -90,8 +90,8 @@ app.get('/api/scheduledStreams/', (req, res) => {
   res.status(200).json(testStreams);
 });
 
-app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
+app.get('/api/activeStreams/', (req, res) => {
+  const testActiveStreams = {
     "asdass": {
       title: 'NodeNStuff',
       user: 'Spencer h-White',
@@ -121,7 +121,7 @@ app.get('/api/scheduledStreams/', (req, res) => {
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
-      streamID: 'asdass',
+      streamID: 'asdasv',
       languageImage: 'image',
       isActive: true
     },
@@ -132,7 +132,7 @@ app.get('/api/scheduledStreams/', (req, res) => {
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
-      streamID: 'asdfad',
+      streamID: 'asdfqa',
       languageImage: 'image',
       isActive: true
     },
@@ -143,7 +143,7 @@ app.get('/api/scheduledStreams/', (req, res) => {
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
-      streamID: 'asdass',
+      streamID: 'asdatf',
       languageImage: 'image',
       isActive: true
     },
@@ -154,7 +154,7 @@ app.get('/api/scheduledStreams/', (req, res) => {
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
-      streamID: 'asdfad',
+      streamID: 'asdfpl',
       languageImage: 'image',
       isActive: true
     }
@@ -162,7 +162,7 @@ app.get('/api/scheduledStreams/', (req, res) => {
 
   
   console.log('Get success');
-  res.status(200).json(testStreams);
+  res.status(200).json(testActiveStreams);
 });
 
 //recieve file dir/content from electron

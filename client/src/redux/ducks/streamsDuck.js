@@ -4,18 +4,23 @@ const axios = require('./api');
 
 // Incoming
 const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
-
+const ACTIVE_STREAMS_UPDATE = 'ACTIVE_STREAMS_UPDATE';
 
 // Action Creators
-export const updateViewerStreams = (scheduledStreams) => ({ type: SCHEDULED_STREAMS_UPDATE, payload: scheduledStreams  });
+export const updateScheduledStreams = (scheduledStreams) => ({ type: SCHEDULED_STREAMS_UPDATE, payload: scheduledStreams  });
+export const updateActiveStreams = (activeStreams) => ({ type: ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
 
 // STREAM REDUCER
 
-export const streamsReducer = (state = { scheduledStreams: ['noStreams'] }, action) => {
+export const streamsReducer = (state = { activeStreams: ['noStreams'], scheduledStreams: ['noStreams'] }, action) => {
   switch(action.type) {
     case SCHEDULED_STREAMS_UPDATE:
       console.log('userstreams update', action.payload);
       return { ...state, scheduledStreams: action.payload }
+
+    case ACTIVE_STREAMS_UPDATE:
+    console.log('userstreams update', action.payload);
+    return { ...state, activeStreams: action.payload }
 
     default:
       return state;
@@ -32,8 +37,25 @@ export const fetchScheduledStreams = () => {
       console.log('fetch result', res.data);
       // TODO refactor for how graphql structures response
       const scheduledStreams = Object.values(res.data)
-      console.log(scheduledStreams)
-      dispatch(updateViewerStreams(scheduledStreams))
+      dispatch(updateScheduledStreams(scheduledStreams))
+    }).catch((err) => {
+      console.error('Error:', err.data);
+      return false
+    });
+  };
+}
+
+export const fetchActiveStreams = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `/api/activeStreams/`
+    }).then((res) => {
+      console.log('fetch result', res.data);
+      // TODO refactor for how graphql structures response
+      const activeStreams = Object.values(res.data)
+      console.log(activeStreams)
+      dispatch(updateActiveStreams(activeStreams))
     }).catch((err) => {
       console.error('Error:', err.data);
       return false
