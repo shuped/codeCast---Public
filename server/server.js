@@ -23,7 +23,8 @@ app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///', 'codecast', {
   'watchPg': true,
   'showErrorStack': 'json',
   'exportJsonSchemaPath:': './db/',
-  'exportGqlSchemaPath:': './db/'
+  'exportGqlSchemaPath:': './db/',
+  'bodySizeLimit': '50mb'
 }));
 
 app.use(bodyParser({ limit: '50mb' }));
@@ -41,7 +42,9 @@ app.use(morgan('dev', {
 
 app.get('/api/filecontent', (req, res) => {
   let fileID = req.body;
-  fileCache ? res.status(200).json(JSON.stringify(fileCache[fileID])) : res.status(204).send('File not found');
+  fileCache ? 
+    res.status(200).json(JSON.stringify(fileCache[fileID])) : 
+    res.status(204).send('File not found');
 });
 
 app.get('/api/scheduledStreams/', (req, res) => {
