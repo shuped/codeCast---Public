@@ -1,6 +1,5 @@
-const chokidar = require('chokidar')
-
-module.exports = function (dirName) {
+module.exports = function watch(dirName) {
+  const chokidar = require('chokidar')
   const watcher = chokidar.watch('file, dir', {
     ignored: /(^|[\/\\])\../ + '**/node_modules/, **package-lock.json',
     persistent: true,
