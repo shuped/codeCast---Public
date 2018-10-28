@@ -2,7 +2,7 @@
 const FILE_REQUEST = 'server/file_change';
 
 // Incoming
-
+const DIRECTORY_UPDATE = 'DIRECTORY_UPDATE';
 // Action Creators
 export const updateFile = (fileID) => ({ type: FILE_REQUEST, payload: { fileID } });
 
@@ -10,7 +10,7 @@ export const updateFile = (fileID) => ({ type: FILE_REQUEST, payload: { fileID }
 const directoryState = { directoryStructure: { 'Next Great Thing': null } };
 export const directoryReducer = (state = directoryState, action) => {
   switch (action.type) {
-    case 'DIRECTORY_UPDATE':
+    case DIRECTORY_UPDATE:
       console.log('directory_update action', action.payload)
       return { ...state, directoryStructure: action.payload };
     
