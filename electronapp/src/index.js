@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 import Root from './Root.jsx';
 import * as serviceWorker from './serviceWorker.js';
 import './styles/css/index.css';
+import store from './redux/store/index';
 
 ReactDOM.render(
-  <Root />, 
+  <Root store={ store } />, 
   document.getElementById('root')
 );
 
