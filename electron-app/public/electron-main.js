@@ -23,7 +23,28 @@ let directory = null;
 let content = null;
 let filepaths = null;
 
-//**TODO: pass variables from shell script that echos PWD**
+/*TODO: pass variables from shell script that echos PWD*/
+
+
+async function isDevMode() {
+	return await new Promise((resolve, reject) => {
+		installExtension(REACT_DEVELOPER_TOOLS)
+		.then(name => {
+			console.log(`Added Extension: ${name}`);
+		}).catch(err => {
+			console.log('An error occurred: ', err);
+		});
+
+		installExtension(REDUX_DEVTOOLS)
+		.then(name => {
+			console.log(`Added Extension: ${name}`);
+		}).catch(err => {
+			console.log('An error occurred: ', err);
+		});
+		isDev ? resolve(true) : reject(false);
+	});
+}
+
 async function getAllFiles() {
 	fs.existsSync('./fileData/directory.json') ? 
 	null : await readDir(rootDir, done(path.join(__dirname, 'fileData')));
@@ -54,25 +75,6 @@ async function postAllFiles() {
 			throw err;
 		});
 	}
-}
-
-async function isDevMode() {
-	return await new Promise((resolve, reject) => {
-		installExtension(REACT_DEVELOPER_TOOLS)
-		.then(name => {
-			console.log(`Added Extension: ${name}`);
-		}).catch(err => {
-			console.log('An error occurred: ', err);
-		});
-
-		installExtension(REDUX_DEVTOOLS)
-		.then(name => {
-			console.log(`Added Extension: ${name}`);
-		}).catch(err => {
-			console.log('An error occurred: ', err);
-		});
-		isDev ? resolve(true) : reject(false);
-	});
 }
 
 // Keep a global reference of the window object, if you don't, the window will
