@@ -6,6 +6,8 @@
 @import 'partials/activeStreamsCard';
 @import 'partials/terminal';
 @import 'partials/fileDirectory';
+@import 'partials/indexviews';
+@import 'partials/header';
 
 html {
   box-sizing: border-box;
@@ -49,7 +51,7 @@ code {
       height: 100%;
       width: 100%; 
       grid-area: Filetree;
-      background-color: grey;
+      background-color: white;
 
     }
 
