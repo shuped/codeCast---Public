@@ -13,12 +13,13 @@ function executor(action, emit, next, dispatch) {
 }
 
 const middleware = [
-  socketMW
+  socketMW,
+  thunk
 ]
 
 
 
-const store = applyMiddleware(middleware)(createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+const store = applyMiddleware(...middleware)(createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 // Testing
 store.subscribe(() => {
