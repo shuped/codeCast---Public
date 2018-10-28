@@ -18,14 +18,14 @@ const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 let fileCache = null;
 let dirCache = null;
 
-app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
-  'dynamicJson': true,
-  'watchPg': true,
-  'showErrorStack': 'json',
-  'exportJsonSchemaPath:': './db/',
-  'exportGqlSchemaPath:': './db/',
-  'bodySizeLimit': '50mb'
-}));
+// app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
+//   'dynamicJson': true,
+//   'watchPg': true,
+//   'showErrorStack': 'json',
+//   'exportJsonSchemaPath:': './db/',
+//   'exportGqlSchemaPath:': './db/',
+//   'bodySizeLimit': '50mb'
+// }));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({limit: '50mb'}));

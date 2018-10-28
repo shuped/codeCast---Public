@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 //components
 import IndexViews from './ViewComponents/IndexViews/IndexViews.jsx';
-import StreamIndex from 'client/src/StreamComponents/StreamIndex.jsx';
 import Header from './ViewComponents/Header.jsx'
 
 
@@ -21,9 +20,7 @@ class App extends Component {
           <IndexViews />
         </div>
 
-        <div className='electron'>
-          <StartScheduled />
-        </div>
+
       </div>
     );
   }
