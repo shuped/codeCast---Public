@@ -8,7 +8,7 @@ const fs = require ('fs');
 //require mapper function. Function call format: readDir(rootDirectory, done());
 const { readDir, done } = require('../server/fs-mapper');
 // axios to send content to the server
-const axios = require('./api');
+const axios = require('./src/redux/ducks/api');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -22,17 +22,11 @@ function createMainWindow () {
 		width: 1280
 	});
 
-	// mainWindow.loadURL(
-  // 	isDev
-  // 		? 'http://localhost:3000'
-  // 		: `file://${path.join(__dirname, '../build/index.html')}`,
-  // );
-
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }));
+	mainWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'public/build/index.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
   
 	if (isDev) {
     const {
@@ -61,15 +55,23 @@ function createMainWindow () {
   
 	mainWindow.once('ready-to-show', () => {
     mainWindow.show();
-
-		ipcMain.on('open-external-window', (event, arg) => {
-      shell.openExternal(arg);
-		});
 	});
 }
 
 let terminalWindow
 async function createTerminalWindow() {
+	terminalWindow = new BrowserWindow({
+		backgroundColor: '#F7F7F7',
+		minWidth: 40,
+		height: 800,
+		width: 800
+	});
+
+	terminalWindow.loadURL(url.format({
+		pathname: path.join(__dirname, 'indexTerminal.html'),
+		protocol: 'file:',
+		slashes: true
+	}));
   const decoder = new StringDecoder('utf8');
   //temp root targets project directory
   //**TODO: get rootDir from shell command**
@@ -84,10 +86,12 @@ async function createTerminalWindow() {
 
   if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
     directory = await decoder.write(fs.readFileSync('./directory.json'));
-    content = await decoder.write(fs.readFileSync('./content.json'));
+		content = await decoder.write(fs.readFileSync('./content.json'));
+		console.log(typeof content)
   }
 
   if (directory !== null && content !== null) {
+		console.log('if director')
     axios({
       method: 'post',
       url: '/api/electron',
@@ -104,7 +108,6 @@ async function createTerminalWindow() {
   }
   // Open the DevTools.
   terminalWindow.webContents.openDevTools();
-
   // Emitted when the window is closed.
   terminalWindow.on('closed', function () {
     // Dereference the window object, usually you would store windows
@@ -192,6 +195,7 @@ app.on('activate', () => {
 	}
 });
 
-ipcMain.on('load-page', (event, arg) => {
-	mainWindow.loadURL(arg);
+ipcMain.on('terminalOpen', (event, arg) => {
+	console.log('terminalOpen in createWindow')
+	createTerminalWindow()
 });

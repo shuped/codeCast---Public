@@ -7,11 +7,11 @@ module.exports = {
   entry: {
     app: ['./src/index.js']
   },
-
+  target: 'electron-main',
   output: {
     path: path.join(__dirname, 'public/build'),
     filename: 'bundle.js',
-    publicPath: '/'
+    publicPath: path.join(__dirname,'public/build/') // change in production to '/'
   },
 
   module: {
@@ -36,7 +36,7 @@ module.exports = {
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,
-      template: './index.html',
+      template: 'index.html'
     })
   ]
 }
