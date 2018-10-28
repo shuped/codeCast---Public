@@ -1,16 +1,15 @@
-'use strict';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Root from './Root.jsx';
+import * as serviceWorker from './serviceWorker.js';
+import './styles/css/index.css';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
+ReactDOM.render(
+  <Root />, 
+  document.getElementById('root')
+);
 
-var Entry = React.createClass({
-  render: function() {
-    return (
-      <div className="myDiv">
-        Hello Electron!
-      </div>
-    );
-  }
-});
-
-ReactDOM.render(<Entry />, document.getElementById('root'));
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+serviceWorker.unregister();

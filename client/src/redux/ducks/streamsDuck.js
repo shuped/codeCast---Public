@@ -1,41 +1,24 @@
-// import randomMessage from '../../StreamComponents/Chat/messages/initialMessageUtil'
+import { fetchBroadcasterStreams } from './ajaxDuck'
 
-// // Outgoing
-// const OUTGOING_MESSAGE = 'server/message';
-// const NEW_CONNECTION = 'server/new_connection';
+// Outgoing
 
-// // Incoming
-// const INCOMING_MESSAGE = 'NEW_MESSAGE'
-// const INCOMING_NOTIFICATION = 'NEW_NOTIFICATION'
-// const USERNAME_CHANGE = 'USERNAME_CHANGE'
 
-// // Action Creator
-// export const newConnection = () => ({ type: NEW_CONNECTION, payload: {} });
+// Incoming
+const VIEWER_STREAMS_UPDATE = 'UPDATE_USER_STREAMS'
 
-// export const sendMessage = (message) => ({ type: OUTGOING_MESSAGE, payload: { message } });
+// Action Creators
+export const updateViewerStreams = (scheduledStreams) => ({ type: VIEWER_STREAMS_UPDATE, payload: scheduledStreams  });
 
-// export const changeUsername = (username) => ({ type: USERNAME_CHANGE, payload: { username } });
+// STREAM REDUCER
 
-// // CHAT REDUCER
-// const chatState = { 
-//   messages: [randomMessage()], 
-//   notifications: [],
-//   username: 'anon'
-// };
-// export const chatReducer = (state = chatState, action) => {
-//   switch(action.type) {
-//     case INCOMING_MESSAGE:
-//       console.log('message recieved', action.payload);
-//       return {...state, messages: action.payload};
-//     case INCOMING_NOTIFICATION:
-//       console.log('notification recieved', action.payload)
-//       return {...state, notifications: action.payload}
-//     case USERNAME_CHANGE: 
-//       // Should be moved to user reducer when
-//       // more user actions can be defined
-//       console.log('username changed', action.payload)
-//       return {...state, username: action.payload}
-//     default:
-//       return state;
-//   }
-// };
+export const streamsReducer = (state = {}, action) => {
+  switch(action.type) {
+    case VIEWER_STREAMS_UPDATE:
+      console.log('userstreams update', action.payload);
+      return { ...state, scheduledStreams: action.payload }
+
+    default:
+      return state;
+  }
+};
+
