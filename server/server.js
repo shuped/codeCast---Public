@@ -1,6 +1,7 @@
 //const ENV      = require ('dotenv');
 const app        = require('express')();
 const http       = require('http').Server(app);
+const { postgraphile } = require('postgraphile');
 const path       = require('path');
 const morgan     = require('morgan');
 const bodyParser = require('body-parser');
@@ -16,6 +17,14 @@ const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
 let fileCache = null;
 let dirCache = null;
+
+app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///', 'codecast', {
+  'dynamicJson': true,
+  'watchPg': true,
+  'showErrorStack': 'json',
+  'exportJsonSchemaPath:': './db/',
+  'exportGqlSchemaPath:': './db/'
+}));
 
 app.use(bodyParser({ limit: '50mb' }));
 
