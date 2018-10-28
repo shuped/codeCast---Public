@@ -1,5 +1,6 @@
 module.exports = function watch(dirName) {
-  const chokidar = require('chokidar')
+
+  const chokidar = require('chokidar');
   const watcher = chokidar.watch('file, dir', {
     ignored: /(^|[\/\\])\../ + '**/node_modules/, **package-lock.json',
     persistent: true,
@@ -48,9 +49,9 @@ module.exports = function watch(dirName) {
 
   }).on('ready', watcherReady)
   .on('raw', (event, path, details) => {
-    // all events register as raw; use for testing purposes
+    // all events register as raw; use for testing purposes 
     log('Raw event data:', event, path, details);
   });
 
   return watcher;
-}
+};
