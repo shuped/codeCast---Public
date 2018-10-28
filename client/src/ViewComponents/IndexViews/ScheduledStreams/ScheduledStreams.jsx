@@ -30,6 +30,20 @@ class ScheduledStream extends Component {
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           startDate: 'Tuesday, March 27 2017',
           imagePath: null
+        },
+        {
+          title: 'Javascript',
+          presentor: 'Joel',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          startDate: 'Thusday, August 12 2017',
+          imagePath: null
+        },
+        {
+          title: 'Haskell',
+          presentor: 'Jeremey',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          startDate: 'Thusday, August 12 2017',
+          imagePath: null
         }
       ]
     };

@@ -11,7 +11,8 @@ const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io = require('socket.io')(server);
 
 const rootPath = path.join(__dirname, '..');
-const buildPath = path.join(rootPath, 'client/build');
+const buildPath = path.join(rootPath, 'client', 'build');
+const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
 let fileCache = null;
 let dirCache = null;
@@ -52,6 +53,10 @@ app.post('/api/electron', (req, res) => {
     throw e;
   }
 
+});
+
+app.get('/*', (req, res) => {
+  res.sendFile(devPath);
 });
 
 io.on('connection', (socket) => {
