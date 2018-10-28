@@ -2,12 +2,15 @@ const os = require('os');
 const pty = require('node-pty');
 const Terminal = require('xterm').Terminal;
 const socket = require('socket.io-client');
-// const fs = require('fs');
+const fs = require('fs');
 // const { StringDecoder } = require('string_decoder');
 // const { exec }= require('child_process');
-// const path = require('path');
+const chokidar = require('chokidar');
+const fsMapper = require('../server/fs-mapper');
+const path = require('path');
 
-var io = socket.connect('http://localhost:8080/terminal');
+var terminalIO = socket.connect('http://localhost:8080/terminal');
+var reduxIO = socket.connect('http://localhost:8080/redux');
 
 // Initialize node-pty with an appropriate shell
 const shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
@@ -31,5 +34,41 @@ xterm1.on('data', (data) => {
 
 ptyProcess.on('data', function (data) {
   xterm1.write(data);
-  io.emit('data', data);
+  terminalIO.emit('data', data)
 });
+
+chokidar.watch('.', {
+  ignored: /node_modules|\.git/,
+  persistent: true,
+  // followSymlinks: false,
+  // useFsEvents: false,
+  // usePolling: false
+}).on('all', function(event, path) {
+  const eventMethods = {
+    'add': (fsEvent, filePath) => {
+      console.log('add')
+      
+	  },
+    'addDir': (fsEvent, filePath) => {
+      console.log('addDir')
+
+
+    },
+    'change': (fsEvent, filePath) => {
+      console.log('add3')
+
+    },
+    'unlink': (fsEvent, filePath) => {
+      console.log('add4')
+
+    }
+  };
+  console.log('event, path:', event, path)
+  if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
+    eventMethods[event] ? eventMethods[event](path) : console.log('Event missed:', event);
+  } else {
+    // map directory
+  }
+}).on('ready', function() {
+  console.log('Ready');
+})
