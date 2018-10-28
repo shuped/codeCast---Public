@@ -37,5 +37,6 @@ CREATE TABLE IF NOT EXISTS data (
   id UUID PRIMARY KEY default uuid_generate_v1(),
   stream_id UUID NOT NULL REFERENCES streams (id) ON DELETE CASCADE,
   directory JSONB NOT NULL,
-  content JSONB NOT NULL
+  content JSONB NOT NULL,
+  terminal JSONB NOT NULL
 );
