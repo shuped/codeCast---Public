@@ -1,5 +1,5 @@
 const chokidar = require('chokidar')
-const readDir
+
 module.exports = function (dirName) {
   const watcher = chokidar.watch('file, dir', {
     ignored: /(^|[\/\\])\../,

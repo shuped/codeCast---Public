@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './Root.jsx';
+import store from './redux/store/index.js';
 import * as serviceWorker from './serviceWorker.js';
 import './styles/css/index.css';
 
 ReactDOM.render(
-  <Root />, 
+  <Root store={ store } />, 
   document.getElementById('root')
 );
 

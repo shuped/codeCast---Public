@@ -91,7 +91,6 @@ async function createTerminalWindow() {
   }
 
   if (directory !== null && content !== null) {
-		console.log('if director')
     axios({
       method: 'post',
       url: '/api/electron',
