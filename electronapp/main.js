@@ -7,7 +7,7 @@ const fs = require ('fs');
 const directoryWatcher = require('./src/fileServices/directoryWatcher.js');
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
-const { readDir, done } = require('./src/fileServices/fs-mapper');
+const { readDir, done } = require('../server/fs-mapper');
 // axios to send content to the server
 const axios = require('./src/redux/ducks/api');
 
