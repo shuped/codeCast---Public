@@ -24,3 +24,5 @@ yarn-error.log*
 create-react-readme.md
 package-lock.json
 client/package-lock.json
+**/.DS_Store
+**/package-lock.json
