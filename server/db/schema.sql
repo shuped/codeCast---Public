@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS streams (
   id UUID PRIMARY KEY default uuid_generate_v1(),
-  user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+  user_id UUID NOT NULL 
+    REFERENCES users (id) ON DELETE CASCADE,
   status text NOT NULL DEFAULT 'upcoming',
   title text NOT NULL,
   description text NOT NULL,
@@ -26,8 +27,10 @@ CREATE TABLE IF NOT EXISTS streams (
 );
 
 CREATE TABLE IF NOT EXISTS messages (
-  user_id UUID NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-  stream_id UUID NOT NULL REFERENCES streams (id) ON DELETE CASCADE,
+  user_id UUID NOT NULL 
+    REFERENCES users (id) ON DELETE CASCADE,
+  stream_id UUID NOT NULL 
+    REFERENCES streams (id) ON DELETE CASCADE,
   content text NOT NULL,
   created_at timestamptz,
   PRIMARY KEY (user_id, stream_id)
@@ -35,7 +38,8 @@ CREATE TABLE IF NOT EXISTS messages (
 
 CREATE TABLE IF NOT EXISTS data (
   id UUID PRIMARY KEY default uuid_generate_v1(),
-  stream_id UUID NOT NULL REFERENCES streams (id) ON DELETE CASCADE,
+  stream_id UUID NOT NULL 
+    REFERENCES streams (id) ON DELETE CASCADE,
   directory JSONB NOT NULL,
   content JSONB NOT NULL,
   terminal JSONB NOT NULL

@@ -2,7 +2,8 @@ const fs = require('fs');
 const { StringDecoder } = require('string_decoder');
 const decoder = new StringDecoder('utf8');
 const path = require('path');
-const uuid = require('uuid/v1');
+const uuidv1 = require('uuid/v1');
+const uuidv4 = require('uuid/v4');
 
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
@@ -53,7 +54,10 @@ function readFile(target) {
 //reads file and stores id and result in fileStore object as key: value pair
 async function fileReader(root, fpath, target) {
   //concat fpath array and join to root to make absolute
-  let filePath = fpath.join('/');
+  let filePath;
+
+  Array.isArray(fpath) ? filePath = fpath.join('/') : filePath = fpath;
+
   let readTarget = path.join(root, filePath, target);
 
   //return new promise with decoded file
@@ -69,6 +73,7 @@ async function makeJSON(array, root, targetDir) {
   let promises = [];
   let dirObj = {};
   let fileObj = {};
+  let pathObj = {};
 
   for (let file of array) {
     //set variable for object traversal
@@ -92,16 +97,20 @@ async function makeJSON(array, root, targetDir) {
           //1) assign file and hash, and 
           //2) read file and push returned promise to promises array
           if(i === fpath.length - 1) {
-            let fileID = uuid();
+            let fileID = uuidv1();
+            let staticID = uuidv4();
             await promises.push({ id: [fileID], promise: fileReader(root, fpath, targetFile) });
-            current[targetFile] = fileID;
+            current[staticID] = {fileNames: [targetFile], fileIDs: [fileID]};
+            pathObj[staticID] = fpath.join('/');
           }
         });
       //if child of root dir append to root object and do same as above
       } else {
-        let fileID = uuid();
+        let fileID = uuidv1();
+        let staticID = uuidv4();
         await promises.push({ id: [fileID], promise: fileReader(root, fpath, targetFile) });
-        current[targetFile] = fileID;
+        current[staticID] = {fileNames: [targetFile], fileIDs: [fileID]};
+        pathObj[staticID] = fpath.join('/');
         
       }
     }
@@ -119,8 +128,9 @@ async function makeJSON(array, root, targetDir) {
   fs.writeFile(`${targetDir}/directory.json`, JSON.stringify(dirObj), (err) => {
     if (err) throw err;
   });
-  //return directory tree as a promise
-  return dirObj;
+  fs.writeFile(`${targetDir}/filepaths.json`, JSON.stringify(pathObj), (err) => {
+    if (err) throw err;
+  });
 }
 
 //when readDir is complete, call function to build directory and file content objects
@@ -144,7 +154,6 @@ function readDir(dir, done, root = dir) {
     //magical recursive IIFE
     (function next() {
       let item = items[i++];
-      // console.log('Item:', item);
       //return when dir is walked
       if (!item) return done(null, results, root);
       //add to filepath
