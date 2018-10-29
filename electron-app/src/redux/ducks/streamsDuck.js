@@ -10,7 +10,7 @@ const BROADCASTER_STREAMS_UPDATE = 'UPDATE_USER_STREAMS'
 export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
 
 // STREAM REDUCER
-export const streamsReducer = (state = {}, action) => {
+export const streamsReducer = (state = {scheduledStreams: ['empty']}, action) => {
   switch(action.type) {
     case BROADCASTER_STREAMS_UPDATE:
       console.log('message recieved', action.payload);
@@ -21,17 +21,17 @@ export const streamsReducer = (state = {}, action) => {
   }
 };
 
-// Async Actions
+// AJAX Actions
 export const fetchBroadcasterStreams = (userID) => {
   return function (dispatch) {
     return axios({
       method: 'get',
-      url: `/api/scheduledStreams?user_id=${userID}`
+      url: `/api/scheduledStreams/`
+      // url: `/api/scheduledStreams?user_id=${userID}`
     }).then((streamsJSON) => {
-      console.log(streamsJSON); 
+      console.log(streamsJSON.data, 'in promise'); 
       // make array so we can map over for jsx elements
-      const scheduledStreams = Object.entries(JSON.parse(streamsJSON))
-        .map(([streamID, stream]) => [streamID, ...stream]);
+      const scheduledStreams = Object.values(streamsJSON.data);
       dispatch(updateBroadcasterStreams(scheduledStreams))
     }).catch((err) => {
       console.error('Error:', err.data);
