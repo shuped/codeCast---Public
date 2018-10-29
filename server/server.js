@@ -17,6 +17,7 @@ const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
 let fileCache = null;
 let dirCache = null;
+let pathCache = null;
 
 app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
   'dynamicJson': true,
@@ -82,6 +83,7 @@ app.post('/api/electron', (req, res) => {
   try {
     fileCache = req.body.content;
     dirCache = req.body.directory;
+    pathCache = req.body.filepaths;
     res.status(200).send('Post request success');
   }
   catch (e) {
@@ -108,9 +110,6 @@ io.on('connection', (socket) => {
     const actions = {
       'server/new_connection': (type, payload) => {
         console.log('Server message:', payload);
-        if (dirCache !== null) {
-          sendDirTree(dirCache);
-        }
       }
     }
 
@@ -144,7 +143,7 @@ const redux = io
   .on('connection', (socket) => {
 
     const clients = [];
-    console.log(`Socket ${socket.id} connected`);
+    console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
    
@@ -177,14 +176,14 @@ const redux = io
       actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
 
       socket.on('disconnect', () => {
-        console.log(`Socket ${socket.id} disconnected`)
+        console.log(`Redux ${socket.id} disconnected`)
         let clientIndex = clients.findIndex(e => e === socket.id);
         clients.splice(clientIndex, 1);
         console.log(clients);
       });
 
       socket.on('error', (err) => {
-        console.log(err, `from ${socket.id}`);
+        console.log(err, `from redux: ${socket.id}`);
       });
     });
   });
