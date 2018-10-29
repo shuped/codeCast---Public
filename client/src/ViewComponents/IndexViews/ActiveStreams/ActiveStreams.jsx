@@ -6,8 +6,7 @@ import pythonImg from '../../../images/python.png';
 import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
-
-
+import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js'
 
 
 
@@ -62,6 +61,10 @@ class ActiveStreams extends Component {
       ]
     };
   
+  // }
+
+  componentDidMount() {
+    this.props.fetchActiveStreams();
   }
 
   GetStreamId = (streamClicked) => {
@@ -71,15 +74,16 @@ class ActiveStreams extends Component {
     // react-router code goes here
   }
 
+
   MakeActiveStreamCard = (props) => {
-    const { title, presentor, description, activeStreamId, imagePath } = props;
+    const { title, user, description, streamID, imagePath } = props;
     // missing image path
     return (
-      <div className="activeStreamCard" key={ activeStreamId } onClick={ () => this.GetStreamId( activeStreamId) }>
+      <div className="activeStreamCard" key={ streamID } onClick={ () => this.GetStreamId( streamID) }>
         <div className="banner">
           <div>
             <h1>{ title }</h1>
-            <h2>{ presentor }</h2>
+            <h2>{ user }</h2>
           </div>
           <img className="imagePlaceholder" src={ imagePath } />
         </div>
@@ -91,8 +95,7 @@ class ActiveStreams extends Component {
   }
 
   render() {  
-    
-    const renderStreams = this.state.activeStreams.map( (stream) => {
+    const renderStreams = this.props.activeStreams.map( (stream) => {
       return this.MakeActiveStreamCard(stream);  
     });
 
@@ -105,10 +108,16 @@ class ActiveStreams extends Component {
 
 }
 
-// map state to props, keep
+const mapStateToProps = (state) => {
+  return {
+    activeStreams: state.streams.activeStreams
+  }
+}
 
-// const mapStateToProps = (state) => ({
-//   theme: state.theme,
-// });
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchActiveStreams: () => dispatch(fetchActiveStreams())
+  }
+}
 
-export default connect(null, null)(ActiveStreams);
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveStreams);
