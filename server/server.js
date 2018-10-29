@@ -16,7 +16,7 @@ const buildPath = path.join(rootPath, 'client/build');
 let fileCache = null;
 let dirCache = null;
 
-app.use(bodyParser({ limit: '50mb' }));
+app.use(bodyParser({ limit: '500mb' }));
 
 app.use(morgan('dev', {
   skip: (req, res) => {
@@ -28,59 +28,6 @@ app.use(morgan('dev', {
     return res.statusCode >= 400;
   }, stream: process.stdout
 }));
-
-app.get('/api/filecontent', (req, res) => {
-  let fileID = req.body;
-  fileCache ? res.status(200).json(JSON.stringify(fileCache[fileID])) : res.status(204).send('File not found');
-});
-
-app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image'
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image'
-    }
-  };
-
-console.log('Get success');
-  res.status(200).json(testStreams);
-});
-
-//recieve file dir/content from electron
-app.post('/api/electron', (req, res) => {
-
-  try {
-    fileCache = req.body.content;
-    dirCache = req.body.directory;
-    res.status(200).send('Post request success');
-  }
-  catch (e) {
-    res.status(500).send('Post request failed');
-    console.log('Post to server failed:', e);
-    throw e;
-  }
-
-});
-
-app.get('/*', (req, res) => {
-  res.status(200).json({ express: 'successful connection to express' });
-});
 
 io.on('connection', (socket) => {
 
@@ -201,7 +148,63 @@ const terminal = io
     });
   });
 
+app.get('/api/filecontent/:file_uuid', (req, res) => {
+  const uuid = req.params.file_uuid;
+  try {
+    fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
+  }
+  catch (e) {
+    res.status(404).send('No files cached')
+  }
+});
 
+app.get('/api/scheduledStreams/', (req, res) => {
+  const testStreams = {
+    "asdass": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: Date.now(),
+      youtubeURL: 'www.youtube.com',
+      userID: 1,
+      streamID: 'asdass',
+      languageImage: 'image'
+    },
+    "asdfad": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: Date.now(),
+      youtubeURL: 'www.youtube.com',
+      userID: 1,
+      streamID: 'asdfad',
+      languageImage: 'image'
+    }
+  };
+
+console.log('Get success');
+  res.status(200).json(testStreams);
+});
+
+//recieve file dir/content from electron
+app.post('/api/electron', (req, res) => {
+
+  try {
+    fileCache = req.body.content || fileCache;
+    dirCache = req.body.directory || dirCache;
+    io.of('redux')
+    res.status(200).send('Post request success');
+  }
+  catch (e) {
+    console.log('Post to server failed:', e);
+    res.status(500).send('Post request failed');
+  }
+  
+});
+
+app.get('/', (req, res) => {
+  res.status(200).json({ express: 'successful connection to express, /*' });
+});
 
 // setTimeout(() => {
 //   console.log('directory update =================');
