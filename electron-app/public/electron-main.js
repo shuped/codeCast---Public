@@ -96,14 +96,17 @@ async function createMainWindow() {
 		show: false
 	});
 
-	mainWindow.loadURL(process.env.ELECTRON_START_URL || startUrl);
+	mainWindow.loadURL(`file://${__dirname}/indexTerminal.html`) //process.env.ELECTRON_START_URL || startUrl);
 	// mainWindow.loadURL(url.format({
 	// 	pathname: path.join(__dirname, 'public/build/index.html'),
 	// 	protocol: 'file:',
 	// 	slashes: true
 	// }));
+	mainWindow.webContents.openDevTools();
+
 	isDevMode().then((res) => {
-		res ? mainWindow.webContents.openDevTools() : null;
+		res ? null // dev tools
+		: null;
 	}).catch((err) => {
 		throw err;
 	}).finally(() => {
@@ -122,14 +125,16 @@ function createTerminalWindow() {
 		width: 800
 	});
 
-	terminalWindow.loadURL(url.format({
-		pathname: isDev ? 'http://localhost:4000/' : path.join(__dirname, '/build', 'indexTerminal.html'),
-		protocol: 'file:',
-		slashes: true
-	}));
+	terminalWindow.loadURL(`file://${__dirname}/indexTerminal.html`)
+	// 	url.format({
+	// 	pathname: isDev ? 'http://localhost:4000/' : path.join(__dirname, '/build', 'indexTerminal.html'),
+	// 	protocol: 'file:',
+	// 	slashes: true
+	// }));
 	// Open the DevTools.
 	terminalWindow.webContents.openDevTools();
 	// Emitted when the window is closed.
+	console.log('dir', fs.readdirSync(__dirname))
 	terminalWindow.on('closed', function () {
 		// Dereference the window object, usually you would store windows
 		// in an array if your app supports multi windows, this is the time
