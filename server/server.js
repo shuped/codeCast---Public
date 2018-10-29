@@ -148,6 +148,7 @@ const terminal = io
     });
   });
 
+  
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
   try {
@@ -192,7 +193,7 @@ app.post('/api/electron', (req, res) => {
   try {
     fileCache = req.body.content || fileCache;
     dirCache = req.body.directory || dirCache;
-    io.of('redux')
+    io.of()
     res.status(200).send('Post request success');
   }
   catch (e) {
