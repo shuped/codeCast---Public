@@ -31,4 +31,3 @@ chokidar.watch('.', {
  .on('ready', function() {
   console.log('Ready');
 })
-});
