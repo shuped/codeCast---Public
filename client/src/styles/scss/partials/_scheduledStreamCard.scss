@@ -19,18 +19,29 @@ main {
       h4 {
         font-size: 1.5em;
         color: #444444;
+        margin-top:1.5em;
       }
       h5 {
-        font-size: 1.2em;
-        margin-right: 10em;
+        font-size: 1em;
+        margin-right: 15em;
         color: #444444;
       }
 
     }
     p {
       font-size: 1em;
-      margin:2em;
-      margin-bottom: 1em;
+      margin:1em;
+      margin-bottom: 2em;
+    }
+    img {
+
+    }
+    .imagePlaceholder {
+      
+      width: 4em;
+      height: 4em;
+      margin: 1em; 
+
     }
   }
 }

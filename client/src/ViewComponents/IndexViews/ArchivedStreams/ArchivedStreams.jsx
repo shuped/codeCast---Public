@@ -1,6 +1,11 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-
+import rubyImg from '../../../images/ruby.png';
+import phpImg from '../../../images/php.png';
+import pythonImg from '../../../images/python.png';
+import javascriptImg from '../../../images/javascript.png';
+import csharpImg from '../../../images/csharp.png';
+import htmlcssImg from '../../../images/htmlcss.png';
 
 
 
@@ -11,20 +16,12 @@ class ArchivedStreams extends Component {
     this.state = {
       scheduledStreams: [
         {
-          title: 'Python',
-          presentor: 'Spencer',
-          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-          broadcastDate: 'Thusday, August 12 2017',
-          archivedId: 1,
-          imagePath: null
-        },
-        {
           title: 'Javascript',
           presentor: 'Benji',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           broadcastDate: 'Wednesday, April 11 2017',
           archivedId: 2,
-          imagePath: null
+          imagePath: javascriptImg
         },
         {
           title: 'HTML/CSS',
@@ -32,7 +29,15 @@ class ArchivedStreams extends Component {
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           broadcastDate: 'Tuesday, March 27 2017',
           archivedId: 3,
-          imagePath: null
+          imagePath: htmlcssImg
+        },
+        {
+          title: 'Python',
+          presentor: 'Spencer',
+          description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+          broadcastDate: 'Thusday, August 12 2017',
+          archivedId: 1,
+          imagePath: pythonImg
         },
         {
           title: 'Node',
@@ -40,7 +45,7 @@ class ArchivedStreams extends Component {
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           broadcastDate: 'Thusday, August 12 2017',
           archivedId: 4,
-          imagePath: null
+          imagePath: javascriptImg
         },
         {
           title: 'Ruby',
@@ -48,7 +53,7 @@ class ArchivedStreams extends Component {
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           broadcastDate: 'Wednesday, April 11 2017',
           archivedId: 5,
-          imagePath: null
+          imagePath: rubyImg
         },
         {
           title: 'Express',
@@ -56,7 +61,7 @@ class ArchivedStreams extends Component {
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           broadCastDate: 'Tuesday, March 27 2017',
           archivedId: 6,
-          imagePath: null
+          imagePath: javascriptImg
         }
       ]
     };
@@ -76,8 +81,7 @@ class ArchivedStreams extends Component {
             <h2>{ presentor }</h2>
             <h3>{ broadcastDate }</h3>
           </div>
-          {/* <img src="#imagePath" /> */}
-          <div className="imagePlaceholder">p</div>
+          <img className="imagePlaceholder" src={ imagePath } />
         </div>
         <div className="description-container">
           { description }

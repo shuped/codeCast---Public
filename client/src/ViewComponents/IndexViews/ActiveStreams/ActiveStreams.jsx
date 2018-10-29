@@ -1,5 +1,12 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
+import rubyImg from '../../../images/ruby.png';
+import phpImg from '../../../images/php.png';
+import pythonImg from '../../../images/python.png';
+import javascriptImg from '../../../images/javascript.png';
+import csharpImg from '../../../images/csharp.png';
+import htmlcssImg from '../../../images/htmlcss.png';
+
 
 
 
@@ -15,42 +22,42 @@ class ActiveStreams extends Component {
           presentor: 'Spencer',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           activeStreamId: 1,
-          imagePath: null
+          imagePath: pythonImg
         },
         {
           title: 'Javascript',
           presentor: 'Benji',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           activeStreamId: 2,
-          imagePath: null
+          imagePath: javascriptImg
         },
         {
           title: 'HTML/CSS',
           presentor: 'Jeff',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           activeStreamId: 3,
-          imagePath: null
+          imagePath: htmlcssImg
         },
         {
           title: 'Node',
           presentor: 'Space G',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           activeStreamId: 4,
-          imagePath: null
+          imagePath: javascriptImg
         },
         {
           title: 'Ruby',
           presentor: 'Mandy',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
           activeStreamId: 5,
-          imagePath: null
+          imagePath: rubyImg
         },
         {
-          title: 'Express',
+          title: 'C Sharp',
           presentor: 'Silvia',
           description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet,',
           activeStreamId: 6,
-          imagePath: null
+          imagePath: csharpImg
         }
       ]
     };
@@ -74,9 +81,7 @@ class ActiveStreams extends Component {
             <h1>{ title }</h1>
             <h2>{ presentor }</h2>
           </div>
-          {/* to use for image later */}
-          {/* <img src="#imagePath" /> */}
-          <div className="imagePlaceholder">p</div>
+          <img className="imagePlaceholder" src={ imagePath } />
         </div>
         <div className="description-container">
           { description }
