@@ -5,14 +5,18 @@ const axios = require('./api');
 // Incoming
 const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
 const ACTIVE_STREAMS_UPDATE = 'ACTIVE_STREAMS_UPDATE';
+const ARCHIVED_STREAMS_UPDATE = 'ARCHIVED_STREAMS_UPDATE';
 
 // Action Creators
 export const updateScheduledStreams = (scheduledStreams) => ({ type: SCHEDULED_STREAMS_UPDATE, payload: scheduledStreams  });
+
 export const updateActiveStreams = (activeStreams) => ({ type: ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
+
+export const updateArchivedStreams = (archivedStreams) => ({ type: ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
 
 // STREAM REDUCER
 
-export const streamsReducer = (state = { activeStreams: ['noStreams'], scheduledStreams: ['noStreams'] }, action) => {
+export const streamsReducer = (state = { activeStreams: ['noStreams'], scheduledStreams: ['noStreams'], archivedStreams: ['noStreams'] }, action) => {
   switch(action.type) {
     case SCHEDULED_STREAMS_UPDATE:
       console.log('userstreams update', action.payload);
@@ -21,6 +25,10 @@ export const streamsReducer = (state = { activeStreams: ['noStreams'], scheduled
     case ACTIVE_STREAMS_UPDATE:
     console.log('userstreams update', action.payload);
     return { ...state, activeStreams: action.payload }
+
+    case ARCHIVED_STREAMS_UPDATE:
+    console.log('userstreams update', action.payload);
+    return { ...state, archivedStreams: action.payload }
 
     default:
       return state;
@@ -53,9 +61,27 @@ export const fetchActiveStreams = () => {
     }).then((res) => {
       console.log('fetch result', res.data);
       // TODO refactor for how graphql structures response
-      const activeStreams = Object.values(res.data)
-      console.log(activeStreams)
-      dispatch(updateActiveStreams(activeStreams))
+      const activeStreams = Object.values(res.data);
+      console.log(activeStreams);
+      dispatch(updateActiveStreams(activeStreams));
+    }).catch((err) => {
+      console.error('Error:', err.data);
+      return false
+    });
+  };
+}
+
+export const fetchArchivedStreams = () => {
+  return function (dispatch) {
+    axios({
+      method: 'get',
+      url: `/api/archivedStreams/`
+    }).then((res) => {
+      console.log('fetch result', res.data);
+      // TODO refactor for how graphql structures response
+      const archivedStreams = Object.values(res.data);
+      console.log(archivedStreams);
+      dispatch(updateArchivedStreams(archivedStreams));
     }).catch((err) => {
       console.error('Error:', err.data);
       return false
