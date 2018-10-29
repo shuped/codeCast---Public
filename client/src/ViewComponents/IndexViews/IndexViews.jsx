@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'; 
+
 import ArchivedStreams from './ArchivedStreams/ArchivedStreams.jsx';
 import ScheduledStreams from './ScheduledStreams/ScheduledStreams.jsx';
 import ActiveStreams from './ActiveStreams/ActiveStreams.jsx';
@@ -7,7 +9,7 @@ class IndexViews extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			pageValue: '/current',
+			pageValue: '/archived',
 			erectileState: 'quarter chub'
 		}
 	}
@@ -43,16 +45,19 @@ class IndexViews extends Component {
 			}
 		}
 		
+
+
+
 		return (
 			<div className="pageGrid">
 				<div>
-				<button className="tablink" onClick={() => this.setRouteState('/current')} id="defaultOpen">
+				<button className="tablink" onClick={() => this.setRouteState('/current')}>
 					CURRENT STREAMS
 				</button>
 				<button className="tablink" onClick={() => this.setRouteState('/scheduled')}>
 					SCHEDULED STREAMS
 				</button>
-				<button className="tablink" onClick={() => this.setRouteState('/archived')}>
+				<button className="tablink" onClick={() => this.setRouteState('/archived')} id="defaultOpen">
 					ARCHIVED STREAMS
 				</button>
 
