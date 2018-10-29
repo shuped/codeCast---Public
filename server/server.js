@@ -181,6 +181,11 @@ app.get('/api/archivedStreams/', (req, res) => {
   res.status(200).json(testArchivedStreams);
 });
 
+app.post('/api/streams/', (req, res) => {
+
+    res.status(200).json({status: 'fuck you bitch'});
+
+});
 
 //recieve file dir/content from electron
 app.post('/api/electron', (req, res) => {

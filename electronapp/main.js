@@ -48,12 +48,12 @@ async function postAllFiles() {
 				filepaths: filepaths
 			},
 			error: (err) => {
-				console.log('Axios error:', err);
+				console.log('Axios error');
 			}
 		}).then((res) => {
 			console.log('Post success');
 		}).catch((err) => {
-			console.error('Error:', err);
+			console.error('Error');
 			throw err;
 		});
 	}
