@@ -21,10 +21,9 @@ let content = null;
 let filepaths = null;
 
 async function getAllFiles() {
-	console.log('getAllFiles triggered');
 	fs.existsSync('./fileData/directory.json') ? 
-	null : await readDir(rootDir, done(path.join(__dirname, 'fileData')));
-	postAllFiles();
+	null :  (async () => { console.log('getAllFiles triggered'); await readDir(rootDir, done(path.join(__dirname, 'fileData'))) })();
+	await postAllFiles();
 }
 
 async function postAllFiles() {
@@ -33,6 +32,10 @@ async function postAllFiles() {
 		directory = await decoder.write(fs.readFileSync('./fileData/directory.json'));
 		content = await decoder.write(fs.readFileSync('./fileData/content.json'));
 		filepaths = await decoder.write(fs.readFileSync('./fileData/content.json'));
+	} else {
+		setTimeout(() => {
+			postAllFiles();
+		}, 3000);
 	}
 
 	if (directory !== null && content !== null) {
