@@ -273,6 +273,7 @@ const redux = io
           //update the code viewer
           redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
         }
+        
       };
       function defaultReduxAction(type, payload) {
         console.log("Default redux action triggered");
