@@ -18,14 +18,14 @@ const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 let fileCache = null;
 let dirCache = null;
 
-app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
-  'dynamicJson': true,
-  'watchPg': true,
-  'showErrorStack': 'json',
-  'exportJsonSchemaPath:': './db/',
-  'exportGqlSchemaPath:': './db/',
-  'bodySizeLimit': '50mb'
-}));
+// app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
+//   'dynamicJson': true,
+//   'watchPg': true,
+//   'showErrorStack': 'json',
+//   'exportJsonSchemaPath:': './db/',
+//   'exportGqlSchemaPath:': './db/',
+//   'bodySizeLimit': '50mb'
+// }));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({limit: '50mb'}));
@@ -54,26 +54,195 @@ app.get('/api/scheduledStreams/', (req, res) => {
       title: 'NodeNStuff',
       user: 'Spencer h-White',
       description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
       userID: 1,
       streamID: 'asdass',
-      languageImage: 'image'
+      languageImage: 'image',
+      isActive: false
+    },
+    "asdasx": {
+      title: 'Javascript4U',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdasx',
+      languageImage: 'image',
+      isActive: false
     },
     "asdfad": {
       title: 'RubyNStuff',
       user: 'Spencer Mc-Whhite',
       description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
       userID: 1,
       streamID: 'asdfad',
-      languageImage: 'image'
+      languageImage: 'image',
+      isActive: false
     }
   };
 
-console.log('Get success');
+  
+  console.log('Get success');
   res.status(200).json(testStreams);
+});
+
+app.get('/api/activeStreams/', (req, res) => {
+  const testActiveStreams = {
+    "asdass": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdass',
+      languageImage: 'image',
+      isActive: true
+    },
+    "asdfad": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfad',
+      languageImage: 'image',
+      isActive: true
+    },
+    "asdasv": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdasv',
+      languageImage: 'image',
+      isActive: true
+    },
+    "asdfqa": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfqa',
+      languageImage: 'image',
+      isActive: true
+    },
+    "asdatf": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdatf',
+      languageImage: 'image',
+      isActive: true
+    },
+    "asdfpl": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfpl',
+      languageImage: 'image',
+      isActive: true
+    }
+  };
+
+  console.log('Get success');
+  res.status(200).json(testActiveStreams);
+});
+
+app.get('/api/archivedStreams/', (req, res) => {
+  const testArchivedStreams = {
+    "asdass": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdass',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    },
+    "asdfad": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfad',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    },
+    "asdasv": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdasv',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    },
+    "asdfqa": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfqa',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    },
+    "asdatf": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdatf',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: false
+    },
+    "asdfpl": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfpl',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    }
+  };
+
+  
+  console.log('Get success');
+  res.status(200).json(testArchivedStreams);
 });
 
 //recieve file dir/content from electron
