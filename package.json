@@ -6,19 +6,11 @@
   "main": "client/src/index.js",
   "scripts": {
     "update-all": "concurrently 'npm update' 'npm update --prefix server' 'npm update --prefix client'",
-<<<<<<< HEAD
-    "install-all": "concurrently 'npm install' 'npm install --prefix server' 'npm install --prefix client' 'npm install --prefix electron-app' 'chmod 777 electron-app/npm_install.sh' './electron-app/npm_install.sh'",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon server/server.js",
-    "react": "npm start --prefix client",
-    "electron": "npm start --prefix electron-app",
-=======
     "install-all": "concurrently 'npm install' 'npm install --prefix server' 'npm install --prefix client' 'npm install --prefix electronapp' 'chmod 777 electronapp/npm_install.sh' './electronapp/npm_install.sh'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js",
     "react": "npm start --prefix client",
     "electron": "npm start --prefix electronapp",
->>>>>>> feature/zero-day
     "start": "concurrently --kill-others-on-fail 'npm run react' 'npm run server'",
     "electron-start": "concurrently --kill-others-on-fail 'npm run server' 'wait-on http://localhost:8080 && npm run electron'"
   },
@@ -43,8 +35,6 @@
   "engines": {
     "node": "10.11.0",
     "npm": "6.4.1"
-<<<<<<< HEAD
-=======
   },
   "build": {
     "files": [
@@ -54,6 +44,5 @@
     "directories": {
       "buildResources": "assets"
     }
->>>>>>> feature/zero-day
   }
 }
