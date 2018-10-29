@@ -80,6 +80,7 @@ async function postAllFiles() {
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
+let terminalWindow;
 
 const startUrl = process.env.ELECTRON_START_URL || url.format({
 	pathname: isDev ? 'http://localhost:4000/' : path.join(__dirname, '/build', '/index.html'),
@@ -102,33 +103,49 @@ async function createMainWindow() {
 	// 	protocol: 'file:',
 	// 	slashes: true
 	// }));
-	isDevMode().then((res) => {
-		res ? mainWindow.webContents.openDevTools() : null;
-	}).catch((err) => {
-		throw err;
-	}).finally(() => {
-		mainWindow.once('ready-to-show', () => {
-			mainWindow.show();
-		});
-	})
+	// isDevMode().then((res) => {
+	// 	res ? mainWindow.webContents.openDevTools() : null;
+	// }).catch((err) => {
+	// 	throw err;
+	// }).finally(() => {
+	// 	mainWindow.once('ready-to-show', () => {
+	// 		mainWindow.show();
+	// 	});
+	// });
+	mainWindow.once('ready-to-show', () => {
+		mainWindow.show();
+	});
 }
 
-let terminalWindow
+
 function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 40,
 		height: 800,
-		width: 800
+		width: 800,
+		show: false,
+		parent: mainWindow
 	});
-
-	terminalWindow.loadURL(url.format({
-		pathname: isDev ? 'http://localhost:4000/' : path.join(__dirname, '/build', 'indexTerminal.html'),
-		protocol: 'file:',
-		slashes: true
-	}));
+	terminalWindow.loadURL(path.join(__dirname, 'terminal.html'));
+	// terminalWindow.loadURL(`${process.env.ELECTRON_START_URL}/terminal` || url.format({
+	// 	pathname: isDev ? 'http://localhost:4000/terminal' : path.join(__dirname, '/build', '/terminal.html'),
+	// 	protocol: 'file:',
+	// 	slashes: true
+	// }));
 	// Open the DevTools.
-	terminalWindow.webContents.openDevTools();
+	// isDevMode().then((res) => {
+	// 	res ? terminalWindow.webContents.openDevTools() : null;
+	// }).catch((err) => {
+	// 	throw err;
+	// }).finally(() => {
+	// 	terminalWindow.once('ready-to-show', () => {
+	// 		terminalWindow.show();
+	// 	});
+	// });
+	terminalWindow.once('ready-to-show', () => {
+		terminalWindow.show();
+	});
 	// Emitted when the window is closed.
 	terminalWindow.on('closed', function () {
 		// Dereference the window object, usually you would store windows
