@@ -4,9 +4,14 @@ const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require ('fs');
+const directoryWatcher = require('./src/fileServices/directoryWatcher')
+const chokidar = require('chokidar');
+const fsMapper = require('./src/fileServices/fs-mapper.js');
+const readDir = fsMapper.readDir;
+const done = fsMapper.done;
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
-const { readDir, done } = require('../server/fs-mapper');
+// const { readDir, done } = require('../server/fs-mapper');
 // axios to send content to the server
 const axios = require('./src/redux/ducks/api');
 
@@ -27,15 +32,15 @@ function createMainWindow () {
 		protocol: 'file:',
 		slashes: true
 	}));
-  
+   
 	if (isDev) {
-    const {
+    const { 
 			default: installExtension,
 			REACT_DEVELOPER_TOOLS,
 			REDUX_DEVTOOLS,
 		} = require('electron-devtools-installer');
-    
-		installExtension(REACT_DEVELOPER_TOOLS)
+     
+		installExtension(REACT_DEVELOPER_TOOLS)  
 			.then(name => {
         console.log(`Added Extension: ${name}`);
 			})
@@ -58,8 +63,8 @@ function createMainWindow () {
 	});
 }
 
-let terminalWindow
-async function createTerminalWindow() {
+let terminalWindow, watcher
+function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 40,
@@ -72,41 +77,43 @@ async function createTerminalWindow() {
 		protocol: 'file:',
 		slashes: true
 	}));
-  const decoder = new StringDecoder('utf8');
-  //temp root targets project directory
-  //**TODO: get rootDir from shell command**
-  const rootDir = path.join(__dirname, '..');
+	readDir(__dirname, done(__dirname))
+  // const decoder = new StringDecoder('utf8');
+  // //temp root targets project directory
+  // //**TODO: get rootDir from shell command**
+  // const rootDir = path.join(__dirname, '..');
 
-  //run fs-mapper module and map dir on window open
-  //**TODO: pass variables from shell script that echos PWD**
-  fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(__dirname));
+  // //run fs-mapper module and map dir on window open
+  // //**TODO: pass variables from shell script that echos PWD**
+  // fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(__dirname));
 
-  let directory = null;
-  let content = null;
+  // let directory = null;
+  // let content = null;
 
-  if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
-    directory = await decoder.write(fs.readFileSync('./directory.json'));
-		content = await decoder.write(fs.readFileSync('./content.json'));
-		console.log(typeof content)
-  }
+  // if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
+  //   directory = await decoder.write(fs.readFileSync('./directory.json'));
+	// 	content = await decoder.write(fs.readFileSync('./content.json'));
+	// 	console.log(typeof content)
+  // }
 
-  if (directory !== null && content !== null) {
-		console.log('if director')
-    axios({
-      method: 'post',
-      url: '/api/electron',
-      data: {
-        directory: JSON.stringify(directory),
-        content: JSON.stringify(content)
-      }
-    }).then((res) => {
-      console.log(res.data);
-    }).catch((err) => {
-      console.error('Error:', err.data);
-      throw err;
-    });
-  }
-  // Open the DevTools.
+  // if (directory !== null && content !== null) {
+	// 	console.log('if director')
+  //   axios({
+  //     method: 'post',
+  //     url: '/api/electron',
+  //     data: {
+  //       directory: JSON.stringify(directory),
+  //       content: JSON.stringify(content)
+  //     }
+  //   }).then((res) => {
+  //     console.log(res.data);
+  //   }).catch((err) => {
+  //     console.error('Error:', err.data);
+  //     throw err;
+  //   });
+	 // }
+	 
+	// Open the DevTools.
   terminalWindow.webContents.openDevTools();
   // Emitted when the window is closed.
   terminalWindow.on('closed', function () {
@@ -183,6 +190,39 @@ generateMenu = () => {
 app.on('ready', () => {
   createMainWindow();
 	generateMenu();
+chokidar.watch('.', {
+   ignored: /node_modules|\.git/,
+   persistent: true,
+   // followSymlinks: false,
+   // useFsEvents: false,
+   // usePolling: false
+ }).on('all', async function(event, path) {
+	const eventMethods = {
+		'add': (filePath) => {
+		 
+		},
+		'addDir': (filePath) => {
+
+
+		},
+		'change': (filePath) => {
+			console.log('change', filePath)
+			readDir(__dirname, done(__dirname))
+		},
+		'unlink': (filePath) => {
+			console.log('unlink', filePath)
+
+		}
+	}
+	console.log('event, path:', event, path )
+	// event specific behavior
+	eventMethods[event] ? eventMethods[event](path) : console.log('Event missed:', event);
+
+	// map directory entirely
+ })
+  .on('ready', function() {
+   console.log('Ready');
+ })
 });
 
 app.on('window-all-closed', () => {
