@@ -82,7 +82,9 @@ async function makeJSON(array, root, targetDir) {
     let fpath = file.split('/');
     let targetFile = fpath.pop();
     //list of files and extensions to ignore
-    const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 'node_modules', 'package-lock.json', '.git', '.scssc'];
+    const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 
+      'node_modules', 'package-lock.json', '.git', '.scssc', '.psd', '.pdf',
+      'directory.json', 'content.json', 'filepaths.json'];
     const check = new RegExp(ignore.join('|')).test(targetFile);
 
     //check for valid file extensions

@@ -1,4 +1,4 @@
-const axios = require('./api');
+const axios = require('../../../api');
 
 // Outgoing
 // async -> fetchBroadcasterStreams, postDeleteStream

@@ -55,7 +55,7 @@ class LiveStreamNow extends React.Component {
       <main className="new-stream">
         <header className="header">
           <Button id="dashboard-btn" type="primary">Dashboard</Button>
-          <div className="logoPlaceholder">p</div>
+          <div className="logoPlaceholder">codeCast</div>
         </header>
         <div className="inputs-container">
           <h1>Start New Stream</h1>

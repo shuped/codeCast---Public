@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 
 //components
 import LiveStreamNow from './ElectronDashboard/LiveStreamNow.jsx';
-import ElectronDashboard from './ElectronDashboard/ElectronDashboard.jsx';
-import ScheduleNewStream from './ElectronDashboard/ScheduleNewStream.jsx';
-import StartScheduled from './ElectronDashboard/StartScheduled.jsx';
 // import logo from './assets/logo.svg';
 
 class App extends Component {
