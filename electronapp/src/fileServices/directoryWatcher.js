@@ -1,43 +1,13 @@
-const chokidar = require('chokidar')
-const readDir
-module.exports = function (dirName) {
+module.exports = function watch(dirName) {
+
+  const chokidar = require('chokidar');
   const watcher = chokidar.watch('file, dir', {
-    ignored: /(^|[\/\\])\../,
-    persistent: true
-  });
-
-  // Add event listeners.
-  const log = console.log.bind(console)
-  watcher
-    .on('ready', () => log('Initial scan complete. Ready for changes'))
-    .on('add', path => log(`File ${path} has been added`))
-    .on('addDir', path => log(`Directory ${path} has been added`))
-    .on('change', path => console.log((`File ${path} has been changed`)))
-    .on('unlink', path => log(`File ${path} has been removed`))
-    .on('unlinkDir', path => log(`Directory ${path} has been removed`))
-    .on('error', error => log(`Watcher error: ${error}`))
-
-  // all events are only registering as raw
-  //testing purposes 
-    watcher
-    .on('raw', (event, path, details) => {
-      console.log('!Raw event info!:', event, path, details);
-    });
-  // 'add', 'addDir' and 'change' events also receive stat() results as second
-  // argument when available: http://nodejs.org/api/fs.html#fs_class_fs_stats
-  watcher.on('change', (path, stats) => {
-    if (stats) console.log(`File ${path} changed size to ${stats.size}`);
-  });
-
-  chokidar.watch('file', {
+    ignored: /(^|[\/\\])\../ + '**/node_modules/, **package-lock.json',
     persistent: true,
-
-    ignored: '**/node_modules/, **package-lock.json',
     ignoreInitial: false,
     followSymlinks: false,
     cwd: dirName,
     disableGlobbing: false,
-
     usePolling: true,
     interval: 100,
     binaryInterval: 300,
@@ -47,9 +17,41 @@ module.exports = function (dirName) {
       stabilityThreshold: 2000,
       pollInterval: 100
     },
-
-    ignorePermissionErrors: true,
+    ignorePermissionErrors: true
   });
 
-  return watcher
-}
+  const log = console.log.bind(console);
+
+  function watcherReady() {
+    log('Watcher is lurking');
+  }
+  //bind console.log
+  // Add event listeners.  
+  // 'add', 'addDir' and 'change' events also receive stat() results as second
+  // argument when available: http://nodejs.org/api/fs.html#fs_class_fs_stats
+  watcher.on('add', (path, stats) => {
+    log(`File ${path} was added;\nStats: ${stats}`);
+
+  }).on('addDir', (path, stats) => {
+    log(`Directory ${path} added;\nStats: ${stats}`);
+
+  }).on('change', (path, stats) => {
+    log(`File ${path} changed;\nStats: ${stats}`);
+
+  }).on('unlink', (path) => {
+    log(`File ${path} removed;`);
+
+  }).on('unlinkDir', (path) => {
+    log(`Directory ${path} removed;`);
+
+  }).on('error', (err) => {
+    log(`Chokidar error: ${err}`);
+
+  }).on('ready', watcherReady)
+  .on('raw', (event, path, details) => {
+    // all events register as raw; use for testing purposes 
+    log('Raw event data:', event, path, details);
+  });
+
+  return watcher;
+};
