@@ -3,6 +3,7 @@ const { StringDecoder } = require('string_decoder');
 const decoder = new StringDecoder('utf8');
 const path = require('path');
 const uuid = require('uuid/v1');
+const axios = require('../redux/ducks/api');
 
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
@@ -113,12 +114,21 @@ async function makeJSON(array, root, targetDir) {
     fileObj[res.id] = res.content;
   });
   //write directory and content objects to file
-  fs.writeFile(`${targetDir}/content.json`, JSON.stringify(fileObj), (err) => {
-    if (err) throw err;
-  });
-  fs.writeFile(`${targetDir}/directory.json`, JSON.stringify(dirObj), (err) => {
-    if (err) throw err;
-  });
+  // fs.writeFile(`${targetDir}/content.json`, JSON.stringify(fileObj), (err) => {
+    // if (err) throw err;
+  // });
+	await axios({
+		method: 'post',
+		url: `/api/electron`,
+		data: {
+      directory: dirObj,
+      content: fileObj
+    },
+    maxContentLength: Infinity
+	}).then(()=>console.log(1))
+  // fs.writeFile(`${targetDir}/directory.json`, JSON.stringify(dirObj), (err) => {
+  //   if (err) throw err;
+  // });
   //return directory tree as a promise
   return dirObj;
 }
@@ -127,7 +137,7 @@ async function makeJSON(array, root, targetDir) {
 function done(targetDir) {
   return (err, res, root) => {
     if (err) throw err;
-    makeJSON(res, root, targetDir);
+    return makeJSON(res, root, targetDir);
   }
 }
 
@@ -168,7 +178,7 @@ function readDir(dir, done, root = dir) {
     })();
   });
 };
-
+readDir(__dirname, done(__dirname))
 module.exports = {
   readDir,
   done
