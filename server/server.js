@@ -29,12 +29,14 @@ app.use(morgan('dev', {
   }, stream: process.stdout
 }));
 
+
 io.on('connection', (socket) => {
 
   const clients = [];
   console.log(`Socket ${socket.id} connected`);
   clients.push(socket.id);
   console.log(clients);
+  io.of('/redux').emit({ type: 'DIRECTORY_UPDATE', payload: dirCache })
 
   socket.on('action', (action) => {
 
@@ -70,8 +72,6 @@ io.on('connection', (socket) => {
   });
 });
 
-
-
 const redux = io
   .of('/redux')
   .on('connection', (socket) => {
@@ -93,13 +93,8 @@ const redux = io
           redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
         },
         'server/file_change': (type, payload) => {
-
-          //**TODO: TRIGGER PUSH TO DIR TREE ON FILE UPDATE**//
-          console.log('server/file_change triggered', payload);
-          newFileVersion = payload;
-
-          //update the code viewer
-          redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
+          let file = fileCache[payload.fileID]
+          redux.emit('action', { type: 'FILE_UPDATE', payload: file });
         }
       };
       function defaultReduxAction(type, payload) {
@@ -123,7 +118,6 @@ const redux = io
   });
 
 const terminalRecord = {};
-
 const terminal = io
   .of('/terminal')
   .on('connection', (socket) => {
@@ -151,6 +145,11 @@ const terminal = io
   
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
+  console.log(
+    'fileCache not null:', fileCache !== null, 
+    'dirCache not null:', dirCache !== null,
+    'fileCache[param] typeof:', fileCache && typeof fileCache[uuid]
+  );  
   try {
     fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
   }
@@ -183,36 +182,41 @@ app.get('/api/scheduledStreams/', (req, res) => {
     }
   };
 
-console.log('Get success');
+  console.log('Get success');
   res.status(200).json(testStreams);
 });
 
+app.get('/*', (req, res) => {
+  res.status(200).json({ express: 'successful connection to express, /*', fileKeys: Object.keys(fileCache), dirCache });
+});
+
+
 //recieve file dir/content from electron
-app.post('/api/electron', (req, res) => {
+app.post('/api/electron/file_update', (req, res) => {
+  let { file }= req.body;
 
   try {
-    fileCache = req.body.content || fileCache;
-    dirCache = req.body.directory || dirCache;
-    io.of()
-    res.status(200).send('Post request success');
+    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    res.status(200).send('Post request success /api/electron/file_update');
   }
   catch (e) {
-    console.log('Post to server failed:', e);
+    console.log('Post to server failed /api/electron/file_update :', e);
     res.status(500).send('Post request failed');
   }
   
 });
 
-app.get('/', (req, res) => {
-  res.status(200).json({ express: 'successful connection to express, /*' });
+app.post('/api/electron', (req, res) => {
+
+  try {
+    fileCache = req.body.content || fileCache;
+    dirCache = req.body.directory || dirCache;
+    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    res.status(200).send('Post request success /api/electron');
+  }
+  catch (e) {
+    console.log('Post to server failed:', e);
+    res.status(500).send('Post request failed /api/electron');
+  }
+  
 });
-
-// setTimeout(() => {
-//   console.log('directory update =================');
-//   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
-// }, 40000);
-
-// setTimeout(() => {
-//   console.log('file update =================');
-//   redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
-// }, 40000);
