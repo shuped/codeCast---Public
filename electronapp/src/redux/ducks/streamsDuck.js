@@ -16,7 +16,17 @@ export const stageStream = (streamID) => ({ type: UPDATE_STAGED_STREAM, payload:
 // STREAM REDUCER
 const initialState = {
   scheduledStreams: ['empty'],
-  stagedStream: ['empty']
+  stagedStream: {
+    title: "NodeNStuff",
+    user: "Spencer h-White",
+    description: "asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada",
+    scheduledDate: "Thusday, August 12 2017",
+    youtubeURL: null,
+    userID: 1,
+    streamID: "asdass",
+    languageImage: "image",
+    isActive: false
+  }
 };
 export const streamsReducer = (state = initialState, action) => {
   switch(action.type) {
