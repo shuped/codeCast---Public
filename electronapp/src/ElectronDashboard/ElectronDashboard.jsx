@@ -59,9 +59,8 @@ class Dashboard extends Component {
   render() {  
     console.log(this.props.scheduledStreams, "render");
     
-    const renderStreams = this.props.scheduledStreams.map( (stream) => {
-      return this.MakeScheduledStreamCard(stream);  
-    });
+    const renderStreams = this.props.scheduledStreams
+      .map((stream) => this.MakeScheduledStreamCard(stream));
 
     return (
 

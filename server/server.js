@@ -33,6 +33,12 @@ let pathCache          = null;
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({limit: '50mb'}));
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.use(morgan('dev', {
   skip: (req, res) => {
     return res.statusCode < 400;
@@ -105,7 +111,7 @@ const redux = io
         },
         'server/file_change': (type, payload) => {
           let file = fileCache[payload.fileID]
-          redux.emit('action', { type: 'FILE_UPDATE', payload: file });
+          socket.emit('action', { type: 'FILE_UPDATE', payload: file });
         }
         
       };
@@ -203,7 +209,7 @@ app.route('/api/activeStreams/')
         status: 'active',
         ...streamData
       };
-      res.status(201).send('POST activeStream: Active stream added to database.');
+      res.status(201).json({ message: "Stream started", streamID });;
     }
     catch (e) {
       res.status(304).send('POST activeStream: Failed to insert active stream to database.');

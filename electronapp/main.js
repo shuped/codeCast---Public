@@ -6,13 +6,11 @@ const path = require('path');
 const fs = require ('fs');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
-const directoryWatcher = require('./src/fileServices/directoryWatcher')
-const chokidar = require('chokidar');
 
 const decoder = new StringDecoder('utf8');
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
-const { readDir, done } = require('./fs-mapper');
+const { readDir, done } = require('./src/fileServices/fs-mapper.js');
 // axios to send content to the server
 const axios = require('./api');
 const rootDir = path.join(__dirname, '..');
@@ -116,8 +114,8 @@ function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 40,
-		height: 800,
-		width: 800,
+		height: 400,
+		width: 400,
 		show: false
 	});
 
@@ -207,45 +205,8 @@ generateMenu = () => {
 app.on('ready', () => {
 	createMainWindow();
 	generateMenu();
-
-	let projectRootDirectroy = path.join(__dirname, '..');
-
-	chokidar.watch('.', {
-		ignored: /node_modules|\.git/,
-		persistent: true,
-		ignoreInitial: true
-		// followSymlinks: false,
-		// useFsEvents: false,
-		// usePolling: false
-	}).on('all', function(event, pathArg) {
-		const eventMethods = {
-			'add': (filePath) => {
-			console.log('add', filePath);
-				
-			},
-			'addDir': (filePath) => {
-				console.log('addDir', filePath);
-
-			},
-			'change': (filePath) => {
-				console.log('change', filePath);
-
-			},
-			'unlink': (filePath) => {
-				console.log('unlink', filePath);
-
-			}
-		}
-		console.log('event, path:', event, pathArg);  
-		// event specific behavior;s
-		eventMethods[event] ? eventMethods[event](pathArg) : console.log('Event missed:', event);
-	})
-		.on('ready', async function() {
-			console.log('Ready');
-			readDir(__dirname, done(__dirname));
-		//  TODO: Move the axios to here instead of fs-mapper
-	});
 });
+
 
 app.on('window-all-closed', () => {
 	app.quit();
