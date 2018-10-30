@@ -6,11 +6,11 @@ const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
 const uuid             = require('uuid/v1')
-const PORT             = 8080;
+const PORT             = process.env.PORT;
 
 const testData         = require('./testData.js');
 
-const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const server           = http.listen((PORT || 8080), () => console.log('App listening on ' + (PORT || 8080)));
 const io               = require('socket.io')(server);
 
 const rootPath         = path.join(__dirname, '..');
