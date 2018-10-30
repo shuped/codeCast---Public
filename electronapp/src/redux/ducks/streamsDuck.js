@@ -1,7 +1,7 @@
 const axios = require('../../../api');
 
 // Outgoing
-// async -> fetchBroadcasterStreams, postDeleteStream, postScheduledStream
+// async -> fetchBroadcasterStreams, postDeleteStream, postScheduledStream, putScheduledStream
 
 // Incoming
 const BROADCASTER_STREAMS_UPDATE = 'BROADCASTER_STREAMS_UPDATE';
@@ -16,17 +16,7 @@ export const stageStream = (streamID) => ({ type: UPDATE_STAGED_STREAM, payload:
 // STREAM REDUCER
 const initialState = {
   scheduledStreams: ['empty'],
-  stagedStream: {
-    title: "NodeNStuff",
-    user: "Spencer h-White",
-    description: "asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada",
-    scheduledDate: "Thusday, August 12 2017",
-    youtubeURL: null,
-    userID: 1,
-    streamID: "asdass",
-    languageImage: "image",
-    isActive: false
-  }
+  stagedStream: {}
 };
 export const streamsReducer = (state = initialState, action) => {
   switch(action.type) {
@@ -70,13 +60,29 @@ export const fetchBroadcasterStreams = (userID) => {
 
 export const postScheduledStream = (stream) => {
   return function (dispatch) {
-    console.log(stream)
     axios({
       method: 'post',
       url: '/api/scheduledStreams/',
       data: stream
     }).then((res) => {
       console.log('Post scheduled API streams success', res);
+      // LinkTo Dashboard
+    }).catch((err) => {
+      console.error('Error: Post scheduled stream rejected:', err.data);
+      // TODO: Render error element
+      
+    })
+  }
+}
+
+export const putScheduledStream = (stream) => {
+  return function (dispatch) {
+    axios({
+      method: 'put',
+      url: '/api/scheduledStreams/',
+      data: stream
+    }).then((res) => {
+      console.log('Put scheduled API streams success', res);
       // LinkTo Dashboard
     }).catch((err) => {
       console.error('Error: Post scheduled stream rejected:', err.data);
