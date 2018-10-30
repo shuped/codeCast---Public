@@ -17,11 +17,11 @@ class App extends Component {
     return (
       <div className="App">
         <div className="nav-bar">
-          <Nav />
+          <Route component={ Nav } className="app-nav" />
         </div>
         <Switch>
-          <Route path="/" component={Index} />
-          <Route path="/stream/:id" component={Stream} />
+          <Route exact path="/" component={ Index } />
+          <Route path="/stream/:id" component={ Stream } />
         </Switch>
       </div>
     );

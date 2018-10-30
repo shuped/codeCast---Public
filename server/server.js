@@ -5,14 +5,13 @@ const { postgraphile } = require('postgraphile');
 const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
-const io               = require('socket.io')(server);
 const PORT             = 8080;
-      
-const testData         = require('./testData.js');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
+const io               = require('socket.io')(server);
 
+const testData         = require('./testData.js');
 
 const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
