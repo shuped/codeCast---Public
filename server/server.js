@@ -167,7 +167,6 @@ app.route('/api/scheduledStreams/')
   })
   .post((req, res) => {
     const streamData = req.body;
-    console.log(req.body, '===========================================================', req)
     try {
       // insert into database, ensure id doesn't collide
       const streamID = uuid().slice(0,9);
@@ -204,11 +203,6 @@ app.route('/api/archivedStreams/')
 
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
-  console.log(
-    'fileCache not null:', fileCache !== null, 
-    'dirCache not null:', dirCache !== null,
-    'fileCache[param] typeof:', fileCache && typeof fileCache[uuid]
-  );  
   try {
     fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
   } catch (e) {
