@@ -51,7 +51,7 @@ class ScheduleNewStream extends React.Component {
     //redirect to broadcast page
     this.props.postScheduledStream(this.state);
     console.log(this.state)
-    
+    this.props.history.push('/');
   }
 
   render() {  
@@ -93,7 +93,7 @@ class ScheduleNewStream extends React.Component {
                       <Option value="ruby">Ruby</Option>
                     </Select>
                   </InputGroup>
-                  <Link to="/"><input type="submit" value="Submit" /></Link>
+                  <input type="submit" value="Submit" />
                 </div>
               </form>
             </div>

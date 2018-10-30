@@ -27,7 +27,6 @@ class StartScheduled extends Component {
 
   HandleSubmit = (event) => {
     event.preventDefault();
-    //redirect to broadcast page
 
     this.props.startScheduledStream({
       ...this.props.stagedStream,
@@ -37,7 +36,7 @@ class StartScheduled extends Component {
     // TODO: React route to Streaming view (chat?) or dashboard
     ipcRenderer.send('terminalOpen', true);
     console.log(this.state);
-    
+    this.props.history.push('/');
   }
 
   render() {  
