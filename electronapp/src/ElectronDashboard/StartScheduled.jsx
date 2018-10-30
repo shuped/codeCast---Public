@@ -29,7 +29,7 @@ class StartScheduled extends Component {
 
     this.props.startScheduledStream({
       ...this.props.stagedStream,
-      isActive: true,
+      status: 'active',
       youtubeURL: this.state.youtubeURL
     });
     // TODO: React route to Streaming view (chat?) or dashboard
