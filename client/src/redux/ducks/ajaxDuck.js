@@ -9,10 +9,8 @@ export const fetchViewerStreams = (userID) => {
       method: 'get',
       url: `/api/scheduledStreams?user_id=${userID}`
     }).then((res) => {
-      console.log(res);
-      const scheduledStreams = Object.entries(JSON.parse(res))
-        .map(([streamID, stream]) => [streamID, ...stream]);
-      
+      // TODO format to graphQL output if neccessary
+      const scheduledStreams = Object.values(res.data)
       dispatch(updateViewerStreams(scheduledStreams))
       return true
     }).catch((err) => {

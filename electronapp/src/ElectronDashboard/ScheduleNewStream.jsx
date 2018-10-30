@@ -1,9 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Input, Select, DatePicker } from 'antd';
+import { connect } from 'react-redux'; 
 
 import { postScheduledStream } from '../redux/ducks/streamsDuck.js'
-import { connect } from 'react-redux'; 
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -13,13 +13,22 @@ class ScheduleNewStream extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: 'placeholder',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdas',
-      scheduledDate: 'time',
-      languageImage: 'image'
+      title: 'Title your stream...',
+<<<<<<< HEAD
+      user: 'userID',
+      description: 'What are you coding today',
+      scheduledDate: 'NOW!',
+      languageImage: 'javascript'
     }
 
+=======
+      userID: 'userID',
+      user: 'userName',
+      description: 'What are you coding today?',
+      scheduledDate: 'NOW!',
+      languageImage: 'javascript'
+    };
+>>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
   }
 
   //handlers
@@ -88,8 +97,12 @@ class ScheduleNewStream extends React.Component {
                   <InputGroup compact>
                     <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
                       <Option value="default">----</Option>
-                      <Option value="image/path1">Node</Option>
-                      <Option value="image/path2">Ruby</Option>
+<<<<<<< HEAD
+                      <Option value="javascript">Javascript</Option>
+=======
+                      <Option value="javascript">JavaScript</Option>
+>>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
+                      <Option value="ruby">Ruby</Option>
                     </Select>
                   </InputGroup>
                   <input type="submit" value="Submit" />
@@ -107,7 +120,7 @@ class ScheduleNewStream extends React.Component {
 
 // const mapStateToProps = (state) => {
 //   return {
-//     fileDir: state.directory.directoryStructure
+//     userID: state.user.userID
 //   }
 // }
 
