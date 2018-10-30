@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 //components
+
 import Nav from './ViewComponents/Nav.jsx';
 import Index from './ViewComponents/IndexViews/IndexViews.jsx';
 import ActiveStreams from './ViewComponents/IndexViews/ActiveStreams/ActiveStreams.jsx';

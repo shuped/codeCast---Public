@@ -5,7 +5,7 @@ const path = require('path');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
 
-const axios = require('../../redux/ducks/api');
+const axios = require('./api');
 
 
 //Create promise.each function that takes array and resolver function

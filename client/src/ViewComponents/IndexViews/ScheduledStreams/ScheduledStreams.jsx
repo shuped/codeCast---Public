@@ -6,12 +6,10 @@ import pythonImg from '../../../images/python.png';
 import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
-import { fetchScheduledStreams } from '../../../redux/ducks/streamsDuck.js'
+import { fetchScheduledStreams } from '../../../redux/ducks/streamsDuck.js';
+import { withRouter } from 'react-router-dom';
 
-class ScheduledStreams extends Component {  
-  constructor(props) {  
-    super(props); 
-  }
+class ScheduledStreams extends Component {
 
   componentDidMount() {
     this.props.fetchScheduledStreams();
@@ -55,9 +53,8 @@ class ScheduledStreams extends Component {
   }
 
   render() {
-    const renderStreams = this.props.scheduledStreams.map( (stream) => {
-      return this.MakeStreamCard(stream);
-    });
+    const renderStreams = this.props.scheduledStreams
+      .map((stream) => this.MakeStreamCard(stream));
 
     return (
       <main className="streams">
@@ -79,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScheduledStreams);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ScheduledStreams));

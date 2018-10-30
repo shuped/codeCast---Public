@@ -6,17 +6,12 @@ import pythonImg from '../../../images/python.png';
 import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
-import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js'
+import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js';
+import { withRouter } from 'react-router-dom';
 
 
 
-class ArchivedStreams extends Component {  
-  constructor(props) {  
-    super(props); 
-    // this.state = {
-      
-    // };
-  }
+class ArchivedStreams extends Component { 
 
   componentDidMount() {
     this.props.fetchArchivedStreams();
@@ -46,7 +41,7 @@ class ArchivedStreams extends Component {
     return (
       <div className="archievedStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
         <div className="banner">
-          <div>
+          <div key={ streamID }>
             <h1>{ title }</h1>
             <h2>{ user }</h2>
             <h3>{ scheduledDate }</h3>
@@ -69,7 +64,6 @@ class ArchivedStreams extends Component {
 
     return (
       <div>
-        <h1>HI THERE</h1>
         <main className="streams">
           { renderStreams }
         </main>
@@ -91,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArchivedStreams);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArchivedStreams));

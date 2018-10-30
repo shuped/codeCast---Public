@@ -6,18 +6,11 @@ import pythonImg from '../../../images/python.png';
 import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
-import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js'
-
+import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js';
+import { withRouter } from 'react-router-dom';
 
 
 class ActiveStreams extends Component {  
-
-  constructor(props) {  
-    super(props); 
-    // this.state = {
-    
-    // };
-  }
 
   componentDidMount() {
     console.log("Spaghetti");
@@ -94,4 +87,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveStreams);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ActiveStreams));
