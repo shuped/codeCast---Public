@@ -26,13 +26,6 @@ class LiveStreamNow extends React.Component {
   };
 
   //handlers
-<<<<<<< HEAD
-
-  HandleImageSelection = (value) => {
-    this.setState({languageImage: value});
-    console.log(value)
-  }
-=======
   HandleInputChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -41,7 +34,6 @@ class LiveStreamNow extends React.Component {
     this.setState({languageImage: value});
     console.log(value)
   };
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
 
   HandleSubmit = (event) => {
     event.preventDefault();
