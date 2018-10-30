@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
+import { putScheduledStream } from '../redux/ducks/streamsDuck.js'
+
+const electron = window.require('electron');
+const ipcRenderer  = electron.ipcRenderer;
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -23,9 +27,14 @@ class StartScheduled extends Component {
     event.preventDefault();
     //redirect to broadcast page
 
-    // based off of id, start stream 
-    // startScheduledStream(IDTOSTART)
-    console.log(this.state)
+    this.props.startScheduledStream({
+      ...this.props.stagedStream,
+      isActive: true,
+      youtubeURL: this.state.youtubeURL
+    });
+    // TODO: React route to Streaming view (chat?) or dashboard
+    ipcRenderer.send('terminalOpen', true);
+    console.log(this.state);
     
   }
 
@@ -68,7 +77,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    startScheduledStream: (fileID) => dispatch(updateFile(fileID))
+    startScheduledStream: (stream) => dispatch(putScheduledStream(stream))
   }
 }
 
