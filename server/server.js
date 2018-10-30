@@ -179,6 +179,15 @@ app.route('/api/scheduledStreams/')
       res.status(304).send('POST scheduledStream: Failed to insert scheduled stream to database.')
     };
   })
+  .put((req, res) => {
+    // Upsert query to database might replace this
+    // !!missing sad path!!
+    const streamData = req.body;
+    testData[streamData.streamID] = {
+      ...streamData
+    };
+    res.status(200).send('PUT /api/scheduledStreams: Stream started');
+  })
 
 app.route('/api/activeStreams/')
   .get((req, res) => {
