@@ -14,12 +14,21 @@ class ScheduleNewStream extends React.Component {
     super();
     this.state = {
       title: 'Title your stream...',
+<<<<<<< HEAD
       user: 'userID',
       description: 'What are you coding today',
       scheduledDate: 'NOW!',
       languageImage: 'javascript'
     }
 
+=======
+      userID: 'userID',
+      user: 'userName',
+      description: 'What are you coding today?',
+      scheduledDate: 'NOW!',
+      languageImage: 'javascript'
+    };
+>>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
   }
 
   //handlers
@@ -88,7 +97,11 @@ class ScheduleNewStream extends React.Component {
                   <InputGroup compact>
                     <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
                       <Option value="default">----</Option>
+<<<<<<< HEAD
                       <Option value="javascript">Javascript</Option>
+=======
+                      <Option value="javascript">JavaScript</Option>
+>>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
                       <Option value="ruby">Ruby</Option>
                     </Select>
                   </InputGroup>
@@ -107,7 +120,7 @@ class ScheduleNewStream extends React.Component {
 
 // const mapStateToProps = (state) => {
 //   return {
-//     fileDir: state.directory.directoryStructure
+//     userID: state.user.userID
 //   }
 // }
 
