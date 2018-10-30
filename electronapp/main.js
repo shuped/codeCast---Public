@@ -26,8 +26,11 @@ let content = null;
 let filepaths = null;
 
 async function getAllFiles() {
-	fs.existsSync('./fileData/directory.json') ? 
-	null :  (async () => { console.log('getAllFiles triggered'); await readDir(rootDir, done(path.join(__dirname, 'fileData'))) })();
+	fs.existsSync('./fileData/directory.json') ?
+		null : (async () => {
+			console.log('getAllFiles triggered');
+			await readDir(rootDir, done(path.join(__dirname, 'fileData')));
+		})();
 	await postAllFiles();
 }
 
@@ -64,8 +67,8 @@ async function postAllFiles() {
 	}
 }
 
-function createMainWindow () {
-  mainWindow = new BrowserWindow({
+function createMainWindow() {
+	mainWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 880,
 		height: 860,
@@ -88,24 +91,24 @@ function createMainWindow () {
      
 		installExtension(REACT_DEVELOPER_TOOLS)  
 			.then(name => {
-        console.log(`Added Extension: ${name}`);
+				console.log(`Added Extension: ${name}`);
 			})
 			.catch(err => {
-        console.log('An error occurred: ', err);
+				console.log('An error occurred: ', err);
 			});
-      
+
 		installExtension(REDUX_DEVTOOLS)
-      .then(name => {
-        console.log(`Added Extension: ${name}`);
-      })
+			.then(name => {
+				console.log(`Added Extension: ${name}`);
+			})
 			.catch(err => {
-        console.log('An error occurred: ', err);
-      });     
+				console.log('An error occurred: ', err);
+			});
 	}
-  
+
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
-		mainWindow.webContents.openDevTools(); 
+		mainWindow.webContents.openDevTools();
 	});
 }
 
@@ -124,19 +127,19 @@ function createTerminalWindow() {
 		protocol: 'file:',
 		slashes: true
 	}));
-  
-  // Open the DevTools.
+
+	// Open the DevTools.
 	terminalWindow.once('ready-to-show', () => {
 		terminalWindow.show();
-		terminalWindow.webContents.openDevTools(); 
+		terminalWindow.webContents.openDevTools();
 	});
-  // Emitted when the window is closed.
-  terminalWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    terminalWindow = null;
-  });
+	// Emitted when the window is closed.
+	terminalWindow.on('closed', function () {
+		// Dereference the window object, usually you would store windows
+		// in an array if your app supports multi windows, this is the time
+		// when you should delete the corresponding element.
+		terminalWindow = null;
+	});
 }
 
 generateMenu = () => {
@@ -203,7 +206,7 @@ generateMenu = () => {
 }
 
 app.on('ready', () => {
-  createMainWindow();
+	createMainWindow();
 	generateMenu();
 
 	let projectRootDirectroy = path.join(__dirname, '..');
@@ -246,7 +249,7 @@ app.on('ready', () => {
 });
 
 app.on('window-all-closed', () => {
-  app.quit();
+	app.quit();
 });
 
 app.on('activate', () => {

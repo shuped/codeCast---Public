@@ -1,23 +1,26 @@
-//const ENV      = require ('dotenv');
-const app        = require('express')();
-const http       = require('http').Server(app);
+//const ENV            = require ('dotenv');
+const app              = require('express')();
+const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
-const path       = require('path');
-const morgan     = require('morgan');
-const bodyParser = require('body-parser');
-const PORT       = 8080;
+const path             = require('path');
+const morgan           = require('morgan');
+const bodyParser       = require('body-parser');
+const io               = require('socket.io')(server);
+const PORT             = 8080;
+      
+const testData         = require('./testData.js');
 
-const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
-const io = require('socket.io')(server);
 
-const rootPath = path.join(__dirname, '..');
-const buildPath = path.join(rootPath, 'client', 'build');
-const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
-let fileCache = null;
-let dirCache = null;
-let pathCache = null;
+const rootPath         = path.join(__dirname, '..');
+const buildPath        = path.join(rootPath, 'client', 'build');
+const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
+
+let fileCache          = null;
+let dirCache           = null;
+let pathCache          = null;
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -167,6 +170,7 @@ app.get('/api/filecontent/:file_uuid', (req, res) => {
   }
 });
 
+
 app.get('/api/scheduledStreams/', (req, res) => {
   const testStreams = {
     "asdass": {
@@ -192,47 +196,18 @@ app.get('/api/scheduledStreams/', (req, res) => {
   };
 
   console.log('Get success');
-  res.status(200).json(testStreams);
+  res.status(200).json(testScheduledStreams);
 });
 
 app.get('/api/activeStreams/', (req, res) => {
-  const testActiveStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasv',
-      languageImage: 'image',
-      isActive: true
+  const testActiveStreams = {};
+  for (let streamID in testData) {
+    if (testData[streamID].isActive === true) {
+      testActiveStreams[streamID] = testData[streamID];
     }
-    
+  }
   
-  };
+  
 
   console.log('Get success');
   res.status(200).json(testActiveStreams);
