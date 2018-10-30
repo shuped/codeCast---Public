@@ -1,4 +1,4 @@
-//const ENV            = require ('dotenv');
+// const ENV              = require ('dotenv');
 const app              = require('express')();
 const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
@@ -166,36 +166,14 @@ app.get('/api/filecontent/:file_uuid', (req, res) => {
     fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
   }
   catch (e) {
-    res.status(404).send('No files cached')
+    res.status(404).send('No files cached');
+    throw e;
   }
 });
 
 app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image'
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image'
-    }
-  };
-
   console.log('Get /scheduledStreams success');
-  res.status(200).json(testScheduledStreams);
+  res.status(200).json(testData);
 });
 
 app.get('/api/activeStreams/', (req, res) => {
@@ -210,47 +188,9 @@ app.get('/api/activeStreams/', (req, res) => {
 });
 
 app.get('/api/archivedStreams/', (req, res) => {
-  const testArchivedStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    },
-    "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasv',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    }
-  };
 
-  console.log('Get success');
-  res.status(200).json(testArchivedStreams);
+  console.log('Get /archivedStreams success');
+  res.status(200).json(testData);
 });
 
 app.get('/*', (req, res) => {
@@ -261,15 +201,16 @@ app.get('/*', (req, res) => {
 
 //recieve file dir/content from electron
 app.post('/api/electron/file_update', (req, res) => {
-  let { file }= req.body;
+  let { file } = req.body;
 
   try {
-    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    // redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
     res.status(200).send('Post request success /api/electron/file_update');
   }
   catch (e) {
-    console.log('Post to server failed /api/electron/file_update :', e);
+    console.log('Post to server failed /api/electron/file_update');
     res.status(500).send('Post request failed');
+    throw e;
   }
   
 });
@@ -281,11 +222,12 @@ app.post('/api/electron', (req, res) => {
     dirCache = req.body.directory || dirCache;
     pathCache = req.body.filepaths || pathCache;
     redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
-    res.status(200).send('Post request success /api/electron');
+    res.status(200).json({ message: 'Post request success /api/electron', data: testData });
   }
   catch (e) {
     console.log('Post to server failed:', e);
     res.status(500).send('Post request failed /api/electron');
+    throw e;
   }
   
 });
