@@ -58,6 +58,7 @@ export const fetchBroadcasterStreams = (userID) => {
   };
 }
 
+// TODO: refactor for passing method to action if sensible
 export const postScheduledStream = (stream) => {
   return function (dispatch) {
     axios({
@@ -84,6 +85,24 @@ export const putScheduledStream = (stream) => {
     }).then((res) => {
       console.log('Put scheduled API streams success', res);
       // LinkTo Dashboard
+    }).catch((err) => {
+      console.error('Error: Post scheduled stream rejected:', err.data);
+      // TODO: Render error element
+      
+    })
+  }
+}
+
+export const postActiveStream = (stream) => {
+  return function (dispatch) {
+    axios({
+      method: 'post',
+      url: '/api/activeStreams/',
+      data: stream
+    }).then((res) => {
+      console.log('Post scheduled API streams success', res);
+      // LinkTo Dashboard
+      // Handle rejection in components
     }).catch((err) => {
       console.error('Error: Post scheduled stream rejected:', err.data);
       // TODO: Render error element
