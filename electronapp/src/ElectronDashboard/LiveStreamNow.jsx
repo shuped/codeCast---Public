@@ -24,21 +24,10 @@ class LiveStreamNow extends React.Component {
   }
 
   //handlers
-  TitleOnChange = (event) => {
-    this.setState({title: event.target.value});
-  }
-  
-  DescriptionOnChange = (event) => {
-    this.setState({description: event.target.value})
-  }
 
   HandleImageSelection = (value) => {
     this.setState({languageImage: value});
     console.log(value)
-  }
-
-  YoutubeUrlInput = (event) => {
-    this.setState({youtubeURL: event.target.value})
   }
 
   HandleSubmit = (event) => {

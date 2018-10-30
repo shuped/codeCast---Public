@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'antd';
-import { fetchBroadcasterStreams, postDeleteStream } from '../redux/ducks/streamsDuck.js';
+import { fetchBroadcasterStreams, postDeleteStream, stageStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
 class Dashboard extends Component {
@@ -12,7 +12,7 @@ class Dashboard extends Component {
   }
 
   LaunchScheduledStream = (clickedID) => {
-    console.log(clickedID)
+    this.props.stageStream(clickedID);
   }
 
   OpenEditControls = (clickedID) => {
@@ -37,7 +37,7 @@ class Dashboard extends Component {
     const { title, scheduledDate, scheduledTime, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
-        <div className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }></div>
+        <div className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>||||</div>
         <p>{ title }</p>
         <div>
           <div className="date-time">
@@ -94,7 +94,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteStream: (fileID) => dispatch(postDeleteStream(fileID)),
-    fetchBroadcasterStreams: (userID) => dispatch(fetchBroadcasterStreams(userID))
+    fetchBroadcasterStreams: (userID) => dispatch(fetchBroadcasterStreams(userID)),
+    stageStream: (streamID) => dispatch(stageStream(streamID))
   }
 }
 

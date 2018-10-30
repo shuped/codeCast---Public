@@ -5,13 +5,13 @@ const { postgraphile } = require('postgraphile');
 const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
+const uuid             = require('uuid/v1')
 const PORT             = 8080;
-      
+
 const testData         = require('./testData.js');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io               = require('socket.io')(server);
-
 
 const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
@@ -158,33 +158,81 @@ const terminal = io
 
 
 app.route('/api/scheduledStreams/')
-  .get( (req, res) => {
-    console.log('Get success');
+  .get((req, res) => {
+    // TODO remove test data
     res.status(200).json(testData);
-  });
+  })
+  .post((req, res) => {
+    const streamData = req.body;
+    try {
+      // insert into database, ensure id doesn't collide
+      const streamID = uuid().slice(0,9);
+      testData[streamID] = {
+        streamID,
+        isActive: false,
+        youtubeURL: null,
+        ...streamData
+      };
+      res.status(201).send('POST scheduledStream: Scheduled stream added to databse.');
+    } 
+    catch (e) {
+      res.status(304).send('POST scheduledStream: Failed to insert scheduled stream to database.')
+    };
+  })
+  .put((req, res) => {
+    // Upsert query to database might replace this
+    // !!missing sad path!!
+    const streamData = req.body;
+    testData[streamData.streamID] = {
+      ...streamData
+    };
+    res.status(200).send('PUT /api/scheduledStreams: Stream started');
+  })
 
+app.route('/api/activeStreams/')
+  .get((req, res) => {
+    res.status(200).json(testData);
+  })
+  .post((req, res) => {
+    const streamData = req.body;
+    try {
+      // insert into database, ensure id doesn't collide
+      const streamID = uuid().slice(0,9);
+      testData[streamID] = {
+        streamID,
+        isActive: true,
+        ...streamData
+      };
+      res.status(201).send('POST activeStream: Scheduled stream added to database.');
+    }
+    catch (e) {
+      res.status(304).send('POST activeStream: Failed to insert scheduled stream to database.')
+    };
+  })
 
-
-
+app.route('/api/archivedStreams/')
+  .get((req, res) => {
+    res.status(200).json(testData);
+  })
+  .post((req, res) => {
+    res.send('To be implemented.')
+  })
 
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
-  console.log(
-    'fileCache not null:', fileCache !== null, 
-    'dirCache not null:', dirCache !== null,
-    'fileCache[param] typeof:', fileCache && typeof fileCache[uuid]
-  );  
   try {
     fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
   } catch (e) {
     res.status(404).send('No files cached')
   }
 });
+
 app.get('/*', (req, res) => {
   res.status(200).json({ express: 'successful connection to express, /*', fileKeys: Object.keys(fileCache), dirCache });
 });
 
-//recieve file dir/content from electron
+
+//recieve file dir/content updates from electron
 app.post('/api/electron/file_update', (req, res) => {
   let { file }= req.body;
   
@@ -200,7 +248,7 @@ app.post('/api/electron/file_update', (req, res) => {
 });
 
 app.post('/api/electron', (req, res) => {
-
+  
   try {
     fileCache = req.body.content || fileCache;
     dirCache = req.body.directory || dirCache;
@@ -214,4 +262,3 @@ app.post('/api/electron', (req, res) => {
   }
   
 });
-

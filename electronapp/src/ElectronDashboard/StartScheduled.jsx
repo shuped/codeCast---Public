@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
+import { connect } from 'react-redux';
+import { putScheduledStream } from '../redux/ducks/streamsDuck';
+
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -10,14 +13,9 @@ class StartScheduled extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: 'New Stream About Stuff',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      streamID: 1,
+      youtubeURL: 'www.youtube.ca'
     }
-
   }
-
-  //handlers
 
   YoutubeUrlInput = (event) => {
     this.setState({youtubeURL: event.target.value})
@@ -26,15 +24,14 @@ class StartScheduled extends React.Component {
   HandleSubmit = (event) => {
     event.preventDefault();
     //redirect to broadcast page
-
-    // based off of id, start stream 
-    // startScheduledStream(IDTOSTART)
-    console.log(this.state)
-    
+    this.props.startScheduledStream({
+      ...this.props.stagedStream,
+      isActive:true,
+      youtubeURL: this.state.youtubeURL
+    });
   }
 
   render() {  
-    
     return (
 
       <main className="start-scheduled">
@@ -44,8 +41,8 @@ class StartScheduled extends React.Component {
         </header>
         <div className="main-container">
           <div>
-           <h1>{this.state.title}</h1>
-           <p>{this.state.description}</p>
+           <h1>{this.props.stagedStream.title}</h1>
+           <p>{this.props.stagedStream.description}</p>
           </div>
 
           <div className="forms-container">
@@ -64,29 +61,16 @@ class StartScheduled extends React.Component {
   }
 }
 
-// leave in 
+const mapStateToProps = (state) => {
+  return {
+    stagedStream: state.streams.stagedStream
+  }
+}
 
-// const mapStateToProps = (state) => {
-//   return {
-//     fileDir: state.directory.directoryStructure
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startScheduledStream: (stream) => dispatch(putScheduledStream(stream)),
+  }
+}
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     startScheduledStream: (fileID) => dispatch(updateFile(fileID))
-//   }
-// }
-
-export default StartScheduled;
-// export default connect(null, null)(ActiveStreams);
-
-// data representation
-// {
-//   title: 'HTML/CSS',
-//   broadcaster: '#'
-//   scheduledDate: "2018-03-25",
-//   scheduledTime: "9am",
-//   description: 
-//   id: 1
-// }
+export default connect(mapStateToProps, mapDispatchToProps)(StartScheduled);
