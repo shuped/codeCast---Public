@@ -7,8 +7,6 @@ const axios = require('../../../api');
 const BROADCASTER_STREAMS_UPDATE = 'BROADCASTER_STREAMS_UPDATE';
 const NEW_SCHEDULED_STREAM = 'NEW_SCEDULED_STREAM';
 
-
-
 // Action Creator
 export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
 export const newScheduledStream = (newStream) => ({ type: NEW_SCHEDULED_STREAM, payload: newStream });
@@ -53,14 +51,15 @@ export const postScheduledStream = (stream) => {
     axios({
       method: 'post',
       url: '/api/streams/',
-      data: { stream }
-    }).then((streamsJSON) => {
-      console.log('Post scheduled API streams success', streamsJSON.data);
-      dispatch()
+      data: stream
+    }).then((res) => {
+      console.log('Post scheduled API streams success', res);
+      // LinkTo Dashboard
     }).catch((err) => {
       console.error('Error: Post scheduled stream rejected:', err.data);
-      throw err;
-    });
+      // TODO: Render error element
+      
+    })
   }
 }
 
