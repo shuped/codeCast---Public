@@ -10,10 +10,12 @@ const directoryWatcher = require('./src/fileServices/directoryWatcher')
 const chokidar = require('chokidar');
 const { readDir, done } = require('./src/fileServices/fs-mapper.js');
 
+
 const decoder = new StringDecoder('utf8');
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
 const { readDir, done } = require('./fs-mapper');
+
 // axios to send content to the server
 const axios = require('./api');
 const rootDir = path.join(__dirname, '..');
@@ -112,6 +114,7 @@ function createMainWindow() {
 	});
 }
 
+
 let terminalWindow, watcher;
 function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
@@ -140,6 +143,7 @@ function createTerminalWindow() {
 		// when you should delete the corresponding element.
 		terminalWindow = null;
 	});
+
 }
 
 generateMenu = () => {
@@ -209,7 +213,9 @@ app.on('ready', () => {
 	createMainWindow();
 	generateMenu();
 
+
 	let projectRootDirectroy = path.join(__dirname, '..');
+
 
 	chokidar.watch('.', {
 		ignored: /node_modules|\.git/,
@@ -221,6 +227,7 @@ app.on('ready', () => {
 	}).on('all', function(event, pathArg) {
 		const eventMethods = {
 			'add': (filePath) => {
+
 			console.log('add', filePath);
 				
 			},
@@ -239,11 +246,14 @@ app.on('ready', () => {
 		}
 		console.log('event, path:', event, pathArg);  
 		// event specific behavior;s
+
 		eventMethods[event] ? eventMethods[event](pathArg) : console.log('Event missed:', event);
 	})
 		.on('ready', async function() {
 			console.log('Ready');
+
 			readDir(__dirname, done(__dirname));
+
 		//  TODO: Move the axios to here instead of fs-mapper
 	});
 });

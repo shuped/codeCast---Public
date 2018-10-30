@@ -4,6 +4,8 @@
   "description": "codeCast Broadcaster electron app, with xterm and react.",
   "main": "main.js",
   "scripts": {
+    "build-start": "npm run build && npm start",
+    "start": "electron . --ignore-gpu-blacklist",
     "build": "webpack",
     "rebuild-pty": "electron-rebuild -f -w node-pty",
     "build-start": "npm run build && npm start",

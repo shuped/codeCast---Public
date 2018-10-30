@@ -154,7 +154,6 @@ const terminal = io
     console.log(termClients);
   });
 });
-
   
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
@@ -165,11 +164,11 @@ app.get('/api/filecontent/:file_uuid', (req, res) => {
   );  
   try {
     fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
-  } catch (e) {
+  }
+  catch (e) {
     res.status(404).send('No files cached')
   }
 });
-
 
 app.get('/api/scheduledStreams/', (req, res) => {
   const testStreams = {
@@ -195,7 +194,7 @@ app.get('/api/scheduledStreams/', (req, res) => {
     }
   };
 
-  console.log('Get success');
+  console.log('Get /scheduledStreams success');
   res.status(200).json(testScheduledStreams);
 });
 
@@ -206,9 +205,6 @@ app.get('/api/activeStreams/', (req, res) => {
       testActiveStreams[streamID] = testData[streamID];
     }
   }
-  
-  
-
   console.log('Get success');
   res.status(200).json(testActiveStreams);
 });
@@ -260,6 +256,7 @@ app.get('/api/archivedStreams/', (req, res) => {
 app.get('/*', (req, res) => {
   res.status(200).json({ express: 'successful connection to express, /*', fileKeys: Object.keys(fileCache), dirCache });
 });
+
 
 
 //recieve file dir/content from electron

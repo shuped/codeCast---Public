@@ -4,7 +4,9 @@ const decoder = new StringDecoder('utf8');
 const path = require('path');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
-const axios = require('../redux/ducks/api');
+
+const axios = require('../../redux/ducks/api');
+
 
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
@@ -86,6 +88,7 @@ async function makeJSON(array, root, targetDir) {
     const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 
       'node_modules', 'package-lock.json', '.git', '.scssc', '.psd', '.pdf',
       'directory.json', 'content.json', 'filepaths.json', '.gif', '.webp'];
+
     const check = new RegExp(ignore.join('|')).test(targetFile);
 
     //check for valid file extensions
@@ -119,6 +122,7 @@ async function makeJSON(array, root, targetDir) {
     }
   }
   //resolve all promises in array 
+
   Promise.each(await promises, resolver).then((resolved) => {
     resolved.forEach((res, i) => {
       fileObj[res.id] = res.content;
@@ -161,7 +165,9 @@ async function makeJSON(array, root, targetDir) {
 function done(targetDir) {
   return (err, res, root) => {
     if (err) throw err;
+
     makeJSON(res, root, targetDir);
+
   }
 }
 
