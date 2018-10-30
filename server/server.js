@@ -112,7 +112,7 @@ const redux = io
         },
         'server/file_change': (type, payload) => {
           let file = fileCache[payload.fileID]
-          redux.emit('action', { type: 'FILE_UPDATE', payload: file });
+          socket.emit('action', { type: 'FILE_UPDATE', payload: file });
         }
         
       };
