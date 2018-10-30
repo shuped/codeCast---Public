@@ -1,68 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'; 
+import { Route, Switch } from "react-router-dom";
 
-import ArchivedStreams from './ArchivedStreams/ArchivedStreams.jsx';
-import ScheduledStreams from './ScheduledStreams/ScheduledStreams.jsx';
+import IndexHeader from './IndexHeader.jsx';
 import ActiveStreams from './ActiveStreams/ActiveStreams.jsx';
+import ScheduledStreams from './ScheduledStreams/ScheduledStreams.jsx';
+import ArchivedStreams from './ArchivedStreams/ArchivedStreams.jsx';
 
 class IndexViews extends Component {
-	constructor(props){
-		super(props)
-		this.state = {
-			pageValue: '/current',
-			erectileState: 'quarter chub'
-		}
-	}
-
-	setRouteState = (route) => {
-		this.setState({pageValue: route})
-		console.log("State:", this.state)
-	}
-
 	render() {
-		
-		let pageVal = () => {
-			if (this.state.pageValue === '/current') {
-				return (
-					<div className='index-view'>
-						<ActiveStreams />
-					</div>
-				)
-			}
-			if (this.state.pageValue === '/scheduled') {
-				return (
-					<div className='index-view'>
-						<ScheduledStreams />
-					</div>
-				)
-			}
-			if (this.state.pageValue === '/archived') {
-				return (
-					<div className='index-view'>
-						<ArchivedStreams />
-					</div>
-				)
-			}
-		}
-		
-
-
-
 		return (
 			<div className="pageGrid">
+				<div className="header-tabs">
+					<Route component={ IndexHeader } />
+				</div>	
 				<div>
-				<button className="tablink" onClick={() => this.setRouteState('/current')}>
-					CURRENT STREAMS
-				</button>
-				<button className="tablink" onClick={() => this.setRouteState('/scheduled')}>
-					SCHEDULED STREAMS
-				</button>
-				<button className="tablink" onClick={() => this.setRouteState('/archived')} id="defaultOpen">
-					ARCHIVED STREAMS
-				</button>
-
-				{pageVal()}
-
+					<Switch>
+						<Route path="/current" component={ ActiveStreams } className="index-view active" />
+						<Route path="/scheduled" component={ ScheduledStreams } className="index-view scheduled" />
+						<Route path="/archived" component={ ArchivedStreams } className="index-view archived" />
+					</Switch>
 				</div>
 			</div>
 		)
@@ -70,8 +27,6 @@ class IndexViews extends Component {
 }
 
 export default IndexViews;
-
-     
 
 
 

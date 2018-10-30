@@ -1,18 +1,18 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
  
 import CodecastLogo from '../images/CODECAST_LOGO.png';
 
-function Header() {
+function Nav() {
 	return (
 		<header>
-			<div className='header'>
-				<img className='headerLogo' src={CodecastLogo}></img>
-				<button className='headerbtn' >LOG IN</button>
-				<button className='headerbtn' >REGISTER</button>
+			<div className='nav'>
+				<img className='headerLogo' src={ CodecastLogo }></img>
+				<NavLink to="/login" className="headerbtn">Login</NavLink>
+				<NavLink to="/register" className="headerbtn">Register</NavLink>
 			</div>
 		</header>
 	)
 }
 
-export default Header;
+export default Nav;

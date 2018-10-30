@@ -67,9 +67,9 @@ class Dashboard extends React.Component {
             <div className="image-placeholder">p</div>
           
             <div className="stream-controls">
-              <Button id="instant"  type="primary" onClick={ console.log("new instant stream")}>Start a Stream</Button>
+              <Button id="instant"  type="primary" onClick={ console.log("new instant stream") }>Start a Stream</Button>
               {/* missing confirm button delete button on click */}
-              <Button id="scheduleNew" type="primary" onClick={ console.log("schedule upcoming")}>Schedule a Stream</Button>
+              <Button id="scheduleNew" type="primary" onClick={ console.log("schedule upcoming") }>Schedule a Stream</Button>
             </div>
           </div>
           <div className="streams">

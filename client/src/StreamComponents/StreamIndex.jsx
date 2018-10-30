@@ -7,7 +7,6 @@ import Terminal from './Terminal/Terminal.jsx';
 import FileDirectory from './FileDirectory/FileDirectory.jsx';
 
 class Stream extends Component {
-
   render() {
     return (
       <div className="stream-parent">
@@ -34,7 +33,6 @@ class Stream extends Component {
     )
   }
 }
-
 
 function mapStateToProps(state) {
   return {
