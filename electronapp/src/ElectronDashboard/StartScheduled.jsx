@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
 
-class StartScheduled extends React.Component {
+class StartScheduled extends Component {
 
   constructor() {
     super();

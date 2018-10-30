@@ -172,31 +172,10 @@ app.get('/api/filecontent/:file_uuid', (req, res) => {
 
 
 app.get('/api/scheduledStreams/', (req, res) => {
-  const testScheduledStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image'
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image'
-    }
-  };
 
   console.log('Get success');
-  res.status(200).json(testScheduledStreams);
+  // TODO remove test data
+  res.status(200).json(testData);
 });
 
 app.get('/api/activeStreams/', (req, res) => {

@@ -49,7 +49,7 @@ module.exports = {
     description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
     scheduledDate: 'Thusday, August 12 2017',
     youtubeURL: null,
-    userID: 1,
+    userID: 2,
     streamID: 'aqdfad',
     languageImage: 'image',
     isActive: true
@@ -60,7 +60,7 @@ module.exports = {
     description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
     scheduledDate: 'Thusday, August 12 2017',
     youtubeURL: null,
-    userID: 1,
+    userID: 2,
     streamID: 'axdasv',
     languageImage: 'image',
     isActive: true

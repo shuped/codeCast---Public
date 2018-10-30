@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
 import { fetchBroadcasterStreams, postDeleteStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
-class Dashboard extends React.Component {
+class Dashboard extends Component {
   
-  componentWillMount() {
+  componentDidMount() {
     let userID = 1;
-    this.props.fetchBroadcasterStreams();
+    this.props.fetchBroadcasterStreams(1);
     // this.props.fetchBroadcasterStreams(userID);
   }
 
@@ -83,8 +83,6 @@ class Dashboard extends React.Component {
   }
 }
 
-// leave in 
-
 const mapStateToProps = (state) => {
   return {
     scheduledStreams: state.streams.scheduledStreams
@@ -94,19 +92,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteStream: (fileID) => dispatch(postDeleteStream(fileID)),
-    fetchBroadcasterStreams: () => dispatch(fetchBroadcasterStreams())
+    fetchBroadcasterStreams: (userID) => dispatch(fetchBroadcasterStreams(userID))
   }
 }
 
-// export default Dashboard;
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
-
-// data representation
-// {
-//   title: 'HTML/CSS',
-//   broadcaster: '#'
-//   scheduledDate: "2018-03-25",
-//   scheduledTime: "9am",
-//   description: 
-//   id: 1
-// }
