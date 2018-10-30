@@ -1,11 +1,11 @@
-//const ENV      = require ('dotenv');
-const app        = require('express')();
-const http       = require('http').Server(app);
+//const ENV            = require ('dotenv');
+const app              = require('express')();
+const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
-const path       = require('path');
-const morgan     = require('morgan');
-const bodyParser = require('body-parser');
-const PORT       = 8080;
+const path             = require('path');
+const morgan           = require('morgan');
+const bodyParser       = require('body-parser');
+const PORT             = 8080;
 
 const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
@@ -29,7 +29,7 @@ let pathCache = null;
 // }));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use(morgan('dev', {
   skip: (req, res) => {
