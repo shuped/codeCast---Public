@@ -48,9 +48,10 @@ export const fetchBroadcasterStreams = (userID) => {
 
 export const postScheduledStream = (stream) => {
   return function (dispatch) {
+    console.log(stream)
     axios({
       method: 'post',
-      url: '/api/streams/',
+      url: '/api/scheduledStreams/',
       data: stream
     }).then((res) => {
       console.log('Post scheduled API streams success', res);
