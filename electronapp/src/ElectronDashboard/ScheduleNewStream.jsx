@@ -64,7 +64,7 @@ class ScheduleNewStream extends React.Component {
             <div className="logoPlaceholder">p</div>
           </header>
           <div className="inputs-container">
-            <h1>New Scheduled Stream</h1>
+            <h1>Schedule A Stream</h1>
 
             <div className="forms-container">
               <form id="form" onSubmit={this.HandleSubmit}>
