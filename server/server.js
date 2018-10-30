@@ -1,22 +1,26 @@
-//const ENV      = require ('dotenv');
-const app        = require('express')();
-const http       = require('http').Server(app);
+//const ENV            = require ('dotenv');
+const app              = require('express')();
+const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
-const path       = require('path');
-const morgan     = require('morgan');
-const bodyParser = require('body-parser');
-const PORT       = 8080;
+const path             = require('path');
+const morgan           = require('morgan');
+const bodyParser       = require('body-parser');
+const io               = require('socket.io')(server);
+const PORT             = 8080;
+      
+const testData         = require('./testData.js');
 
-const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
-const io = require('socket.io')(server);
 
-const rootPath = path.join(__dirname, '..');
-const buildPath = path.join(rootPath, 'client', 'build');
-const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
-let fileCache = null;
-let dirCache = null;
+const rootPath         = path.join(__dirname, '..');
+const buildPath        = path.join(rootPath, 'client', 'build');
+const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
+
+let fileCache          = null;
+let dirCache           = null;
+let pathCache          = null;
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -41,76 +45,19 @@ app.use(morgan('dev', {
   }, stream: process.stdout
 }));
 
-app.get('/api/filecontent', (req, res) => {
-  let fileID = req.body;
-  fileCache ? 
-    res.status(200).json(JSON.stringify(fileCache[fileID])) : 
-    res.status(204).send('File not found');
-});
-
-app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image'
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: Date.now(),
-      youtubeURL: 'www.youtube.com',
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image'
-    }
-  };
-
-console.log('Get success');
-  res.status(200).json(testStreams);
-});
-
-//recieve file dir/content from electron
-app.post('/api/electron', (req, res) => {
-
-  try {
-    fileCache = req.body.content;
-    dirCache = req.body.directory;
-    res.status(200).send('Post request success');
-  }
-  catch (e) {
-    res.status(500).send('Post request failed');
-    console.log('Post to server failed:', e);
-    throw e;
-  }
-
-});
-
-app.get('/*', (req, res) => {
-  res.sendFile(devPath);
-});
-
 io.on('connection', (socket) => {
 
   const clients = [];
   console.log(`Socket ${socket.id} connected`);
   clients.push(socket.id);
   console.log(clients);
+  io.of('/redux').emit({ type: 'DIRECTORY_UPDATE', payload: dirCache })
 
   socket.on('action', (action) => {
 
     const actions = {
       'server/new_connection': (type, payload) => {
         console.log('Server message:', payload);
-        if (dirCache !== null) {
-          sendDirTree(dirCache);
-        }
       }
     }
 
@@ -137,14 +84,12 @@ io.on('connection', (socket) => {
   });
 });
 
-
-
 const redux = io
   .of('/redux')
   .on('connection', (socket) => {
 
     const clients = [];
-    console.log(`Socket ${socket.id} connected`);
+    console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
    
@@ -160,14 +105,10 @@ const redux = io
           redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
         },
         'server/file_change': (type, payload) => {
-
-          //**TODO: TRIGGER PUSH TO DIR TREE ON FILE UPDATE**//
-          console.log('server/file_change triggered', payload);
-          newFileVersion = payload;
-
-          //update the code viewer
-          redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
+          let file = fileCache[payload.fileID]
+          redux.emit('action', { type: 'FILE_UPDATE', payload: file });
         }
+        
       };
       function defaultReduxAction(type, payload) {
         console.log("Default redux action triggered");
@@ -177,52 +118,177 @@ const redux = io
       actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
 
       socket.on('disconnect', () => {
-        console.log(`Socket ${socket.id} disconnected`)
+        console.log(`Redux ${socket.id} disconnected`)
         let clientIndex = clients.findIndex(e => e === socket.id);
         clients.splice(clientIndex, 1);
         console.log(clients);
       });
 
       socket.on('error', (err) => {
-        console.log(err, `from ${socket.id}`);
+        console.log(err, `from redux: ${socket.id}`);
       });
     });
   });
 
 const terminalRecord = {};
-
 const terminal = io
-  .of('/terminal')
-  .on('connection', (socket) => {
-    const termClients = [];
-    console.log(`Terminal Socket ${socket.id} connected`);
-    termClients.push(socket.id);
-    console.log(termClients);
+.of('/terminal')
+.on('connection', (socket) => {
+  const termClients = [];
+  console.log(`Terminal Socket ${socket.id} connected`);
+  termClients.push(socket.id);
+  console.log(termClients);
 
-    socket.on('data', (data) => {
-      let now = Date.now();
-      terminalRecord[now] = data;
-      terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
-    });
+  socket.on('data', (data) => {
+    let now = Date.now();
+    terminalRecord[now] = data;
+    terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+  });
   
 
 
-    socket.on('disconnect', () => {
-      console.log(`Terminal socket ${socket.id} disconnected`)
-      let clientIndex = termClients.findIndex(e => e === socket.id);
-      termClients.splice(clientIndex, 1);
-      console.log(termClients);
-    });
+  socket.on('disconnect', () => {
+    console.log(`Terminal socket ${socket.id} disconnected`)
+    let clientIndex = termClients.findIndex(e => e === socket.id);
+    termClients.splice(clientIndex, 1);
+    console.log(termClients);
   });
+});
+
+  
+app.get('/api/filecontent/:file_uuid', (req, res) => {
+  const uuid = req.params.file_uuid;
+  console.log(
+    'fileCache not null:', fileCache !== null, 
+    'dirCache not null:', dirCache !== null,
+    'fileCache[param] typeof:', fileCache && typeof fileCache[uuid]
+  );  
+  try {
+    fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
+  } catch (e) {
+    res.status(404).send('No files cached')
+  }
+});
 
 
+app.get('/api/scheduledStreams/', (req, res) => {
+  const testStreams = {
+    "asdass": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: Date.now(),
+      youtubeURL: 'www.youtube.com',
+      userID: 1,
+      streamID: 'asdass',
+      languageImage: 'image'
+    },
+    "asdfad": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: Date.now(),
+      youtubeURL: 'www.youtube.com',
+      userID: 1,
+      streamID: 'asdfad',
+      languageImage: 'image'
+    }
+  };
 
-// setTimeout(() => {
-//   console.log('directory update =================');
-//   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
-// }, 40000);
+  console.log('Get success');
+  res.status(200).json(testScheduledStreams);
+});
 
-// setTimeout(() => {
-//   console.log('file update =================');
-//   redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
-// }, 40000);
+app.get('/api/activeStreams/', (req, res) => {
+  const testActiveStreams = {};
+  for (let streamID in testData) {
+    if (testData[streamID].isActive === true) {
+      testActiveStreams[streamID] = testData[streamID];
+    }
+  }
+  
+  
+
+  console.log('Get success');
+  res.status(200).json(testActiveStreams);
+});
+
+app.get('/api/archivedStreams/', (req, res) => {
+  const testArchivedStreams = {
+    "asdass": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdass',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    },
+    "asdfad": {
+      title: 'RubyNStuff',
+      user: 'Spencer Mc-Whhite',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdfad',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    },
+    "asdasv": {
+      title: 'NodeNStuff',
+      user: 'Spencer h-White',
+      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdasv',
+      languageImage: 'image',
+      isActive: false,
+      isArchived: true
+    }
+  };
+
+  console.log('Get success');
+  res.status(200).json(testArchivedStreams);
+});
+
+app.get('/*', (req, res) => {
+  res.status(200).json({ express: 'successful connection to express, /*', fileKeys: Object.keys(fileCache), dirCache });
+});
+
+
+//recieve file dir/content from electron
+app.post('/api/electron/file_update', (req, res) => {
+  let { file }= req.body;
+
+  try {
+    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    res.status(200).send('Post request success /api/electron/file_update');
+  }
+  catch (e) {
+    console.log('Post to server failed /api/electron/file_update :', e);
+    res.status(500).send('Post request failed');
+  }
+  
+});
+
+app.post('/api/electron', (req, res) => {
+
+  try {
+    fileCache = req.body.content || fileCache;
+    dirCache = req.body.directory || dirCache;
+    pathCache = req.body.filepaths || pathCache;
+    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    res.status(200).send('Post request success /api/electron');
+  }
+  catch (e) {
+    console.log('Post to server failed:', e);
+    res.status(500).send('Post request failed /api/electron');
+  }
+  
+});
