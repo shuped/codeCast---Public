@@ -2,6 +2,9 @@ import React from 'react';
 import { Button } from 'antd';
 import { Input, Select, DatePicker } from 'antd';
 
+import { postScheduledStream } from '../redux/ducks/streamsDuck.js'
+import { connect } from 'react-redux'; 
+
 const InputGroup = Input.Group;
 const Option = Select.Option;
 
@@ -45,7 +48,7 @@ class ScheduleNewStream extends React.Component {
   HandleSubmit = (event) => {
     event.preventDefault();
     //redirect to broadcast page
-
+    this.props.postScheduledStream(this.state)
     console.log(this.state)
     
   }
@@ -108,21 +111,12 @@ class ScheduleNewStream extends React.Component {
 //   }
 // }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     newScheduledStream: (fileID) => dispatch(updateFile(fileID))
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postScheduledStream: (streamData) => dispatch(postScheduledStream(streamData))
+  }
+}
 
-export default ScheduleNewStream;
-// export default connect(null, null)(ActiveStreams);
 
-// data representation
-// {
-//   title: 'HTML/CSS',
-//   broadcaster: '#'
-//   scheduledDate: "2018-03-25",
-//   scheduledTime: "9am",
-//   description: 
-//   id: 1
-// }
+export default connect(null, mapDispatchToProps)(ScheduleNewStream);
+

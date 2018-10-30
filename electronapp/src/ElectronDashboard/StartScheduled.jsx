@@ -78,7 +78,7 @@ class StartScheduled extends React.Component {
 //   }
 // }
 
-  export default StartScheduled;
+export default StartScheduled;
 // export default connect(null, null)(ActiveStreams);
 
 // data representation

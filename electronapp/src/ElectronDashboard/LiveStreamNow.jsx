@@ -1,7 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
-import { ipcRenderer } from 'electron'
+
+const electron = window.require('electron');
+const fs = electron.remote.require('fs');
+const ipcRenderer  = electron.ipcRenderer;
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -52,7 +55,7 @@ class LiveStreamNow extends React.Component {
       <main className="new-stream">
         <header className="header">
           <Button id="dashboard-btn" type="primary">Dashboard</Button>
-          <div className="logoPlaceholder">p</div>
+          <div className="logoPlaceholder">codeCast</div>
         </header>
         <div className="inputs-container">
           <h1>Start New Stream</h1>

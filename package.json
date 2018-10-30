@@ -1,22 +1,24 @@
 {
-  "name": "final",
+  "name": "codecast",
   "version": "1.0.0",
-  "description": "First commit",
+  "description": "Live-streaming code app with integrated terminal and remote file viewing",
+  "author": "Spencer Shupe, Benji Leboe, Erik Mackie, Jeff Pang",
   "main": "client/src/index.js",
   "scripts": {
     "update-all": "concurrently 'npm update' 'npm update --prefix server' 'npm update --prefix client'",
-    "install-all": "concurrently 'npm install' 'npm install --prefix server' 'npm install --prefix client' 'chmod 777 electronapp/npm_install.sh' './electronapp/npm_install.sh'",
+    "install-all": "concurrently 'npm install' 'npm install --prefix server' 'npm install --prefix client' 'npm install --prefix electronapp' 'chmod 777 electronapp/npm_install.sh' './electronapp/npm_install.sh'",
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon server/server.js",
     "react": "npm start --prefix client",
-    "start": "concurrently --kill-others-on-fail 'npm run react' 'npm run server'"
+    "electron": "npm start --prefix electronapp",
+    "start": "concurrently --kill-others-on-fail 'npm run react' 'npm run server'",
+    "electron-start": "concurrently --kill-others-on-fail 'npm run server' 'wait-on http://localhost:8080 && npm run electron'"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Benji-Leboe/final.git"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Benji-Leboe/final/issues"
@@ -25,7 +27,7 @@
   "dependencies": {
     "concurrently": "~4.0.1",
     "nodemon": "~1.18.4",
-    "xterm": "^3.8.0"
+    "wait-on": "~3.1.0"
   },
   "devDependencies": {
     "remote-redux-devtools": "~0.5.13"
@@ -33,5 +35,14 @@
   "engines": {
     "node": "10.11.0",
     "npm": "6.4.1"
+  },
+  "build": {
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    }
   }
 }

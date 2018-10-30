@@ -1,13 +1,14 @@
 import React from 'react';
 import { Button } from 'antd';
-import { fetchBroadcasterStreams, postDeleteStream } from './redux/ducks/ajaxDuck.js';
+import { fetchBroadcasterStreams, postDeleteStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
 class Dashboard extends React.Component {
   
   componentWillMount() {
     let userID = 1;
-    this.props.fetchBroadcasterStreams(userID);
+    this.props.fetchBroadcasterStreams();
+    // this.props.fetchBroadcasterStreams(userID);
   }
 
   LaunchScheduledStream = (clickedID) => {
@@ -54,12 +55,8 @@ class Dashboard extends React.Component {
 
   render() {  
     console.log(this.props.scheduledStreams, "render");
-    const streamsArr = [];
-    for (const stream in this.props.scheduledStreams) {
-      streamsArr.push(this.props.scheduledStreams[stream])
-    }
-    console.log(streamsArr)
-    const renderStreams = streamsArr.map( (stream) => {
+    
+    const renderStreams = this.props.scheduledStreams.map( (stream) => {
       return this.MakeScheduledStreamCard(stream);  
     });
 
@@ -97,7 +94,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteStream: (fileID) => dispatch(postDeleteStream(fileID)),
-    fetchBroadcasterStreams: (userID) => fetchBroadcasterStreams(userID)
+    fetchBroadcasterStreams: () => dispatch(fetchBroadcasterStreams())
   }
 }
 
