@@ -10,7 +10,9 @@ const UPDATE_STAGED_STREAM = 'UPDATE_STAGED_STREAM';
 
 // Action Creator
 export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
+
 export const newScheduledStream = (newStream) => ({ type: NEW_SCHEDULED_STREAM, payload: newStream });
+
 export const stageStream = (streamID) => ({ type: UPDATE_STAGED_STREAM, payload: streamID });
 
 // STREAM REDUCER
