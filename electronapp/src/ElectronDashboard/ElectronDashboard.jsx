@@ -12,10 +12,6 @@ class Dashboard extends Component {
   }
 
   LaunchScheduledStream = (clickedID) => {
-<<<<<<< HEAD
-=======
-    console.log(clickedID);
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
     this.props.stageStream(clickedID);
   }
 
@@ -41,11 +37,7 @@ class Dashboard extends Component {
     const { title, scheduledDate, scheduledTime, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
-<<<<<<< HEAD
         <div className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>||||</div>
-=======
-        <div className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>|launch stream|</div>
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
         <p>{ title }</p>
         <div>
           <div className="date-time">
