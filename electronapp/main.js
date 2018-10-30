@@ -4,14 +4,12 @@ const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require ('fs');
+const uuidv1 = require('uuid/v1');
+const uuidv4 = require('uuid/v4');
 const directoryWatcher = require('./src/fileServices/directoryWatcher')
 const chokidar = require('chokidar');
-const fsMapper = require('./src/fileServices/fs-mapper.js');
-const readDir = fsMapper.readDir;
-const done = fsMapper.done;
+const { readDir, done } = require('./src/fileServices/fs-mapper.js');
 
-//require mapper function. Function call format: readDir(rootDirectory, done());
-// const { readDir, done } = require('../server/fs-mapper');
 // axios to send content to the server
 const axios = require('./src/redux/ducks/api');
 
@@ -77,41 +75,6 @@ function createTerminalWindow() {
 		protocol: 'file:',
 		slashes: true
 	}));
-	readDir(__dirname, done(__dirname))
-  // const decoder = new StringDecoder('utf8');
-  // //temp root targets project directory
-  // //**TODO: get rootDir from shell command**
-  // const rootDir = path.join(__dirname, '..');
-
-  // //run fs-mapper module and map dir on window open
-  // //**TODO: pass variables from shell script that echos PWD**
-  // fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(__dirname));
-
-  // let directory = null;
-  // let content = null;
-
-  // if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
-  //   directory = await decoder.write(fs.readFileSync('./directory.json'));
-	// 	content = await decoder.write(fs.readFileSync('./content.json'));
-	// 	console.log(typeof content)
-  // }
-
-  // if (directory !== null && content !== null) {
-	// 	console.log('if director')
-  //   axios({
-  //     method: 'post',
-  //     url: '/api/electron',
-  //     data: {
-  //       directory: JSON.stringify(directory),
-  //       content: JSON.stringify(content)
-  //     }
-  //   }).then((res) => {
-  //     console.log(res.data);
-  //   }).catch((err) => {
-  //     console.error('Error:', err.data);
-  //     throw err;
-  //   });
-	 // }
 	 
 	// Open the DevTools.
   terminalWindow.webContents.openDevTools();
@@ -190,39 +153,44 @@ generateMenu = () => {
 app.on('ready', () => {
   createMainWindow();
 	generateMenu();
-chokidar.watch('.', {
-   ignored: /node_modules|\.git/,
-   persistent: true,
-   // followSymlinks: false,
-   // useFsEvents: false,
-   // usePolling: false
- }).on('all', async function(event, path) {
-	const eventMethods = {
-		'add': (filePath) => {
-		 
-		},
-		'addDir': (filePath) => {
 
+	let projectRootDirectroy = path.join(__dirname, '..')
 
-		},
-		'change': (filePath) => {
-			console.log('change', filePath)
-			readDir(__dirname, done(__dirname))
-		},
-		'unlink': (filePath) => {
-			console.log('unlink', filePath)
+	chokidar.watch('.', {
+		ignored: /node_modules|\.git/,
+		persistent: true,
+		ignoreInitial: true
+		// followSymlinks: false,
+		// useFsEvents: false,
+		// usePolling: false
+	}).on('all', function(event, pathArg) {
+		const eventMethods = {
+			'add': (filePath) => {
+			console.log('add', filePath)
+				
+			},
+			'addDir': (filePath) => {
+				console.log('addDir', filePath)
 
+			},
+			'change': (filePath) => {
+				console.log('change', filePath)
+
+			},
+			'unlink': (filePath) => {
+				console.log('unlink', filePath)
+
+			}
 		}
-	}
-	console.log('event, path:', event, path )
-	// event specific behavior
-	eventMethods[event] ? eventMethods[event](path) : console.log('Event missed:', event);
-
-	// map directory entirely
- })
-  .on('ready', function() {
-   console.log('Ready');
- })
+		console.log('event, path:', event, pathArg )  
+		// event specific behavior
+		eventMethods[event] ? eventMethods[event](pathArg) : console.log('Event missed:', event);
+	})
+		.on('ready', async function() {
+			console.log('Ready');
+			readDir(__dirname, done(__dirname))
+		//  TODO: Move the axios to here instead of fs-mapper
+	});
 });
 
 app.on('window-all-closed', () => {
