@@ -91,6 +91,10 @@ class ScheduleNewStream extends React.Component {
                       <Option value="default">----</Option>
                       <Option value="javascript">JavaScript</Option>
                       <Option value="ruby">Ruby</Option>
+                      <Option value="csshtml">CSS/HTML</Option>
+                      <Option value="csharp">Csharp</Option>
+                      <Option value="python">Python</Option>
+                      <Option value="php">PHP</Option>
                     </Select>
                   </InputGroup>
                   <input type="submit" value="Submit" />

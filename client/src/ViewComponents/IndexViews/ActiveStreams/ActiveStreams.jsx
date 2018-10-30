@@ -68,7 +68,6 @@ class ActiveStreams extends Component {
     // react-router code goes here
   }
 
-
   MakeActiveStreamCard = (props) => {
     const { title, user, description, streamID, imagePath } = props;
     // missing image path

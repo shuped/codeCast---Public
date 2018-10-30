@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import store from './redux/store/index.js';
 import Root from './Root.jsx';
 import './styles/css/index.css';
-import store from './redux/store/index';
+
 
 ReactDOM.render(
   <Root store={ store } />, 
