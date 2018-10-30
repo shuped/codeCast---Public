@@ -1,17 +1,16 @@
 const axios = require('../../../api');
 
 // Outgoing
-// async -> fetchBroadcasterStreams, postDeleteStream
+// async -> fetchBroadcasterStreams, postDeleteStream, postScheduledStream
 
-const BROADCASTER_NEW_STREAM = 'BROADCASTER_NEW_STREAM';
 // Incoming
 const BROADCASTER_STREAMS_UPDATE = 'UPDATE_USER_STREAMS';
+const NEW_SCHEDULED_STREAM = 'NEW_SCEDULED_STREAM';
 
 
 
 // Action Creator
 export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
-
 export const newScheduledStream = (newStream) => ({ type: BROADCASTER_NEW_STREAM, payload: newStream });
 
 // STREAM REDUCER
@@ -19,7 +18,11 @@ export const streamsReducer = (state = { scheduledStreams: ['empty'] }, action) 
   switch(action.type) {
     case BROADCASTER_STREAMS_UPDATE:
       console.log('message recieved', action.payload);
-      return { ...state, scheduledStreams: action.payload };
+      return { ...state, scheduledStreams: action.payload }
+
+    case NEW_SCHEDULED_STREAM:
+      console.log('new scheduled stream:', action.payload);
+      return { ...state, scheduledStreams: [...scheduledStreams, action.payload] };
 
     default:
       return state;
@@ -53,6 +56,7 @@ export const postScheduledStream = (stream) => {
       data: { stream }
     }).then((streamsJSON) => {
       console.log('Post scheduled API streams success', streamsJSON.data);
+      dispatch()
     }).catch((err) => {
       console.error('Error:', err.data);
       throw err;
