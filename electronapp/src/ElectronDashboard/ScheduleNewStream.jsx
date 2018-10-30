@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Input, Select, DatePicker } from 'antd';
+import { connect } from 'react-redux'; 
+
+import { postScheduledStream } from '../redux/ducks/streamsDuck.js'
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -10,13 +13,13 @@ class ScheduleNewStream extends React.Component {
   constructor() {
     super();
     this.state = {
-      title: 'placeholder',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdas',
-      scheduledDate: 'time',
-      languageImage: 'image'
-    }
-
+      title: 'Title your stream...',
+      userID: 'userID',
+      user: 'userName',
+      description: 'What are you coding today?',
+      scheduledDate: 'NOW!',
+      languageImage: 'javascript'
+    };
   }
 
   //handlers
@@ -45,7 +48,7 @@ class ScheduleNewStream extends React.Component {
   HandleSubmit = (event) => {
     event.preventDefault();
     //redirect to broadcast page
-
+    this.props.postScheduledStream(this.state)
     console.log(this.state)
     
   }
@@ -85,8 +88,8 @@ class ScheduleNewStream extends React.Component {
                   <InputGroup compact>
                     <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
                       <Option value="default">----</Option>
-                      <Option value="image/path1">Node</Option>
-                      <Option value="image/path2">Ruby</Option>
+                      <Option value="javascript">JavaScript</Option>
+                      <Option value="ruby">Ruby</Option>
                     </Select>
                   </InputGroup>
                   <input type="submit" value="Submit" />
@@ -104,25 +107,16 @@ class ScheduleNewStream extends React.Component {
 
 // const mapStateToProps = (state) => {
 //   return {
-//     fileDir: state.directory.directoryStructure
+//     userID: state.user.userID
 //   }
 // }
 
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     newScheduledStream: (fileID) => dispatch(updateFile(fileID))
-//   }
-// }
+const mapDispatchToProps = (dispatch) => {
+  return {
+    postScheduledStream: (streamData) => dispatch(postScheduledStream(streamData))
+  }
+}
 
-export default ScheduleNewStream;
-// export default connect(null, null)(ActiveStreams);
 
-// data representation
-// {
-//   title: 'HTML/CSS',
-//   broadcaster: '#'
-//   scheduledDate: "2018-03-25",
-//   scheduledTime: "9am",
-//   description: 
-//   id: 1
-// }
+export default connect(null, mapDispatchToProps)(ScheduleNewStream);
+

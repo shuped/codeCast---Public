@@ -4,26 +4,75 @@ const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require ('fs');
-const directoryWatcher = require('./src/fileServices/directoryWatcher.js');
+const uuidv1 = require('uuid/v1');
+const uuidv4 = require('uuid/v4');
+const directoryWatcher = require('./src/fileServices/directoryWatcher')
+const chokidar = require('chokidar');
+
+const decoder = new StringDecoder('utf8');
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
-const { readDir, done } = require('../server/fs-mapper');
+const { readDir, done } = require('./fs-mapper');
 // axios to send content to the server
-const axios = require('./src/redux/ducks/api');
-
-// For testing things
-const log = console.log.bind(console);
-
+const axios = require('./api');
+const rootDir = path.join(__dirname, '..');
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-function createMainWindow () {
-  mainWindow = new BrowserWindow({
+let directory = null;
+let content = null;
+let filepaths = null;
+
+async function getAllFiles() {
+	fs.existsSync('./fileData/directory.json') ?
+		null : (async () => {
+			console.log('getAllFiles triggered');
+			await readDir(rootDir, done(path.join(__dirname, 'fileData')));
+		})();
+	await postAllFiles();
+}
+
+async function postAllFiles() {
+	if (fs.existsSync('./fileData/directory.json') && fs.existsSync('./fileData/content.json')) {
+		console.log('postAllFiles triggered');
+		directory = await decoder.write(fs.readFileSync('./fileData/directory.json'));
+		content = await decoder.write(fs.readFileSync('./fileData/content.json'));
+		filepaths = await decoder.write(fs.readFileSync('./fileData/content.json'));
+	} else {
+		setTimeout(() => {
+			postAllFiles();
+		}, 3000);
+	}
+
+	if (directory !== null && content !== null) {
+		axios({
+			method: 'post',
+			url: '/api/electron',
+			data: {
+				directory: directory,
+				content: content,
+				filepaths: filepaths
+			},
+			error: (err) => {
+				console.log('Axios error');
+			}
+		}).then((res) => {
+			console.log('Post success');
+		}).catch((err) => {
+			console.error('Error');
+			throw err;
+		});
+	}
+}
+
+function createMainWindow() {
+	mainWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 880,
 		height: 860,
-		width: 1280
+		width: 1280,
+		show: false
 	});
 
 	mainWindow.loadURL(url.format({
@@ -31,104 +80,72 @@ function createMainWindow () {
 		protocol: 'file:',
 		slashes: true
 	}));
-  
+   
 	if (isDev) {
-    const {
+    const { 
 			default: installExtension,
 			REACT_DEVELOPER_TOOLS,
 			REDUX_DEVTOOLS,
 		} = require('electron-devtools-installer');
-    
-		installExtension(REACT_DEVELOPER_TOOLS)
+     
+		installExtension(REACT_DEVELOPER_TOOLS)  
 			.then(name => {
-        log(`Added Extension: ${name}`);
+				console.log(`Added Extension: ${name}`);
 			})
 			.catch(err => {
-        log('An error occurred: ', err);
+				console.log('An error occurred: ', err);
 			});
-      
+
 		installExtension(REDUX_DEVTOOLS)
-      .then(name => {
-        log(`Added Extension: ${name}`);
-      })
+			.then(name => {
+				console.log(`Added Extension: ${name}`);
+			})
 			.catch(err => {
-        log('An error occurred: ', err);
-      });
-    mainWindow.webContents.openDevTools();      
+				console.log('An error occurred: ', err);
+			});
 	}
-  
+
 	mainWindow.once('ready-to-show', () => {
-    mainWindow.show();
+		mainWindow.show();
+		mainWindow.webContents.openDevTools();
 	});
 }
 
-let terminalWindow
-async function createTerminalWindow() {
+let terminalWindow, watcher;
+function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 40,
 		height: 800,
-		width: 800
+		width: 800,
+		show: false
 	});
 
 	terminalWindow.loadURL(url.format({
-		pathname: path.join(__dirname, 'indexTerminal.html'),
+		pathname: path.join(__dirname, 'public', 'indexTerminal.html'),
 		protocol: 'file:',
 		slashes: true
 	}));
-  const decoder = new StringDecoder('utf8');
-  //temp root targets project directory
-  //**TODO: get rootDir from shell command**
-  const rootDir = path.join(__dirname, '..');
 
-  //run fs-mapper module and map dir on window open
-	//**TODO: pass variables from shell script that echos PWD**
-  fs.existsSync('./directory.json') ? null : await readDir(rootDir, done(__dirname));
-
-  let directory = null;
-  let content = null;
-
-  if (fs.existsSync('./directory.json') && fs.existsSync('./content.json')) {
-    directory = await decoder.write(fs.readFileSync('./directory.json'));
-		content = await decoder.write(fs.readFileSync('./content.json'));
-	}
-
-	
-  if (directory !== null && content !== null) {
-		axios({
-			method: 'post',
-      url: '/api/electron',
-      data: {
-				directory: JSON.stringify(directory),
-        content: JSON.stringify(content)
-      }
-    }).then((res) => {
-			log(res.data);
-    }).catch((err) => {
-			console.error('Error:', err.data);
-      throw err;
-    });
-	}
-	// start the chokidar watcher
-	log('=======')
-	directoryWatcher()
-	
-  // Open the DevTools.
-  terminalWindow.webContents.openDevTools();
-  // Emitted when the window is closed.
-  terminalWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    terminalWindow = null;
-  });
+	// Open the DevTools.
+	terminalWindow.once('ready-to-show', () => {
+		terminalWindow.show();
+		terminalWindow.webContents.openDevTools();
+	});
+	// Emitted when the window is closed.
+	terminalWindow.on('closed', function () {
+		// Dereference the window object, usually you would store windows
+		// in an array if your app supports multi windows, this is the time
+		// when you should delete the corresponding element.
+		terminalWindow = null;
+	});
 }
 
 generateMenu = () => {
   const template = [
     {
       label: 'File',
-			submenu: [{ role: 'about' }, { role: 'quit' }],
+			submenu: [{ role: 'about' }, { role: 'quit' }]
 		},
 		{
 			label: 'Edit',
@@ -141,7 +158,7 @@ generateMenu = () => {
 				{ role: 'paste' },
 				{ role: 'pasteandmatchstyle' },
 				{ role: 'delete' },
-				{ role: 'selectall' },
+				{ role: 'selectall' }
 			],
 		},
 		{
@@ -155,12 +172,12 @@ generateMenu = () => {
 				{ role: 'zoomin' },
 				{ role: 'zoomout' },
 				{ type: 'separator' },
-				{ role: 'togglefullscreen' },
+				{ role: 'togglefullscreen' }
 			],
 		},
 		{
 			role: 'window',
-			submenu: [{ role: 'minimize' }, { role: 'close' }],
+			submenu: [{ role: 'minimize' }, { role: 'close' }]
 		},
 		{
 			role: 'help',
@@ -168,7 +185,7 @@ generateMenu = () => {
 				{
 					click() {
 						require('electron').shell.openExternal(
-							'https://github.com/Benji-Leboe/codeCast',
+							'https://github.com/Benji-Leboe/codeCast'
 						);
 					},
 					label: 'Learn More',
@@ -176,10 +193,10 @@ generateMenu = () => {
 				{
 					click() {
 						require('electron').shell.openExternal(
-							'https://github.com/Benji-Leboe/codeCast/issues',
+							'https://github.com/Benji-Leboe/codeCast/issues'
 						);
 					},
-					label: 'File Issue on GitHub',
+					label: 'File Issue on GitHub'
 				},
 			],
 		},
@@ -188,12 +205,50 @@ generateMenu = () => {
 }
 
 app.on('ready', () => {
-  createMainWindow();
+	createMainWindow();
 	generateMenu();
+
+	let projectRootDirectroy = path.join(__dirname, '..');
+
+	chokidar.watch('.', {
+		ignored: /node_modules|\.git/,
+		persistent: true,
+		ignoreInitial: true
+		// followSymlinks: false,
+		// useFsEvents: false,
+		// usePolling: false
+	}).on('all', function(event, pathArg) {
+		const eventMethods = {
+			'add': (filePath) => {
+			console.log('add', filePath);
+				
+			},
+			'addDir': (filePath) => {
+				console.log('addDir', filePath);
+
+			},
+			'change': (filePath) => {
+				console.log('change', filePath);
+
+			},
+			'unlink': (filePath) => {
+				console.log('unlink', filePath);
+
+			}
+		}
+		console.log('event, path:', event, pathArg);  
+		// event specific behavior;s
+		eventMethods[event] ? eventMethods[event](pathArg) : console.log('Event missed:', event);
+	})
+		.on('ready', async function() {
+			console.log('Ready');
+			readDir(__dirname, done(__dirname));
+		//  TODO: Move the axios to here instead of fs-mapper
+	});
 });
 
 app.on('window-all-closed', () => {
-  app.quit();
+	app.quit();
 });
 
 app.on('activate', () => {
@@ -203,7 +258,6 @@ app.on('activate', () => {
 });
 
 ipcMain.on('terminalOpen', (event, arg) => {
-	log('terminalOpen in createWindow')
-	createTerminalWindow()
+	console.log('terminalOpen in createWindow');
+	createTerminalWindow();
 });
-

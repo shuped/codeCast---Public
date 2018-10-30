@@ -2,15 +2,8 @@ const os = require('os');
 const pty = require('node-pty');
 const Terminal = require('xterm').Terminal;
 const socket = require('socket.io-client');
-const fs = require('fs');
-// const { StringDecoder } = require('string_decoder');
-// const { exec }= require('child_process');
-const chokidar = require('chokidar');
-const fsMapper = require('../server/fs-mapper');
-const path = require('path');
 
-var terminalIO = socket.connect('http://localhost:8080/terminal');
-var reduxIO = socket.connect('http://localhost:8080/redux');
+const io = socket.connect('http://localhost:8080/terminal');
 
 // Initialize node-pty with an appropriate shell
 const shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];

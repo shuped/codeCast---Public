@@ -2,7 +2,7 @@ import React from 'react';
 import { Tree } from 'antd';
 import 'antd/dist/antd.css';
 import { connect } from 'react-redux';
-import { updateFile } from '../../redux/ducks/DirectoryDuck';
+import { updateFile } from '../../redux/ducks/directoryDuck';
 
 const TreeNode = Tree.TreeNode;
 
@@ -22,8 +22,8 @@ class FileDirectory extends React.Component {
     // if treeNode is a leaf, handle call render function
     if (info.node.isLeaf() === true) {
 
-      console.log(info.selectedNodes[0].key);
-      this.props.sendFileID(info.selectedNodes[0].key);
+      console.log(selectedKeys[selectedKeys.length - 1]);
+      this.props.sendFileID(selectedKeys[selectedKeys.length - 1]);
       // need script to disable click event on currently active file
     }
   }
@@ -34,13 +34,13 @@ class FileDirectory extends React.Component {
     const fileDir = treeFrom;
     // for each item in the file state, build node based of if object or string
     for (let file in fileDir) {
-      if (typeof fileDir[file] === 'string') {
+      if (fileDir[file].fileIDs !== undefined) { //is file
         result.push(<TreeNode 
-          title={ file } 
-          key={ fileDir[file] } 
+          title={ fileDir[file].fileNames[fileDir[file].fileNames.length - 1] } 
+          key={ fileDir[file].fileIDs[fileDir[file].fileIDs.length - 1] } 
         />)
 
-      } else if (typeof fileDir[file] === 'object') {
+      } else { // is directory TODO handle edge cases
         result.push(<TreeNode title={ file } key={ file + ((Math.random()*10).toString().slice(2,6)) }>
           { this.buildTree(fileDir[file]) }
         </TreeNode>)
