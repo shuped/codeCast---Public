@@ -8,12 +8,15 @@ const bodyParser       = require('body-parser');
 const uuid             = require('uuid/v1')
 const PORT             = 8080;
 
-const testData         = require('./testData.js');
+const testData         = require('./testData/testData.js');
+const activeData       = require('./testData/activeData.js');
+const scheduleData     = require('./testData/scheduleData.js');
+const archiveData      = require('./testData/archiveData.js');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io               = require('socket.io')(server);
 
-const testData         = require('./testData.js');
+const testData         = require('./testData/testData.js');
 
 const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
