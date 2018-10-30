@@ -161,7 +161,6 @@ const terminal = io
 
 app.route('/api/scheduledStreams/')
   .get((req, res) => {
-    console.log('Get success');
     // TODO remove test data
     res.status(200).json(testData);
   })
@@ -185,7 +184,6 @@ app.route('/api/scheduledStreams/')
 
 app.route('/api/activeStreams/')
   .get((req, res) => {
-    console.log('Get success');
     res.status(200).json(testData);
   })
   .post((req, res) => {
@@ -194,7 +192,6 @@ app.route('/api/activeStreams/')
 
 app.route('/api/archivedStreams/')
   .get((req, res) => {
-    console.log('Get success');
     res.status(200).json(testData);
   })
   .post((req, res) => {
