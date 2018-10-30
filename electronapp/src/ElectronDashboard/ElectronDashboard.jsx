@@ -70,7 +70,7 @@ class Dashboard extends Component {
             <div className="image-placeholder">p</div>
           
             <div className="stream-controls">
-              <Button id="instant"  type="primary" onClick={ console.log("new instant stream")}>Start a Stream</Button>
+              <Link to='/LiveStreamNow' id="instant">Start a Stream</Link>
               {/* missing confirm button delete button on click */}
               <Button id="scheduleNew" type="primary" onClick={ console.log("schedule upcoming")}>Schedule a Stream</Button>
             </div>
