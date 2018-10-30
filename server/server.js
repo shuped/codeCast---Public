@@ -155,6 +155,18 @@ const terminal = io
 });
 
   
+
+
+app.route('/api/scheduledStreams/')
+  .get( (req, res) => {
+    console.log('Get success');
+    res.status(200).json(testData);
+  });
+
+
+
+
+
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
   console.log(
@@ -168,82 +180,14 @@ app.get('/api/filecontent/:file_uuid', (req, res) => {
     res.status(404).send('No files cached')
   }
 });
-
-
-app.get('/api/scheduledStreams/', (req, res) => {
-  const scheduledStreams = testData;
-    
-  console.log('Get success');
-  res.status(200).json(scheduledStreams);
-});
-
-app.get('/api/activeStreams/', (req, res) => {
-  const testActiveStreams = {};
-  for (let streamID in testData) {
-    if (testData[streamID].isActive === true) {
-      testActiveStreams[streamID] = testData[streamID];
-    }
-  }
-  
-  
-
-  console.log('Get success');
-  res.status(200).json(testActiveStreams);
-});
-
-app.get('/api/archivedStreams/', (req, res) => {
-  const testArchivedStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    },
-    "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasv',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    }
-  };
-
-  console.log('Get success');
-  res.status(200).json(testArchivedStreams);
-});
-
 app.get('/*', (req, res) => {
   res.status(200).json({ express: 'successful connection to express, /*', fileKeys: Object.keys(fileCache), dirCache });
 });
 
-
 //recieve file dir/content from electron
 app.post('/api/electron/file_update', (req, res) => {
   let { file }= req.body;
-
+  
   try {
     redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
     res.status(200).send('Post request success /api/electron/file_update');
@@ -270,3 +214,4 @@ app.post('/api/electron', (req, res) => {
   }
   
 });
+
