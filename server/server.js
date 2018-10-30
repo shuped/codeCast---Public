@@ -7,6 +7,8 @@ const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const PORT       = 8080;
 
+const testData   = require('./testData.js');
+
 const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
 const io = require('socket.io')(server);
@@ -49,89 +51,27 @@ app.get('/api/filecontent', (req, res) => {
     res.status(204).send('File not found');
 });
 
+
 app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: false
-    },
-    "asdasx": {
-      title: 'Javascript4U',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasx',
-      languageImage: 'image',
-      isActive: false
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: false
-    }
-  };
+  const testScheduledStreams = 
 
   // const query = req.query.user_id || '*';
   
   console.log('Get success');
-  res.status(200).json(testStreams);
+  res.status(200).json(testScheduledStreams);
 });
 
 
 
 app.get('/api/activeStreams/', (req, res) => {
-  const testActiveStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasv',
-      languageImage: 'image',
-      isActive: true
+  const testActiveStreams = {};
+  for (let streamID in testData) {
+    if (testData[streamID].isActive === true) {
+      testActiveStreams[streamID] = testData[streamID];
     }
-    
+  }
   
-  };
+  
 
   console.log('Get success');
   res.status(200).json(testActiveStreams);
@@ -181,11 +121,10 @@ app.get('/api/archivedStreams/', (req, res) => {
   res.status(200).json(testArchivedStreams);
 });
 
-app.post('/api/streams/', (req, res) => {
-
-    res.status(200).json({status: 'fuck you bitch'});
-
-});
+app.post('/api/streams'), (req, res) => {
+  testData[req.body.stream.streamID] =  req.body.stream;
+  console.log(testData);
+}
 
 //recieve file dir/content from electron
 app.post('/api/electron', (req, res) => {

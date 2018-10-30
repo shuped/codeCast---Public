@@ -50,9 +50,9 @@ export const postScheduledStream = (stream) => {
     axios({
       method: 'post',
       url: '/api/streams/',
+      data: { stream }
     }).then((streamsJSON) => {
-      console.log(streamsJSON.data);
-      dispatch(newScheduledStream(stream));
+      console.log('Post scheduled API streams success', streamsJSON.data);
     }).catch((err) => {
       console.error('Error:', err.data);
       throw err;
