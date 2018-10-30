@@ -20,14 +20,6 @@ class App extends Component {
         <div>
           <IndexViews />
         </div>
-
-<<<<<<< HEAD
-        <div className='electron'>
-     
-        </div>
-=======
-
->>>>>>> 821e2379978c16064807c07cb89d5efa520a700f
       </div>
     );
   }

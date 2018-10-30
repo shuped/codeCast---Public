@@ -9,7 +9,7 @@ class IndexViews extends Component {
 	constructor(props){
 		super(props)
 		this.state = {
-			pageValue: '/archived',
+			pageValue: '/current',
 			erectileState: 'quarter chub'
 		}
 	}

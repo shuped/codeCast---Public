@@ -395,14 +395,17 @@ code {
   min-height: 100vh;
   max-height: 100vh;
   min-width: 100vw;
+  overflow-y: auto;
+}
+.App .stream-parent {
   overflow: hidden;
 }
-.App .component-container1 {
+.App .stream-parent .component-container1 {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas: "Filetree Video Chat";
 }
-.App .component-container1 .Filetree-display {
+.App .stream-parent .component-container1 .Filetree-display {
   position: relative;
   max-height: 52vh;
   overflow-y: auto;
@@ -411,32 +414,32 @@ code {
   grid-area: Filetree;
   background-color: white;
 }
-.App .component-container1 .Video-display {
+.App .stream-parent .component-container1 .Video-display {
   position: relative;
   height: 100%;
   width: 100%;
   grid-area: Video;
 }
-.App .component-container1 .Chat-display {
+.App .stream-parent .component-container1 .Chat-display {
   position: relative;
   height: 100%;
   width: 100%;
   grid-area: Chat;
 }
-.App .component-container2 {
+.App .stream-parent .component-container2 {
   display: grid;
   position: relative;
   height: 47vh;
   grid-template-columns: 50% 50%;
   grid-template-areas: "Code Terminal";
 }
-.App .component-container2 .Code-display {
+.App .stream-parent .component-container2 .Code-display {
   grid-column: span 6;
   position: relative;
   height: 100%;
   grid-area: Code;
 }
-.App .component-container2 .Terminal-display {
+.App .stream-parent .component-container2 .Terminal-display {
   grid-column: span 6;
   position: relative;
   display: flex;

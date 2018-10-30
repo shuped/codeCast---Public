@@ -52,36 +52,69 @@ app.get('/api/filecontent', (req, res) => {
 app.get('/api/scheduledStreams/', (req, res) => {
   const testStreams = {
     "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Node JS',
+      user: 'Spencer',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdass',
-      languageImage: 'image',
+      languageImage: 'javascript',
       isActive: false
     },
     "asdasx": {
-      title: 'Javascript4U',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'HTML CSS',
+      user: 'Angela',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdasx',
-      languageImage: 'image',
+      languageImage: 'csshtml',
       isActive: false
     },
     "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Ruby',
+      user: 'Spencer',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdfad',
-      languageImage: 'image',
+      languageImage: 'ruby',
+      isActive: false
+    },
+    "asdwws": {
+      title: 'Node JS',
+      user: 'Spencer',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdwws',
+      languageImage: 'javascript',
+      isActive: false
+    },
+    "asdafs": {
+      title: 'Node JS',
+      user: 'Spencer',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdafs',
+      languageImage: 'javascript',
+      isActive: false
+    },
+    "asyyss": {
+      title: 'Csharp',
+      user: 'Nima',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asyyss',
+      languageImage: 'csharp',
       isActive: false
     }
   };
@@ -97,40 +130,71 @@ app.get('/api/scheduledStreams/', (req, res) => {
 app.get('/api/activeStreams/', (req, res) => {
   const testActiveStreams = {
     "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Node JS',
+      user: 'Spencer',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdass',
-      languageImage: 'image',
+      languageImage: 'javascript',
       isActive: true
     },
     "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Ruby',
+      user: 'Benji',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdfad',
-      languageImage: 'image',
+      languageImage: 'ruby',
       isActive: true
     },
     "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Javascript',
+      user: 'Space G',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdasv',
-      languageImage: 'image',
+      languageImage: 'javascript',
       isActive: true
-    }
-    
-  
+    },
+    "asdasg": {
+      title: 'Python',
+      user: 'Silvia',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdasg',
+      languageImage: 'python',
+      isActive: false
+    },
+    "asdash": {
+      title: 'HTML CSS',
+      user: 'Ardellia',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdash',
+      languageImage: 'csshtml',
+      isActive: false
+    },
+    "asdasi": {
+      title: 'C sharp',
+      user: 'Jeff',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asdasi',
+      languageImage: 'csharp',
+      isActive: false
+    },
   };
 
   console.log('Get success');
@@ -140,38 +204,74 @@ app.get('/api/activeStreams/', (req, res) => {
 app.get('/api/archivedStreams/', (req, res) => {
   const testArchivedStreams = {
     "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Node',
+      user: 'Jeff',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdass',
-      languageImage: 'image',
+      languageImage: 'javascript',
       isActive: false,
       isArchived: true
     },
     "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Ruby',
+      user: 'Eric',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdfad',
-      languageImage: 'image',
+      languageImage: 'ruby',
       isActive: false,
       isArchived: true
     },
     "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
+      title: 'Python',
+      user: 'Joel',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
       scheduledDate: 'Thusday, August 12 2017',
       youtubeURL: null,
       userID: 1,
       streamID: 'asdasv',
-      languageImage: 'image',
+      languageImage: 'javascript',
+      isActive: false,
+      isArchived: true
+    },
+    "yuiuio": {
+      title: 'Csharp',
+      user: 'Angela',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'yuiuio',
+      languageImage: 'csharp',
+      isActive: false,
+      isArchived: true
+    },
+    "asfeif": {
+      title: 'Ruby',
+      user: 'Space G',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asfeif',
+      languageImage: 'ruby',
+      isActive: false,
+      isArchived: true
+    },
+    "asteun": {
+      title: 'Node',
+      user: 'Spencer',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+      scheduledDate: 'Thusday, August 12 2017',
+      youtubeURL: null,
+      userID: 1,
+      streamID: 'asteun',
+      languageImage: 'javascript',
       isActive: false,
       isArchived: true
     }
