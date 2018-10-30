@@ -13,8 +13,6 @@ const testData         = require('./testData.js');
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io               = require('socket.io')(server);
 
-
-
 const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
 const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
