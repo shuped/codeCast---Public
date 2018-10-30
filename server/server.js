@@ -5,12 +5,12 @@ const { postgraphile } = require('postgraphile');
 const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
-const io               = require('socket.io')(server);
 const PORT             = 8080;
-      
+
 const testData         = require('./testData.js');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const io               = require('socket.io')(server);
 
 
 
@@ -172,7 +172,7 @@ app.get('/api/filecontent/:file_uuid', (req, res) => {
 
 
 app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
+  const testScheduledStreams = {
     "asdass": {
       title: 'NodeNStuff',
       user: 'Spencer h-White',
