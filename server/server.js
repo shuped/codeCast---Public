@@ -169,11 +169,7 @@ app.route('/api/scheduledStreams/')
       const streamID = uuid().slice(0,9);
       testData[streamID] = {
         streamID,
-<<<<<<< HEAD
-        isActive: false,
-=======
         status: 'scheduled',
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
         youtubeURL: null,
         ...streamData
       };
@@ -191,11 +187,7 @@ app.route('/api/scheduledStreams/')
       ...streamData
     };
     res.status(200).send('PUT /api/scheduledStreams: Stream started');
-<<<<<<< HEAD
-  })
-=======
   });
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
 
 app.route('/api/activeStreams/')
   .get((req, res) => {
@@ -208,17 +200,6 @@ app.route('/api/activeStreams/')
       const streamID = uuid().slice(0,9);
       testData[streamID] = {
         streamID,
-<<<<<<< HEAD
-        isActive: true,
-        ...streamData
-      };
-      res.status(201).send('POST activeStream: Scheduled stream added to database.');
-    }
-    catch (e) {
-      res.status(304).send('POST activeStream: Failed to insert scheduled stream to database.')
-    };
-  })
-=======
         status: 'active',
         ...streamData
       };
@@ -228,7 +209,6 @@ app.route('/api/activeStreams/')
       res.status(304).send('POST activeStream: Failed to insert active stream to database.');
     };
   });
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
 
 app.route('/api/archivedStreams/')
   .get((req, res) => {
@@ -236,11 +216,7 @@ app.route('/api/archivedStreams/')
   })
   .post((req, res) => {
     res.send('To be implemented.')
-<<<<<<< HEAD
-  })
-=======
   });
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
 
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
