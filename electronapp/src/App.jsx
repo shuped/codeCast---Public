@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 //components
@@ -17,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <ScheduleNewStream />
+        <LiveStreamNow />
       </div>
     );
   }

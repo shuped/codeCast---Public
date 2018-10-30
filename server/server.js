@@ -171,10 +171,10 @@ app.route('/api/scheduledStreams/')
     const streamData = req.body;
     try {
       // insert into database, ensure id doesn't collide
-      const streamID = uuid().slice(0,9);
+      const streamID = uuid().slice(0,8);
       testData[streamID] = {
         streamID,
-        isActive: false,
+        status: 'scheduled',
         youtubeURL: null,
         ...streamData
       };
@@ -184,14 +184,36 @@ app.route('/api/scheduledStreams/')
       res.status(304).send('POST scheduledStream: Failed to insert scheduled stream to database.')
     };
   })
+  .put((req, res) => {
+    // Upsert query to database might replace this
+    // !!missing sad path!!
+    const streamData = req.body;
+    testData[streamData.streamID] = {
+      ...streamData
+    };
+    res.status(200).send('PUT /api/scheduledStreams: Stream started');
+  });
 
 app.route('/api/activeStreams/')
   .get((req, res) => {
     res.status(200).json(testData);
   })
   .post((req, res) => {
-    res.send('To be implemented.')
-  })
+    const streamData = req.body;
+    try {
+      // insert into database, ensure id doesn't collide
+      const streamID = uuid().slice(0,8);
+      testData[streamID] = {
+        streamID,
+        status: 'active',
+        ...streamData
+      };
+      res.status(201).send('POST activeStream: Active stream added to database.');
+    }
+    catch (e) {
+      res.status(304).send('POST activeStream: Failed to insert active stream to database.');
+    };
+  });
 
 app.route('/api/archivedStreams/')
   .get((req, res) => {
@@ -199,7 +221,7 @@ app.route('/api/archivedStreams/')
   })
   .post((req, res) => {
     res.send('To be implemented.')
-  })
+  });
 
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
@@ -245,3 +267,4 @@ app.post('/api/electron', (req, res) => {
   }
   
 });
+
