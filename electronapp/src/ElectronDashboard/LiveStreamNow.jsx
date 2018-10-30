@@ -102,4 +102,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(LiveStreamNow);
+export default withRouter(connect(null, mapDispatchToProps)(LiveStreamNow));
