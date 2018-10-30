@@ -1,7 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { Input, Select, DatePicker } from 'antd';
+
 import { postScheduledStream } from '../redux/ducks/streamsDuck.js'
+import { connect } from 'react-redux'; 
 
 const InputGroup = Input.Group;
 const Option = Select.Option;

@@ -29,13 +29,14 @@
     "redux-socket.io": "~1.4.0",
     "redux-thunk": "~2.3.0",
     "socket.io-client": "~2.1.1",
-    "uuid": "~3.3.2"
+    "uuid": "~3.3.2",
+    "xterm": "^3.8.0"
   },
   "proxy": "http://localhost:8080",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
     "sass": "sass --watch src/styles/scss:src/styles/css",
     "sass:build": "sass — update src/styles/scss:src/styles/css"
@@ -50,7 +51,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "next": "^7.0.2",
-    "node-sass": "~4.9.4"
+    "customize-cra": "~0.1.1",
+    "node-sass": "~4.9.4",
+    "react-app-rewired": "~1.6.2"
   }
 }

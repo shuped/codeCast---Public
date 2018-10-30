@@ -1,23 +1,26 @@
-//const ENV      = require ('dotenv');
-const app        = require('express')();
-const http       = require('http').Server(app);
+// const ENV              = require ('dotenv');
+const app              = require('express')();
+const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
-const path       = require('path');
-const morgan     = require('morgan');
-const bodyParser = require('body-parser');
-const PORT       = 8080;
+const path             = require('path');
+const morgan           = require('morgan');
+const bodyParser       = require('body-parser');
+const io               = require('socket.io')(server);
+const PORT             = 8080;
+      
+const testData         = require('./testData.js');
 
-const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
-const io = require('socket.io')(server);
 
-const rootPath = path.join(__dirname, '..');
-const buildPath = path.join(rootPath, 'client', 'build');
-const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
-let fileCache = null;
-let dirCache = null;
-let pathCache = null;
+const rootPath         = path.join(__dirname, '..');
+const buildPath        = path.join(rootPath, 'client', 'build');
+const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
+
+let fileCache          = null;
+let dirCache           = null;
+let pathCache          = null;
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -29,7 +32,7 @@ let pathCache = null;
 // }));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use(morgan('dev', {
   skip: (req, res) => {
@@ -42,6 +45,7 @@ app.use(morgan('dev', {
   }, stream: process.stdout
 }));
 
+<<<<<<< HEAD
 app.get('/api/filecontent', (req, res) => {
   let fileID = req.body;
   fileCache ? 
@@ -303,12 +307,15 @@ app.get('/*', (req, res) => {
   res.sendFile(devPath);
 });
 
+=======
+>>>>>>> 4caaf3cf8a91f833bbe5bd422e4cc4ffd5f26c5e
 io.on('connection', (socket) => {
 
   const clients = [];
   console.log(`Socket ${socket.id} connected`);
   clients.push(socket.id);
   console.log(clients);
+  io.of('/redux').emit({ type: 'DIRECTORY_UPDATE', payload: dirCache })
 
   socket.on('action', (action) => {
 
@@ -341,8 +348,6 @@ io.on('connection', (socket) => {
   });
 });
 
-
-
 const redux = io
   .of('/redux')
   .on('connection', (socket) => {
@@ -364,13 +369,8 @@ const redux = io
           redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
         },
         'server/file_change': (type, payload) => {
-
-          //**TODO: TRIGGER PUSH TO DIR TREE ON FILE UPDATE**//
-          console.log('server/file_change triggered', payload);
-          newFileVersion = payload;
-
-          //update the code viewer
-          redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
+          let file = fileCache[payload.fileID]
+          redux.emit('action', { type: 'FILE_UPDATE', payload: file });
         }
         
       };
@@ -395,39 +395,103 @@ const redux = io
   });
 
 const terminalRecord = {};
-
 const terminal = io
-  .of('/terminal')
-  .on('connection', (socket) => {
-    const termClients = [];
-    console.log(`Terminal Socket ${socket.id} connected`);
-    termClients.push(socket.id);
-    console.log(termClients);
+.of('/terminal')
+.on('connection', (socket) => {
+  const termClients = [];
+  console.log(`Terminal Socket ${socket.id} connected`);
+  termClients.push(socket.id);
+  console.log(termClients);
 
-    socket.on('data', (data) => {
-      let now = Date.now();
-      terminalRecord[now] = data;
-      terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
-    });
+  socket.on('data', (data) => {
+    let now = Date.now();
+    terminalRecord[now] = data;
+    terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+  });
   
 
 
-    socket.on('disconnect', () => {
-      console.log(`Terminal socket ${socket.id} disconnected`)
-      let clientIndex = termClients.findIndex(e => e === socket.id);
-      termClients.splice(clientIndex, 1);
-      console.log(termClients);
-    });
+  socket.on('disconnect', () => {
+    console.log(`Terminal socket ${socket.id} disconnected`)
+    let clientIndex = termClients.findIndex(e => e === socket.id);
+    termClients.splice(clientIndex, 1);
+    console.log(termClients);
   });
+});
+  
+app.get('/api/filecontent/:file_uuid', (req, res) => {
+  const uuid = req.params.file_uuid;
+  console.log(
+    'fileCache not null:', fileCache !== null, 
+    'dirCache not null:', dirCache !== null,
+    'fileCache[param] typeof:', fileCache && typeof fileCache[uuid]
+  );  
+  try {
+    fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
+  }
+  catch (e) {
+    res.status(404).send('No files cached');
+    throw e;
+  }
+});
+
+app.get('/api/scheduledStreams/', (req, res) => {
+  console.log('Get /scheduledStreams success');
+  res.status(200).json(testData);
+});
+
+app.get('/api/activeStreams/', (req, res) => {
+  const testActiveStreams = {};
+  for (let streamID in testData) {
+    if (testData[streamID].isActive === true) {
+      testActiveStreams[streamID] = testData[streamID];
+    }
+  }
+  console.log('Get success');
+  res.status(200).json(testActiveStreams);
+});
+
+app.get('/api/archivedStreams/', (req, res) => {
+
+  console.log('Get /archivedStreams success');
+  res.status(200).json(testData);
+});
+
+app.get('/*', (req, res) => {
+  res.status(200).json({ express: 'successful connection to express, /*', fileKeys: Object.keys(fileCache), dirCache });
+});
 
 
 
-// setTimeout(() => {
-//   console.log('directory update =================');
-//   redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: testDirectory });
-// }, 40000);
+//recieve file dir/content from electron
+app.post('/api/electron/file_update', (req, res) => {
+  let { file } = req.body;
 
-// setTimeout(() => {
-//   console.log('file update =================');
-//   redux.emit('action', { type: 'FILE_UPDATE', payload: ActiveViewFile });
-// }, 40000);
+  try {
+    // redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    res.status(200).send('Post request success /api/electron/file_update');
+  }
+  catch (e) {
+    console.log('Post to server failed /api/electron/file_update');
+    res.status(500).send('Post request failed');
+    throw e;
+  }
+  
+});
+
+app.post('/api/electron', (req, res) => {
+
+  try {
+    fileCache = req.body.content || fileCache;
+    dirCache = req.body.directory || dirCache;
+    pathCache = req.body.filepaths || pathCache;
+    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    res.status(200).json({ message: 'Post request success /api/electron', data: testData });
+  }
+  catch (e) {
+    console.log('Post to server failed:', e);
+    res.status(500).send('Post request failed /api/electron');
+    throw e;
+  }
+  
+});
