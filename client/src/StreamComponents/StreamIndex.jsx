@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Chat from './Chat/ChatMain.jsx';
+import LiveCodeDisplay from './FileDisplay/LiveCodeDisplay.jsx';
+import Video from './VideoStream/VideoStream.jsx';
+import Terminal from './Terminal/Terminal.jsx';
+import FileDirectory from './FileDirectory/FileDirectory.jsx';
 
-import Chat from './StreamComponents/Chat/ChatMain.jsx';
-import LiveCodeDisplay from './StreamComponents/FileDisplay/LiveCodeDisplay.jsx';
-import Video from './StreamComponents/VideoStream/VideoStream.jsx';
-import Terminal from './StreamComponents/Terminal/Terminal.jsx';
-import FileDirectory from './StreamComponents/FileDirectory/FileDirectory.jsx';
-
-class Stream extends Component (props) {
+class Stream extends Component {
 
   render() {
     return (

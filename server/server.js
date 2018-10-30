@@ -1,16 +1,17 @@
-// const ENV              = require ('dotenv');
+//const ENV            = require ('dotenv');
 const app              = require('express')();
 const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
 const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
-const io               = require('socket.io')(server);
+const uuid             = require('uuid/v1')
 const PORT             = 8080;
-      
+
 const testData         = require('./testData.js');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const io               = require('socket.io')(server);
 
 
 
@@ -32,7 +33,7 @@ let pathCache          = null;
 // }));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.json({limit: '50mb'}));
 
 app.use(morgan('dev', {
   skip: (req, res) => {
@@ -154,43 +155,56 @@ const terminal = io
     console.log(termClients);
   });
 });
+
   
+
+
+app.route('/api/scheduledStreams/')
+  .get((req, res) => {
+    // TODO remove test data
+    res.status(200).json(testData);
+  })
+  .post((req, res) => {
+    const streamData = req.body;
+    try {
+      // insert into database, ensure id doesn't collide
+      const streamID = uuid().slice(0,9);
+      testData[streamID] = {
+        streamID,
+        isActive: false,
+        youtubeURL: null,
+        ...streamData
+      };
+      res.status(201).send('POST scheduledStream: Scheduled stream added to databse.');
+    } 
+    catch (e) {
+      res.status(304).send('POST scheduledStream: Failed to insert scheduled stream to database.')
+    };
+  })
+
+app.route('/api/activeStreams/')
+  .get((req, res) => {
+    res.status(200).json(testData);
+  })
+  .post((req, res) => {
+    res.send('To be implemented.')
+  })
+
+app.route('/api/archivedStreams/')
+  .get((req, res) => {
+    res.status(200).json(testData);
+  })
+  .post((req, res) => {
+    res.send('To be implemented.')
+  })
+
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
-  console.log(
-    'fileCache not null:', fileCache !== null, 
-    'dirCache not null:', dirCache !== null,
-    'fileCache[param] typeof:', fileCache && typeof fileCache[uuid]
-  );  
   try {
     fileCache[uuid] ? res.status(200).json(fileCache[uuid]) : res.send('File not found') 
+  } catch (e) {
+    res.status(404).send('No files cached')
   }
-  catch (e) {
-    res.status(404).send('No files cached');
-    throw e;
-  }
-});
-
-app.get('/api/scheduledStreams/', (req, res) => {
-  console.log('Get /scheduledStreams success');
-  res.status(200).json(testData);
-});
-
-app.get('/api/activeStreams/', (req, res) => {
-  const testActiveStreams = {};
-  for (let streamID in testData) {
-    if (testData[streamID].isActive === true) {
-      testActiveStreams[streamID] = testData[streamID];
-    }
-  }
-  console.log('Get success');
-  res.status(200).json(testActiveStreams);
-});
-
-app.get('/api/archivedStreams/', (req, res) => {
-
-  console.log('Get /archivedStreams success');
-  res.status(200).json(testData);
 });
 
 app.get('/*', (req, res) => {
@@ -198,36 +212,33 @@ app.get('/*', (req, res) => {
 });
 
 
-
-//recieve file dir/content from electron
+//recieve file dir/content updates from electron
 app.post('/api/electron/file_update', (req, res) => {
-  let { file } = req.body;
-
+  let { file }= req.body;
+  
   try {
-    // redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
     res.status(200).send('Post request success /api/electron/file_update');
   }
   catch (e) {
-    console.log('Post to server failed /api/electron/file_update');
+    console.log('Post to server failed /api/electron/file_update :', e);
     res.status(500).send('Post request failed');
-    throw e;
   }
   
 });
 
 app.post('/api/electron', (req, res) => {
-
+  
   try {
     fileCache = req.body.content || fileCache;
     dirCache = req.body.directory || dirCache;
     pathCache = req.body.filepaths || pathCache;
     redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
-    res.status(200).json({ message: 'Post request success /api/electron', data: testData });
+    res.status(200).send('Post request success /api/electron');
   }
   catch (e) {
     console.log('Post to server failed:', e);
     res.status(500).send('Post request failed /api/electron');
-    throw e;
   }
   
 });
