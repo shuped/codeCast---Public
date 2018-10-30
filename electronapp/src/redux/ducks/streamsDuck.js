@@ -6,14 +6,12 @@ const axios = require('../../../api');
 const NEW_SCHEDULED_STREAM = 'NEW_SCHEDULED_STREAM';
 
 // Incoming
-const BROADCASTER_STREAMS_UPDATE = 'UPDATE_USER_STREAMS';
-
-
+const BROADCASTER_STREAMS_UPDATE = 'BROADCASTER_STREAMS_UPDATE';
 
 // Action Creator
-export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
+export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams });
 
-export const newScheduledStream = (newStream) => ({ type: BROADCASTER_NEW_STREAM, payload: newStream });
+export const newScheduledStream = (newStream) => ({ type: NEW_SCHEDULED_STREAM, payload: newStream });
 
 // STREAM REDUCER
 export const streamsReducer = (state = { scheduledStreams: ['empty'] }, action) => {
@@ -34,7 +32,7 @@ export const streamsReducer = (state = { scheduledStreams: ['empty'] }, action) 
 // AJAX Actions
 export const fetchBroadcasterStreams = (userID) => {
   return function (dispatch) {
-    return axios({
+    axios({
       method: 'get',
       url: `/api/scheduledStreams/`
       // url: `/api/scheduledStreams?user_id=${userID}`
@@ -60,22 +58,22 @@ export const postScheduledStream = (stream) => {
       console.log('Post scheduled API streams success', streamsJSON.data);
       dispatch(newScheduledStream());
     }).catch((err) => {
-      console.error('Error:', err.data);
+      console.error('Error: Post scheduled stream rejected:', err.data);
       throw err;
     });
   }
 }
 
-
 export const postDeleteStream = (streamID) => {
-  // refactor as above
-  axios({
-    method: 'delete',
-    url: `/api/scheduledStreams?stream_id=${streamID}`
-  }).then((streamsJSON) => {
-    console.log(streamsJSON.data);
-  }).catch((err) => {
-    console.error('Error:', err.data);
-    throw err;
-  });
+  return function (dispatch) {
+    axios({
+      method: 'delete',
+      url: `/api/scheduledStreams?stream_id=${streamID}`
+    }).then((streamsJSON) => {
+      console.log(streamsJSON.data);
+    }).catch((err) => {
+      console.error('Error:', err.data);
+      throw err;
+    });
+  }
 }
