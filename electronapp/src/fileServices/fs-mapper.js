@@ -162,18 +162,6 @@ function done(targetDir) {
   return (err, res, root) => {
     if (err) throw err;
     makeJSON(res, root, targetDir);
-  }
-}
-
-//takes directory path and callback
-function readDir(dir, done, root = dir) {
-  // collects results
-  let results = [];
-  // reads directory passed to readDir()
-  fs.readdir(dir, function(err, items) {
-    //returns error if err
-    if (err) return done(err);
-    //init index counter for current dir
     let i = 0;
     //magical recursive IIFE
     (function next() {
@@ -199,7 +187,7 @@ function readDir(dir, done, root = dir) {
         return next();
       });
     })();
-  });
+  };
 };
 
 module.exports = {
