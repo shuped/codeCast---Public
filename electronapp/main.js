@@ -4,6 +4,11 @@ const url = require('url')
 const isDev = require('electron-is-dev');
 const path = require('path');
 const fs = require ('fs');
+const uuidv1 = require('uuid/v1');
+const uuidv4 = require('uuid/v4');
+const directoryWatcher = require('./src/fileServices/directoryWatcher')
+const chokidar = require('chokidar');
+const { readDir, done } = require('./src/fileServices/fs-mapper.js');
 
 const decoder = new StringDecoder('utf8');
 
@@ -73,15 +78,15 @@ function createMainWindow () {
 		protocol: 'file:',
 		slashes: true
 	}));
-  
+   
 	if (isDev) {
-    const {
+    const { 
 			default: installExtension,
 			REACT_DEVELOPER_TOOLS,
 			REDUX_DEVTOOLS,
 		} = require('electron-devtools-installer');
-    
-		installExtension(REACT_DEVELOPER_TOOLS)
+     
+		installExtension(REACT_DEVELOPER_TOOLS)  
 			.then(name => {
         console.log(`Added Extension: ${name}`);
 			})
@@ -104,8 +109,8 @@ function createMainWindow () {
 	});
 }
 
-let terminalWindow
-async function createTerminalWindow() {
+let terminalWindow, watcher;
+function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 40,
@@ -138,7 +143,7 @@ generateMenu = () => {
   const template = [
     {
       label: 'File',
-			submenu: [{ role: 'about' }, { role: 'quit' }],
+			submenu: [{ role: 'about' }, { role: 'quit' }]
 		},
 		{
 			label: 'Edit',
@@ -151,7 +156,7 @@ generateMenu = () => {
 				{ role: 'paste' },
 				{ role: 'pasteandmatchstyle' },
 				{ role: 'delete' },
-				{ role: 'selectall' },
+				{ role: 'selectall' }
 			],
 		},
 		{
@@ -165,12 +170,12 @@ generateMenu = () => {
 				{ role: 'zoomin' },
 				{ role: 'zoomout' },
 				{ type: 'separator' },
-				{ role: 'togglefullscreen' },
+				{ role: 'togglefullscreen' }
 			],
 		},
 		{
 			role: 'window',
-			submenu: [{ role: 'minimize' }, { role: 'close' }],
+			submenu: [{ role: 'minimize' }, { role: 'close' }]
 		},
 		{
 			role: 'help',
@@ -178,7 +183,7 @@ generateMenu = () => {
 				{
 					click() {
 						require('electron').shell.openExternal(
-							'https://github.com/Benji-Leboe/codeCast',
+							'https://github.com/Benji-Leboe/codeCast'
 						);
 					},
 					label: 'Learn More',
@@ -186,10 +191,10 @@ generateMenu = () => {
 				{
 					click() {
 						require('electron').shell.openExternal(
-							'https://github.com/Benji-Leboe/codeCast/issues',
+							'https://github.com/Benji-Leboe/codeCast/issues'
 						);
 					},
-					label: 'File Issue on GitHub',
+					label: 'File Issue on GitHub'
 				},
 			],
 		},
@@ -200,7 +205,44 @@ generateMenu = () => {
 app.on('ready', () => {
   createMainWindow();
 	generateMenu();
-	getAllFiles();
+
+	let projectRootDirectroy = path.join(__dirname, '..');
+
+	chokidar.watch('.', {
+		ignored: /node_modules|\.git/,
+		persistent: true,
+		ignoreInitial: true
+		// followSymlinks: false,
+		// useFsEvents: false,
+		// usePolling: false
+	}).on('all', function(event, pathArg) {
+		const eventMethods = {
+			'add': (filePath) => {
+			console.log('add', filePath);
+				
+			},
+			'addDir': (filePath) => {
+				console.log('addDir', filePath);
+
+			},
+			'change': (filePath) => {
+				console.log('change', filePath);
+
+			},
+			'unlink': (filePath) => {
+				console.log('unlink', filePath);
+
+			}
+		}
+		console.log('event, path:', event, pathArg);  
+		// event specific behavior;s
+		eventMethods[event] ? eventMethods[event](pathArg) : console.log('Event missed:', event);
+	})
+		.on('ready', async function() {
+			console.log('Ready');
+			readDir(__dirname, done(__dirname));
+		//  TODO: Move the axios to here instead of fs-mapper
+	});
 });
 
 app.on('window-all-closed', () => {
@@ -214,6 +256,6 @@ app.on('activate', () => {
 });
 
 ipcMain.on('terminalOpen', (event, arg) => {
-	console.log('terminalOpen in createWindow')
-	createTerminalWindow()
+	console.log('terminalOpen in createWindow');
+	createTerminalWindow();
 });

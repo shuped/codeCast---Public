@@ -4,9 +4,10 @@
   "description": "codeCast Broadcaster electron app, with xterm and react.",
   "main": "main.js",
   "scripts": {
-    "start": "PORT=4000 electron . --ignore-gpu-blacklist",
     "build": "webpack",
-    "rebuild-pty": "electron-rebuild -f -w node-pty"
+    "rebuild-pty": "electron-rebuild -f -w node-pty",
+    "build-start": "npm run build && npm start",
+    "start": "electron . --ignore-gpu-blacklist"
   },
   "proxy": "http://localhost:8080",
   "repository": "https://github.com/benji-leboe/codeCast",
