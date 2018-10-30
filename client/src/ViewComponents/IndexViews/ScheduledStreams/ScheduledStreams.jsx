@@ -11,38 +11,6 @@ import { fetchScheduledStreams } from '../../../redux/ducks/streamsDuck.js'
 class ScheduledStreams extends Component {  
   constructor(props) {  
     super(props); 
-    this.state = {
-      // scheduledStreams: [
-      //   {
-      //     title: 'Python',
-      //     presentor: 'Spencer',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     startDate: 'Thusday, August 12 2017',
-      //     imagePath: pythonImg
-      //   },
-      //   {
-      //     title: 'Javascript',
-      //     presentor: 'Benji',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     startDate: 'Wednesday, April 11 2017',
-      //     imagePath: javascriptImg
-      //   },
-      //   {
-      //     title: 'HTML/CSS',
-      //     presentor: 'Jeff',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     startDate: 'Tuesday, March 27 2017',
-      //     imagePath: htmlcssImg
-      //   },
-      //   {
-      //     title: 'Javascript',
-      //     presentor: 'Joel',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     startDate: 'Thusday, August 12 2017',
-      //     imagePath: javascriptImg
-      //   }
-      // ]
-    };
   }
 
   componentDidMount() {

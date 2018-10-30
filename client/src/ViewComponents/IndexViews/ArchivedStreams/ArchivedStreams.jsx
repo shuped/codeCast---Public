@@ -13,58 +13,9 @@ import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js'
 class ArchivedStreams extends Component {  
   constructor(props) {  
     super(props); 
-    this.state = {
-      // scheduledStreams: [
-      //   {
-      //     title: 'Javascript',
-      //     presentor: 'Benji',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     broadcastDate: 'Wednesday, April 11 2017',
-      //     archivedId: 2,
-      //     imagePath: javascriptImg
-      //   },
-      //   {
-      //     title: 'HTML/CSS',
-      //     presentor: 'Jeff',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     broadcastDate: 'Tuesday, March 27 2017',
-      //     archivedId: 3,
-      //     imagePath: htmlcssImg
-      //   },
-      //   {
-      //     title: 'Python',
-      //     presentor: 'Spencer',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     broadcastDate: 'Thusday, August 12 2017',
-      //     archivedId: 1,
-      //     imagePath: pythonImg
-      //   },
-      //   {
-      //     title: 'Node',
-      //     presentor: 'Space G',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     broadcastDate: 'Thusday, August 12 2017',
-      //     archivedId: 4,
-      //     imagePath: javascriptImg
-      //   },
-      //   {
-      //     title: 'Ruby',
-      //     presentor: 'Mandy',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     broadcastDate: 'Wednesday, April 11 2017',
-      //     archivedId: 5,
-      //     imagePath: rubyImg
-      //   },
-      //   {
-      //     title: 'Express',
-      //     presentor: 'Silvia',
-      //     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-      //     broadCastDate: 'Tuesday, March 27 2017',
-      //     archivedId: 6,
-      //     imagePath: javascriptImg
-      //   }
-      // ]
-    };
+    // this.state = {
+      
+    // };
   }
 
   componentDidMount() {
@@ -117,9 +68,12 @@ class ArchivedStreams extends Component {
     });
 
     return (
-      <main className="streams">
-        { renderStreams }
-      </main>
+      <div>
+        <h1>HI THERE</h1>
+        <main className="streams">
+          { renderStreams }
+        </main>
+      </div>
     );
   }
 
