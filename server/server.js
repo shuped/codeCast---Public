@@ -203,7 +203,7 @@ app.route('/api/activeStreams/')
         status: 'active',
         ...streamData
       };
-      res.status(201).send('POST activeStream: Active stream added to database.');
+      res.status(201).json({ message: "Stream started", streamID });;
     }
     catch (e) {
       res.status(304).send('POST activeStream: Failed to insert active stream to database.');
