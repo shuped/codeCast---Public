@@ -7,6 +7,8 @@ const morgan     = require('morgan');
 const bodyParser = require('body-parser');
 const PORT       = 8080;
 
+const testData   = require('./testData.js');
+
 const server = http.listen(PORT, () => console.log('App listening on ' + PORT));
 
 const io = require('socket.io')(server);
@@ -17,6 +19,7 @@ const devPath = path.join(rootPath, 'client', 'public', 'index.html');
 
 let fileCache = null;
 let dirCache = null;
+let pathCache = null;
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -48,117 +51,27 @@ app.get('/api/filecontent', (req, res) => {
     res.status(204).send('File not found');
 });
 
-app.get('/api/scheduledStreams/', (req, res) => {
-  const testStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: false
-    },
-    "asdasx": {
-      title: 'Javascript4U',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasx',
-      languageImage: 'image',
-      isActive: false
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: false
-    }
-  };
 
+app.get('/api/scheduledStreams/', (req, res) => {
+  const testScheduledStreams = 
+
+  // const query = req.query.user_id || '*';
   
   console.log('Get success');
-  res.status(200).json(testStreams);
+  res.status(200).json(testScheduledStreams);
 });
 
+
+
 app.get('/api/activeStreams/', (req, res) => {
-  const testActiveStreams = {
-    "asdass": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdass',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdfad": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfad',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdasv": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdasv',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdfqa": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfqa',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdatf": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdatf',
-      languageImage: 'image',
-      isActive: true
-    },
-    "asdfpl": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfpl',
-      languageImage: 'image',
-      isActive: true
+  const testActiveStreams = {};
+  for (let streamID in testData) {
+    if (testData[streamID].isActive === true) {
+      testActiveStreams[streamID] = testData[streamID];
     }
-  };
+  }
+  
+  
 
   console.log('Get success');
   res.status(200).json(testActiveStreams);
@@ -201,49 +114,17 @@ app.get('/api/archivedStreams/', (req, res) => {
       languageImage: 'image',
       isActive: false,
       isArchived: true
-    },
-    "asdfqa": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfqa',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
-    },
-    "asdatf": {
-      title: 'NodeNStuff',
-      user: 'Spencer h-White',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdatf',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: false
-    },
-    "asdfpl": {
-      title: 'RubyNStuff',
-      user: 'Spencer Mc-Whhite',
-      description: 'asdasdasasdasdasdasfsdfadsfasffasdsadsafsdfadsfsdsadasdsafasdfadsfsadsadasdsadsada',
-      scheduledDate: 'Thusday, August 12 2017',
-      youtubeURL: null,
-      userID: 1,
-      streamID: 'asdfpl',
-      languageImage: 'image',
-      isActive: false,
-      isArchived: true
     }
   };
 
-  
   console.log('Get success');
   res.status(200).json(testArchivedStreams);
 });
+
+app.post('/api/streams'), (req, res) => {
+  testData[req.body.stream.streamID] =  req.body.stream;
+  console.log(testData);
+}
 
 //recieve file dir/content from electron
 app.post('/api/electron', (req, res) => {
@@ -251,6 +132,7 @@ app.post('/api/electron', (req, res) => {
   try {
     fileCache = req.body.content;
     dirCache = req.body.directory;
+    pathCache = req.body.filepaths;
     res.status(200).send('Post request success');
   }
   catch (e) {
@@ -277,9 +159,6 @@ io.on('connection', (socket) => {
     const actions = {
       'server/new_connection': (type, payload) => {
         console.log('Server message:', payload);
-        if (dirCache !== null) {
-          sendDirTree(dirCache);
-        }
       }
     }
 
@@ -313,7 +192,7 @@ const redux = io
   .on('connection', (socket) => {
 
     const clients = [];
-    console.log(`Socket ${socket.id} connected`);
+    console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
    
@@ -337,6 +216,7 @@ const redux = io
           //update the code viewer
           redux.emit('action', { type: 'FILE_UPDATE', payload: newFileVersion });
         }
+        
       };
       function defaultReduxAction(type, payload) {
         console.log("Default redux action triggered");
@@ -346,14 +226,14 @@ const redux = io
       actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
 
       socket.on('disconnect', () => {
-        console.log(`Socket ${socket.id} disconnected`)
+        console.log(`Redux ${socket.id} disconnected`)
         let clientIndex = clients.findIndex(e => e === socket.id);
         clients.splice(clientIndex, 1);
         console.log(clients);
       });
 
       socket.on('error', (err) => {
-        console.log(err, `from ${socket.id}`);
+        console.log(err, `from redux: ${socket.id}`);
       });
     });
   });
