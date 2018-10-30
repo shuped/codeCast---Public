@@ -14,7 +14,8 @@ class ScheduleNewStream extends React.Component {
     super();
     this.state = {
       title: 'Title your stream...',
-      user: 'userID',
+      userID: 'userID',
+      user: 'userName',
       description: 'What are you coding today?',
       scheduledDate: 'NOW!',
       languageImage: 'javascript'
