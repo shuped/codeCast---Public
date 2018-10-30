@@ -166,7 +166,7 @@ app.route('/api/scheduledStreams/')
     const streamData = req.body;
     try {
       // insert into database, ensure id doesn't collide
-      const streamID = uuid().slice(0,9);
+      const streamID = uuid().slice(0,8);
       testData[streamID] = {
         streamID,
         status: 'scheduled',
@@ -197,7 +197,7 @@ app.route('/api/activeStreams/')
     const streamData = req.body;
     try {
       // insert into database, ensure id doesn't collide
-      const streamID = uuid().slice(0,9);
+      const streamID = uuid().slice(0,8);
       testData[streamID] = {
         streamID,
         status: 'active',
