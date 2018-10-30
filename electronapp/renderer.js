@@ -1,9 +1,10 @@
+const fit = require('xterm/lib/addons/fit/fit');
 const os = require('os');
 const pty = require('node-pty');
 const Terminal = require('xterm').Terminal;
 const socket = require('socket.io-client');
-const directoryWatcher = require('./src/fileServices/directoryWatcher.js')
-const path = require('path')
+const directoryWatcher = require('./src/fileServices/directoryWatcher.js');
+const path = require('path');
 const io = socket.connect('http://localhost:8080/terminal');
 
 // Initialize node-pty with an appropriate shell
@@ -16,9 +17,11 @@ const ptyProcess = pty.spawn(shell, [], {
 });
 
 // Initialize xterm.js and attach it to the DOM
+Terminal.applyAddon(fit);
 const xterm1 = new Terminal({ scrollback: 9999999 });
 
 xterm1.open(document.getElementById('xterm1'));
+xterm1.fit();
 
 // Setup communication between xterm.js and node-pty
 xterm1.on('data', (data) => {
