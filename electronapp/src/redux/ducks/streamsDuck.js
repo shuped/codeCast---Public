@@ -12,8 +12,6 @@ const BROADCASTER_STREAMS_UPDATE = 'UPDATE_USER_STREAMS';
 // Action Creator
 export const updateBroadcasterStreams = (scheduledStreams) => ({ type: BROADCASTER_STREAMS_UPDATE, payload: scheduledStreams  });
 
-export const newScheduledStream = (newStream) => ({ type: BROADCASTER_NEW_STREAM, payload: newStream })
-
 // STREAM REDUCER
 export const streamsReducer = (state = {scheduledStreams: ['empty']}, action) => {
   switch(action.type) {
@@ -45,20 +43,21 @@ export const fetchBroadcasterStreams = (userID) => {
   };
 }
 
-// export const postScheduledStream = (stream) => {
-//   return function (dispatch) {
-//     axios({
-//       method: 'post',
-//       url: '/api/stream/',
-//     }).then((streamsJSON) => {
-//       console.log(streamsJSON.data);
-//       dispatch(newScheduledStream())
-//     }).catch((err) => {
-//       console.error('Error:', err.data);
-//       throw err;
-//     });
-//   }
-// }
+export const postScheduledStream = (stream) => {
+  return function (dispatch) {
+    axios({
+      method: 'post',
+      url: '/api/streams/',
+      data: { stream }
+    }).then((streamsJSON) => {
+      console.log('Post scheduled API streams success', streamsJSON.data);
+    }).catch((err) => {
+      console.error('Error:', err.data);
+      throw err;
+    });
+  }
+}
+
 
 
 export const postDeleteStream = (streamID) => {
