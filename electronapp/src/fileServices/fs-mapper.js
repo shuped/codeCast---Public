@@ -5,6 +5,9 @@ const path = require('path');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
 
+const axios = require('../../redux/ducks/api');
+
+
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
   //collect resolved promises
@@ -82,7 +85,10 @@ async function makeJSON(array, root, targetDir) {
     let fpath = file.split('/');
     let targetFile = fpath.pop();
     //list of files and extensions to ignore
-    const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 'node_modules', 'package-lock.json', '.git', '.scssc'];
+    const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 
+      'node_modules', 'package-lock.json', '.git', '.scssc', '.psd', '.pdf',
+      'directory.json', 'content.json', 'filepaths.json', '.gif', '.webp'];
+
     const check = new RegExp(ignore.join('|')).test(targetFile);
 
     //check for valid file extensions
@@ -116,28 +122,52 @@ async function makeJSON(array, root, targetDir) {
     }
   }
   //resolve all promises in array 
-  let resolved = await Promise.each(await promises, resolver);
+
+  Promise.each(await promises, resolver).then((resolved) => {
+    resolved.forEach((res, i) => {
+      fileObj[res.id] = res.content;
+    });
+
+    // TEMPORARY POST REQUEST INSIDE MAPPER
+    axios({
+      method: 'post',
+      url: `/api/electron`,
+      data: {
+        streamID: null,
+        directory: dirObj,
+        content: fileObj,
+        paths: pathObj
+      },
+      maxContentLength: Infinity
+    })
+    .then(() => console.log('Post success to /api/electron in fs mapper'))
+    // TODO error handle without infinite axios loop
+    .catch((err) => {
+      console.error('Post failure', err)
+    })
+  })
+  //  END OF TEMPORARY CHANGE
+
   //iterate through resolved promises and assign id hashes to file contents
-  resolved.forEach((res, i) => {
-    fileObj[res.id] = res.content;
-  });
   //write directory and content objects to file
-  fs.writeFile(`${targetDir}/content.json`, JSON.stringify(fileObj), (err) => {
-    if (err) throw err;
-  });
-  fs.writeFile(`${targetDir}/directory.json`, JSON.stringify(dirObj), (err) => {
-    if (err) throw err;
-  });
-  fs.writeFile(`${targetDir}/filepaths.json`, JSON.stringify(pathObj), (err) => {
-    if (err) throw err;
-  });
+  // fs.writeFile(`${targetDir}/content.json`, JSON.stringify(fileObj), (err) => {
+  //   if (err) throw err;
+  // });
+  // fs.writeFile(`${targetDir}/directory.json`, JSON.stringify(dirObj), (err) => {
+  //   if (err) throw err;
+  // });
+  // fs.writeFile(`${targetDir}/filepaths.json`, JSON.stringify(pathObj), (err) => {
+  //   if (err) throw err;
+  // });
 }
 
 //when readDir is complete, call function to build directory and file content objects
 function done(targetDir) {
   return (err, res, root) => {
     if (err) throw err;
+
     makeJSON(res, root, targetDir);
+
   }
 }
 
