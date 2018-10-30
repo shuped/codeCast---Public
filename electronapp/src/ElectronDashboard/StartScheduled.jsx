@@ -4,6 +4,8 @@ import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
 import { putScheduledStream } from '../redux/ducks/streamsDuck.js'
 
+import { Router, withRouter, Link } from 'react-router-dom';
+
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
@@ -43,7 +45,7 @@ class StartScheduled extends Component {
 
       <main className="start-scheduled">
         <header className="header">
-          <Button id="dashboard-btn" type="primary">Dashboard</Button>
+          <Link to='/' id="dashboard-btn">Dashboard</Link>
           <div className="logoPlaceholder">p</div>
         </header>
         <div className="main-container">
@@ -70,7 +72,7 @@ class StartScheduled extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    stagedStream: state.streams.stagedStream
+    stagedStream: state.streams.stagedStream[0]
   }
 }
 
@@ -80,4 +82,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(StartScheduled);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(StartScheduled));

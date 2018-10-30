@@ -3,6 +3,9 @@ import { Button } from 'antd';
 import { fetchBroadcasterStreams, postDeleteStream, stageStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
+import { Router, withRouter, Link } from 'react-router-dom';
+
+
 class Dashboard extends Component {
   
   componentDidMount() {
@@ -37,7 +40,7 @@ class Dashboard extends Component {
     const { title, scheduledDate, scheduledTime, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
-        <div className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>||||</div>
+        <Link to='/StartScheduled' className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID)} >Test</Link>
         <p>{ title }</p>
         <div>
           <div className="date-time">
@@ -97,4 +100,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
