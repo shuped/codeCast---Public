@@ -43,7 +43,7 @@ class LiveStreamNow extends React.Component {
     // TODO: check form validation before terminalOpen and form submit
     this.props.postActiveStream(this.state);
     ipcRenderer.send('terminalOpen', true);
-    
+    this.props.history.push('/');
     // TODO: show broadcasting view
   };
 
