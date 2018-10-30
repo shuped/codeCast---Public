@@ -2,15 +2,10 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { putScheduledStream } from '../redux/ducks/streamsDuck';
-
-=======
 import { putScheduledStream } from '../redux/ducks/streamsDuck.js'
 
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -20,15 +15,9 @@ class StartScheduled extends Component {
   constructor() {
     super();
     this.state = {
-<<<<<<< HEAD
-      youtubeURL: 'www.youtube.ca'
-    }
-  }
-=======
       youtubeURL: 'Enter the URL for your youtube LiveStream here'
     };
   };
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
 
   YoutubeUrlInput = (event) => {
     this.setState({youtubeURL: event.target.value})
@@ -37,13 +26,6 @@ class StartScheduled extends Component {
   HandleSubmit = (event) => {
     event.preventDefault();
     //redirect to broadcast page
-<<<<<<< HEAD
-    this.props.startScheduledStream({
-      ...this.props.stagedStream,
-      isActive:true,
-      youtubeURL: this.state.youtubeURL
-    });
-=======
 
     this.props.startScheduledStream({
       ...this.props.stagedStream,
@@ -54,7 +36,6 @@ class StartScheduled extends Component {
     ipcRenderer.send('terminalOpen', true);
     console.log(this.state);
     
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
   }
 
   render() {  
@@ -95,16 +76,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-<<<<<<< HEAD
-    startScheduledStream: (stream) => dispatch(putScheduledStream(stream)),
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(StartScheduled);
-=======
     startScheduledStream: (stream) => dispatch(putScheduledStream(stream))
   }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(StartScheduled);
->>>>>>> c2f3d8eff3ab858cbae8fa9d748e1c46b9894095
