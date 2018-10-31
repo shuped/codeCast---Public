@@ -146,6 +146,7 @@ const terminal = io
   console.log(`Terminal Socket ${socket.id} connected`);
   termClients.push(socket.id);
   console.log(termClients);
+  terminal.emit('terminalRecord', terminalRecord);
 
   socket.on('data', (data) => {
     let now = Date.now();
