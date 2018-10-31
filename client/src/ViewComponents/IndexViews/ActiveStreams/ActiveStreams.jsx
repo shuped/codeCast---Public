@@ -22,7 +22,6 @@ class ActiveStreams extends Component {
     console.log(streamClicked);
   }
 
-
   MakeActiveStreamCard = (props) => {
     const { title, user, description, streamID, languageImage } = props;
     // missing image path
