@@ -13,7 +13,7 @@ import Stream from '../../../StreamComponents/StreamIndex.jsx';
 
 
 class ArchivedStreams extends Component { 
-
+  
   componentDidMount() {
     this.props.fetchArchivedStreams();
   }
@@ -71,7 +71,6 @@ class ArchivedStreams extends Component {
 
     return (
       <div>
-        <Route path="/archived/:id" component={ Stream } />
         <main className="streams">
           { renderStreams }
         </main>

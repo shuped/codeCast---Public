@@ -71,7 +71,7 @@ class ActiveStreams extends Component {
 
     return (
       <div>
-        <Route path="/active/:id" component={ Stream }/>
+        
         <main className="streams">
           { renderStreams }
         </main>
