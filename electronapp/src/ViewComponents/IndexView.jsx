@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import ElectronDashboard from '../ElectronDashboard/ElectronDashboard.jsx';
 import LiveStreamNow from '../ElectronDashboard/LiveStreamNow.jsx';
 import ScheduleNewStream from '../ElectronDashboard/ScheduleNewStream.jsx';
@@ -18,4 +18,4 @@ function ReactRouter() {
   );
 };
 
-export default ReactRouter;
+export default withRouter(ReactRouter);

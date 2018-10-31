@@ -64,7 +64,7 @@ class ScheduleNewStream extends React.Component {
             <div className="logoPlaceholder">p</div>
           </header>
           <div className="inputs-container">
-            <h1>New Scheduled Stream</h1>
+            <h1>Schedule A Stream</h1>
 
             <div className="forms-container">
               <form id="form" onSubmit={this.HandleSubmit}>
@@ -91,6 +91,10 @@ class ScheduleNewStream extends React.Component {
                       <Option value="default">----</Option>
                       <Option value="javascript">JavaScript</Option>
                       <Option value="ruby">Ruby</Option>
+                      <Option value="csshtml">CSS/HTML</Option>
+                      <Option value="csharp">Csharp</Option>
+                      <Option value="python">Python</Option>
+                      <Option value="php">PHP</Option>
                     </Select>
                   </InputGroup>
                   <input type="submit" value="Submit" />

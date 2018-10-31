@@ -1,12 +1,12 @@
 {
-  "asdass": {
+  "streamidthatworks": {
     "title": "Node",
     "user": "Jeff",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "description": "Its Wednesday My Dudes! \nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
     "scheduledDate": "Thusday, August 12 2017",
-    "youtubeURL": null,
+    "youtubeURL": "https://www.youtube.com/watch?v=c_IVcbEez8o",
     "userID": 1,
-    "streamID": "asdass",
+    "streamID": "streamidthatworks",
     "languageImage": "javascript",
     "status": "active"
   },

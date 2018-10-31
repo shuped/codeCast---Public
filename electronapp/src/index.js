@@ -4,6 +4,7 @@ import store from './redux/store/index.js';
 import Root from './Root.jsx';
 import './styles/css/index.css';
 
+
 ReactDOM.render(
   <Root store={ store } />, 
   document.getElementById('root')

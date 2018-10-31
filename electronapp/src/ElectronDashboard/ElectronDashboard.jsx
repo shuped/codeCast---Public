@@ -70,7 +70,6 @@ class Dashboard extends Component {
           
             <div className="stream-controls">
               <Link to='/LiveStreamNow' id="instant">Start a Stream</Link>
-              {/* missing confirm button delete button on click */}
               <Link to='/ScheduleNewStream' id="scheduleNew" >Schedule a Stream</Link>
             </div>
           </div>

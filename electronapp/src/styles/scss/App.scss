@@ -1,0 +1,11 @@
+@import 'partials/electronDashBoard.scss';
+@import 'partials/liveStreamNow.scss';
+@import 'partials/scheduleNewStream.scss';
+@import 'partials/startScheduled.scss';
+
+// testing purposes delete me once electron can host its own content
+.App {
+  width: 800px;
+  height: 600px;
+  background-color: darkgray;
+} 
