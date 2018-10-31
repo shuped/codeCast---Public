@@ -4,6 +4,7 @@ import { Input, Select, DatePicker } from 'antd';
 import { connect } from 'react-redux'; 
 
 import { postScheduledStream } from '../redux/ducks/streamsDuck.js'
+import { Router, withRouter, Link, Redirect } from 'react-router-dom';
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -48,9 +49,9 @@ class ScheduleNewStream extends React.Component {
   HandleSubmit = (event) => {
     event.preventDefault();
     //redirect to broadcast page
-    this.props.postScheduledStream(this.state)
+    this.props.postScheduledStream(this.state);
     console.log(this.state)
-    
+    this.props.history.push('/');
   }
 
   render() {  
@@ -59,14 +60,14 @@ class ScheduleNewStream extends React.Component {
 
         <main className="new-stream">
           <header className="header">
-            <Button id="dashboard-btn" type="primary">Dashboard</Button>
+            <Link to='/' id="dashboard-btn">Dashboard</Link>
             <div className="logoPlaceholder">p</div>
           </header>
           <div className="inputs-container">
             <h1>New Scheduled Stream</h1>
 
             <div className="forms-container">
-              <form onSubmit={this.HandleSubmit}>
+              <form id="form" onSubmit={this.HandleSubmit}>
                 <div className="title-input">
                   <h3>Title:</h3>
                   <input type="text" title={this.state.title} onChange={this.TitleOnChange} />
@@ -118,5 +119,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(null, mapDispatchToProps)(ScheduleNewStream);
+export default withRouter(connect(null, mapDispatchToProps)(ScheduleNewStream));
 
