@@ -4,6 +4,8 @@ import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
 import { postActiveStream } from '../redux/ducks/streamsDuck.js'
 
+import { Router, withRouter, Link } from 'react-router-dom';
+
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
@@ -41,7 +43,7 @@ class LiveStreamNow extends React.Component {
     // TODO: check form validation before terminalOpen and form submit
     this.props.postActiveStream(this.state);
     ipcRenderer.send('terminalOpen', true);
-    
+    this.props.history.push('/');
     // TODO: show broadcasting view
   };
 
@@ -49,7 +51,7 @@ class LiveStreamNow extends React.Component {
     return (
       <main className="new-stream">
         <header className="header">
-          <Button id="dashboard-btn" type="primary">Dashboard</Button>
+          <Link to='/' id="dashboard-btn">Dashboard</Link>
           <div className="logoPlaceholder">codeCast</div>
         </header>
         <div className="inputs-container">
@@ -100,4 +102,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(LiveStreamNow);
+export default withRouter(connect(null, mapDispatchToProps)(LiveStreamNow));
