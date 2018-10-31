@@ -16,7 +16,7 @@ function executor(action, emit, next, dispatch) {
 const middleware = [
   socketMW,
   thunk
-]
+];
 
 const store = applyMiddleware(...middleware)(createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 

@@ -7,14 +7,16 @@ import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
 import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js';
-import { withRouter } from 'react-router-dom';
-
-
+import { Link, withRouter, Route } from 'react-router-dom';
 
 class ArchivedStreams extends Component { 
-
+  
   componentDidMount() {
     this.props.fetchArchivedStreams();
+  }
+
+  GetStreamId = (streamClicked) => {
+    console.log(streamClicked);
   }
 
   MakeStreamCard = (props) => {
@@ -39,19 +41,21 @@ class ArchivedStreams extends Component {
       image = phpImg
     }
     return (
-      <div className="archievedStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
-        <div className="banner">
-          <div key={ streamID }>
-            <h1>{ title }</h1>
-            <h2>{ user }</h2>
-            <h3>{ scheduledDate }</h3>
+      <Link to={`/archived/${streamID}`}> 
+        <div className="archievedStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
+          <div className="banner">
+            <div key={ streamID }>
+              <h1>{ title }</h1>
+              <h2>{ user }</h2>
+              <h3>{ scheduledDate }</h3>
+            </div>
+            <img className="imagePlaceholder" src={ image } />
           </div>
-          <img className="imagePlaceholder" src={ image } />
+          <div className="description-container">
+            { description }
+          </div>
         </div>
-        <div className="description-container">
-          { description }
-        </div>
-      </div>
+      </Link>
     )
   }
 
