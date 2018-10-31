@@ -47,7 +47,7 @@ class ActiveStreams extends Component {
 
     return (
       <Link to={`/active/${streamID}`}>
-        <div className="activeStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
+        <div className="streamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
           <div className="banner">
             <div>
               <h1>{ title }</h1>
