@@ -7,9 +7,7 @@ import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
 import { fetchScheduledStreams } from '../../../redux/ducks/streamsDuck.js';
-import { Link, withRouter, Route } from 'react-router-dom';
-
-
+import { Link, withRouter } from 'react-router-dom';
 
 class ScheduledStreams extends Component {
 

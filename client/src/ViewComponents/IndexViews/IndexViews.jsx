@@ -7,6 +7,7 @@ import ArchivedStreams from './ArchivedStreams/ArchivedStreams.jsx';
 import IndexHeader from './IndexHeader.jsx';
 import Stream from '../../StreamComponents/StreamIndex.jsx';
 import Nav from '../Nav.jsx';
+
 function IndexViews (){
 
 	return (
@@ -37,6 +38,3 @@ function IndexViews (){
 }
 
 export default withRouter(IndexViews);
-
-
-

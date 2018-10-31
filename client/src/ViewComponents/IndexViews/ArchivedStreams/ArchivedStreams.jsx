@@ -8,9 +8,6 @@ import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
 import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js';
 import { Link, withRouter, Route } from 'react-router-dom';
-import Stream from '../../../StreamComponents/StreamIndex.jsx';
-
-
 
 class ArchivedStreams extends Component { 
   
