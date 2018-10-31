@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import Chat from './Chat/ChatMain.jsx';
 import LiveCodeDisplay from './FileDisplay/LiveCodeDisplay.jsx';
 import Video from './VideoStream/VideoStream.jsx';

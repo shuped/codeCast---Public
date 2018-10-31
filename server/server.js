@@ -8,10 +8,9 @@ const bodyParser       = require('body-parser');
 const uuid             = require('uuid/v1')
 const PORT             = 8080;
 
-// const testData         = require('./testData/testData.js');
-// const activeData       = require('./testData/activeData.js');
-// const scheduleData     = require('./testData/scheduleData.js');
-// const archiveData      = require('./testData/archiveData.js');
+const activeData       = require('./testData/activeData.json');
+const scheduleData     = require('./testData/scheduleData.json');
+const archiveData      = require('./testData/archiveData.json');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io               = require('socket.io')(server);
@@ -32,6 +31,11 @@ let pathCache          = null;
 //   'exportGqlSchemaPath:': './db/',
 //   'bodySizeLimit': '50mb'
 // }));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
@@ -108,7 +112,7 @@ const redux = io
         },
         'server/file_change': (type, payload) => {
           let file = fileCache[payload.fileID]
-          redux.emit('action', { type: 'FILE_UPDATE', payload: file });
+          socket.emit('action', { type: 'FILE_UPDATE', payload: file });
         }
         
       };
@@ -163,7 +167,7 @@ const terminal = io
 app.route('/api/scheduledStreams/')
   .get((req, res) => {
     // TODO remove test data
-    res.status(200).json(testData);
+    res.status(200).json(scheduleData);
   })
   .post((req, res) => {
     const streamData = req.body;
@@ -172,8 +176,8 @@ app.route('/api/scheduledStreams/')
       const streamID = uuid().slice(0,8);
       testData[streamID] = {
         streamID,
-        status: 'scheduled',
-        youtubeURL: null,
+        "status": "scheduled",
+        "youtubeURL": null,
         ...streamData
       };
       res.status(201).send('POST scheduledStream: Scheduled stream added to databse.');
@@ -194,7 +198,7 @@ app.route('/api/scheduledStreams/')
 
 app.route('/api/activeStreams/')
   .get((req, res) => {
-    res.status(200).json(testData);
+    res.status(200).json(activeData);
   })
   .post((req, res) => {
     const streamData = req.body;
@@ -215,7 +219,7 @@ app.route('/api/activeStreams/')
 
 app.route('/api/archivedStreams/')
   .get((req, res) => {
-    res.status(200).json(testData);
+    res.status(200).json(archiveData);
   })
   .post((req, res) => {
     res.send('To be implemented.')
