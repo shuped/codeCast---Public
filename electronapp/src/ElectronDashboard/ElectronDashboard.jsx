@@ -37,7 +37,7 @@ class Dashboard extends Component {
   // need data structure for scheduled streams, for edit purposes
 
   MakeScheduledStreamCard = (props) => {
-    const { title, scheduledDate, scheduledTime, streamID } = props;
+    const { title, scheduledDate, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
         <Link to='/StartScheduled' className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID)} >Test</Link>
@@ -45,7 +45,6 @@ class Dashboard extends Component {
         <div>
           <div className="date-time">
             <p id="date">{ scheduledDate }</p>
-            <p id="time">{ scheduledTime }</p>
           </div>
           <div className="controls">
             <Button id="edit-btn"  type="primary" onClick={ () => this.OpenEditControls(streamID) }>Edit</Button>
