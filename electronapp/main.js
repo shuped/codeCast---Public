@@ -209,50 +209,6 @@ generateMenu = () => {
 app.on('ready', () => {
 	createMainWindow();
 	generateMenu();
-
-
-	let projectRootDirectroy = path.join(__dirname, '..');
-
-
-	chokidar.watch('.', {
-		ignored: /node_modules|\.git/,
-		persistent: true,
-		ignoreInitial: true
-		// followSymlinks: false,
-		// useFsEvents: false,
-		// usePolling: false
-	}).on('all', function(event, pathArg) {
-		const eventMethods = {
-			'add': (filePath) => {
-
-			console.log('add', filePath);
-				
-			},
-			'addDir': (filePath) => {
-				console.log('addDir', filePath);
-
-			},
-			'change': (filePath) => {
-				console.log('change', filePath);
-
-			},
-			'unlink': (filePath) => {
-				console.log('unlink', filePath);
-
-			}
-		}
-		console.log('event, path:', event, pathArg);  
-		// event specific behavior;s
-
-		eventMethods[event] ? eventMethods[event](pathArg) : console.log('Event missed:', event);
-	})
-		.on('ready', async function() {
-			console.log('Ready');
-
-			readDir(__dirname, done(__dirname));
-
-		//  TODO: Move the axios to here instead of fs-mapper
-	});
 });
 
 
