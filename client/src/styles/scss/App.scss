@@ -94,6 +94,12 @@ code {
         display: flex;
         min-width: 100vw;
         grid-area: Terminal;
+        
+        .wrapper {
+          position: relative;
+          height: 100%;
+          width: 100%;
+        }
       }
     }
   }

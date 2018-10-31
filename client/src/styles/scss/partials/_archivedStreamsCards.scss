@@ -17,6 +17,9 @@
     padding:1.5em;
     &:hover {
       opacity: 0.8;
+      transform: scale(1.05);
+      box-shadow: 5px 5px 5px grey;
+      transition: transform .5s;
     }
 
     .banner {
