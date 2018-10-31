@@ -6,13 +6,16 @@ import ScheduledStreams from './ScheduledStreams/ScheduledStreams.jsx';
 import ArchivedStreams from './ArchivedStreams/ArchivedStreams.jsx';
 import IndexHeader from './IndexHeader.jsx';
 import Stream from '../../StreamComponents/StreamIndex.jsx';
-
+import Nav from '../Nav.jsx';
 function IndexViews (){
 
 	return (
 		<div className="pageGrid">
+			<Route exact path={["/", "/active", "/scheduled", "/archived"]} component={ Nav } className="app-nav" />
 			<div className="header-tabs">
 				<Route exact path={["/", "/active", "/scheduled", "/archived"]} component={ IndexHeader } />
+			</div>
+			<div className="stream-views">
 				<Switch>
 					<Route exact path="/" render={() => (
 						<div>
