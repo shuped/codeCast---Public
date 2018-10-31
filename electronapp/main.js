@@ -6,8 +6,6 @@ const path = require('path');
 const fs = require ('fs');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
-const directoryWatcher = require('./src/fileServices/directoryWatcher')
-const chokidar = require('chokidar');
 
 
 const decoder = new StringDecoder('utf8');
@@ -119,8 +117,8 @@ function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 40,
-		height: 800,
-		width: 800,
+		height: 400,
+		width: 400,
 		show: false
 	});
 
@@ -256,6 +254,7 @@ app.on('ready', () => {
 		//  TODO: Move the axios to here instead of fs-mapper
 	});
 });
+
 
 app.on('window-all-closed', () => {
 	app.quit();
