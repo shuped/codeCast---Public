@@ -1,4 +1,4 @@
-//const ENV            = require ('dotenv');
+// const ENV              = require ('dotenv');
 const app              = require('express')();
 const http             = require('http').Server(app);
 const { postgraphile } = require('postgraphile');
@@ -8,10 +8,15 @@ const bodyParser       = require('body-parser');
 const uuid             = require('uuid/v1')
 const PORT             = 8080;
 
-const testData         = require('./testData.js');
+const testData         = require('./testData/testData.js');
+const activeData       = require('./testData/activeData.js');
+const scheduleData     = require('./testData/scheduleData.js');
+const archiveData      = require('./testData/archiveData.js');
 
 const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
 const io               = require('socket.io')(server);
+
+const testData         = require('./testData/testData.js');
 
 const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
@@ -31,7 +36,7 @@ let pathCache          = null;
 // }));
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
-app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({ limit: '50mb' }));
 
 app.use(morgan('dev', {
   skip: (req, res) => {
