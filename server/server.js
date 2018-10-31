@@ -5,7 +5,7 @@ const { postgraphile } = require('postgraphile');
 const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
-const uuid             = require('uuid/v1')
+const uuid             = require('uuid/v1');
 const PORT             = process.env.PORT;
 
 const activeData       = require('./testData/activeData.json');
@@ -32,20 +32,8 @@ let pathCache          = null;
 //   'bodySizeLimit': '50mb'
 // }));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
-
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

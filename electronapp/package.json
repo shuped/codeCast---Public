@@ -8,11 +8,11 @@
     "start": "electron . --ignore-gpu-blacklist",
     "build": "webpack",
     "rebuild-pty": "electron-rebuild -f -w node-pty",
-    "sass": "sass --watch /src/styles/scss:src/styles/css"
+    "sass": "sass --watch src/styles/scss:src/styles/css"
   },
   "proxy": "http://localhost:8080",
   "repository": "https://github.com/benji-leboe/codeCast",
-  "author": "Spencer Shupe, Benji Leboe",
+  "author": "Spencer Shupe, Benji Leboe, Erik Mackie",
   "dependencies": {
     "antd": "^3.10.3",
     "axios": "~0.18.0",
