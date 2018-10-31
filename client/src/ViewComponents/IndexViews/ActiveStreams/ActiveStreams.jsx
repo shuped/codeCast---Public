@@ -7,7 +7,8 @@ import javascriptImg from '../../../images/javascript.png';
 import csharpImg from '../../../images/csharp.png';
 import htmlcssImg from '../../../images/htmlcss.png';
 import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js';
-import { withRouter } from 'react-router-dom';
+import { Link, withRouter, Route } from 'react-router-dom';
+import Stream from '../../../StreamComponents/StreamIndex.jsx';
 
 
 class ActiveStreams extends Component {  
@@ -46,18 +47,20 @@ class ActiveStreams extends Component {
     }
 
     return (
-      <div className="activeStreamCard" key={ streamID } onClick={ () => this.GetStreamId( streamID) }>
-        <div className="banner">
-          <div>
-            <h1>{ title }</h1>
-            <h2>{ user }</h2>
+      <Link to={`/active/${streamID}`}>
+        <div className="activeStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
+          <div className="banner">
+            <div>
+              <h1>{ title }</h1>
+              <h2>{ user }</h2>
+            </div>
+            <img className="imagePlaceholder" src={ image } />
           </div>
-          <img className="imagePlaceholder" src={ image } />
+          <div className="description-container">
+            { description }
+          </div>
         </div>
-        <div className="description-container">
-          { description }
-        </div>
-      </div>
+      </Link>
     )
   }
 
@@ -67,9 +70,13 @@ class ActiveStreams extends Component {
     });
 
     return (
-      <main className="streams">
-        { renderStreams }
-      </main>
+      <div>
+        <Route path="/active/:id" component={ Stream }/>
+        <main className="streams">
+          { renderStreams }
+        </main>
+      </div>
+      
     );
   }
 
