@@ -7,12 +7,10 @@ const fs = require ('fs');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
 
-
 const decoder = new StringDecoder('utf8');
 
 //require mapper function. Function call format: readDir(rootDirectory, done());
-const { readDir, done } = require('./fs-mapper');
-
+const { readDir, done } = require('./src/fileServices/fs-mapper.js');
 // axios to send content to the server
 const axios = require('./api');
 const rootDir = path.join(__dirname, '..');
