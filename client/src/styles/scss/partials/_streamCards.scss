@@ -1,0 +1,94 @@
+.streams {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  .stream-card {
+    display: flex;
+    border: 3px solid #555;
+    background-color: rgb(202, 202, 202);
+    border-radius: 5px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    .stream-banner {
+      display:flex;
+      justify-content: space-between;
+    }
+
+    .scheduled {
+      display: flex;
+      flex-direction: row;
+      width:75%;
+      margin: 2em 4em;
+      padding: 1em;
+    }
+
+    .active-archived {
+      width: 25vw;
+      height:25vw;
+      margin:3em;
+      padding:1.5em;
+    }
+
+    .card-img {
+      width: 4em;
+      height: 4em;
+      margin: 1em; 
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      .description {
+        display: flex;
+        margin: 1em; 
+        p {
+          font-size: 1.2em;
+        }
+      }
+    }
+  }
+
+  
+
+  div{
+    margin: 1em; 
+
+    h1 {
+      font-size: 2.2em;
+      margin: 0;
+      color: #444444;
+    }
+    h2 {
+      font-size: 1.8em;
+      margin: 0;
+      color: #444444;
+    }
+    h3 {
+      font-size: 1.5em;
+      margin: 0em;
+      color: #444444;
+    }
+    h4 {
+      font-size: 1.3em;
+      color: #444444;
+      margin-top:1.5em;
+    }
+    h5 {
+      font-size: 1em;
+      margin-right: 15em;
+      color: #444444;
+    }
+    p {
+      font-size: 1em;
+      margin:1em;
+      margin-bottom: 2em;
+    }
+  }
+}
+

@@ -1,0 +1,38 @@
+.nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
+  height: 4rem;
+  background-color: #000000;
+
+  .navLogo {
+    height: 70%;
+    margin: 0.5em 1rem;
+  }
+
+  .login-register {
+    display: flex;
+    flex-direction: row;
+
+    .navBtn {
+      background-color: #bbbbbb;
+      color: #4d4d4d;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      font-size: 0.75rem;
+      margin: 1rem 2rem 1rem 0rem;
+      width: 6rem;
+      border-radius: 4px;
+  
+      &:hover {
+        background-color: #777;
+      }
+    }
+  }
+}
