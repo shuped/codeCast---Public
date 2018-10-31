@@ -42,7 +42,7 @@ class ArchivedStreams extends Component {
     }
     return (
       <Link to={`/archived/${streamID}`}> 
-        <div className="archievedStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
+        <div className="streamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
           <div className="banner">
             <div key={ streamID }>
               <h1>{ title }</h1>

@@ -41,14 +41,20 @@ class ScheduledStreams extends Component {
 
     return (
       <Link to={`/scheduled/${streamID}`}>
-        <div className="currentStream" key={(Math.random()*10).toString().slice(2,6)}>
-          <div className="currentStreamBanner">
-            <h3>{ title }</h3>
-            <h4>{ user }</h4>
-            <h5>{ scheduledDate }</h5>
-            <img className="imagePlaceholder" src={ image } />
+        <div className="stream-card scheduled" key={(Math.random()*10).toString().slice(2,6)}>
+          <div className="stream-banner">
+            <div className="card-headers">
+              <h3>{ title }</h3>
+              <h4>{ user }</h4>
+              <h5>{ scheduledDate }</h5>
+            </div>
           </div>
-          <p>{ description }</p>
+          <div className="card-content">
+            <p className="description">
+              { description }
+            </p>
+          </div>
+          <img className="card-img" src={ image } />
         </div>
       </Link>
     )
