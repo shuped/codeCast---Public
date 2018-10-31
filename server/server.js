@@ -6,13 +6,13 @@ const path             = require('path');
 const morgan           = require('morgan');
 const bodyParser       = require('body-parser');
 const uuid             = require('uuid/v1')
-const PORT             = 8080;
+const PORT             = process.env.PORT;
 
 const activeData       = require('./testData/activeData.json');
 const scheduleData     = require('./testData/scheduleData.json');
 const archiveData      = require('./testData/archiveData.json');
 
-const server           = http.listen(PORT, () => console.log('App listening on ' + PORT));
+const server           = http.listen((PORT || 8080), () => console.log('App listening on ' + (PORT || 8080)));
 const io               = require('socket.io')(server);
 
 const rootPath         = path.join(__dirname, '..');
@@ -40,6 +40,12 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
