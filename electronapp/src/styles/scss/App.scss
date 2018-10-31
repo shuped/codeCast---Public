@@ -1,12 +1,11 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
-@import 'partials/electronDashBoard';
-@import 'partials/liveStreamNow';
-@import 'partials/scheduleNewStream';
-@import 'partials/startScheduled';
+@import 'partials/electronDashBoard.scss';
+@import 'partials/liveStreamNow.scss';
+@import 'partials/scheduleNewStream.scss';
+@import 'partials/startScheduled.scss';
 
 // testing purposes delete me once electron can host its own content
 .App {
   width: 800px;
   height: 600px;
-  background-color: lightgrey;
+  background-color: darkgray;
 } 
