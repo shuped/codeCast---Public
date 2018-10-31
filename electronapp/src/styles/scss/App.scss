@@ -2,13 +2,11 @@
 @import 'partials/electronDashBoard';
 @import 'partials/liveStreamNow';
 @import 'partials/scheduleNewStream';
-@import 'partials/statScheduled';
+@import 'partials/startScheduled';
 
 // testing purposes delete me once electron can host its own content
-.electron {
+.App {
   width: 800px;
   height: 600px;
   background-color: lightgrey;
-
-
 } 
