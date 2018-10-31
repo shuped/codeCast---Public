@@ -13,13 +13,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="nav-bar">
-          <Route component={ Nav } className="app-nav" />
-        </div>
-        <Switch>
-          <Route exact path="/" component={ Index } />
-          <Route path="/stream/:id" component={ Stream } />
-        </Switch>
+        <Stream />
       </div>
     );
   }
