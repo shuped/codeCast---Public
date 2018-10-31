@@ -1,76 +1,49 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js'
-
+import rubyImg from '../../../images/ruby.png';
+import phpImg from '../../../images/php.png';
+import pythonImg from '../../../images/python.png';
+import javascriptImg from '../../../images/javascript.png';
+import csharpImg from '../../../images/csharp.png';
+import htmlcssImg from '../../../images/htmlcss.png';
+import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js';
+import { withRouter } from 'react-router-dom';
 
 
 class ActiveStreams extends Component {  
 
-  // constructor(props) {  
-  //   super(props); 
-  //   this.state = {
-  //     activeStreams: [
-  //       {
-  //         title: 'Python',
-  //         presentor: 'Spencer',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         activeStreamId: 1,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Javascript',
-  //         presentor: 'Benji',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         activeStreamId: 2,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'HTML/CSS',
-  //         presentor: 'Jeff',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         activeStreamId: 3,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Node',
-  //         presentor: 'Space G',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         activeStreamId: 4,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Ruby',
-  //         presentor: 'Mandy',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         activeStreamId: 5,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Express',
-  //         presentor: 'Silvia',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Lorem ipsum dolor sit amet,',
-  //         activeStreamId: 6,
-  //         imagePath: null
-  //       }
-  //     ]
-  //   };
-  
-  // }
-
   componentDidMount() {
+    console.log("Spaghetti");
     this.props.fetchActiveStreams();
   }
 
   GetStreamId = (streamClicked) => {
-    console.log(streamClicked)
-    // react-router code goes here
-    // react-router code goes here
-    // react-router code goes here
+    console.log(streamClicked);
   }
 
   MakeActiveStreamCard = (props) => {
-    const { title, user, description, streamID, imagePath } = props;
+    const { title, user, description, streamID, languageImage } = props;
     // missing image path
+    let image
+    if (languageImage === 'javascript') {
+      image = javascriptImg
+    }
+    if (languageImage === 'ruby') {
+      image = rubyImg
+    }
+    if (languageImage === 'csshtml') {
+      image = htmlcssImg
+    }
+    if (languageImage === 'csharp') {
+      image = csharpImg
+    }
+    if (languageImage === 'python') {
+      image = pythonImg
+    }
+    if (languageImage === 'php') {
+      image = phpImg
+    }
+
     return (
       <div className="activeStreamCard" key={ streamID } onClick={ () => this.GetStreamId( streamID) }>
         <div className="banner">
@@ -78,9 +51,7 @@ class ActiveStreams extends Component {
             <h1>{ title }</h1>
             <h2>{ user }</h2>
           </div>
-          {/* to use for image later */}
-          {/* <img src="#imagePath" /> */}
-          <div className="imagePlaceholder">p</div>
+          <img className="imagePlaceholder" src={ image } />
         </div>
         <div className="description-container">
           { description }
@@ -89,7 +60,7 @@ class ActiveStreams extends Component {
     )
   }
 
-  render() {  
+  render() {
     const renderStreams = this.props.activeStreams.map( (stream) => {
       return this.MakeActiveStreamCard(stream);  
     });
@@ -115,4 +86,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveStreams);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ActiveStreams));

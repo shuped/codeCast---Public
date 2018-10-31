@@ -1,85 +1,52 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js'
+import rubyImg from '../../../images/ruby.png';
+import phpImg from '../../../images/php.png';
+import pythonImg from '../../../images/python.png';
+import javascriptImg from '../../../images/javascript.png';
+import csharpImg from '../../../images/csharp.png';
+import htmlcssImg from '../../../images/htmlcss.png';
+import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js';
+import { withRouter } from 'react-router-dom';
 
 
 
-class ArchivedStreams extends Component {  
-
-  // constructor(props) {  
-  //   super(props); 
-  //   this.state = {
-  //     scheduledStreams: [
-  //       {
-  //         title: 'Python',
-  //         presentor: 'Spencer',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         broadcastDate: 'Thusday, August 12 2017',
-  //         archivedId: 1,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Javascript',
-  //         presentor: 'Benji',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         broadcastDate: 'Wednesday, April 11 2017',
-  //         archivedId: 2,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'HTML/CSS',
-  //         presentor: 'Jeff',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         broadcastDate: 'Tuesday, March 27 2017',
-  //         archivedId: 3,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Node',
-  //         presentor: 'Space G',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         broadcastDate: 'Thusday, August 12 2017',
-  //         archivedId: 4,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Ruby',
-  //         presentor: 'Mandy',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         broadcastDate: 'Wednesday, April 11 2017',
-  //         archivedId: 5,
-  //         imagePath: null
-  //       },
-  //       {
-  //         title: 'Express',
-  //         presentor: 'Silvia',
-  //         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  //         broadCastDate: 'Tuesday, March 27 2017',
-  //         archivedId: 6,
-  //         imagePath: null
-  //       }
-  //     ]
-  //   };
-  
-  // }
+class ArchivedStreams extends Component { 
 
   componentDidMount() {
     this.props.fetchArchivedStreams();
   }
 
   MakeStreamCard = (props) => {
-    const { title, user, description, scheduledDate, streamID, imagePath } = props;
-    // missing image path
+    const { title, user, description, scheduledDate, streamID, languageImage } = props;
+    let image
+    if (languageImage === 'javascript') {
+      image = javascriptImg
+    }
+    if (languageImage === 'ruby') {
+      image = rubyImg
+    }
+    if (languageImage === 'csshtml') {
+      image = htmlcssImg
+    }
+    if (languageImage === 'csharp') {
+      image = csharpImg
+    }
+    if (languageImage === 'python') {
+      image = pythonImg
+    }
+    if (languageImage === 'php') {
+      image = phpImg
+    }
     return (
       <div className="archievedStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
         <div className="banner">
-          <div>
+          <div key={ streamID }>
             <h1>{ title }</h1>
             <h2>{ user }</h2>
             <h3>{ scheduledDate }</h3>
           </div>
-          {/* <img src="#imagePath" /> */}
-          <div className="imagePlaceholder">p</div>
+          <img className="imagePlaceholder" src={ image } />
         </div>
         <div className="description-container">
           { description }
@@ -96,9 +63,11 @@ class ArchivedStreams extends Component {
     });
 
     return (
-      <main className="streams">
-        { renderStreams }
-      </main>
+      <div>
+        <main className="streams">
+          { renderStreams }
+        </main>
+      </div>
     );
   }
 
@@ -116,4 +85,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArchivedStreams);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ArchivedStreams));

@@ -1,9 +1,9 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css");
 @import 'partials/chat';
 @import 'partials/fileViewer';
 @import 'partials/video';
 @import 'partials/scheduledStreamCard';
 @import 'partials/activeStreamsCard';
+@import 'partials/archivedStreamsCards';
 @import 'partials/terminal';
 @import 'partials/fileDirectory';
 @import 'partials/indexviews';
@@ -34,63 +34,67 @@ code {
   min-height: 100vh;
   max-height: 100vh;
   min-width: 100vw;
-  overflow: hidden;
+  overflow-y: auto;
   // background-color: black;
 
-  .component-container1 {
-    display: grid;
+  .stream-parent {
+    overflow: hidden;
+
+    .component-container1 {
+      display: grid;
+      
+      grid-template-columns: 1fr 2fr 1fr;
+      grid-template-areas: 
+        "Filetree Video Chat";
+  
+      .Filetree-display {
+        position: relative;
+        max-height: 52vh;
+        overflow-y: auto; 
+        height: 100%;
+        width: 100%; 
+        grid-area: Filetree;
+        background-color: white;
+  
+      }
+  
+      .Video-display {
+        position: relative;
+        height: 100%;
+        width: 100%; 
+        grid-area: Video;
+      }
     
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-areas: 
-      "Filetree Video Chat";
-
-    .Filetree-display {
-      position: relative;
-      max-height: 52vh;
-      overflow-y: auto; 
-      height: 100%;
-      width: 100%; 
-      grid-area: Filetree;
-      background-color: white;
-
-    }
-
-    .Video-display {
-      position: relative;
-      height: 100%;
-      width: 100%; 
-      grid-area: Video;
+      .Chat-display {
+        position: relative;
+        height: 100%;
+        width: 100%; 
+        grid-area: Chat;
+      }
     }
   
-    .Chat-display {
+    .component-container2 {
+      display: grid;
       position: relative;
-      height: 100%;
-      width: 100%; 
-      grid-area: Chat;
-    }
-  }
-
-  .component-container2 {
-    display: grid;
-    position: relative;
-    height: 47vh;
-    grid-template-columns: 50% 50%;
-    grid-template-areas:
-      "Code Terminal";
-
-    .Code-display {
-      grid-column: span 6;
-      position: relative;
-      height: 100%;
-      grid-area: Code;
-    }
-
-    .Terminal-display {
-      grid-column: span 6;
-      position: relative;
-      display: flex;
-      min-width: 100vw;
-      grid-area: Terminal;
+      height: 47vh;
+      grid-template-columns: 50% 50%;
+      grid-template-areas:
+        "Code Terminal";
+  
+      .Code-display {
+        grid-column: span 6;
+        position: relative;
+        height: 100%;
+        grid-area: Code;
+      }
+  
+      .Terminal-display {
+        grid-column: span 6;
+        position: relative;
+        display: flex;
+        min-width: 100vw;
+        grid-area: Terminal;
+      }
     }
   }
 }

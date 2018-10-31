@@ -4,7 +4,7 @@ const decoder = new StringDecoder('utf8');
 const path = require('path');
 const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
-const axios = require('../../api');
+const axios = require('./api');
 
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
@@ -85,8 +85,7 @@ async function makeJSON(array, root, targetDir) {
     //list of files and extensions to ignore
     const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 
       'node_modules', 'package-lock.json', '.git', '.scssc', '.psd', '.pdf',
-      'directory.json', 'content.json', 'filepaths.json', '.gif', '.webp'];
-
+      'directory.json', 'content.json', 'filepaths.json'];
     const check = new RegExp(ignore.join('|')).test(targetFile);
 
     //check for valid file extensions
@@ -95,7 +94,7 @@ async function makeJSON(array, root, targetDir) {
       if (fpath.length > 0) {
         //for each node assign child and move one level deeper
         fpath.forEach(async (node, i) => {
-          current[node] ? current[node][fpath[i + i]] : current[node] = {};
+          current[node] ? current[node][fpath[i + 1]] : current[node] = {};
           current = current[node];
           //if last node: 
           //1) assign file and hash, and 
@@ -120,8 +119,7 @@ async function makeJSON(array, root, targetDir) {
     }
   }
   //resolve all promises in array 
-
-  Promise.each(await promises, resolver).then((resolved) => {
+  Promise.each(await promises, resolver).then((resolved, rejected) => {
     resolved.forEach((res, i) => {
       fileObj[res.id] = res.content;
     });
@@ -163,9 +161,7 @@ async function makeJSON(array, root, targetDir) {
 function done(targetDir) {
   return (err, res, root) => {
     if (err) throw err;
-
     makeJSON(res, root, targetDir);
-
   }
 }
 

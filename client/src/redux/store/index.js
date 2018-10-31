@@ -3,6 +3,7 @@ import { rootReducer } from '../ducks/Ducktator';
 import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
 import thunk from 'redux-thunk';
+
 const io = socketIO.connect('http://localhost:8080/redux');
 
 const socketMW = createSocketMW(io, 'server/', { execute: executor });
@@ -16,8 +17,6 @@ const middleware = [
   socketMW,
   thunk
 ]
-
-
 
 const store = applyMiddleware(...middleware)(createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
