@@ -16,16 +16,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="nav-bar">
-          <Route component={ Nav } className="app-nav" />
-        </div>
-        <Route exact path="/" component={ Index } />
-        <Switch>
-					<Route path="/current" component={ ActiveStreams } className="index-view active" />
-					<Route path="/scheduled" component={ ScheduledStreams } className="index-view scheduled" />
-					<Route path="/archived" component={ ArchivedStreams } className="index-view archived" />
-					<Route path="/stream/:id" component={ Stream } />
-				</Switch>
+
+        <Route component={ Nav } className="app-nav" />
+        <Route exact path="/" component={ Index }>
+          <Route path="/active" component={ ActiveStreams } className="index-view active" />
+          <Route path="/scheduled" component={ ScheduledStreams } className="index-view scheduled" />
+          <Route path="/archived" component={ ArchivedStreams } className="index-view archived" />
+        </Route>
+        <Route path="/stream/:id" component={ Stream } />
       </div>
     );
   }

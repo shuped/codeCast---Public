@@ -4,6 +4,7 @@ import LiveCodeDisplay from './FileDisplay/LiveCodeDisplay.jsx';
 import Video from './VideoStream/VideoStream.jsx';
 import Terminal from './Terminal/Terminal.jsx';
 import FileDirectory from './FileDirectory/FileDirectory.jsx';
+import { connect } from 'react-redux';
 
 class Stream extends Component {
   render() {
