@@ -1,94 +1,166 @@
+.stream-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  .index-header {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    color: #FFF;
+  }
+}
+
 .streams {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
 
-  .stream-card {
+  .link-container{
     display: flex;
-    border: 3px solid #555;
-    background-color: rgb(202, 202, 202);
-    border-radius: 5px;
-
-    &:hover {
-      opacity: 0.8;
-    }
-
-    .stream-banner {
-      display:flex;
-      justify-content: space-between;
-    }
-
-    .scheduled {
+    .stream-card {
       display: flex;
-      flex-direction: row;
-      width:75%;
-      margin: 2em 4em;
-      padding: 1em;
-    }
+      border: 1px solid rgb(0, 0, 0);
+      background-color: rgb(167, 167, 167);
+      border-radius: 10px;
+      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.6);
+      margin: 2rem 0rem;
+      padding: 1rem;
+  
+      &:hover {
+        opacity: 0.8;
+      }
 
-    .active-archived {
-      width: 25vw;
-      height:25vw;
-      margin:3em;
-      padding:1.5em;
-    }
-
-    .card-img {
-      width: 4em;
-      height: 4em;
-      margin: 1em; 
-    }
-
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      .description {
+      &.scheduled {
         display: flex;
-        margin: 1em; 
-        p {
-          font-size: 1.2em;
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: 75vw;
+        margin: 2rem 4rem;
+        padding: 1rem;
+      }
+  
+      &.active-archived {
+        display: flex;
+        flex-direction: column;
+        max-width: 25vw;
+        max-height:25vw;
+        padding:1.5rem;
+      }
+      
+      .stream-banner {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+
+        .title-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: #1b1b1b;
+          padding: 0rem 0.5em;
+          margin-left: 1rem;  
+
+          .title {
+            display: flex;
+            flex-direction: column;
+            h3 {
+              margin-bottom: 0.5rem;
+            }
+          }
+
+          p.date-time {
+            display: flex;
+            flex-direction: row;            
+            font-size: 0.9rem;
+            font-weight: 600;
+            
+          }
+        }
+
+        .scheduled-title-container {
+          display: flex;
+          flex-direction: column;
+          max-width: 5rem;
+          padding: 0.5rem;
+          margin-left: 0.5rem;
+          .title {
+            display: flex;
+            flex-direction: column;
+            h3 {
+              margin-bottom: 0.5rem;
+            }
+          }
+
+          p.date-time {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+            font-weight: 600;
+          }
         }
       }
+
+      .card-img {
+        max-width: 2.5rem;
+        max-height: 2.5rem;
+        margin: 0.5rem; 
+      }
+  
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        .scheduled-description {
+          display: flex;
+          flex-direction: row;
+          max-width: 50vw;
+          margin: 1rem; 
+          padding: 1rem 2rem;
+        }
+      }
+
+      .description {
+        display: flex;
+        flex-direction: row;
+        margin: 0.5rem; 
+        padding: 1rem;
+      }
+
+      
     }
   }
 
-  
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 
   div{
-    margin: 1em; 
 
     h1 {
-      font-size: 2.2em;
-      margin: 0;
-      color: #444444;
+      font-size: 1.8rem;
+      margin: 0rem;
     }
     h2 {
-      font-size: 1.8em;
-      margin: 0;
-      color: #444444;
+      font-size: 1.6rem;
+      margin: 0rem;
     }
     h3 {
-      font-size: 1.5em;
-      margin: 0em;
-      color: #444444;
+      font-size: 1.3rem;
+      margin: 0rem;
     }
     h4 {
-      font-size: 1.3em;
-      color: #444444;
-      margin-top:1.5em;
+      font-size: 1.1rem;
+      margin: 0rem;
     }
     h5 {
-      font-size: 1em;
-      margin-right: 15em;
-      color: #444444;
+      font-size: 1rem;
+      margin: 0rem;
     }
-    p {
-      font-size: 1em;
-      margin:1em;
-      margin-bottom: 2em;
-    }
+    
   }
 }
 
