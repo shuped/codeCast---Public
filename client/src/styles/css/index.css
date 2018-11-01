@@ -249,6 +249,8 @@
   .Filetree-display .ant-tree-title {
     color: #fff; }
 
+.pageGrid .welcome-message {
+  color: #FFF; }
 .pageGrid .index-view {
   background-color: #777;
   width: 100vw; }
