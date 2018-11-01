@@ -236,7 +236,8 @@
       display: flex;
       min-width: 50vw !important;
       min-height: 48vh; }
-    .Terminal-display .wrapper .terminal-main canvas.xterm-text-layer, .Terminal-display .wrapper .terminal-main canvas.xterm-cursor-layer {
+    .Terminal-display .wrapper .terminal-main canvas.xterm-text-layer, .Terminal-display .wrapper .terminal-main canvas.xterm-cursor-layer, .Terminal-display .wrapper .terminal-main .xterm-screen {
+      bottom: 0;
       padding: 0.5rem 3rem 1rem 2rem; }
 
 .Filetree-display {
@@ -398,9 +399,6 @@ code {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin); }
-
-.App-link {
-  color: #61dafb; }
 
 @keyframes App-logo-spin {
   from {
