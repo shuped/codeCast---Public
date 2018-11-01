@@ -59,7 +59,6 @@ io.on('connection', (socket) => {
   console.log(`Socket ${socket.id} connected`);
   clients.push(socket.id);
   console.log(clients);
-  io.of('/redux').emit({ type: 'DIRECTORY_UPDATE', payload: dirCache })
 
   socket.on('action', (action) => {
 
@@ -100,6 +99,7 @@ const redux = io
     console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
+    socket.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache })
    
     socket.on('action', (action) => {      
 
@@ -119,7 +119,7 @@ const redux = io
         
       };
       function defaultReduxAction(type, payload) {
-        console.log("Default redux action triggered");
+        console.log("Default redux action triggered", type, payload);
         return null
       }
       const { type, payload } = action;
@@ -146,11 +146,12 @@ const terminal = io
   console.log(`Terminal Socket ${socket.id} connected`);
   termClients.push(socket.id);
   console.log(termClients);
+  socket.emit('terminalRecord', terminalRecord);
 
   socket.on('data', (data) => {
     let now = Date.now();
     terminalRecord[now] = data;
-    terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+    terminal.emit('terminal', data); // refactor to action when we store data
   });
   
 
@@ -191,6 +192,7 @@ app.route('/api/scheduledStreams/')
   .put((req, res) => {
     // Upsert query to database might replace this
     // !!missing sad path!!
+    // Think about date/time of scheduled versus started
     const streamData = req.body;
     activeData[streamData.streamID] = {
       ...streamData
@@ -210,13 +212,13 @@ app.route('/api/activeStreams/')
       const streamID = uuid().slice(0,8);
       activeData[streamID] = {
         streamID,
-        status: 'active',
+        "status": "active",
         ...streamData
       };
       res.status(201).json({ message: "Stream started", streamID });;
     }
     catch (e) {
-      res.status(304).send('POST activeStream: Failed to insert active stream to database.');
+      res.status(304).send('POST activeStream: Failed to insert active stream to database.', e);
     };
   });
 
