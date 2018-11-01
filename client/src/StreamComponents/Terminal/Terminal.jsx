@@ -36,7 +36,7 @@ class Console extends Component {
     .on('terminalRecord', (record) => {
       this.setState({ terminalRecord: record });
 
-      this.terminal.write(Object.values(this.state.terminalRecord));
+      this.terminal.write(Object.values(this.state.terminalRecord).join(''));
     });
   }
 
