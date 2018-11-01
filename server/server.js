@@ -192,10 +192,12 @@ app.route('/api/scheduledStreams/')
   .put((req, res) => {
     // Upsert query to database might replace this
     // !!missing sad path!!
+    // Think about date/time of scheduled versus started
     const streamData = req.body;
-    scheduleData[streamData.streamID] = {
+    activeData[streamData.streamID] = {
       ...streamData
     };
+    delete scheduleData[streamData.streamID];
     res.status(200).send('PUT /api/scheduledStreams: Stream started');
   });
 
@@ -210,13 +212,13 @@ app.route('/api/activeStreams/')
       const streamID = uuid().slice(0,8);
       activeData[streamID] = {
         streamID,
-        status: 'active',
+        "status": "active",
         ...streamData
       };
       res.status(201).json({ message: "Stream started", streamID });;
     }
     catch (e) {
-      res.status(304).send('POST activeStream: Failed to insert active stream to database.');
+      res.status(304).send('POST activeStream: Failed to insert active stream to database.', e);
     };
   });
 
