@@ -104,71 +104,121 @@
   width: 100%;
   height: 52vh; }
 
+.stream-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center; }
+  .stream-container .index-header {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    color: #FFF; }
+
 .streams {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around; }
-  .streams .stream-card {
-    display: flex;
-    border: 3px solid #555;
-    background-color: #cacaca;
-    border-radius: 5px; }
-    .streams .stream-card:hover {
-      opacity: 0.8; }
-    .streams .stream-card .stream-banner {
+  .streams .link-container {
+    display: flex; }
+    .streams .link-container .stream-card {
       display: flex;
-      justify-content: space-between; }
-    .streams .stream-card .scheduled {
-      display: flex;
-      flex-direction: row;
-      width: 75%;
-      margin: 2em 4em;
-      padding: 1em; }
-    .streams .stream-card .active-archived {
-      width: 25vw;
-      height: 25vw;
-      margin: 3em;
-      padding: 1.5em; }
-    .streams .stream-card .card-img {
-      width: 4em;
-      height: 4em;
-      margin: 1em; }
-    .streams .stream-card .card-content {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap; }
-      .streams .stream-card .card-content .description {
+      border: 1px solid black;
+      background-color: #a7a7a7;
+      border-radius: 10px;
+      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.6);
+      margin: 2rem 0rem;
+      padding: 1rem; }
+      .streams .link-container .stream-card:hover {
+        opacity: 0.8; }
+      .streams .link-container .stream-card.scheduled {
         display: flex;
-        margin: 1em; }
-        .streams .stream-card .card-content .description p {
-          font-size: 1.2em; }
-  .streams div {
-    margin: 1em; }
-    .streams div h1 {
-      font-size: 2.2em;
-      margin: 0;
-      color: #444444; }
-    .streams div h2 {
-      font-size: 1.8em;
-      margin: 0;
-      color: #444444; }
-    .streams div h3 {
-      font-size: 1.5em;
-      margin: 0em;
-      color: #444444; }
-    .streams div h4 {
-      font-size: 1.3em;
-      color: #444444;
-      margin-top: 1.5em; }
-    .streams div h5 {
-      font-size: 1em;
-      margin-right: 15em;
-      color: #444444; }
-    .streams div p {
-      font-size: 1em;
-      margin: 1em;
-      margin-bottom: 2em; }
+        flex-direction: row;
+        justify-content: space-between;
+        min-width: 75vw;
+        margin: 2rem 4rem;
+        padding: 1rem; }
+      .streams .link-container .stream-card.active-archived {
+        display: flex;
+        flex-direction: column;
+        max-width: 25vw;
+        max-height: 25vw;
+        padding: 1.5rem; }
+      .streams .link-container .stream-card .stream-banner {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 1rem; }
+        .streams .link-container .stream-card .stream-banner .title-container {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          color: #1b1b1b;
+          padding: 0rem 0.5em;
+          margin-left: 1rem; }
+          .streams .link-container .stream-card .stream-banner .title-container .title {
+            display: flex;
+            flex-direction: column; }
+            .streams .link-container .stream-card .stream-banner .title-container .title h3 {
+              margin-bottom: 0.5rem; }
+          .streams .link-container .stream-card .stream-banner .title-container p.date-time {
+            display: flex;
+            flex-direction: row;
+            font-size: 0.9rem;
+            font-weight: 600; }
+        .streams .link-container .stream-card .stream-banner .scheduled-title-container {
+          display: flex;
+          flex-direction: column;
+          max-width: 5rem;
+          padding: 0.5rem;
+          margin-left: 0.5rem; }
+          .streams .link-container .stream-card .stream-banner .scheduled-title-container .title {
+            display: flex;
+            flex-direction: column; }
+            .streams .link-container .stream-card .stream-banner .scheduled-title-container .title h3 {
+              margin-bottom: 0.5rem; }
+          .streams .link-container .stream-card .stream-banner .scheduled-title-container p.date-time {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.9rem;
+            font-weight: 600; }
+      .streams .link-container .stream-card .card-img {
+        max-width: 2.5rem;
+        max-height: 2.5rem;
+        margin: 0.5rem; }
+      .streams .link-container .stream-card .card-content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap; }
+        .streams .link-container .stream-card .card-content .scheduled-description {
+          display: flex;
+          flex-direction: row;
+          max-width: 50vw;
+          margin: 1rem;
+          padding: 1rem 2rem; }
+      .streams .link-container .stream-card .description {
+        display: flex;
+        flex-direction: row;
+        margin: 0.5rem;
+        padding: 1rem; }
+  .streams a {
+    color: inherit;
+    text-decoration: none; }
+  .streams div h1 {
+    font-size: 1.8rem;
+    margin: 0rem; }
+  .streams div h2 {
+    font-size: 1.6rem;
+    margin: 0rem; }
+  .streams div h3 {
+    font-size: 1.3rem;
+    margin: 0rem; }
+  .streams div h4 {
+    font-size: 1.1rem;
+    margin: 0rem; }
+  .streams div h5 {
+    font-size: 1rem;
+    margin: 0rem; }
 
 .Terminal-display {
   position: relative;
@@ -233,46 +283,54 @@
       background-color: #666; }
 
 .stream-parent {
+  box-sizing: border-box;
   overflow: hidden;
   background-color: #000; }
   .stream-parent .component-container1 {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    max-height: 52vh;
+    grid-template-columns: 20% 50% 30%;
     grid-template-areas: "Filetree Video Chat"; }
     .stream-parent .component-container1 .Filetree-display {
       position: relative;
       max-height: 52vh;
       overflow-y: auto;
-      height: 100%;
-      width: 100%;
-      grid-area: Filetree; }
+      grid-area: Filetree;
+      border: 1px groove #464666;
+      border-radius: 1px; }
     .stream-parent .component-container1 .Video-display {
       position: relative;
-      height: 100%;
-      width: 100%;
-      grid-area: Video; }
+      max-height: 52vh;
+      grid-area: Video;
+      z-index: 99;
+      border: 1px groove #464666;
+      border-radius: 1px; }
     .stream-parent .component-container1 .Chat-display {
       position: relative;
-      height: 100%;
-      width: 100%;
-      grid-area: Chat; }
+      max-height: 52vh;
+      grid-area: Chat;
+      border: 1px groove #464666;
+      border-radius: 1px; }
   .stream-parent .component-container2 {
     display: grid;
-    position: relative;
-    height: 47vh;
     grid-template-columns: 50% 50%;
-    grid-template-areas: "Code Terminal"; }
+    grid-template-areas: "Code Terminal";
+    max-height: 47.8vh; }
     .stream-parent .component-container2 .Code-display {
       grid-column: span 6;
       position: relative;
-      height: 100%;
-      grid-area: Code; }
+      grid-area: Code;
+      border: 1px groove #464666;
+      border-radius: 1px;
+      z-index: 88; }
     .stream-parent .component-container2 .Terminal-display {
       grid-column: span 6;
       position: relative;
       display: flex;
-      min-width: 100vw;
-      grid-area: Terminal; }
+      grid-area: Terminal;
+      border: 1px groove #464666;
+      border-radius: 1px;
+      z-index: 88; }
 
 .nav {
   display: flex;
@@ -306,6 +364,8 @@
 
 html {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   font-size: 16px; }
 
 body {
@@ -313,7 +373,8 @@ body {
   padding: 0;
   font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #202133; }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace; }
@@ -336,8 +397,7 @@ code {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white; }
+  font-size: calc(10px + 2vmin); }
 
 .App-link {
   color: #61dafb; }
