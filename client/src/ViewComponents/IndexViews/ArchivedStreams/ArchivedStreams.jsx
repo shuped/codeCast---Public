@@ -41,17 +41,21 @@ class ArchivedStreams extends Component {
       image = phpImg
     }
     return (
-      <Link to={`/archived/${streamID}`}> 
-        <div className="archievedStreamCard" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
-          <div className="banner">
-            <div key={ streamID }>
-              <h1>{ title }</h1>
-              <h2>{ user }</h2>
-              <h3>{ scheduledDate }</h3>
+      <Link className="link-container" to={`/archived/${streamID}`}> 
+        <div className="stream-card active-archived" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
+          <div className="stream-banner">
+            <div className="title-container">
+              <div className="title">
+                <h3>{ title }</h3>
+                <h5>{ user }</h5>
+              </div>
+              <p className="date-time">
+                { scheduledDate }
+              </p>
             </div>
-            <img className="imagePlaceholder" src={ image } />
+            <img className="card-img" src={ image } />
           </div>
-          <div className="description-container">
+          <div className="description">
             { description }
           </div>
         </div>
@@ -67,7 +71,8 @@ class ArchivedStreams extends Component {
     });
 
     return (
-      <div>
+      <div className="stream-container">
+        <h1 className="index-header">Archived Streams</h1>
         <main className="streams">
           { renderStreams }
         </main>

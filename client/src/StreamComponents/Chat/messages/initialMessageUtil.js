@@ -7,7 +7,7 @@ export default function randomMessage() {
       type: 'messages',
       id: uuid(),
       timestamp: new Date(),
-      user: { username: 'Joel@LHL', userColor: '#101010' },
+      user: { username: 'Joel@LHL', userColor: '#FF00FF' },
       content: 'A monad is just a monoid in the category of endofunctors, what\'s the problem?'
     }
   ]

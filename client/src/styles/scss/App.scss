@@ -1,27 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,800');
 @import 'partials/chat';
 @import 'partials/fileViewer';
 @import 'partials/video';
-@import 'partials/scheduledStreamCard';
-@import 'partials/activeStreamsCard';
-@import 'partials/archivedStreamsCards';
+@import 'partials/streamCards';
 @import 'partials/terminal';
 @import 'partials/fileDirectory';
-@import 'partials/indexviews';
-@import 'partials/header';
+@import 'partials/indexViews';
+@import 'partials/indexHeader';
+@import 'partials/streamIndex';
+@import 'partials/nav';
 
 html {
   box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   font-size: 16px;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: 'Montserrat', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(32, 33, 51);
 }
 
 code {
@@ -35,68 +37,6 @@ code {
   max-height: 100vh;
   min-width: 100vw;
   overflow-y: auto;
-  // background-color: black;
-
-  .stream-parent {
-    overflow: hidden;
-
-    .component-container1 {
-      display: grid;
-      
-      grid-template-columns: 1fr 2fr 1fr;
-      grid-template-areas: 
-        "Filetree Video Chat";
-  
-      .Filetree-display {
-        position: relative;
-        max-height: 52vh;
-        overflow-y: auto; 
-        height: 100%;
-        width: 100%; 
-        grid-area: Filetree;
-        background-color: white;
-  
-      }
-  
-      .Video-display {
-        position: relative;
-        height: 100%;
-        width: 100%; 
-        grid-area: Video;
-      }
-    
-      .Chat-display {
-        position: relative;
-        height: 100%;
-        width: 100%; 
-        grid-area: Chat;
-      }
-    }
-  
-    .component-container2 {
-      display: grid;
-      position: relative;
-      height: 47vh;
-      grid-template-columns: 50% 50%;
-      grid-template-areas:
-        "Code Terminal";
-  
-      .Code-display {
-        grid-column: span 6;
-        position: relative;
-        height: 100%;
-        grid-area: Code;
-      }
-  
-      .Terminal-display {
-        grid-column: span 6;
-        position: relative;
-        display: flex;
-        min-width: 100vw;
-        grid-area: Terminal;
-      }
-    }
-  }
 }
 
 .App-logo {
@@ -112,7 +52,6 @@ code {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
