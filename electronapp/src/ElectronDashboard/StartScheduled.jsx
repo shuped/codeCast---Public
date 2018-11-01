@@ -44,7 +44,7 @@ class StartScheduled extends Component {
 
       <main className="start-scheduled">        
         <div className="main-container">
-          <div>
+          <div className="content-wrapper">
            <h1 className="container-header">{this.props.stagedStream.title}</h1>
            <p>{this.props.stagedStream.description}</p>
           </div>
@@ -53,10 +53,10 @@ class StartScheduled extends Component {
             <form onSubmit={this.HandleSubmit}>
 
                 <div className="youtube-container">
-                  <h3>YouTube URL:</h3>
-                  <input type="text" placeholder='Enter the URL for your youtube LiveStream here' onChange={this.YoutubeUrlInput} />
+                  <h3 className="youtube-header">YouTube URL:</h3>
+                  <input className="url-input" type="text" placeholder='Enter Youtube Live URL' onChange={this.YoutubeUrlInput} />
                 </div>
-                <input type="submit" value="Go live!" />
+                <input className="btn submit-button" type="submit" value="Go live!" />
             </form>
           </div>
         </div>

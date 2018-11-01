@@ -48,14 +48,14 @@ a {
 }
 
 .btn {
-  background-color: #bbbbbb;
-  color: #4d4d4d;
+  background-color: #bbb;
+  color: #000;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-content: center;
   align-self: center;
-  border: 1px solid #000;
+  border: 2px outset #bbb;
   border-radius: 4px;
   cursor: pointer;
   padding: 0.5rem;

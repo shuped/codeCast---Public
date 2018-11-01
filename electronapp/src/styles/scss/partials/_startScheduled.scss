@@ -1,23 +1,51 @@
   // new-stream
   .start-scheduled {
+    overflow: hidden;
+    display: flex;
 
     .main-container{
+      color: #FFF;
+      align-items: center;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      color: #FFF;
+      max-width: 60vw;
+      margin-left: auto;
+      margin-right: auto;
 
+      .content-wrapper {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        max-width: 40vw;
+
+        .container-header {
+          font-size: 2rem;
+          display: flex;
+          color: #FFF;
+          justify-content: center;
+        }
+        .youtube-header {
+          margin-left: 1rem;
+        }
+        .url-input {
+          margin: 0.5rem;
+          border-radius: 3px;
+        }
+        .submit-button {
+          margin-left: 1rem;
+        }
+      }
       div {
         h1{
-          font-size: 2em;
+          font-size: 2rem;
           color: #FFF;
         }
         h3{
-          font-size: 1.6em;
+          font-size: 1.6rem;
           color: #FFF;
         }
         p {
-          font-size: 1em;
+          font-size: 1rem;
           color: #FFF;
         }
       }
