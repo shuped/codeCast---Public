@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { Router, withRouter, Link } from 'react-router-dom';
 // import CodecastLogo from '../assets/logo.png';
 
-client/src/assets/logo.svg
 class Dashboard extends Component {
 
   componentDidMount() {
@@ -60,7 +59,6 @@ class Dashboard extends Component {
     console.log(this.props.scheduledStreams, "render");
     
     const renderStreams = this.props.scheduledStreams
-      .reverse()
       .map((stream) => this.MakeScheduledStreamCard(stream));
 
     return (
