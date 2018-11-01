@@ -105,7 +105,7 @@ function createMainWindow() {
 
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
-		mainWindow.webContents.openDevTools();
+		// mainWindow.webContents.openDevTools();
 	});
 }
 
@@ -129,7 +129,7 @@ function createTerminalWindow() {
 	// Open the DevTools.
 	terminalWindow.once('ready-to-show', () => {
 		terminalWindow.show();
-		terminalWindow.webContents.openDevTools();
+		// terminalWindow.webContents.openDevTools();
 	});
 	// Emitted when the window is closed.
 	terminalWindow.on('closed', function () {

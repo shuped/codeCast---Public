@@ -113,7 +113,7 @@ function MessageList({ messages, notifications, uuid }) {
           </div>}
 
         <div className={`${message.type}-content`}>
-          {message.type === 'messages' ? `$ ${parsed.join(' ')}` : parsed}
+          { parsed }
         </div>
 
       </div>

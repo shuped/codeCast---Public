@@ -13,7 +13,8 @@ class Console extends Component {
       this.__term = e;
       this.terminal.open(this.__term);
       this.terminal.fit()
-    }
+    };
+    this.state = { terminalRecord: {} };
   }
 
   componentWillMount() {
@@ -25,8 +26,11 @@ class Console extends Component {
   };
 
   componentDidMount() {
-    const io = socket.connect('http://localhost:8080/terminal');
-    io.on('terminal', (data) => {
+    const io = socket
+    .connect('http://localhost:8080/terminal')
+    .on('terminal', (data) => {
+      let now = Date.now();
+      this.setState({ terminalRecord: {...this.terminalRecord, [now]: data} });
       this.terminal.write(data);
     })
     .on('terminalRecord', (record) => {

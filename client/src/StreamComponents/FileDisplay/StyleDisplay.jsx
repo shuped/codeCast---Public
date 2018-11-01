@@ -76,7 +76,7 @@ function StyleList({ changeDisplayTheme }) {
   });
 
   return (
-    <select className="theme-select" defaultValue='dracula' onChange={ changeDisplayTheme } id='theme-select'>
+    <select className="theme-select" defaultValue="Dracula" onChange={ changeDisplayTheme } id="theme-select">
       {styleElems}
     </select>
   );
