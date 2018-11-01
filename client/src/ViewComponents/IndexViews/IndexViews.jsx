@@ -12,9 +12,13 @@ function IndexViews (){
 
 	return (
 		<div className="pageGrid">
-			<Route exact path={["/", "/active", "/scheduled", "/archived"]} component={ Nav } className="app-nav" />
-			<div className="header-tabs">
-				<Route exact path={["/", "/active", "/scheduled", "/archived"]} component={ IndexHeader } />
+			<div className="header-container">
+				<div className="nav-container">
+					<Route exact path={["/", "/active", "/scheduled", "/archived"]} component={ Nav } className="app-nav" />
+				</div>
+				<div className="index-container">
+					<Route exact path={["/", "/active", "/scheduled", "/archived"]} component={ IndexHeader } />
+				</div>
 			</div>
 			<div className="stream-views">
 				<Switch>

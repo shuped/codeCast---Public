@@ -40,15 +40,25 @@ class ScheduledStreams extends Component {
     }
 
     return (
-      <Link to={`/scheduled/${streamID}`}>
-        <div className="currentStream" key={(Math.random()*10).toString().slice(2,6)}>
-          <div className="currentStreamBanner">
-            <h3>{ title }</h3>
-            <h4>{ user }</h4>
-            <h5>{ scheduledDate }</h5>
-            <img className="imagePlaceholder" src={ image } />
+      <Link className="link-container" to={`/scheduled`}>
+        <div className="stream-card scheduled" key={(Math.random()*10).toString().slice(2,6)}>
+          <div className="stream-banner">
+            <div className="scheduled-title-container">
+              <div className="title">
+                <h3>{ title }</h3>
+                <h5>{ user }</h5>
+              </div>
+              <p className="date-time">
+                { scheduledDate }
+              </p>
+            </div>
           </div>
-          <p>{ description }</p>
+          <div className="card-content">
+            <p className="scheduled-description">
+              { description }
+            </p>
+          </div>
+          <img className="card-img" src={ image } />
         </div>
       </Link>
     )
@@ -60,7 +70,8 @@ class ScheduledStreams extends Component {
       .map((stream) => this.MakeStreamCard(stream));
 
     return (
-      <div>
+      <div className="stream-container">
+        <h1 className="index-header">Upcoming Streams</h1>
         <main className="streams">
           { renderStreams }
         </main>
