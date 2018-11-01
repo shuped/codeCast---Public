@@ -28,6 +28,11 @@ class Console extends Component {
     const io = socket.connect('http://localhost:8080/terminal');
     io.on('terminal', (data) => {
       this.terminal.write(data);
+    })
+    .on('terminalRecord', (record) => {
+      this.setState({ terminalRecord: record });
+
+      this.terminal.write(Object.values(this.state.terminalRecord));
     });
   }
 

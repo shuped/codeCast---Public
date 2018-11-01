@@ -59,7 +59,6 @@ io.on('connection', (socket) => {
   console.log(`Socket ${socket.id} connected`);
   clients.push(socket.id);
   console.log(clients);
-  io.of('/redux').emit({ type: 'DIRECTORY_UPDATE', payload: dirCache })
 
   socket.on('action', (action) => {
 
@@ -100,6 +99,7 @@ const redux = io
     console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
+    socket.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache })
    
     socket.on('action', (action) => {      
 
@@ -119,7 +119,7 @@ const redux = io
         
       };
       function defaultReduxAction(type, payload) {
-        console.log("Default redux action triggered");
+        console.log("Default redux action triggered", type, payload);
         return null
       }
       const { type, payload } = action;
@@ -146,12 +146,12 @@ const terminal = io
   console.log(`Terminal Socket ${socket.id} connected`);
   termClients.push(socket.id);
   console.log(termClients);
-  terminal.emit('terminalRecord', terminalRecord);
+  socket.emit('terminalRecord', terminalRecord);
 
   socket.on('data', (data) => {
     let now = Date.now();
     terminalRecord[now] = data;
-    terminal.emit('terminal', terminalRecord[now]); // refactor to action when we store data
+    terminal.emit('terminal', data); // refactor to action when we store data
   });
   
 
@@ -177,7 +177,7 @@ app.route('/api/scheduledStreams/')
     try {
       // insert into database, ensure id doesn't collide
       const streamID = uuid().slice(0,8);
-      testData[streamID] = {
+      scheduleData[streamID] = {
         streamID,
         "status": "scheduled",
         "youtubeURL": null,
@@ -193,7 +193,7 @@ app.route('/api/scheduledStreams/')
     // Upsert query to database might replace this
     // !!missing sad path!!
     const streamData = req.body;
-    testData[streamData.streamID] = {
+    scheduleData[streamData.streamID] = {
       ...streamData
     };
     res.status(200).send('PUT /api/scheduledStreams: Stream started');
@@ -208,7 +208,7 @@ app.route('/api/activeStreams/')
     try {
       // insert into database, ensure id doesn't collide
       const streamID = uuid().slice(0,8);
-      testData[streamID] = {
+      activeData[streamID] = {
         streamID,
         status: 'active',
         ...streamData
