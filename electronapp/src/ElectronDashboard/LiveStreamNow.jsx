@@ -51,7 +51,7 @@ class LiveStreamNow extends React.Component {
     return (
       <main className="new-stream">
         <div className="inputs-container">
-          <h1>Start New Stream</h1>
+          <h1 className="container-header">Start New Stream</h1>
 
           <div className="forms-container">
 
@@ -73,17 +73,6 @@ class LiveStreamNow extends React.Component {
                   <input type="text" placeholder="https://www.youtube.com/channel/PLACEHOLDER" name='youtubeURL' onChange={this.HandleInputChange} />
                 </div>
                 <div className="b-bottom-container">
-                  <InputGroup compact>
-                    <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
-                      <Option value="default">----</Option>
-                      <Option value="javascript">JavaScript</Option>
-                      <Option value="ruby">Ruby</Option>
-                      <Option value="csshtml">CSS/HTML</Option>
-                      <Option value="csharp">Csharp</Option>
-                      <Option value="python">Python</Option>
-                      <Option value="php">PHP</Option>
-                    </Select>
-                  </InputGroup>
                   <input type="submit" value="Go live!" />
                 </div>
 

@@ -12,6 +12,9 @@
   margin: 2rem;
   padding: 1rem;
 }
+.dashboard .streams .container-header {
+  color: #FFF;
+}
 .dashboard .streams .scheduledStreamCard {
   display: flex;
   flex-direction: row;
@@ -80,6 +83,9 @@
   box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+.new-stream {
+  color: #FFF;
+}
 .new-stream .header {
   display: flex;
   justify-content: center;
@@ -96,56 +102,58 @@
 }
 .new-stream .inputs-container h1 {
   justify-content: center;
+  color: #FFF;
 }
-.new-stream .inputs-container .forms-container form .title-input h3 {
+.new-stream .inputs-container h3 {
   justify-content: space-around;
+  color: #FFF;
 }
 .new-stream .inputs-container .forms-container form .bottom-container {
   display: inline-flex;
   justify-content: space-between;
 }
 
-.start-scheduled .header {
-  height: 20%;
-  display: flex;
-  justify-content: center;
-}
-.start-scheduled .header .logoPlaceholder {
-  width: 50px;
-  height: 50px;
-  background-color: black;
-}
 .start-scheduled .main-container {
-  height: 60%;
-  border: 2px solid black;
-  background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: #FFF;
 }
 .start-scheduled .main-container div h1 {
   font-size: 2em;
+  color: #FFF;
+}
+.start-scheduled .main-container div h3 {
+  font-size: 1.6em;
+  color: #FFF;
 }
 .start-scheduled .main-container div p {
   font-size: 1em;
+  color: #FFF;
 }
 
-.nav-header {
+.nav-container .nav-header {
   display: flex;
   min-width: 100vw;
+  max-width: 100vw;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
   height: 5rem;
   background-color: #000000;
 }
-.nav-header img.nav-logo {
+.nav-container .nav-header img.nav-logo {
   max-height: 3rem;
-  margin: 0.5em 1rem;
+  margin: 0.5em;
 }
-.nav-header .nav-links {
+.nav-container .nav-header .nav-links {
   display: flex;
   flex-direction: row;
+}
+.nav-container .nav-header .nav-links .btn.nav-link {
+  font-size: 0.7rem;
+  color: #000;
+  max-width: 5rem;
 }
 
 html {
@@ -157,11 +165,13 @@ html {
 
 a {
   text-decoration: none;
+  color: #FFF;
 }
 
 .App {
   min-width: 100vh;
   min-height: 100vw;
+  overflow-x: hidden;
   overflow-y: auto;
   margin: 0;
   padding: 0;
@@ -178,6 +188,7 @@ a {
 }
 .App .electron-container .nav-container {
   min-width: 100vw;
+  max-width: 100vw;
 }
 .App .electron-container .view-container {
   min-width: 100vw;

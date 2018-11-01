@@ -12,8 +12,6 @@ function Nav() {
         <NavLink className="btn start-now nav-link" to="/LiveStreamNow">Stream Now</NavLink>
 
         <NavLink className="btn schedule-new nav-link" to="/ScheduleNewStream">Schedule New</NavLink>
-
-        <NavLink className="btn start-scheduled nav-link" to="/StartScheduled">Start Scheduled</NavLink>
       </div>
     </header>
   );

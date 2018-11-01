@@ -114,8 +114,8 @@ let terminalWindow, watcher;
 function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
-		minWidth: 40,
-		height: 700,
+		minWidth: 800,
+		height: 475,
 		width: 800,
 		show: false
 	});

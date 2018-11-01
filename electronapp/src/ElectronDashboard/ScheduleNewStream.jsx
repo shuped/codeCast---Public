@@ -60,7 +60,7 @@ class ScheduleNewStream extends React.Component {
 
         <main className="new-stream">          
           <div className="inputs-container">
-            <h1>Schedule A Stream</h1>
+            <h1 className="container-header">Schedule A Stream</h1>
 
             <div className="forms-container">
               <form id="form" onSubmit={this.HandleSubmit}>
@@ -73,26 +73,7 @@ class ScheduleNewStream extends React.Component {
                   <textarea type="text" rows="4" cols="90" description={this.state.description} onChange={this.DescriptionOnChange} />
                 </div>
                 <div className=" bottom-container">
-                  <DatePicker
-                    className="date-selection"
-                    showTime
-                    format="YYYY-MM-DD HH:mm:ss"
-                    placeholder="Select Time"
-                    onChange={this.onChange}
-                    onOk={this.onOk}
-                  />
-                  {/* Language image selector */}
-                  <InputGroup compact>
-                    <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
-                      <Option value="default">----</Option>
-                      <Option value="javascript">JavaScript</Option>
-                      <Option value="ruby">Ruby</Option>
-                      <Option value="csshtml">CSS/HTML</Option>
-                      <Option value="csharp">Csharp</Option>
-                      <Option value="python">Python</Option>
-                      <Option value="php">PHP</Option>
-                    </Select>
-                  </InputGroup>
+                  
                   <input type="submit" value="Submit" />
                 </div>
               </form>

@@ -17,6 +17,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.less$/,
+        use: [
+          "style-loader", {loader: 'css-loader', options: {sourceMap: 1}}, "postcss-loader",
+          {
+            loader: 'less-loader', options: { javascriptEnabled: true }
+          }
+        ]
+      },
+      {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
@@ -25,9 +34,6 @@ module.exports = {
             "presets": [
               "@babel/env", 
               "@babel/react"
-            ],
-            "plugins": [ 
-              "@babel/plugin-proposal-class-properties"
             ]
           },
         }
@@ -47,23 +53,6 @@ module.exports = {
           }, 
           {
             loader: 'sass-loader'
-          }
-        ]
-      },
-      {
-        test: /\.less$/,
-        use: ["style-loader", {loader: 'css-loader', options: {sourceMap: 1}}, "postcss-loader",
-          {
-            loader: 'less-loader', options: { javascriptEnabled: true },
-            options: {
-              "plugins": [
-                ["import", {
-                  "libraryName": "antd",
-                  "libraryDirectory": "es",
-                  "style": true
-                }]
-              ]
-            }
           }
         ]
       },

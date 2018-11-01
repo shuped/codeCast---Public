@@ -45,7 +45,7 @@ class StartScheduled extends Component {
       <main className="start-scheduled">        
         <div className="main-container">
           <div>
-           <h1>{this.props.stagedStream.title}</h1>
+           <h1 className="container-header">{this.props.stagedStream.title}</h1>
            <p>{this.props.stagedStream.description}</p>
           </div>
 
