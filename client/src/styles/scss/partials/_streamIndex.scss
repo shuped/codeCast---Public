@@ -1,58 +1,64 @@
 .stream-parent {
+  box-sizing: border-box;
   overflow: hidden;
   background-color: #000;
+
   .component-container1 {
     display: grid;
-    
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-areas: 
-      "Filetree Video Chat";
+    max-height: 52vh;
+    grid-template-columns: 20% 50% 30%;
+    grid-template-areas: "Filetree Video Chat";
 
     .Filetree-display {
       position: relative;
       max-height: 52vh;
       overflow-y: auto; 
-      height: 100%;
-      width: 100%; 
       grid-area: Filetree;
+      border: 1px groove rgb(70, 70, 102);
+      border-radius: 1px;
     }
 
     .Video-display {
       position: relative;
-      height: 100%;
-      width: 100%; 
+      max-height: 52vh;
       grid-area: Video;
+      z-index: 99;
+      border: 1px groove rgb(70, 70, 102);
+      border-radius: 1px;
     }
   
     .Chat-display {
       position: relative;
-      height: 100%;
-      width: 100%; 
+      max-height: 52vh;
       grid-area: Chat;
+      border: 1px groove rgb(70, 70, 102);
+      border-radius: 1px;
     }
   }
 
   .component-container2 {
     display: grid;
-    position: relative;
-    height: 47vh;
     grid-template-columns: 50% 50%;
-    grid-template-areas:
-      "Code Terminal";
+    grid-template-areas: "Code Terminal";
+    max-height: 47.8vh;
 
     .Code-display {
       grid-column: span 6;
       position: relative;
-      height: 100%;
       grid-area: Code;
+      border: 1px groove rgb(70, 70, 102);
+      border-radius: 1px;
+      z-index: 88;
     }
 
     .Terminal-display {
       grid-column: span 6;
       position: relative;
       display: flex;
-      min-width: 100vw;
       grid-area: Terminal;
+      border: 1px groove rgb(70, 70, 102);
+      border-radius: 1px;
+      z-index: 88;
     }
   }
 }

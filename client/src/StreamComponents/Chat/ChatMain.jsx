@@ -39,7 +39,7 @@ class Chat extends Component {
   generateRandomHexColor = () => {
     let decimal = Math.floor(Math.random()*16777215);
 
-    let hex = (decimal < (200 * 200 * 200) && decimal > (30 * 30 * 30)) 
+    let hex = (decimal < (200 * 200 * 200) && decimal > (50 * 50 * 50)) 
       ? decimal.toString(16) : this.generateRandomHexColor();
     
     this.setState({ userColor: `#${hex}` });
