@@ -54,6 +54,15 @@ module.exports = {
             loader: 'less-loader', options: { javascriptEnabled: true }
           }
         ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {}
+          }
+        ]
       }
     ]
   },

@@ -4,8 +4,9 @@ import { fetchBroadcasterStreams, postDeleteStream, stageStream } from '../redux
 import { connect } from 'react-redux'; 
 
 import { Router, withRouter, Link } from 'react-router-dom';
-import CodecastLogo from '../images/CODECAST_LOGO.png';
+// import CodecastLogo from '../assets/logo.png';
 
+client/src/assets/logo.svg
 class Dashboard extends Component {
 
   componentDidMount() {
@@ -59,13 +60,14 @@ class Dashboard extends Component {
     console.log(this.props.scheduledStreams, "render");
     
     const renderStreams = this.props.scheduledStreams
+      .reverse()
       .map((stream) => this.MakeScheduledStreamCard(stream));
 
     return (
 
         <main className="dashboard">
           <div className="header">
-            <img src={ CodecastLogo } />
+            {/* <img src={ CodecastLogo } /> */}
           
             <div className="stream-controls">
               <Link to='/LiveStreamNow' id="instant">Start a Stream</Link>
