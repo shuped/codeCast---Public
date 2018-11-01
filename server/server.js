@@ -32,7 +32,6 @@ let pathCache          = null;
 //   'bodySizeLimit': '50mb'
 // }));
 
-
 app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
 app.use(bodyParser.json({ limit: '50mb' }));
 
@@ -176,7 +175,7 @@ app.route('/api/scheduledStreams/')
     try {
       // insert into database, ensure id doesn't collide
       const streamID = uuid().slice(0,8);
-      testData[streamID] = {
+      scheduleData[streamID] = {
         streamID,
         "status": "scheduled",
         "youtubeURL": null,
@@ -192,9 +191,10 @@ app.route('/api/scheduledStreams/')
     // Upsert query to database might replace this
     // !!missing sad path!!
     const streamData = req.body;
-    testData[streamData.streamID] = {
+    activeData[streamData.streamID] = {
       ...streamData
     };
+    delete scheduleData[streamData.streamID];
     res.status(200).send('PUT /api/scheduledStreams: Stream started');
   });
 
@@ -207,7 +207,7 @@ app.route('/api/activeStreams/')
     try {
       // insert into database, ensure id doesn't collide
       const streamID = uuid().slice(0,8);
-      testData[streamID] = {
+      activeData[streamID] = {
         streamID,
         status: 'active',
         ...streamData

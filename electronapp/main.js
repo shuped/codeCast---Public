@@ -67,9 +67,9 @@ async function postAllFiles() {
 function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
-		minWidth: 880,
-		height: 860,
-		width: 1280,
+		minWidth: 1080,
+		height: 800,
+		width: 1080,
 		show: false
 	});
 
@@ -105,7 +105,7 @@ function createMainWindow() {
 
 	mainWindow.once('ready-to-show', () => {
 		mainWindow.show();
-		mainWindow.webContents.openDevTools();
+		// mainWindow.webContents.openDevTools();
 	});
 }
 
@@ -114,9 +114,9 @@ let terminalWindow, watcher;
 function createTerminalWindow() {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
-		minWidth: 40,
-		height: 400,
-		width: 400,
+		minWidth: 800,
+		height: 475,
+		width: 800,
 		show: false
 	});
 
@@ -129,7 +129,7 @@ function createTerminalWindow() {
 	// Open the DevTools.
 	terminalWindow.once('ready-to-show', () => {
 		terminalWindow.show();
-		terminalWindow.webContents.openDevTools();
+		// terminalWindow.webContents.openDevTools();
 	});
 	// Emitted when the window is closed.
 	terminalWindow.on('closed', function () {
