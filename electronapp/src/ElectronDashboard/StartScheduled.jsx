@@ -4,7 +4,7 @@ import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
 import { putScheduledStream } from '../redux/ducks/streamsDuck.js'
 
-import { Router, withRouter, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
@@ -42,11 +42,7 @@ class StartScheduled extends Component {
   render() {  
     return (
 
-      <main className="start-scheduled">
-        <header className="header">
-          <Link to='/' id="dashboard-btn">Dashboard</Link>
-          <div className="logoPlaceholder">p</div>
-        </header>
+      <main className="start-scheduled">        
         <div className="main-container">
           <div>
            <h1>{this.props.stagedStream.title}</h1>

@@ -25,6 +25,9 @@ module.exports = {
             "presets": [
               "@babel/env", 
               "@babel/react"
+            ],
+            "plugins": [ 
+              "@babel/plugin-proposal-class-properties"
             ]
           },
         }
@@ -49,13 +52,33 @@ module.exports = {
       },
       {
         test: /\.less$/,
+        use: ["style-loader", {loader: 'css-loader', options: {sourceMap: 1}}, "postcss-loader",
+          {
+            loader: 'less-loader', options: { javascriptEnabled: true },
+            options: {
+              "plugins": [
+                ["import", {
+                  "libraryName": "antd",
+                  "libraryDirectory": "es",
+                  "style": true
+                }]
+              ]
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'less-loader', options: { javascriptEnabled: true }
+            loader: 'file-loader'
           }
         ]
       }
     ]
+  },
+  resolve: {
+    extensions: ['.json', '.js', '.jsx', '.css', '.less']
   },
   plugins: [
     // Generates an `index.html` file with the <script> injected.

@@ -4,7 +4,7 @@ import { Input, Select, DatePicker } from 'antd';
 import { connect } from 'react-redux'; 
 
 import { postScheduledStream } from '../redux/ducks/streamsDuck.js'
-import { Router, withRouter, Link, Redirect } from 'react-router-dom';
+import { withRouter, Link, Redirect } from 'react-router-dom';
 
 const InputGroup = Input.Group;
 const Option = Select.Option;
@@ -58,11 +58,7 @@ class ScheduleNewStream extends React.Component {
     
     return (
 
-        <main className="new-stream">
-          <header className="header">
-            <Link to='/' id="dashboard-btn">Dashboard</Link>
-            <div className="logoPlaceholder">p</div>
-          </header>
+        <main className="new-stream">          
           <div className="inputs-container">
             <h1>Schedule A Stream</h1>
 

@@ -4,7 +4,7 @@ import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
 import { postActiveStream } from '../redux/ducks/streamsDuck.js'
 
-import { Router, withRouter, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
@@ -50,10 +50,6 @@ class LiveStreamNow extends React.Component {
   render() {  
     return (
       <main className="new-stream">
-        <header className="header">
-          <Link to='/' id="dashboard-btn">Dashboard</Link>
-          <div className="logoPlaceholder">codeCast</div>
-        </header>
         <div className="inputs-container">
           <h1>Start New Stream</h1>
 
