@@ -1,6 +1,6 @@
 const axios = require('./api');
 // Outgoing
-
+// async -> fetchActiveStreams, fetchArchivedStreams, fetchScheduledStreams
 
 // Incoming
 const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
@@ -23,12 +23,12 @@ export const streamsReducer = (state = { activeStreams: ['noStreams'], scheduled
       return { ...state, scheduledStreams: action.payload }
 
     case ACTIVE_STREAMS_UPDATE:
-    console.log('userstreams update', action.payload);
-    return { ...state, activeStreams: action.payload }
+      console.log('userstreams update', action.payload);
+      return { ...state, activeStreams: action.payload }
 
     case ARCHIVED_STREAMS_UPDATE:
-    console.log('userstreams update', action.payload);
-    return { ...state, archivedStreams: action.payload }
+      console.log('userstreams update', action.payload);
+      return { ...state, archivedStreams: action.payload }
 
     default:
       return state;

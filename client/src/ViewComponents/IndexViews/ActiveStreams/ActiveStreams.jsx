@@ -14,7 +14,6 @@ import Stream from '../../../StreamComponents/StreamIndex.jsx';
 class ActiveStreams extends Component {  
 
   componentDidMount() {
-    console.log("Spaghetti");
     this.props.fetchActiveStreams();
   }
 
@@ -47,7 +46,7 @@ class ActiveStreams extends Component {
 
     return (
       <Link className="link-container" to={`/active/${streamID}`}>
-        <div className="stream-card active-archived" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
+        <div className="stream-card active-archived" key={streamID} onClick={() => this.GetStreamId(streamID)}>
           <div className="stream-banner">
             <div className="title-container">
               <div className="title">
@@ -66,9 +65,8 @@ class ActiveStreams extends Component {
   }
 
   render() {
-    const renderStreams = this.props.activeStreams.map( (stream) => {
-      return this.MakeActiveStreamCard(stream);  
-    });
+    const renderStreams = this.props.activeStreams
+      .map((stream) => this.MakeActiveStreamCard(stream));
 
     return (
       <div className="stream-container">
@@ -77,7 +75,6 @@ class ActiveStreams extends Component {
           { renderStreams }
         </main>
       </div>
-      
     );
   }
 
