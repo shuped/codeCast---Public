@@ -27,7 +27,7 @@ class Console extends Component {
 
   componentDidMount() {
     const io = socket
-    .connect('https://arcane-thicket-82509.herokuapp.com/terminal')
+    .connect('http://localhost:8080/terminal')
     .on('terminal', (data) => {
       let now = Date.now();
       this.setState({ terminalRecord: {...this.terminalRecord, [now]: data} });
