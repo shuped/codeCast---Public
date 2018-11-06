@@ -1,5 +1,6 @@
 const axios = require('../../../api');
-
+const electron = window.require('electron');
+const ipcRenderer  = electron.ipcRenderer;
 // Outgoing
 // async -> fetchBroadcasterStreams, postDeleteStream, postScheduledStream, putScheduledStream
 
@@ -103,6 +104,9 @@ export const postActiveStream = (stream) => {
       data: stream
     }).then((res) => {
       console.log('Post scheduled API streams success', res);
+      // Send streamID to renderer.js for socket room
+      ipcRenderer.send('streamID', res.streamID)
+      
       // LinkTo Dashboard
       // Handle rejection in components
     }).catch((err) => {
