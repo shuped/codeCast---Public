@@ -147,10 +147,15 @@ const terminal = io
   console.log(termClients);
   socket.emit('terminalRecord', terminalRecord);
 
-  socket.on('data', (data) => {
+  socket.on('join', (streamID) => {
+    console.log(`Terminal room ${streamID} joined`);
+    socket.join(streamID);
+  });
+
+  socket.on('data', (streamID, data) => {
     let now = Date.now();
     terminalRecord[now] = data;
-    terminal.emit('terminal', data); // refactor to action when we store data
+    terminal.in(streamID).emit('terminal', data); // refactor to action when we playback archived data
   });
   
 

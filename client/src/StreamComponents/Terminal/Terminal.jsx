@@ -5,8 +5,8 @@ import socket from 'socket.io-client';
 import 'xterm/src/xterm.css';
 
 class Console extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.__term = null;
     this.terminal = null;
     this.setTermRef = (e) => {
@@ -38,6 +38,7 @@ class Console extends Component {
 
       this.terminal.write(Object.values(this.state.terminalRecord).join(''));
     });
+    io.emit('join', this.props.streamID)
   }
 
   render() {
