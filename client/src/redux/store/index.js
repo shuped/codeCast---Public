@@ -4,7 +4,7 @@ import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
 import thunk from 'redux-thunk';
 
-const io = socketIO.connect('http://localhost:8080/');
+const io = socketIO.connect('http://localhost:8080/redux');
 
 const socketMW = createSocketMW(io, 'server/', { execute: executor });
 
