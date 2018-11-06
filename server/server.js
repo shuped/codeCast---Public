@@ -229,6 +229,13 @@ app.route('/api/archivedStreams/')
     res.send('To be implemented.')
   });
 
+app.get('/api/query', (req, res) => {
+  // To be replaced with graphQL api
+  const { id, field } = req.query;
+
+  res.json(activeData[id][field])
+})
+
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
   try {
