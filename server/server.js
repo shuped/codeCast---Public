@@ -274,12 +274,13 @@ app.post('/api/electron/file_update', (req, res) => {
 });
 
 app.post('/api/electron', (req, res) => {
+  const { streamID, content, directory, filepaths } = req.body;
   
   try {
-    fileCache = req.body.content || fileCache;
-    dirCache = req.body.directory || dirCache;
-    pathCache = req.body.filepaths || pathCache;
-    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    fileCache[streamID] = content || fileCache;
+    dirCache[streamID] = directory || dirCache;
+    pathCache[streamID] = filepaths || pathCache;
+    redux.in(streamID).emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
     res.status(200).send('Post request success /api/electron');
   }
   catch (e) {
