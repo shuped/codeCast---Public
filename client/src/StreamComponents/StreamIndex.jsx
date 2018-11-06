@@ -8,25 +8,26 @@ import { connect } from 'react-redux';
 
 class Stream extends Component {
   render() {
+    const streamID = this.props.match.params.id;
     return (
       <div className="stream-parent">
         <div className='component-container1'>
           <div className="Filetree-display">
-            <FileDirectory />
+            <FileDirectory streamID={streamID}/>
           </div>
           <div className="Video-display">
-            <Video />
+            <Video streamID={streamID}/>
           </div>
           <div className="Chat-display">
-            <Chat />
+            <Chat streamID={streamID}/>
           </div>
         </div>  
         <div className="component-container2">
           <div className="Code-display">
-            <LiveCodeDisplay />
+            <LiveCodeDisplay streamID={streamID}/>
           </div>
           <div className="Terminal-display">
-            <Terminal />
+            <Terminal streamID={streamID}/>
           </div>
         </div>
       </div>
