@@ -1,16 +1,9 @@
 import React from 'react';
-import { Button } from 'antd';
 import { Input, Select } from 'antd';
-import { connect } from 'react-redux';
-import { postActiveStream } from '../redux/ducks/streamsDuck.js'
-
 import { withRouter, Link } from 'react-router-dom';
-
+import axios from '../../api.js'
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
-
-const InputGroup = Input.Group;
-const Option = Select.Option;
 
 class LiveStreamNow extends React.Component {
 
@@ -39,12 +32,23 @@ class LiveStreamNow extends React.Component {
 
   HandleSubmit = (event) => {
     event.preventDefault();
-    
     // TODO: check form validation before terminalOpen and form submit
-    this.props.postActiveStream(this.state);
-    ipcRenderer.send('terminalOpen', true);
-    this.props.history.push('/');
-    // TODO: show broadcasting view
+
+    // Post stream to server and retrive streamID on success
+    axios({
+      method: 'post',
+      url: '/api/activeStreams/',
+      data: this.state
+    }).then((res) => {
+      console.log('Post scheduled API streams success', res);
+      // Send streamID to renderer.js for socket room
+      ipcRenderer.send('terminalOpen', res.data.streamID)
+      // TODO: show broadcasting view
+      this.props.history.push('/');
+    }).catch((err) => {
+      console.error('Error: Post scheduled stream rejected:', err.data);
+      // TODO: Render error element
+    })
   };
 
   render() {  
@@ -85,10 +89,4 @@ class LiveStreamNow extends React.Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    postActiveStream: (stream) => dispatch(postActiveStream(stream))
-  };
-};
-
-export default withRouter(connect(null, mapDispatchToProps)(LiveStreamNow));
+export default withRouter(LiveStreamNow);

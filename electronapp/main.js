@@ -1,4 +1,4 @@
-const { app, BrowserWindow, shell, ipcMain, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, ipcRenderer, Menu } = require('electron');
 const { StringDecoder } = require('string_decoder');
 const url = require('url')
 const isDev = require('electron-is-dev');
@@ -110,8 +110,8 @@ function createMainWindow() {
 }
 
 
-let terminalWindow, watcher;
-function createTerminalWindow() {
+let terminalWindow;
+function createTerminalWindow(streamID) {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 800,
@@ -126,11 +126,12 @@ function createTerminalWindow() {
 		slashes: true
 	}));
 
-	// Open the DevTools.
 	terminalWindow.once('ready-to-show', () => {
+		// Pass streamID to renderer so terminal can include it in its data to server
+		terminalWindow.webContents.send('streamID', streamID);
 		terminalWindow.show();
-		// terminalWindow.webContents.openDevTools();
 	});
+
 	// Emitted when the window is closed.
 	terminalWindow.on('closed', function () {
 		// Dereference the window object, usually you would store windows
@@ -138,7 +139,6 @@ function createTerminalWindow() {
 		// when you should delete the corresponding element.
 		terminalWindow = null;
 	});
-
 }
 
 generateMenu = () => {
@@ -220,7 +220,6 @@ app.on('activate', () => {
 	}
 });
 
-ipcMain.on('terminalOpen', (event, arg) => {
-	console.log('terminalOpen in createWindow');
-	createTerminalWindow();
+ipcMain.on('terminalOpen', (event, streamID) => {
+	createTerminalWindow(streamID);
 });

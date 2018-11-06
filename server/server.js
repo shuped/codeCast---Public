@@ -198,11 +198,14 @@ app.route('/api/scheduledStreams/')
     // !!missing sad path!!
     // Think about date/time of scheduled versus started
     const streamData = req.body;
-    activeData[streamData.streamID] = {
+    const { streamID } = streamData;
+
+    activeData[streamID] = {
       ...streamData
     };
-    delete scheduleData[streamData.streamID];
-    res.status(200).send('PUT /api/scheduledStreams: Stream started');
+    
+    delete scheduleData[streamID];
+    res.status(200).json({message: "Scheduled stream started", streamID});
   });
 
 app.route('/api/activeStreams/')
@@ -219,7 +222,7 @@ app.route('/api/activeStreams/')
         "status": "active",
         ...streamData
       };
-      res.status(201).json({ message: "Stream started", streamID });;
+      res.status(201).json({ message: "Stream started", streamID });
     }
     catch (e) {
       res.status(304).send('POST activeStream: Failed to insert active stream to database.', e);
