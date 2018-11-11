@@ -4,7 +4,7 @@ import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
 import { postActiveStream } from '../redux/ducks/streamsDuck.js'
 
-import { Router, withRouter, Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
@@ -50,12 +50,8 @@ class LiveStreamNow extends React.Component {
   render() {  
     return (
       <main className="new-stream">
-        <header className="header">
-          <Link to='/' id="dashboard-btn">Dashboard</Link>
-          <div className="logoPlaceholder">codeCast</div>
-        </header>
         <div className="inputs-container">
-          <h1>Start New Stream</h1>
+          <h1 className="container-header">Start New Stream</h1>
 
           <div className="forms-container">
 
@@ -77,17 +73,6 @@ class LiveStreamNow extends React.Component {
                   <input type="text" placeholder="https://www.youtube.com/channel/PLACEHOLDER" name='youtubeURL' onChange={this.HandleInputChange} />
                 </div>
                 <div className="b-bottom-container">
-                  <InputGroup compact>
-                    <Select className="image-select" defaultValue="default" onChange={this.HandleImageSelection}>
-                      <Option value="default">----</Option>
-                      <Option value="javascript">JavaScript</Option>
-                      <Option value="ruby">Ruby</Option>
-                      <Option value="csshtml">CSS/HTML</Option>
-                      <Option value="csharp">Csharp</Option>
-                      <Option value="python">Python</Option>
-                      <Option value="php">PHP</Option>
-                    </Select>
-                  </InputGroup>
                   <input type="submit" value="Go live!" />
                 </div>
 

@@ -272,6 +272,7 @@
 
 .Terminal-display {
   position: relative;
+<<<<<<< HEAD
   overflow: scroll;
 }
 .Terminal-display .wrapper {
@@ -293,6 +294,25 @@
 .Terminal-display .wrapper .terminal-main canvas.xterm-text-layer, .Terminal-display .wrapper .terminal-main canvas.xterm-cursor-layer {
   padding: 0.5rem 3rem 1rem 2rem;
 }
+=======
+  overflow: scroll; }
+  .Terminal-display .wrapper {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-wrap: nowrap; }
+    .Terminal-display .wrapper .terminal-main div.xterm-screen {
+      display: flex;
+      min-width: 50vw;
+      min-height: 48vh; }
+    .Terminal-display .wrapper .terminal-main canvas[class^="xterm-"] {
+      display: flex;
+      min-width: 50vw !important;
+      min-height: 48vh; }
+    .Terminal-display .wrapper .terminal-main canvas.xterm-text-layer, .Terminal-display .wrapper .terminal-main canvas.xterm-cursor-layer, .Terminal-display .wrapper .terminal-main .xterm-screen {
+      bottom: 0;
+      padding: 0.5rem 3rem 1rem 2rem; }
+>>>>>>> 6f2b9b3b5f7733192c21ab98e6aada9f5ff0ad58
 
 .Filetree-display {
   background-color: #282a36 !important;
@@ -307,6 +327,12 @@
   color: #fff;
 }
 
+.pageGrid .welcome-message {
+  color: #FFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 3rem; }
 .pageGrid .index-view {
   background-color: #777;
   width: 100vw;
@@ -483,10 +509,13 @@ code {
   font-size: calc(10px + 2vmin);
 }
 
+<<<<<<< HEAD
 .App-link {
   color: #61dafb;
 }
 
+=======
+>>>>>>> 6f2b9b3b5f7733192c21ab98e6aada9f5ff0ad58
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

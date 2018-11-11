@@ -3,8 +3,13 @@ import { Button } from 'antd';
 import { fetchBroadcasterStreams, postDeleteStream, stageStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
+<<<<<<< HEAD
 import { Router, withRouter, Link } from 'react-router-dom';
 // import CodecastLogo from '../assets/logo.png';
+=======
+import { withRouter, Link } from 'react-router-dom';
+
+>>>>>>> 6f2b9b3b5f7733192c21ab98e6aada9f5ff0ad58
 
 class Dashboard extends Component {
 
@@ -40,15 +45,25 @@ class Dashboard extends Component {
     const { title, scheduledDate, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
-        <Link to='/StartScheduled' className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID)} >Test</Link>
-        <p>{ title }</p>
-        <div>
+        <div className="info-container">
+          <p className="title">{ title }</p>
           <div className="date-time">
             <p id="date">{ scheduledDate }</p>
           </div>
+        </div>
+        <div>
           <div className="controls">
-            <Button id="edit-btn"  type="primary" onClick={ () => this.OpenEditControls(streamID) }>Edit</Button>
-            <Button id="delete-btn" type="primary" onClick={ () => this.props.deleteStream(streamID) }>Delete</Button>
+            <Link to='/StartScheduled' className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>
+              <Button id="start-btn" className="btn" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
+                Start Stream
+              </Button>
+            </Link>
+            <Button id="edit-btn" className="btn" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
+              Edit
+            </Button>
+            <Button id="delete-btn" className="btn" type="primary" onClick={ () => this.props.deleteStream(streamID) }>
+              Delete
+            </Button>
           </div>
         </div>
       </div>
@@ -63,20 +78,11 @@ class Dashboard extends Component {
 
     return (
 
-        <main className="dashboard">
-          <div className="header">
-            {/* <img src={ CodecastLogo } /> */}
-          
-            <div className="stream-controls">
-              <Link to='/LiveStreamNow' id="instant">Start a Stream</Link>
-              <Link to='/ScheduleNewStream' id="scheduleNew" >Schedule a Stream</Link>
-            </div>
-          </div>
+        <main className="dashboard">        
           <div className="streams">
-            <h2>Your Scheduled Streams</h2>
+            <h2 className="container-header">Your Scheduled Streams</h2>
             { renderStreams }
           </div>
-          
         </main>
       
     );

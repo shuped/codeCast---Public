@@ -2,106 +2,96 @@
   display:flex;
   flex-direction: column;
   justify-content: center;
-  height:100%;
-  width: 100%;
+  min-width: 100vw;
 
-  .header {
-    height:35%;
-    display:flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;     
-
-    .imageHeader{
-      
-      width:50px;
-      height:50px;
-      margin: .5em;
-      background-color:black;
-    }
-    .stream-controls{
-      display:flex;
-      justify-content: center;
-      border: 2px solid black;
-      padding: 1em 2em;
-      width: 60%;
-
-      #instant {
-        margin: .5em;
-      }
-
-      #scheduleNew {
-        margin: .5em;
-      }
-    }
-  }
   .streams {
-    height: 65%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    padding: 1rem;
+
+    .container-header {
+      color: #FFF;
+    }
 
     .scheduledStreamCard {
-      width: 90%;
-      height: 15%;
-      display:flex;
+      display: flex;
+      flex-direction: row;
+      color: #000;
       justify-content: space-between;
-      border:2px solid black;
-      margin: 1em 0 ; 
-      align-items: center;
+      border: 1px solid rgb(0, 0, 0);
+      background-color: rgb(202, 202, 202);
+      border-radius: 10px;
+      box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.6);
+      min-width: 75vw;
+      margin: 2rem 2rem;
+      padding: 1rem;
 
-      .startPlaceholder {
-        width:50px;
-        height: 50px;
-        background-color: aquamarine;
+      .info-container {
+        display: flex;
+        flex-direction: column;
+        
+        .date-time{
+          display:flex;
+          flex-direction: column;
+
+          #date, #time{
+            font-size: 0.7rem;
+            display: flex;
+            margin: 0;
+          }
+        }
       }
+
       p{
         font-size: 1.5em;
         height:20%;
       }
       
-      div {
-        display:inline-flex;
-        
-        .date-time{
-          display:flex;
-          flex-direction: column;
-          
-
-          #date{
-            font-size: 1em;
-            display:block;
-            margin: 0;
-          }
-          #time {
-            font-size: 1em;
-            display:block;
-            margin: 0;
-          }
-        }
-      }
       .controls{
         display:flex;
         flex-direction: column;
         justify-content: space-evenly;
 
-        #edit-btn {
-          background-color: skyblue;
+        #start-btn {
+          background-color: rgb(163, 163, 163);
           padding:3px;
-          font-size:1em;
+          font-size:0.7rem;
+          border-radius: 5px;
+          margin: 0.5rem;
 
           &:hover {
             background: rgba(0,0,0,0);
-            color: #3a7999;
-            box-shadow: inset 0 0 0 3px #3a7999;
+            color: #b8b8b8;
+            box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
           }
         }
-        #delete-btn {
-          background-color: darkred;
+
+        #edit-btn {
+          background-color: rgb(163, 163, 163);
           padding:3px;
-          font-size:1em;
+          font-size:0.7rem;
+          border-radius: 5px;
+          margin: 0.5rem;
 
           &:hover {
             background: rgba(0,0,0,0);
-            color: #3a7999;
-            box-shadow: inset 0 0 0 3px #3a7999;
+            color: #b8b8b8;
+            box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
+          }
+        }
+
+        #delete-btn {
+          background-color: rgb(107, 107, 107);
+          padding:3px;
+          font-size:0.7rem;
+          border-radius: 5px;
+          margin: 0.5rem;
+
+          &:hover {
+            background: rgba(0,0,0,0);
+            color: #b8b8b8;
+            box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
           }
         }
       }
