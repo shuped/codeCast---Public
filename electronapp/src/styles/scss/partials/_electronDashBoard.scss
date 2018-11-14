@@ -7,9 +7,29 @@
   .streams {
     display: flex;
     flex-direction: column;
+<<<<<<< HEAD
     margin: 2rem;
     padding: 1rem;
 
+=======
+    align-items: center;     
+
+    .imageHeader{
+      
+      width:50px;
+      height:50px;
+      margin: .5em;
+      background-color:black;
+    }
+    .stream-controls{
+      display:flex;
+      justify-content: center;
+      border: 2px solid black;
+      padding: 1em 2em;
+      width: 60%;
+    }
+    
+>>>>>>> 60e05c92c75c8d01eac3edfb9c36940b22803449
     .container-header {
       color: #FFF;
     }

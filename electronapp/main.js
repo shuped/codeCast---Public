@@ -18,52 +18,6 @@ const rootDir = path.join(__dirname, '..');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
-let directory = null;
-let content = null;
-let filepaths = null;
-
-async function getAllFiles() {
-	fs.existsSync('./fileData/directory.json') ?
-		null : (async () => {
-			console.log('getAllFiles triggered');
-			await readDir(rootDir, done(path.join(__dirname, 'fileData')));
-		})();
-	await postAllFiles();
-}
-
-async function postAllFiles() {
-	if (fs.existsSync('./fileData/directory.json') && fs.existsSync('./fileData/content.json')) {
-		console.log('postAllFiles triggered');
-		directory = await decoder.write(fs.readFileSync('./fileData/directory.json'));
-		content = await decoder.write(fs.readFileSync('./fileData/content.json'));
-		filepaths = await decoder.write(fs.readFileSync('./fileData/content.json'));
-	} else {
-		setTimeout(() => {
-			postAllFiles();
-		}, 3000);
-	}
-
-	if (directory !== null && content !== null) {
-		axios({
-			method: 'post',
-			url: '/api/electron',
-			data: {
-				directory: directory,
-				content: content,
-				filepaths: filepaths
-			},
-			error: (err) => {
-				console.log('Axios error');
-			}
-		}).then((res) => {
-			console.log('Post success');
-		}).catch((err) => {
-			console.error('Error');
-			throw err;
-		});
-	}
-}
-
 function createMainWindow() {
 	mainWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
@@ -224,3 +178,49 @@ ipcMain.on('terminalOpen', (event, arg) => {
 	console.log('terminalOpen in createWindow');
 	createTerminalWindow();
 });
+
+let directory = null;
+let content = null;
+let filepaths = null;
+
+async function getAllFiles() {
+	fs.existsSync('./fileData/directory.json') ?
+		null : (async () => {
+			console.log('getAllFiles triggered');
+			await readDir(rootDir, done(path.join(__dirname, 'fileData')));
+		})();
+	await postAllFiles();
+}
+
+async function postAllFiles() {
+	if (fs.existsSync('./fileData/directory.json') && fs.existsSync('./fileData/content.json')) {
+		console.log('postAllFiles triggered');
+		directory = await decoder.write(fs.readFileSync('./fileData/directory.json'));
+		content = await decoder.write(fs.readFileSync('./fileData/content.json'));
+		filepaths = await decoder.write(fs.readFileSync('./fileData/content.json'));
+	} else {
+		setTimeout(() => {
+			postAllFiles();
+		}, 3000);
+	}
+
+	if (directory !== null && content !== null) {
+		axios({
+			method: 'post',
+			url: '/api/electron',
+			data: {
+				directory: directory,
+				content: content,
+				filepaths: filepaths
+			},
+			error: (err) => {
+				console.log('Axios error');
+			}
+		}).then((res) => {
+			console.log('Post success');
+		}).catch((err) => {
+			console.error('Error');
+			throw err;
+		});
+	}
+}
