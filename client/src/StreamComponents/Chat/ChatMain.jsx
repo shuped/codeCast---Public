@@ -48,8 +48,7 @@ class Chat extends Component {
       user: { username: this.state.currentUser, userColor: this.state.userColor },
       content: message
     };
-    // this.props.sendMessage(newMsg);
-    this.props.dispatch(chatActions.sendMessage(newMsg));
+    this.props.sendMessage(newMsg);
     this.setState({ messages: this.state.messages.concat(newMsg)});
   }
 
@@ -100,14 +99,14 @@ class Chat extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  sendMessage: (msg) => dispatch(chatActions.sendMessage(msg)),
-  alertConnection: () => dispatch(chatActions.newConnection('New connection established from React')) 
-});
-
 const mapStateToProps = (state) => ({
   messages: state.chat.messages,
   notifications: state.chat.notifications
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  sendMessage: (msg) => dispatch(chatActions.sendMessage(msg)),
+  alertConnection: () => dispatch(chatActions.newConnection('New connection established from React')) 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);
