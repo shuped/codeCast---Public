@@ -1,32 +1,33 @@
+import { streamConstants } from '../_constants';
 const axios = require('./api');
 // Outgoing
 
 
 // Incoming
-const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
-const ACTIVE_STREAMS_UPDATE = 'ACTIVE_STREAMS_UPDATE';
-const ARCHIVED_STREAMS_UPDATE = 'ARCHIVED_STREAMS_UPDATE';
+// const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
+// const ACTIVE_STREAMS_UPDATE = 'ACTIVE_STREAMS_UPDATE';
+// const ARCHIVED_STREAMS_UPDATE = 'ARCHIVED_STREAMS_UPDATE';
 
 // Action Creators
-export const updateScheduledStreams = (scheduledStreams) => ({ type: SCHEDULED_STREAMS_UPDATE, payload: scheduledStreams  });
+export const updateScheduledStreams = (scheduledStreams) => ({ type: streamConstants.SCHEDULED_STREAMS_UPDATE, payload: scheduledStreams  });
 
-export const updateActiveStreams = (activeStreams) => ({ type: ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
+export const updateActiveStreams = (activeStreams) => ({ type: streamConstants.ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
 
-export const updateArchivedStreams = (archivedStreams) => ({ type: ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
+export const updateArchivedStreams = (archivedStreams) => ({ type: streamConstants.ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
 
 // STREAM REDUCER
 
 export const streamsReducer = (state = { activeStreams: ['noStreams'], scheduledStreams: ['noStreams'], archivedStreams: ['noStreams'] }, action) => {
   switch(action.type) {
-    case SCHEDULED_STREAMS_UPDATE:
+    case streamConstants.SCHEDULED_STREAMS_UPDATE:
       console.log('userstreams update', action.payload);
       return { ...state, scheduledStreams: action.payload }
 
-    case ACTIVE_STREAMS_UPDATE:
+    case streamConstants.ACTIVE_STREAMS_UPDATE:
     console.log('userstreams update', action.payload);
     return { ...state, activeStreams: action.payload }
 
-    case ARCHIVED_STREAMS_UPDATE:
+    case streamConstants.ARCHIVED_STREAMS_UPDATE:
     console.log('userstreams update', action.payload);
     return { ...state, archivedStreams: action.payload }
 

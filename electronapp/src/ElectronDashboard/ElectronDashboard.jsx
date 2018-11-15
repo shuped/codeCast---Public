@@ -3,18 +3,9 @@ import { Button } from 'antd';
 import { fetchBroadcasterStreams, postDeleteStream, stageStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Router, withRouter, Link } from 'react-router-dom';
 // import CodecastLogo from '../assets/logo.png';
-=======
-import { withRouter, Link } from 'react-router-dom';
 
->>>>>>> 6f2b9b3b5f7733192c21ab98e6aada9f5ff0ad58
-=======
-import { Router, withRouter, Link } from 'react-router-dom';
-// import CodecastLogo from '../assets/logo.png';
->>>>>>> 60e05c92c75c8d01eac3edfb9c36940b22803449
 
 class Dashboard extends Component {
 
@@ -83,9 +74,6 @@ class Dashboard extends Component {
 
     return (
 
-<<<<<<< HEAD
-        <main className="dashboard">        
-=======
         <main className="dashboard">
           <div className="header">
             {/* <img src={ CodecastLogo } /> */}
@@ -95,7 +83,6 @@ class Dashboard extends Component {
               <Link to='/ScheduleNewStream' id="scheduleNew" >Schedule a Stream</Link>
             </div>
           </div>
->>>>>>> 60e05c92c75c8d01eac3edfb9c36940b22803449
           <div className="streams">
             <h2 className="container-header">Your Scheduled Streams</h2>
             { renderStreams }

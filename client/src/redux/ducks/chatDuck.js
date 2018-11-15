@@ -1,10 +1,10 @@
 import randomMessage from '../../StreamComponents/Chat/messages/initialMessageUtil'
 import { chatConstants } from '../_constants';
 
+// delete delete delete
 // Outgoing
 // const OUTGOING_MESSAGE = 'server/message';
 // const NEW_CONNECTION = 'server/new_connection';
-
 // Incoming
 // const INCOMING_MESSAGE = 'NEW_MESSAGE'
 // const INCOMING_NOTIFICATION = 'NEW_NOTIFICATION'
