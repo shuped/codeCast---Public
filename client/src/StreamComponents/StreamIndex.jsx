@@ -13,7 +13,7 @@ class Stream extends Component {
     this.streamID = this.props.match.params.id;
   }
   componentDidMount() {
-    joinRoom(this.streamID)
+    this.props.joinRoom(this.streamID)
   }
   render() {
     return (

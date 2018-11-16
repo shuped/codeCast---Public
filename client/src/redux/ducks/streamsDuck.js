@@ -1,7 +1,7 @@
 const axios = require('./api');
 // Outgoing
 // async -> fetchActiveStreams, fetchArchivedStreams, fetchScheduledStreams
-const JOIN_ROOM = 'JOIN_ROOM';
+const JOIN_ROOM = 'server/join';
 
 // Incoming
 const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
