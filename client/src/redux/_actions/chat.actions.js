@@ -11,4 +11,4 @@ export const chatActions = {
   newConnection,
   sendMessage,
   changeUsername
-}
+};
