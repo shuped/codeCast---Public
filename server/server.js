@@ -19,9 +19,10 @@ const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
 const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
 
-let fileCache          = null;
-let dirCache           = null;
-let pathCache          = null;
+// Placeholding for db. Namespacing the placeholder is cleaner if we use objects
+let fileCache          = {};
+let dirCache           = {};
+let pathCache          = {};
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -98,7 +99,6 @@ const redux = io
     console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
-    socket.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache })
    
     socket.on('action', (action) => {      
 
@@ -114,6 +114,11 @@ const redux = io
         'server/join': (type, payload) => {
           console.log(`Redux room ${payload.streamID} joined`);
           socket.join(payload.streamID);
+          socket.emit('action', {
+            type: 'DIRECTORY_UPDATE',
+            payload: dirCache[payload.streamID]
+          });
+          
         }
       };
 
@@ -276,7 +281,7 @@ app.post('/api/electron/file_update', (req, res) => {
 
 app.post('/api/electron', (req, res) => {
   const { streamID, content, directory, filepaths } = req.body;
-  
+
   try {
     fileCache[streamID] = content || fileCache;
     dirCache[streamID] = directory || dirCache;
@@ -285,9 +290,8 @@ app.post('/api/electron', (req, res) => {
     res.status(200).send('Post request success /api/electron');
   }
   catch (e) {
-    console.log('Post to server failed:', e);
+    console.log('Post to server api/electron failed:', e);
     res.status(500).send('Post request failed /api/electron');
   }
   
 });
-
