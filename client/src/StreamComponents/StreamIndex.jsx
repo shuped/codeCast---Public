@@ -8,7 +8,8 @@ import { connect } from 'react-redux';
 import { joinRoom } from '../redux/ducks/streamsDuck.js';
 
 class Stream extends Component {
-  constructor() {
+  constructor(props) {
+    super(props);
     this.streamID = this.props.match.params.id;
   }
   componentDidMount() {
