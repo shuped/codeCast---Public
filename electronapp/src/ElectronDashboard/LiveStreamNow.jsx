@@ -9,16 +9,13 @@ import { withRouter, Link } from 'react-router-dom';
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
-const InputGroup = Input.Group;
-const Option = Select.Option;
-
 class LiveStreamNow extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       title: 'placeholder',
-      user: 'Joel Codes',
+      user: 'Benji Liabø',
       userID: 1,
       description: '',
       scheduledDate: new Date(),

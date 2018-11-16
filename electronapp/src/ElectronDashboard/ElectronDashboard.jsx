@@ -3,11 +3,12 @@ import { Button } from 'antd';
 import { fetchBroadcasterStreams, postDeleteStream, stageStream } from '../redux/ducks/streamsDuck.js';
 import { connect } from 'react-redux'; 
 
-import { withRouter, Link } from 'react-router-dom';
+import { Router, withRouter, Link } from 'react-router-dom';
+// import CodecastLogo from '../assets/logo.png';
 
 
 class Dashboard extends Component {
-  
+
   componentDidMount() {
     let userID = 1;
     this.props.fetchBroadcasterStreams(1);
@@ -37,14 +38,13 @@ class Dashboard extends Component {
   // need data structure for scheduled streams, for edit purposes
 
   MakeScheduledStreamCard = (props) => {
-    const { title, scheduledDate, scheduledTime, streamID } = props;
+    const { title, scheduledDate, streamID } = props;
     return (
       <div className="scheduledStreamCard" key={ streamID } >
         <div className="info-container">
           <p className="title">{ title }</p>
           <div className="date-time">
             <p id="date">{ scheduledDate }</p>
-            <p id="time">{ scheduledTime }</p>
           </div>
         </div>
         <div>
@@ -74,7 +74,15 @@ class Dashboard extends Component {
 
     return (
 
-        <main className="dashboard">        
+        <main className="dashboard">
+          <div className="header">
+            {/* <img src={ CodecastLogo } /> */}
+          
+            <div className="stream-controls">
+              <Link to='/LiveStreamNow' id="instant">Start a Stream</Link>
+              <Link to='/ScheduleNewStream' id="scheduleNew" >Schedule a Stream</Link>
+            </div>
+          </div>
           <div className="streams">
             <h2 className="container-header">Your Scheduled Streams</h2>
             { renderStreams }
