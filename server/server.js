@@ -108,7 +108,8 @@ const redux = io
           redux.emit('action', { type: 'NEW_MESSAGE', payload });
         },
         'server/file_change': (type, payload) => {
-          let file = fileCache[payload.fileID]
+          let streamID = Object.keys(socket.rooms)[1]; // socket.io/docs/server-api/#socket.rooms
+          let file = fileCache[streamID][payload.fileID]
           socket.emit('action', { type: 'FILE_UPDATE', payload: file });
         },
         'server/join': (type, payload) => {
