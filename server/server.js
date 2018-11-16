@@ -107,20 +107,21 @@ const redux = io
           console.log('server/message action triggered', payload);
           redux.emit('action', { type: 'NEW_MESSAGE', payload });
         },
-        'server/directory_update': (type, payload) => {
-          console.log('server/dir_update triggered', payload);
-          redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
-        },
         'server/file_change': (type, payload) => {
           let file = fileCache[payload.fileID]
           socket.emit('action', { type: 'FILE_UPDATE', payload: file });
+        },
+        'server/join': (type, payload) => {
+          console.log(`Redux room ${payload.streamID} joined`);
+          socket.join(payload.streamID);
         }
-        
       };
-      function defaultReduxAction(type, payload) {
+
+      defaultReduxAction = (type, payload) => {
         console.log("Default redux action triggered", type, payload);
         return null
       }
+
       const { type, payload } = action;
       actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
 
