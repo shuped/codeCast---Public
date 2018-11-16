@@ -137,36 +137,34 @@ const redux = io
     });
   });
 
-const terminalRecord = {};
-const terminal = io
-.of('/terminal')
-.on('connection', (socket) => {
-  const termClients = [];
-  console.log(`Terminal Socket ${socket.id} connected`);
-  termClients.push(socket.id);
-  console.log(termClients);
-  socket.emit('terminalRecord', terminalRecord);
-
-  socket.on('join', (streamID) => {
-    console.log(`Terminal room ${streamID} joined`);
-    socket.join(streamID);
-  });
-
-  socket.on('data', (streamID, data) => {
-    let now = Date.now();
-    terminalRecord[now] = data;
-    terminal.in(streamID).emit('terminal', data); // refactor to action when we playback archived data
-  });
-  
-
-
-  socket.on('disconnect', () => {
-    console.log(`Terminal socket ${socket.id} disconnected`)
-    let clientIndex = termClients.findIndex(e => e === socket.id);
-    termClients.splice(clientIndex, 1);
+  const terminalRecord = {};
+  const terminal = io
+  .of('/terminal')
+  .on('connection', (socket) => {
+    const termClients = [];
+    console.log(`Terminal Socket ${socket.id} connected`);
+    termClients.push(socket.id);
     console.log(termClients);
+    
+    socket.on('join', (streamID) => {
+      console.log(`Terminal room ${streamID} joined`);
+      socket.join(streamID);
+      socket.emit('terminalRecord', terminalRecord); //TODO: send terminalRecord[streamID] or the relevant db entry
+    });
+  
+    socket.on('data', (streamID, data) => {
+      let now = Date.now();
+      terminalRecord[now] = data;
+      terminal.in(streamID).emit('terminal', now, data);
+    });
+    
+    socket.on('disconnect', () => {
+      console.log(`Terminal socket ${socket.id} disconnected`)
+      let clientIndex = termClients.findIndex(e => e === socket.id);
+      termClients.splice(clientIndex, 1);
+      console.log(termClients);
+    });
   });
-});
 
   
 
