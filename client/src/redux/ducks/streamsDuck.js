@@ -1,6 +1,7 @@
 const axios = require('./api');
 // Outgoing
 // async -> fetchActiveStreams, fetchArchivedStreams, fetchScheduledStreams
+const JOIN_ROOM = 'JOIN_ROOM';
 
 // Incoming
 const SCHEDULED_STREAMS_UPDATE = 'SCHEDULED_STREAMS_UPDATE';
@@ -13,6 +14,8 @@ export const updateScheduledStreams = (scheduledStreams) => ({ type: SCHEDULED_S
 export const updateActiveStreams = (activeStreams) => ({ type: ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
 
 export const updateArchivedStreams = (archivedStreams) => ({ type: ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
+
+export const joinRoom = (streamID) => ({ type: JOIN_ROOM, payload: { streamID } });
 
 // STREAM REDUCER
 
