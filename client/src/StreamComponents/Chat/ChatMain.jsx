@@ -6,8 +6,6 @@ import uuid from 'uuid/v1';
 import { connect } from 'react-redux';
 import { chatActions } from '../../redux/_actions';
 
-//delete
-// import { newConnection, sendMessage } from '../../redux/ducks/chatDuck';
 import store from '../../redux/store/index.js';
 
 class Chat extends Component {
