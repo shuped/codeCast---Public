@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import { withRouter, Link } from 'react-router-dom';
 const electron = window.require('electron');
 const ipcRenderer  = electron.ipcRenderer;
 
-class LiveStreamNow extends React.Component {
+class LiveStreamNow extends Component {
 
   constructor(props) {
     super(props);

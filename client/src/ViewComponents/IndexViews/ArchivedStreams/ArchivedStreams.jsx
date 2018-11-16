@@ -1,13 +1,8 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-import rubyImg from '../../../images/ruby.png';
-import phpImg from '../../../images/php.png';
-import pythonImg from '../../../images/python.png';
-import javascriptImg from '../../../images/javascript.png';
-import csharpImg from '../../../images/csharp.png';
-import htmlcssImg from '../../../images/htmlcss.png';
+import { Link, withRouter } from 'react-router-dom';
+import languageImagePicker from '../../../helperFunctions/languagePicker';
 import { fetchArchivedStreams } from '../../../redux/ducks/streamsDuck.js';
-import { Link, withRouter, Route } from 'react-router-dom';
 
 class ArchivedStreams extends Component { 
   
@@ -21,25 +16,7 @@ class ArchivedStreams extends Component {
 
   MakeStreamCard = (props) => {
     const { title, user, description, scheduledDate, streamID, languageImage } = props;
-    let image
-    if (languageImage === 'javascript') {
-      image = javascriptImg
-    }
-    if (languageImage === 'ruby') {
-      image = rubyImg
-    }
-    if (languageImage === 'csshtml') {
-      image = htmlcssImg
-    }
-    if (languageImage === 'csharp') {
-      image = csharpImg
-    }
-    if (languageImage === 'python') {
-      image = pythonImg
-    }
-    if (languageImage === 'php') {
-      image = phpImg
-    }
+
     return (
       <Link className="link-container" to={`/archived/${streamID}`}> 
         <div className="stream-card active-archived" key={ streamID } onClick={ () => this.GetStreamId(streamID) }>
@@ -53,7 +30,7 @@ class ArchivedStreams extends Component {
                 { scheduledDate }
               </p>
             </div>
-            <img className="card-img" src={ image } />
+            <img className="card-img" alt={ languageImage } src={ languageImagePicker(languageImage) } />
           </div>
           <div className="description">
             { description }

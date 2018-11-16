@@ -1,47 +1,20 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';
-import rubyImg from '../../../images/ruby.png';
-import phpImg from '../../../images/php.png';
-import pythonImg from '../../../images/python.png';
-import javascriptImg from '../../../images/javascript.png';
-import csharpImg from '../../../images/csharp.png';
-import htmlcssImg from '../../../images/htmlcss.png';
-import { fetchScheduledStreams } from '../../../redux/ducks/streamsDuck.js';
 import { Link, withRouter } from 'react-router-dom';
-
+import { fetchScheduledStreams } from '../../../redux/ducks/streamsDuck.js';
+import languageImagePicker from '../../../helperFunctions/languagePicker';
 class ScheduledStreams extends Component {
 
   componentDidMount() {
     this.props.fetchScheduledStreams();
   }
 
-
   MakeStreamCard = (props) => {
     const { title, user, description, scheduledDate, languageImage, streamID } = props;
 
-    let image
-    if (languageImage === 'javascript') {
-      image = javascriptImg
-    }
-    if (languageImage === 'ruby') {
-      image = rubyImg
-    }
-    if (languageImage === 'csshtml') {
-      image = htmlcssImg
-    }
-    if (languageImage === 'csharp') {
-      image = csharpImg
-    }
-    if (languageImage === 'python') {
-      image = pythonImg
-    }
-    if (languageImage === 'php') {
-      image = phpImg
-    }
-
     return (
-      <Link className="link-container" to={`/scheduled`}>
-        <div className="stream-card scheduled" key={(Math.random()*10).toString().slice(2,6)}>
+      <Link className="link-container" to={ `/scheduled/${streamID}` }>
+        <div className="stream-card scheduled" key={ (Math.random()*10).toString().slice(2,6) }>
           <div className="stream-banner">
             <div className="scheduled-title-container">
               <div className="title">
@@ -58,7 +31,7 @@ class ScheduledStreams extends Component {
               { description }
             </p>
           </div>
-          <img className="card-img" src={ image } />
+          <img className="card-img" alt={ languageImage } src={ languageImagePicker(languageImage) } />
         </div>
       </Link>
     )

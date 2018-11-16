@@ -7,7 +7,7 @@ function Nav() {
 	return (
 		<header>
 			<div className="nav">
-				<NavLink to="/"><img className="navLogo" src={ CodecastLogo }></img></NavLink>
+				<NavLink to="/"><img className="navLogo" alt="codeCast" src={ CodecastLogo }></img></NavLink>
 				<div className="login-register">
 					<NavLink to="/login" className="navBtn">Login</NavLink>
 					<NavLink to="/register" className="navBtn">Register</NavLink>

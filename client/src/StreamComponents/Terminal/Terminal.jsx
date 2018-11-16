@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Terminal } from 'xterm';
-import * as fit from 'xterm/lib/addons/fit/fit';
 import socket from 'socket.io-client';
+import { connect } from 'react-redux';
+import * as fit from 'xterm/lib/addons/fit/fit';
 import 'xterm/src/xterm.css';
 
 class Console extends Component {
@@ -36,6 +37,7 @@ class Console extends Component {
     .on('terminalRecord', (record) => {
       this.setState({ terminalRecord: record });
     });
+    console.log(io);
   }
 
   render() {
@@ -49,4 +51,4 @@ class Console extends Component {
   };
 }
 
-export default Console;
+export default connect(null, null)(Console);

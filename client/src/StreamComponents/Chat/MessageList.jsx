@@ -41,7 +41,7 @@ function MessageList({ messages, notifications, uuid }) {
       }
       return (
         <span key={uuid()}>
-          <br /><img key={uuid()} className='img-msg' src={url} /><br />
+          <br /><img alt={`img-${uuid().slice(0,6)}`} key={uuid()} className='img-msg' src={url} /><br />
         </span>
       );
     },

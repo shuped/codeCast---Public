@@ -1,14 +1,9 @@
 import React, { Component } from 'react';  
 import { connect } from 'react-redux';  
-import rubyImg from '../../../images/ruby.png';
-import phpImg from '../../../images/php.png';
-import pythonImg from '../../../images/python.png';
-import javascriptImg from '../../../images/javascript.png';
-import csharpImg from '../../../images/csharp.png';
-import htmlcssImg from '../../../images/htmlcss.png';
+import { Link, withRouter } from 'react-router-dom';
+import languageImagePicker from '../../../helperFunctions/languagePicker';
 import { fetchActiveStreams } from '../../../redux/ducks/streamsDuck.js';
-import { Link, withRouter, Route } from 'react-router-dom';
-import Stream from '../../../StreamComponents/StreamIndex.jsx';
+
 
 
 class ActiveStreams extends Component {  
@@ -24,26 +19,6 @@ class ActiveStreams extends Component {
 
   MakeActiveStreamCard = (props) => {
     const { title, user, description, streamID, languageImage } = props;
-    // missing image path
-    let image
-    if (languageImage === 'javascript') {
-      image = javascriptImg
-    }
-    if (languageImage === 'ruby') {
-      image = rubyImg
-    }
-    if (languageImage === 'csshtml') {
-      image = htmlcssImg
-    }
-    if (languageImage === 'csharp') {
-      image = csharpImg
-    }
-    if (languageImage === 'python') {
-      image = pythonImg
-    }
-    if (languageImage === 'php') {
-      image = phpImg
-    }
 
     return (
       <Link className="link-container" to={`/active/${streamID}`}>
@@ -55,7 +30,7 @@ class ActiveStreams extends Component {
                 <h5>{ user }</h5>
               </div>
             </div>
-            <img className="card-img" src={ image } />
+            <img className="card-img" alt={ languageImage } src={ languageImagePicker(languageImage) } />
           </div>
           <div className="description">
             { description }

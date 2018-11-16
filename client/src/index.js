@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import store from './redux/store/index.js';
 import Root from './Root.jsx';
-import * as serviceWorker from './serviceWorker.js';
 import './styles/css/index.css';
 
 ReactDOM.render(
