@@ -11,7 +11,7 @@ class LiveStreamNow extends React.Component {
     super(props);
     this.state = {
       title: 'placeholder',
-      user: 'Joel Codes',
+      user: 'Benji Liabø',
       userID: 1,
       description: '',
       scheduledDate: new Date(),

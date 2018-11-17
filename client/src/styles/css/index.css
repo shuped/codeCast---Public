@@ -130,7 +130,9 @@
       margin: 2rem 0rem;
       padding: 1rem; }
       .streams .link-container .stream-card:hover {
-        opacity: 0.8; }
+        opacity: 0.8;
+        transform: scale(1.05);
+        transition: transform .15s ease-in-out; }
       .streams .link-container .stream-card.scheduled {
         display: flex;
         flex-direction: row;

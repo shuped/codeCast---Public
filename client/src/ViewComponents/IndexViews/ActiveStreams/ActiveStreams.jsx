@@ -66,7 +66,10 @@ class ActiveStreams extends Component {
 
   render() {
     const renderStreams = this.props.activeStreams
-      .map((stream) => this.MakeActiveStreamCard(stream));
+      .reverse()
+      .map( (stream) => {
+        return this.MakeActiveStreamCard(stream);  
+    });
 
     return (
       <div className="stream-container">
