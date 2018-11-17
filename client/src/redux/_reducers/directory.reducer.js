@@ -6,7 +6,6 @@ const directoryState = { directoryStructure: { 'staticKey': {fileNames:['Your Gr
 export const directoryReducer = (state = directoryState, action) => {
   switch (action.type) {
     case fileConstants.DIRECTORY_UPDATE:
-      console.log('directory_update action', action.payload);
       return { ...state, directoryStructure: action.payload };
     
     default:

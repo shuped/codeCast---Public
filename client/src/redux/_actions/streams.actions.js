@@ -4,7 +4,6 @@ const axios = require('../api');
 // Action Creators
 const updateScheduledStreams = (scheduledStreams) => ({ type: streamConstants.SCHEDULED_STREAMS_UPDATE, payload: scheduledStreams  });
 
-
 const updateActiveStreams = (activeStreams) => ({ type: streamConstants.ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
 
 const updateArchivedStreams = (archivedStreams) => ({ type: streamConstants.ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
