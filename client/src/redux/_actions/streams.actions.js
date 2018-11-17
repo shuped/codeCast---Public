@@ -8,8 +8,7 @@ const updateScheduledStreams = (scheduledStreams) => ({ type: streamConstants.SC
 const updateActiveStreams = (activeStreams) => ({ type: streamConstants.ACTIVE_STREAMS_UPDATE, payload: activeStreams  });
 
 const updateArchivedStreams = (archivedStreams) => ({ type: streamConstants.ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
-// MERGE: MOVE TO CONSTANTS
-const JOIN_ROOM = 'server/join';
+
 const joinRoom = (streamID) => ({ type: JOIN_ROOM, payload: { streamID } });
 
 // AJAX ACTIONS
