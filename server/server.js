@@ -116,10 +116,12 @@ const redux = io
         'server/join': (type, payload) => {
           console.log(`Redux room ${payload.streamID} joined`);
           socket.join(payload.streamID);
-          socket.emit('action', {
-            type: 'DIRECTORY_UPDATE',
-            payload: dirCache[payload.streamID]
-          });
+          if (dirCache[payload.streamID]) {
+            socket.emit('action', {
+              type: 'DIRECTORY_UPDATE',
+              payload: dirCache[payload.streamID]
+            });
+          };
         }
       };
 
@@ -156,7 +158,7 @@ const terminal = io
     socket.on('join', (streamID) => {
       console.log(`Terminal room ${streamID} joined`);
       socket.join(streamID);
-      socket.emit('terminalRecord', terminalRecord[streamID]);
+      if (terminalRecord[streamID]) { socket.emit('terminalRecord', terminalRecord[streamID]) }
     });
 
     socket.on('data', (streamID, data) => {
