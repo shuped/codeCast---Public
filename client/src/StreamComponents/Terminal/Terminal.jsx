@@ -34,9 +34,11 @@ class Console extends Component {
       this.terminal.write(data);
     })
     .on('terminalRecord', (terminalRecord) => {
-      this.setState({ terminalRecord });
-      let terminalRecordData = Object.values(terminalRecord).join('')
-      this.terminal.write(terminalRecordData);
+      if (terminalRecord) { // placehold sad path
+        this.setState({ terminalRecord });
+        let terminalRecordData = Object.values(terminalRecord).join('')
+        this.terminal.write(terminalRecordData);
+      };
     });
     io.emit('join', this.props.streamID)
   }
