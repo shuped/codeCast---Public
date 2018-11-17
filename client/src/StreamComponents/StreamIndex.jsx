@@ -5,7 +5,7 @@ import Video from './VideoStream/VideoStream.jsx';
 import Terminal from './Terminal/Terminal.jsx';
 import FileDirectory from './FileDirectory/FileDirectory.jsx';
 import { connect } from 'react-redux';
-import { joinRoom } from '../redux/ducks/streamsDuck.js';
+import { streamsActions } from '../redux/_actions';
 
 class Stream extends Component {
   constructor(props) {
@@ -50,7 +50,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    joinRoom: (streamID) => dispatch(joinRoom(streamID))
+    joinRoom: (streamID) => dispatch(streamsActions.joinRoom(streamID))
   };   
 }
 
