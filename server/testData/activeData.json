@@ -64,5 +64,16 @@
     "streamID": "asteun",
     "languageImage": "javascript",
     "status": "active"
+  },
+  "d1d8d2d0": {
+    "streamID": "d1d8d2d0",
+    "status": "active",
+    "title": "This is a real stream",
+    "user": "Joel Codes",
+    "userID": 1,
+    "description": "This is not a real description, but the streamID is d1d8d2d0",
+    "scheduledDate": "2018-11-17T03:35:06.446Z",
+    "youtubeURL": "https://www.youtube.com/embed/h8xMmyNkGrE",
+    "languageImage": ""
   }
 }
