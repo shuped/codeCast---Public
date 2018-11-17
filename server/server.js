@@ -149,12 +149,12 @@ const redux = io
     socket.on('join', (streamID) => {
       console.log(`Terminal room ${streamID} joined`);
       socket.join(streamID);
-      socket.emit('terminalRecord', terminalRecord); //TODO: send terminalRecord[streamID] or the relevant db entry
+      socket.emit('terminalRecord', terminalRecord[streamID]);
     });
   
     socket.on('data', (streamID, data) => {
       let now = Date.now();
-      terminalRecord[now] = data;
+      terminalRecord[streamID][now] = data;
       terminal.in(streamID).emit('terminal', now, data);
     });
     
