@@ -14,7 +14,7 @@ class Stream extends Component {
     this.state = {};
     this.streamID = this.props.match.params.id;
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.joinRoom(this.streamID);
 
     // This is a holdover until a better solution is presented
