@@ -37,6 +37,6 @@ ipcRenderer.on('streamID', (event, streamID) => {
     xterm1.write(data);
     io.emit('data', streamID, data)
   });
-});
 
-directoryWatcher(path.join(__dirname, '..'));
+  directoryWatcher(path.join(__dirname, '..'), streamID);
+});
