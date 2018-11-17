@@ -9,7 +9,7 @@ const updateActiveStreams = (activeStreams) => ({ type: streamConstants.ACTIVE_S
 
 const updateArchivedStreams = (archivedStreams) => ({ type: streamConstants.ARCHIVED_STREAMS_UPDATE, payload: archivedStreams  });
 
-const joinRoom = (streamID) => ({ type: JOIN_ROOM, payload: { streamID } });
+const joinRoom = (streamID) => ({ type: streamConstants.JOIN_ROOM, payload: { streamID } });
 
 // AJAX ACTIONS
 const fetchScheduledStreams = () => {
