@@ -20,9 +20,10 @@ const buildPath        = path.join(rootPath, 'client', 'build');
 const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
 
 // Placeholding for db. Namespacing the placeholder is cleaner if we use objects
-let fileCache          = {};
-let dirCache           = {};
-let pathCache          = {};
+const fileCache          = {};
+const dirCache           = {};
+const pathCache          = {};
+const terminalRecord     = {};
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -144,36 +145,34 @@ const redux = io
     });
   });
 
-const terminalRecord = {};
 const terminal = io
-.of('/terminal')
-.on('connection', (socket) => {
-  const termClients = [];
-  console.log(`Terminal Socket ${socket.id} connected`);
-  termClients.push(socket.id);
-  console.log(termClients);
-  socket.emit('terminalRecord', terminalRecord);
+  .of('/terminal')
+  .on('connection', (socket) => {
 
-  socket.on('join', (streamID) => {
-    console.log(`Terminal room ${streamID} joined`);
-    socket.join(streamID);
-  });
-
-  socket.on('data', (streamID, data) => {
-    let now = Date.now();
-    terminalRecord[now] = data;
-    terminal.in(streamID).emit('terminal', data); // refactor to action when we playback archived data
-  });
-  
-
-
-  socket.on('disconnect', () => {
-    console.log(`Terminal socket ${socket.id} disconnected`)
-    let clientIndex = termClients.findIndex(e => e === socket.id);
-    termClients.splice(clientIndex, 1);
+    const termClients = [];
+    console.log(`Terminal Socket ${socket.id} connected`);
+    termClients.push(socket.id);
     console.log(termClients);
+    
+    socket.on('join', (streamID) => {
+      console.log(`Terminal room ${streamID} joined`);
+      socket.join(streamID);
+      socket.emit('terminalRecord', terminalRecord[streamID]);
+    });
+
+    socket.on('data', (streamID, data) => {
+      let now = Date.now();
+      terminalRecord[streamID][now] = data;
+      terminal.in(streamID).emit('terminal', now, data);
+    });
+    
+    socket.on('disconnect', () => {
+      console.log(`Terminal socket ${socket.id} disconnected`)
+      let clientIndex = termClients.findIndex(e => e === socket.id);
+      termClients.splice(clientIndex, 1);
+      console.log(termClients);
+    });
   });
-});
 
   
 
@@ -211,6 +210,9 @@ app.route('/api/scheduledStreams/')
       ...streamData
     };
     
+    // create table for terminal record
+    terminalRecord[streamID] = {};
+
     delete scheduleData[streamID];
     res.status(200).json({message: "Scheduled stream started", streamID});
   });
@@ -229,6 +231,10 @@ app.route('/api/activeStreams/')
         "status": "active",
         ...streamData
       };
+
+      // create table for terminal record
+      terminalRecord[streamID] = {};
+
       res.status(201).json({ message: "Stream started", streamID });
     }
     catch (e) {

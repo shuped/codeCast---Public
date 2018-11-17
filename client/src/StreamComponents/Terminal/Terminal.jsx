@@ -14,6 +14,7 @@ class Console extends Component {
       this.terminal.open(this.__term);
       this.terminal.fit()
     };
+    // TODO: put terminalRecord in redux when we implement archive video playback
     this.state = { terminalRecord: {} };
   }
 
@@ -28,15 +29,14 @@ class Console extends Component {
   componentDidMount() {
     const io = socket
     .connect('http://localhost:8080/terminal')
-    .on('terminal', (data) => {
-      let now = Date.now();
-      this.setState({ terminalRecord: {...this.terminalRecord, [now]: data} });
+    .on('terminal', (timestamp, data) => {
+      this.setState({ terminalRecord: {...this.terminalRecord, [timestamp]: data} });
       this.terminal.write(data);
     })
-    .on('terminalRecord', (record) => {
-      this.setState({ terminalRecord: record });
-
-      this.terminal.write(Object.values(this.state.terminalRecord).join(''));
+    .on('terminalRecord', (terminalRecord) => {
+      this.setState({ terminalRecord });
+      let terminalRecordData = Object.values(terminalRecord).join('')
+      this.terminal.write(terminalRecordData);
     });
     io.emit('join', this.props.streamID)
   }
