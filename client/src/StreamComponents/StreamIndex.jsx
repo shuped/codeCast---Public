@@ -33,18 +33,18 @@ class Stream extends Component {
       <div className="stream-parent">
         <div className='component-container1'>
           <div className="Filetree-display">
-            <FileDirectory/>
+            <FileDirectory />
           </div>
           <div className="Video-display">
             <Video url={this.state.youtubeURL}/>
           </div>
           <div className="Chat-display">
-            <Chat/>
+            <Chat />
           </div>
         </div>  
         <div className="component-container2">
           <div className="Code-display">
-            <LiveCodeDisplay/>
+            <LiveCodeDisplay />
           </div>
           <div className="Terminal-display">
             <Terminal streamID={this.state.streamID}/>
