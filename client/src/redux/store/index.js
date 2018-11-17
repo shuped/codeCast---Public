@@ -22,11 +22,4 @@ const middleware = [
 
 const store = applyMiddleware(...middleware)(createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-// Testing
-store.subscribe(() => {
-  console.log('New state:', store.getState());
-});
-
 export default store;
-
-//
