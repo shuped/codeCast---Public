@@ -253,8 +253,8 @@ app.route('/api/archivedStreams/')
 app.get('/api/query', (req, res) => {
   // To be replaced with graphQL api
   const { id, field } = req.query;
-
-  res.json(activeData[id][field])
+  
+  activeData[id] ? res.json(activeData[id][field]) : res.status(404).send('StreamID not found.')
 })
 
 app.get('/api/filecontent/:file_uuid', (req, res) => {
