@@ -6,35 +6,48 @@ import Terminal from './Terminal/Terminal.jsx';
 import FileDirectory from './FileDirectory/FileDirectory.jsx';
 import { connect } from 'react-redux';
 import { streamsActions } from '../redux/_actions';
+import axios from '../redux/api.js';
 
 class Stream extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
     this.streamID = this.props.match.params.id;
   }
-  componentDidMount() {
-    this.props.joinRoom(this.streamID)
+  componentWillMount() {
+    this.props.joinRoom(this.streamID);
+
+    // This is a holdover until a better solution is presented
+    // Make a new redux state object, eg currentStream?
+    // More research on Apollo should dictate this decision
+    axios({
+      method: 'get',
+      url: `/api/query?id=${this.streamID}`
+    }).then((res) => {
+      this.setState({...res.data});
+    });
+
   }
   render() {
     return (
       <div className="stream-parent">
         <div className='component-container1'>
           <div className="Filetree-display">
-            <FileDirectory streamID={this.streamID}/>
+            <FileDirectory/>
           </div>
           <div className="Video-display">
-            <Video streamID={this.streamID}/>
+            <Video url={this.state.youtubeURL}/>
           </div>
           <div className="Chat-display">
-            <Chat streamID={this.streamID}/>
+            <Chat/>
           </div>
         </div>  
         <div className="component-container2">
           <div className="Code-display">
-            <LiveCodeDisplay streamID={this.streamID}/>
+            <LiveCodeDisplay/>
           </div>
           <div className="Terminal-display">
-            <Terminal streamID={this.streamID}/>
+            <Terminal streamID={this.state.streamID}/>
           </div>
         </div>
       </div>
