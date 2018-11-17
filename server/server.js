@@ -120,7 +120,6 @@ const redux = io
             type: 'DIRECTORY_UPDATE',
             payload: dirCache[payload.streamID]
           });
-          
         }
       };
 
@@ -252,10 +251,20 @@ app.route('/api/archivedStreams/')
 
 app.get('/api/query', (req, res) => {
   // To be replaced with graphQL api
-  const { id, field } = req.query;
+  const { id } = req.query;
   
-  activeData[id] ? res.json(activeData[id][field]) : res.status(404).send('StreamID not found.')
-})
+  if (activeData[id]) {
+    res.json(activeData[id]);
+  } else
+  if (scheduleData[id]) {
+    res.json(scheduleData[id]);
+  } else
+  if (archiveData[id]) {
+    res.json(archiveData[id]);
+  } else {
+    res.status(404).send('Whoops, that stream doesn\'t exist yet!');
+  };
+});
 
 app.get('/api/filecontent/:file_uuid', (req, res) => {
   const uuid = req.params.file_uuid;
