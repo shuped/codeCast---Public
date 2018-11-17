@@ -3,8 +3,9 @@ import { rootReducer } from '../ducks/Ducktator';
 import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger'
 
-const io = socketIO.connect('http://localhost:8080/');
+const io = socketIO.connect('http://localhost:8080/redux');
 
 const socketMW = createSocketMW(io, 'server/', { execute: executor });
 
@@ -15,7 +16,8 @@ function executor(action, emit, next, dispatch) {
 
 const middleware = [
   socketMW,
-  thunk
+  thunk,
+  logger
 ];
 
 const store = applyMiddleware(...middleware)(createStore)(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());

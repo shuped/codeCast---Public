@@ -69,7 +69,7 @@ async function fileReader(root, fpath, target) {
   });
 }
 
-async function makeJSON(array, root, targetDir) {
+async function makeJSON(array, root, targetDir, streamID) {
   //generates JSON object representing directory structure from array
   let promises = [];
   let dirObj = {};
@@ -127,11 +127,12 @@ async function makeJSON(array, root, targetDir) {
     });
 
     // TEMPORARY POST REQUEST INSIDE MAPPER
+    console.log('==',streamID)
     axios({
       method: 'post',
       url: `/api/electron`,
       data: {
-        streamID: null,
+        streamID: streamID,
         directory: dirObj,
         content: fileObj,
         paths: pathObj
@@ -160,11 +161,11 @@ async function makeJSON(array, root, targetDir) {
 }
 
 //when readDir is complete, call function to build directory and file content objects
-function done(targetDir) {
+function done(targetDir, streamID) {
   return (err, res, root) => {
     if (err) throw err;
 
-    makeJSON(res, root, targetDir);
+    makeJSON(res, root, targetDir, streamID);
 
   }
 }

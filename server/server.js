@@ -19,9 +19,10 @@ const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
 const devPath          = path.join(rootPath, 'client', 'public', 'index.html');
 
-let fileCache          = null;
-let dirCache           = null;
-let pathCache          = null;
+// Placeholding for db. Namespacing the placeholder is cleaner if we use objects
+let fileCache          = {};
+let dirCache           = {};
+let pathCache          = {};
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -98,7 +99,6 @@ const redux = io
     console.log(`Redux ${socket.id} connected`);
     clients.push(socket.id);
     console.log(clients);
-    socket.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache })
    
     socket.on('action', (action) => {      
 
@@ -107,20 +107,27 @@ const redux = io
           console.log('server/message action triggered', payload);
           redux.emit('action', { type: 'NEW_MESSAGE', payload });
         },
-        'server/directory_update': (type, payload) => {
-          console.log('server/dir_update triggered', payload);
-          redux.emit('action', { type: 'DIRECTORY_UPDATE', payload });
-        },
         'server/file_change': (type, payload) => {
-          let file = fileCache[payload.fileID]
+          let streamID = Object.keys(socket.rooms)[1]; // socket.io/docs/server-api/#socket.rooms
+          let file = fileCache[streamID][payload.fileID]
           socket.emit('action', { type: 'FILE_UPDATE', payload: file });
+        },
+        'server/join': (type, payload) => {
+          console.log(`Redux room ${payload.streamID} joined`);
+          socket.join(payload.streamID);
+          socket.emit('action', {
+            type: 'DIRECTORY_UPDATE',
+            payload: dirCache[payload.streamID]
+          });
+          
         }
-        
       };
-      function defaultReduxAction(type, payload) {
+
+      defaultReduxAction = (type, payload) => {
         console.log("Default redux action triggered", type, payload);
         return null
       }
+
       const { type, payload } = action;
       actions[type] ? actions[type](type, payload) : defaultReduxAction(type, payload);
 
@@ -272,18 +279,18 @@ app.post('/api/electron/file_update', (req, res) => {
 });
 
 app.post('/api/electron', (req, res) => {
-  
+  const { streamID, content, directory, filepaths } = req.body;
+
   try {
-    fileCache = req.body.content || fileCache;
-    dirCache = req.body.directory || dirCache;
-    pathCache = req.body.filepaths || pathCache;
-    redux.emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache });
+    fileCache[streamID] = content || fileCache;
+    dirCache[streamID] = directory || dirCache;
+    pathCache[streamID] = filepaths || pathCache;
+    redux.in(streamID).emit('action', { type: 'DIRECTORY_UPDATE', payload: dirCache[streamID] });
     res.status(200).send('Post request success /api/electron');
   }
   catch (e) {
-    console.log('Post to server failed:', e);
+    console.log('Post to server api/electron failed:', e);
     res.status(500).send('Post request failed /api/electron');
   }
   
 });
-
