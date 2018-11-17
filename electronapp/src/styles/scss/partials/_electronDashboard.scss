@@ -9,14 +9,14 @@
     flex-direction: column;
     align-items: center;     
 
-    .imageHeader{
+    .imageHeader {
       
       width:50px;
       height:50px;
       margin: .5em;
       background-color:black;
     }
-    .stream-controls{
+    .stream-controls {
       display:flex;
       justify-content: center;
       border: 2px solid black;
@@ -45,11 +45,11 @@
         display: flex;
         flex-direction: column;
         
-        .date-time{
+        .date-time {
           display:flex;
           flex-direction: column;
 
-          #date, #time{
+          #date, #time {
             font-size: 0.7rem;
             display: flex;
             margin: 0;
@@ -57,12 +57,12 @@
         }
       }
 
-      p{
+      p {
         font-size: 1.5em;
         height:20%;
       }
       
-      .controls{
+      .controls {
         display:flex;
         flex-direction: column;
         justify-content: space-evenly;

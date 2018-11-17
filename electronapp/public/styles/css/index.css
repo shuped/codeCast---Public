@@ -9,8 +9,20 @@
 .dashboard .streams {
   display: flex;
   flex-direction: column;
-  margin: 2rem;
-  padding: 1rem;
+  align-items: center;
+}
+.dashboard .streams .imageHeader {
+  width: 50px;
+  height: 50px;
+  margin: 0.5em;
+  background-color: black;
+}
+.dashboard .streams .stream-controls {
+  display: flex;
+  justify-content: center;
+  border: 2px solid black;
+  padding: 1em 2em;
+  width: 60%;
 }
 .dashboard .streams .container-header {
   color: #FFF;

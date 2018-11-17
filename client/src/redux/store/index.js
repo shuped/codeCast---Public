@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { rootReducer } from '../ducks/Ducktator';
+import { rootReducer } from '../_reducers/index.js';
 import createSocketMW from 'redux-socket.io';
 import socketIO from 'socket.io-client';
 import thunk from 'redux-thunk';
@@ -28,3 +28,5 @@ store.subscribe(() => {
 });
 
 export default store;
+
+//
