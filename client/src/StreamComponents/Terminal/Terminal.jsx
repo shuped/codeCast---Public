@@ -15,7 +15,7 @@ class Console extends Component {
       this.terminal.fit()
     };
     // TODO: put terminalRecord in redux when we implement archive video playback
-    this.state = { terminalRecord: {} };
+    this.state = { terminalRecord: {'0': '>>Browse the broadcaster\'s terminal output in this window.'} };
   }
 
   componentWillMount() {
@@ -34,11 +34,9 @@ class Console extends Component {
       this.terminal.write(data);
     })
     .on('terminalRecord', (terminalRecord) => {
-      if (terminalRecord) { // placehold sad path
-        this.setState({ terminalRecord });
-        let terminalRecordData = Object.values(terminalRecord).join('')
-        this.terminal.write(terminalRecordData);
-      };
+      this.setState({ terminalRecord });
+      let terminalRecordData = Object.values(terminalRecord).join('')
+      this.terminal.write(terminalRecordData);
     });
     io.emit('join', this.props.streamID)
   }
