@@ -36,12 +36,12 @@ class Stream extends Component {
           <div className="Filetree-display">
             <FileDirectory />
           </div>
-          {this.state.youtubeURL
-            ? <div className="Video-display">
-                <Video url={this.state.youtubeURL} />
-              </div>
-            : <div className="Stream-Info-card">
+          {this.state.status === 'scheduled'
+            ? <div className="Stream-Info-card">
                 <StreamInfoCard {...this.state} />
+              </div>
+            : <div className="Video-display">
+                <Video url={this.state.youtubeURL} />
               </div>
           }
           <div className="Chat-display">
