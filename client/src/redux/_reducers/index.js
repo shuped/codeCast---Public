@@ -5,7 +5,7 @@ import { directoryReducer } from './directory.reducer.js';
 import { chatReducer } from './chat.reducer.js';
 import { streamsReducer } from './streams.reducer.js';
 
-const appReducer = combineReducers({
+const allReducers = combineReducers({
   file: fileReducer,
   directory: directoryReducer,
   chat: chatReducer,
@@ -19,5 +19,5 @@ export const rootReducer = (state, action) => {
     state = { streams };
   };
 
-  return appReducer(state, action);
+  return allReducers(state, action);
 };
