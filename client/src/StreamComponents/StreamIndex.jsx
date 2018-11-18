@@ -47,7 +47,7 @@ class Stream extends Component {
             <LiveCodeDisplay />
           </div>
           <div className="Terminal-display">
-            <Terminal streamID={this.state.streamID}/>
+            <Terminal streamID={this.streamID}/>
           </div>
         </div>
       </div>
