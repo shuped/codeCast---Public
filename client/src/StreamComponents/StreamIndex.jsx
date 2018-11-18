@@ -4,6 +4,7 @@ import LiveCodeDisplay from './FileDisplay/LiveCodeDisplay.jsx';
 import Video from './VideoStream/VideoStream.jsx';
 import Terminal from './Terminal/Terminal.jsx';
 import FileDirectory from './FileDirectory/FileDirectory.jsx';
+import StreamInfoCard from './StreamInfoCard/StreamInfoCard.jsx';
 import { connect } from 'react-redux';
 import { streamsActions } from '../redux/_actions';
 import axios from '../redux/api.js';
@@ -35,9 +36,14 @@ class Stream extends Component {
           <div className="Filetree-display">
             <FileDirectory />
           </div>
-          <div className="Video-display">
-            <Video url={this.state.youtubeURL}/>
-          </div>
+          {this.state.youtubeURL
+            ? <div className="Video-display">
+                <Video url={this.state.youtubeURL} />
+              </div>
+            : <div className="Stream-Info-card">
+                <StreamInfoCard {...this.state} />
+              </div>
+          }
           <div className="Chat-display">
             <Chat />
           </div>
