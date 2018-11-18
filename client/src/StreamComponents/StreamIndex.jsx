@@ -7,6 +7,8 @@ import FileDirectory from './FileDirectory/FileDirectory.jsx';
 import StreamInfoCard from './StreamInfoCard/StreamInfoCard.jsx';
 import { connect } from 'react-redux';
 import { streamsActions } from '../redux/_actions';
+import { appActions } from '../redux/_actions';
+
 import axios from '../redux/api.js';
 
 class Stream extends Component {
@@ -15,6 +17,7 @@ class Stream extends Component {
     this.state = {};
     this.streamID = this.props.match.params.id;
   }
+
   componentDidMount() {
     this.props.joinRoom(this.streamID);
 
@@ -29,6 +32,11 @@ class Stream extends Component {
     });
 
   }
+
+  componentWillUnmount() {
+    this.props.resetStates();
+  }
+
   render() {
     return (
       <div className="stream-parent">
@@ -69,7 +77,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    joinRoom: (streamID) => dispatch(streamsActions.joinRoom(streamID))
+    joinRoom: (streamID) => dispatch(streamsActions.joinRoom(streamID)),
+    resetStates: () => dispatch(appActions.resetApp())
   };   
 }
 
