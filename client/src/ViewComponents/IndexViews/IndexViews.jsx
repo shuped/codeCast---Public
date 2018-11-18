@@ -33,8 +33,9 @@ function IndexViews (){
 					<Route exact path="/active" component={ ActiveStreams } className="index-view active" />
           <Route exact path="/scheduled" component={ ScheduledStreams } className="index-view scheduled" />
           <Route exact path="/archived" component={ ArchivedStreams } className="index-view archived" />
-					<Route path="/archived/:id" component={ Stream } />
           <Route path="/active/:id" component={ Stream } />
+					<Route path="/scheduled/:id" component={ Stream } />
+					<Route path="/archived/:id" component={ Stream } />
 				</Switch>
 			</div>
 		</div>
