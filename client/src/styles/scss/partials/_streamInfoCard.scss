@@ -1,0 +1,19 @@
+.Stream-Info-card {
+  div {
+    color: white;
+    span {
+      display: flex;
+      justify-content: space-between;
+      line-height: 4.5rem;
+      h2 {
+        display: inline-flex;
+        justify-content: flex-start
+      }
+    }
+    .card-img {
+      max-width: 2.5rem;
+      max-height: 2.5rem;
+      margin: 0.5rem;
+    } 
+  }
+}
