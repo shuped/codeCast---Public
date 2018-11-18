@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from '../../redux/api.js';
 
 class Video extends Component {
   constructor(props) {
