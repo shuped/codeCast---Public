@@ -12,11 +12,11 @@ Along with the live stream video, CodeCast can broadcast:
 
 - A fully-featured chat component for viewers, with desktop notifications for the broadcaster when they are mentioned.
 
-![CodeCast landing page screenshot](https://imgur.com/kHfRDoL "Landing page")
+![CodeCast landing page screenshot](https://imgur.com/kHfRDoL.png "Landing page")
 
-![CodeCast current streams page screenshpt](https://imgur.com/9Fbe4wF "Current Streams")
+![CodeCast current streams page screenshpt](https://imgur.com/9Fbe4wF.png "Current Streams")
 
-![CodeCast live stream in progress](https://imgur.com/IEbrA42 "A live stream in progress! Center pane is live stream video.")
+![CodeCast live stream in progress](https://imgur.com/IEbrA42.png "A live stream in progress! Center pane is live stream video.")
 
 ## To set up:
 - Clone this repo `git clone https://www.github.com/shuped/codeCast---Public' codeCast && cd codeCast`
