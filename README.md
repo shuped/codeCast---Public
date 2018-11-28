@@ -13,10 +13,9 @@ Along with the live stream video, CodeCast can broadcast:
 - A fully-featured chat component for viewers, with desktop notifications for the broadcaster when they are mentioned.
 
 ## To set up:
-- Fork and clone this repo
-- Run `npm run install-all` in root directory. If 'concurrently' isn't installed globally, run 'npm install' first.
+- Clone this repo 'git clone https://www.github.com/shuped/codeCast---Public codeCast && cd codeCast'
+- Run `npm run install-all` in root directory. If 'concurrently' isn't installed globally, run 'npm install' first
 - In Electron App directory run `npm run rebuild-pty` to rebuild the node-pty binaries against the Electron node version
-- For development, run `npm start` in the **ROOT DIRECTORY**. This will run the react scripts in `/client` and the server in `/server/server.js`
-- For Electron app to work **make sure that the server is running**. If server not active on Heroku, run locally
-- **COMMIT OFTEN AND ATOMICALLY**. Focus on one component at a time. 
-- Load the component you're working on in to App.jsx inside the empty div. This will render it on `localhost:3000` for you to reference. Nodemon will update any time you make changes.
+- For development, run `npm start` in the root directory. This will run the react scripts in `/client` and the server in `/server/server.js`
+- For Electron app to work **make sure that the server is running**. If server not active on Heroku or AWS, run locally
+- To start the Broadcaster electron application, run 'npm start' in the ElectronApp directory
