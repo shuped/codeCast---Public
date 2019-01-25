@@ -350,6 +350,7 @@
   background-color: #000000; }
   .nav .navLogo {
     height: 70%;
+    width: 100%;
     margin: 0.5em 1rem; }
   .nav .login-register {
     display: flex;
