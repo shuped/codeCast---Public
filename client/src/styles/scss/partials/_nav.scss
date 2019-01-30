@@ -1,20 +1,37 @@
+$large-break: 600px;
+$medium-break: 450px;
+
 .nav {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
-  height: 4rem;
   background-color: #000000;
 
+  @media screen and (max-width: $medium-break) {
+    display: block;
+  }
+
   .navLogo {
-    height: 70%;
-    width: 100%;
+    max-height: 70%;
+    max-width: 100%;
     margin: 0.5em 1rem;
+    @media screen and (max-width: $medium-break) {
+      margin: 0rem 0.3rem;
+    }
   }
 
   .login-register {
     display: flex;
     flex-direction: row;
+
+    @media screen and (max-width: $large-break) and (min-width: $medium-break) {
+      display: block;
+    }
+    @media screen and (max-width: $medium-break) {
+      display: flex;
+      justify-content: space-around;
+    }
 
     .navBtn {
       background-color: #bbbbbb;
@@ -27,10 +44,17 @@
       cursor: pointer;
       padding: 0.5rem;
       font-size: 0.75rem;
-      margin: 1rem 2rem 1rem 0rem;
+      margin: 1.5rem 1rem;
       width: 6rem;
       border-radius: 4px;
-  
+
+      @media screen and (max-width: $large-break) and (min-width: $medium-break) {
+        margin: 0.1rem 3rem;
+      }
+      @media screen and (max-width: $medium-break) {
+        margin: 1rem;
+      }
+
       &:hover {
         background-color: #777;
       }
