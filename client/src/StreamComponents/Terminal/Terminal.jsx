@@ -28,7 +28,7 @@ class Console extends Component {
 
   componentDidMount() {
     const io = socket
-    .connect('http://codecastserver-prod.us-west-2.elasticbeanstalk.com/:8080/terminal')
+    .connect('http://codecastserver-prod.us-west-2.elasticbeanstalk.com/terminal')
     .on('terminal', (timestamp, data) => {
       this.setState({ terminalRecord: {...this.terminalRecord, [timestamp]: data} });
       this.terminal.write(data);
