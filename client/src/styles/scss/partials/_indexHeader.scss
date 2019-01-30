@@ -1,3 +1,5 @@
+$small-break: 300px;
+
 .index-tabs {
   display: flex;
   flex-direction: row;
@@ -22,6 +24,9 @@
     letter-spacing: 2px;
     text-shadow: -1px 1px 1px black;
     width: 33.33%;
+    @media screen and (max-width: $small-break) {
+      font-size: 0.7rem;
+    }
 
     &:focus {
       background-color: #777;
