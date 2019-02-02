@@ -10,7 +10,7 @@ class LiveStreamNow extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: 'placeholder',
+      title: 'Untitled',
       user: 'Anon',
       userID: 1,
       description: 'No description provided. Get ready for a suprise!',
@@ -57,6 +57,8 @@ class LiveStreamNow extends React.Component {
     return (
       <main className="new-stream">
         <div className="inputs-container">
+        
+
           <h1 className="container-header">Start New Stream</h1>
 
           <div className="forms-container">
@@ -64,39 +66,36 @@ class LiveStreamNow extends React.Component {
             <form onSubmit={this.HandleSubmit}>
 
               <div className="title-input">
+              <div classNane="">
                 <h3>Title:</h3>
-                <input type="text" name='title' onChange={this.HandleInputChange} />
-              </div>
-
-              <div className="title-input">
+                <input type="text" placeholder="Title..." name='title' onChange={this.HandleInputChange} />
+                </div>
+                <div className="">
                 <h3>Username:</h3>
-                <input type="text" name='user' onChange={this.HandleInputChange} />
+                <input type="text" placeholder="John Carmack..." name='user' onChange={this.HandleInputChange} />
+              </div>
               </div>
 
               <div className="description-input">
-                <h3>Description:</h3>
-                <textarea type="text" rows="4" cols="90" name='description' onChange={this.HandleInputChange} />
+                <h3>Description</h3>
+                <textarea type="text" placeholder="What project are you sharing today?" rows="4" cols="90" name='description' onChange={this.HandleInputChange} />
               </div>
 
+              <div className="youtube-container">
+                <h3>YouTube URL:</h3>
+              
+                <p>Copy the embed link to the YouTube video you wish to broadcast!</p>
+                <input type="text" placeholder="youtube.com/embed/.." name='youtubeURL' onChange={this.HandleInputChange} />
+              
+              </div>
               <div className=" bottom-container">
-
-                <div className="youtube-container">
-                  <h3>YouTube URL:</h3>
-                  <div>
-                    <input type="text" placeholder="youtube.com/embed/.." name='youtubeURL' onChange={this.HandleInputChange} />
-                    <p>Copy the embed link to the YouTube video you wish to broadcast!</p>
-                  </div>
-                  <h3>Path to Project Directory:</h3>
-                  <div>
-                    <input type="text" placeholder="/Users/..." name='path' onChange={this.HandleInputChange} />
-                    <p>Copy the absolute path of the directory you want to broadcast. Note: users will have unrestricted access to files within the directory.</p>
-                  </div>
-                  
-                  <div className="b-bottom-container">
-                    <input type="submit" value="Go live!" />
-                  </div>
-                </div>
-                
+                <h3>Path to Project Directory:</h3>
+                <p>Copy the absolute path of the directory you want to broadcast. Note: users will have unrestricted access to files within the directory.</p>
+                <input type="text" placeholder="/Users/... or C:\..." name='path' onChange={this.HandleInputChange} />
+              </div>
+              
+              <div className="b-bottom-container">
+                <input className="launch-btn" type="submit" value="Go live!" />
               </div>
             </form>
           </div>
