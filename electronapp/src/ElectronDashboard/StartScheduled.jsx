@@ -56,7 +56,7 @@ class StartScheduled extends Component {
                   <h3 className="youtube-header">YouTube URL:</h3>
                   <input className="url-input" type="text" placeholder='Enter Youtube Live URL' onChange={this.YoutubeUrlInput} />
                 </div>
-                <input className="btn submit-button" type="submit" value="Go live!" />
+                <input className="btncc submit-button" type="submit" value="Go live!" />
             </form>
           </div>
         </div>

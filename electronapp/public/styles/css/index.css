@@ -104,6 +104,89 @@
   box-shadow: inset 0 0 0 3px rgba(0, 0, 0, 0.3);
 }
 
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.forms-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.title-input input {
+  margin-left: 1rem;
+}
+.title-input .grouping {
+  display: flex;
+  justify-content: space-around;
+  margin: 0rem 1rem;
+}
+
+.title-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.description-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.youtube-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.b-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.launch-btn {
+  width: 5rem;
+  border-radius: 4px;
+  padding: 0.3rem;
+  position: absolute;
+  left: 3rem;
+  bottom: 3rem;
+}
+
+.p {
+  margin-top: -1em;
+}
+
 .new-stream {
   color: #FFF;
 }
@@ -196,7 +279,7 @@
   max-height: 3rem;
   margin: 0.5em;
 }
-.nav-container .nav-header .btn.nav-link {
+.nav-container .nav-header .btncc.nav-link {
   font-size: 0.7rem;
   color: #000;
   max-width: 7rem;
@@ -241,7 +324,7 @@ a {
   min-width: 100vw;
 }
 
-.btn {
+.btncc {
   background-color: #bbb;
   color: #000;
   text-decoration: none;
@@ -259,7 +342,7 @@ a {
   min-width: 6rem;
   max-height: 2rem;
 }
-.btn:hover {
+.btncc:hover {
   background-color: #777;
 }
 

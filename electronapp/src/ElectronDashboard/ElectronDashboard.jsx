@@ -50,14 +50,14 @@ class Dashboard extends Component {
         <div>
           <div className="controls">
             <Link to='/StartScheduled' className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>
-              <Button id="start-btn" className="btn" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
+              <Button id="start-btncc" className="btncc" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
                 Start Stream
               </Button>
             </Link>
-            <Button id="edit-btn" className="btn" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
+            <Button id="edit-btncc" className="btncc" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
               Edit
             </Button>
-            <Button id="delete-btn" className="btn" type="primary" onClick={ () => this.props.deleteStream(streamID) }>
+            <Button id="delete-btncc" className="btncc" type="primary" onClick={ () => this.props.deleteStream(streamID) }>
               Delete
             </Button>
           </div>
