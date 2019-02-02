@@ -65,7 +65,7 @@ function createMainWindow() {
 
 
 let terminalWindow;
-function createTerminalWindow(streamID) {
+function createTerminalWindow(streamID, projectPath) {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 800,
@@ -82,7 +82,8 @@ function createTerminalWindow(streamID) {
 
 	terminalWindow.once('ready-to-show', () => {
 		// Pass streamID to renderer so terminal can include it in its data to server
-		terminalWindow.webContents.send('streamID', streamID);
+		console.log('terminalWindow' ,projectPath)
+		terminalWindow.webContents.send('streamID', streamID, projectPath);
 		terminalWindow.show();
 	});
 
@@ -174,8 +175,9 @@ app.on('activate', () => {
 	}
 });
 
-ipcMain.on('terminalOpen', (event, streamID) => {
-	createTerminalWindow(streamID);
+ipcMain.on('terminalOpen', (event, streamID, projectPath) => {
+	console.log('ipcmain', streamID, projectPath)
+	createTerminalWindow(streamID, projectPath);
 });
 
 let directory = null;
