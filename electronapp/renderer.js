@@ -7,7 +7,7 @@ const directoryWatcher  = require('./src/fileServices/directoryWatcher.js');
 const path              = require('path');
 const { ipcRenderer }   = window.require('electron');
 
-const io                = socket.connect('http://codecastserver-prod.us-west-2.elasticbeanstalk.com/terminal');
+const io                = socket.connect('http://http://codeCastServer-prod.us-west-2.elasticbeanstalk.com/terminal');
 
 // Initialize node-pty with an appropriate shell
 const shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
@@ -21,7 +21,8 @@ Terminal.applyAddon(fit);
 // Open terminal when streamID is sent from main
 // keeping the xterm and pty 'on' events in this ipc callback
 // ensures the initial shell prompt is sent to the streamID socket room
-ipcRenderer.on('streamID', (event, streamID) => {
+ipcRenderer.on('streamID', (event, streamID, projectPath) => {
+  console.log('ipcRender', projectPath)
   // Initialize xterm.js and attach it to the DOM
   const xterm1 = new Terminal({ scrollback: 9999999 });
   xterm1.open(document.getElementById('xterm1'));
@@ -37,5 +38,5 @@ ipcRenderer.on('streamID', (event, streamID) => {
     io.emit('data', streamID, data)
   });
 
-  directoryWatcher(path.join(__dirname, '..'), streamID);
+  directoryWatcher(projectPath || path.join(__dirname, '..'), streamID);
 });

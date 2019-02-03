@@ -65,7 +65,7 @@ function createMainWindow() {
 
 
 let terminalWindow;
-function createTerminalWindow(streamID) {
+function createTerminalWindow(streamID, projectPath) {
 	terminalWindow = new BrowserWindow({
 		backgroundColor: '#F7F7F7',
 		minWidth: 800,
@@ -82,15 +82,27 @@ function createTerminalWindow(streamID) {
 
 	terminalWindow.once('ready-to-show', () => {
 		// Pass streamID to renderer so terminal can include it in its data to server
-		terminalWindow.webContents.send('streamID', streamID);
+		terminalWindow.webContents.send('streamID', streamID, projectPath);
 		terminalWindow.show();
 	});
 
 	// Emitted when the window is closed.
 	terminalWindow.on('closed', function () {
-		// Dereference the window object, usually you would store windows
-		// in an array if your app supports multi windows, this is the time
-		// when you should delete the corresponding element.
+		// Notify server to mark the stream as archived
+		// TODO: This needs some identity checking in the future. anyone could end anyones stream.
+		axios({
+			method: 'put',
+			url: '/api/archivedStreams',
+			data: { streamID }, 
+			error: (err) => {
+				console.log('Axios error in terminal close.', err);
+			}
+		}).then((res) => {
+			console.log('Put success, archive successful');
+		}).catch((err) => {
+			console.error('Error, archive unsuccessful', err);
+		});
+
 		terminalWindow = null;
 	});
 }
@@ -174,8 +186,8 @@ app.on('activate', () => {
 	}
 });
 
-ipcMain.on('terminalOpen', (event, streamID) => {
-	createTerminalWindow(streamID);
+ipcMain.on('terminalOpen', (event, streamID, projectPath) => {
+	createTerminalWindow(streamID, projectPath);
 });
 
 let directory = null;

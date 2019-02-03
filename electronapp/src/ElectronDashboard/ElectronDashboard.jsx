@@ -50,14 +50,14 @@ class Dashboard extends Component {
         <div>
           <div className="controls">
             <Link to='/StartScheduled' className="startPlaceholder" onClick={ () => this.LaunchScheduledStream(streamID) }>
-              <Button id="start-btn" className="btn" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
+              <Button id="start-btncc" className="btncc" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
                 Start Stream
               </Button>
             </Link>
-            <Button id="edit-btn" className="btn" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
+            <Button id="edit-btncc" className="btncc" type="primary" onClick={ () => this.OpenEditControls(streamID) }>
               Edit
             </Button>
-            <Button id="delete-btn" className="btn" type="primary" onClick={ () => this.props.deleteStream(streamID) }>
+            <Button id="delete-btncc" className="btncc" type="primary" onClick={ () => this.props.deleteStream(streamID) }>
               Delete
             </Button>
           </div>
@@ -77,13 +77,14 @@ class Dashboard extends Component {
         <main className="dashboard">
           <div className="header">
             {/* <img src={ CodecastLogo } /> */}
-          
-            <div className="stream-controls">
-              <Link to='/LiveStreamNow' id="instant">Start a Stream</Link>
-              <Link to='/ScheduleNewStream' id="scheduleNew" >Schedule a Stream</Link>
-            </div>
           </div>
           <div className="streams">
+            <div className="info">
+              <p>Welcome to the initial mock up of CodeCast's streaming app! Thanks for downloading!</p>
+              <p>You can stream a project right now with the Stream Now button at the top - ready the embed link to your YouTube live stream or desired video</p>
+              <p>You can schedule a stream by clicking Schedule a Stream at the top - this will let users on the website know when and what you plan to stream!</p>
+              <p>If you want to begin a previously scheduled stream, below is the global list of scheduled streams. Note these are not user specific or restricted at this time.</p>
+            </div>
             <h2 className="container-header">Your Scheduled Streams</h2>
             { renderStreams }
           </div>

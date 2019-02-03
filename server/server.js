@@ -247,8 +247,16 @@ app.route('/api/archivedStreams/')
   .get((req, res) => {
     res.status(200).json(archiveData);
   })
-  .post((req, res) => {
-    res.send('To be implemented.')
+  .put((req, res) => {
+    const { streamID } = req.body;
+    
+    // Insert query
+    let activeStream = activeData[streamID];
+    activeStream.status = "archived";
+    archiveData[streamID] = activeStream;
+    delete activeData[streamID];
+
+    res.status(200).send(`Stream ${streamID} archived successfully.`)
   });
 
 app.get('/api/query', (req, res) => {

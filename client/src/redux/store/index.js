@@ -5,7 +5,7 @@ import socketIO from 'socket.io-client';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger'
 
-const io = socketIO.connect('http://codecastserver-prod.us-west-2.elasticbeanstalk.com/redux');
+const io = socketIO.connect('http://http://codeCastServer-prod.us-west-2.elasticbeanstalk.com/redux');
 
 const socketMW = createSocketMW(io, 'server/', { execute: executor });
 

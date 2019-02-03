@@ -7,7 +7,16 @@
   .streams {
     display: flex;
     flex-direction: column;
-    align-items: center;     
+    align-items: center;   
+    
+    .info {
+      text-align: center;
+      line-height: 1rem;
+      padding: 0rem 1rem;
+      margin: 1rem;
+      border: 1px solid white;
+      border-radius: 4px;
+    }
 
     .imageHeader {
       

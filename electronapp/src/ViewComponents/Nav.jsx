@@ -5,14 +5,15 @@ import CodecastLogo from '../assets/CODECAST_LOGO.png';
 function Nav() {
   return(
     <header className="nav-header">
-      <NavLink to="/"><img className="nav-logo" src={ CodecastLogo }></img></NavLink>
-      <div className="nav-links">
-        <NavLink className="btn home nav-link" to="/">Dashboard</NavLink>
+      {/* <NavLink to="/"><img className="nav-logo" src={ CodecastLogo }></img></NavLink> */}
 
-        <NavLink className="btn start-now nav-link" to="/LiveStreamNow">Stream Now</NavLink>
+      {/*nav-links and nav-controls*/}
+        <NavLink className="btncc home nav-link" to="/">Dashboard</NavLink>
 
-        {/* <NavLink className="btn schedule-new nav-link" to="/ScheduleNewStream">Schedule New</NavLink> */}
-      </div>
+        <NavLink className="btncc start-now nav-link" to="/LiveStreamNow">Stream Now!</NavLink>
+        
+        <NavLink className="btncc start-scheduled nav-link" to='/ScheduleNewStream' id="scheduleNew" >Schedule a Stream</NavLink>
+
     </header>
   );
 }
