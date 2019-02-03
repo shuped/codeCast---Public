@@ -105,8 +105,9 @@ const redux = io
 
       const actions = {
         'server/message': (type, payload) => {
-          console.log('server/message action triggered', payload);
-          redux.emit('action', { type: 'NEW_MESSAGE', payload });
+          let streamID = Object.keys(socket.rooms)[1];
+          console.log('server/message action triggered', payload, streamID);
+          redux.in(streamID).emit('action', { type: 'NEW_MESSAGE', payload });
         },
         'server/file_change': (type, payload) => {
           let streamID = Object.keys(socket.rooms)[1]; // socket.io/docs/server-api/#socket.rooms

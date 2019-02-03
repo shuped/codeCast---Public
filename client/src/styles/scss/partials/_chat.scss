@@ -9,7 +9,12 @@
   color: white;
   font-family: 'Courier New';
   font-size: 12px;
-
+  .img-msg {
+    max-width: 400px
+  }
+  a {
+    color: rgb(88, 88, 255)
+  }
 }
 .chat-container {
   display: flex;
@@ -56,7 +61,7 @@
         flex-direction: column-reverse;
         overflow-y: auto;
         scroll-behavior: smooth;
-        margin: 0.1rem 0.1rem 0.1rem 0.1rem;
+        margin: 0.1rem 0.1rem 4rem 0.1rem;
         
         .unreverse {
           flex-direction: column;
