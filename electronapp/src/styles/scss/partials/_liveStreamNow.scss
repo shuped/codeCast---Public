@@ -54,6 +54,25 @@
   justify-content: center;
   align-items: center;
 
+  .input-label-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    .warning-label{
+      font-size: 0.7rem;
+      max-width: 300px;
+    }
+
+    input {
+      height: 1rem;
+      width: 300px;
+      margin: 1rem;
+    }
+  }
+
 }
 .youtube-container {
   display: flex;
@@ -75,10 +94,9 @@
 .launch-btn {
   width: 5rem;
   border-radius: 4px;
-  padding: 0.3rem;
-  position: absolute;
-  left:3rem;
-  bottom: 3rem
+  padding: 0.4rem;
+  margin-top: 1rem;
+  margin-left: 3rem;
 }
 
 .p {
