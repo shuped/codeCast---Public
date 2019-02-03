@@ -7,7 +7,7 @@ const directoryWatcher  = require('./src/fileServices/directoryWatcher.js');
 const path              = require('path');
 const { ipcRenderer }   = window.require('electron');
 
-const io                = socket.connect('http://http://codeCastServer-prod.us-west-2.elasticbeanstalk.com/terminal');
+const io                = socket.connect('http://codeCastServer-prod.us-west-2.elasticbeanstalk.com/terminal');
 
 // Initialize node-pty with an appropriate shell
 const shell = process.env[os.platform() === 'win32' ? 'COMSPEC' : 'SHELL'];
