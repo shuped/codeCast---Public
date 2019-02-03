@@ -12,6 +12,7 @@ class ArchivedStreams extends Component {
 
   render() {  
     const renderStreams = this.props.archivedStreams
+      .reverse()
       .map((stream) => ArchivedStreamCard(stream))
 
     return (
