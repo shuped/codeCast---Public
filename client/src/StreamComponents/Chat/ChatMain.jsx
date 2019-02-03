@@ -18,23 +18,16 @@ class Chat extends Component {
       notifications: this.props.notifications,
       connections: 0
     };
-  
-  }
-
-  updateState = (entry, data) => {
-    const newData = this.state[entry].concat(data);
-
-    this.setState({ [entry]: newData });
   }
 
   generateRandomHexColor = () => {
     let decimal = Math.floor(Math.random()*16777215);
 
     let hex = (decimal < (200 * 200 * 200) && decimal > (50 * 50 * 50)) 
-      ? decimal.toString(16) : this.generateRandomHexColor();
+      ? decimal.toString(16)
+      : this.generateRandomHexColor();
     
     this.setState({ userColor: `#${hex}` });
-
     return hex;
   }
 
@@ -73,7 +66,14 @@ class Chat extends Component {
     this.generateRandomHexColor();
     this.props.alertConnection();
     console.log(store.getState());
-    
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom()
   }
 
   render() {
@@ -81,12 +81,19 @@ class Chat extends Component {
       <div className='chat-main'>
         <div className='chat-container'>
           <Messages>
-            <MessageList uuid={ uuid } 
+            <MessageList 
+              uuid={ uuid } 
               images={ this.state.images } 
-              notifications={ this.state.notifications } 
-              messages={ this.state.messages } 
-            />
-            <Chatbar addMessage={ this.addMessage } 
+              notifications={ this.props.notifications } 
+              messages={ this.props.messages } 
+            >
+              {/*Temporary measure to scroll to bottom of chat. This is referenced as children*/}
+              <div style={{ float:"left", clear: "both" }}
+                ref={(el) => { this.messagesEnd = el; }}>
+              </div>
+            </MessageList>
+            <Chatbar
+              addMessage={ this.addMessage } 
               updateCurrentUser={ this.updateCurrentUser } 
               currentUser={ this.state.currentUser } 
             />

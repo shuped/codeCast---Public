@@ -11,6 +11,10 @@
   color: white;
   font-family: 'Courier New';
   font-size: 12px; }
+  .chat-main .img-msg {
+    max-width: 400px; }
+  .chat-main a {
+    color: #5858ff; }
 
 .chat-container {
   display: flex;
@@ -51,7 +55,7 @@
         flex-direction: column-reverse;
         overflow-y: auto;
         scroll-behavior: smooth;
-        margin: 0.1rem 0.1rem 0.1rem 0.1rem; }
+        margin: 0.1rem 0.1rem 4rem 0.1rem; }
         .chat-container .messages-container .message-system .message-list-container .unreverse {
           flex-direction: column; }
           .chat-container .messages-container .message-system .message-list-container .unreverse .messages {
