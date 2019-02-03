@@ -12,14 +12,14 @@ class Console extends Component {
     this.setTermRef = (e) => {
       this.__term = e;
       this.terminal.open(this.__term);
-      this.terminal.fit()
+      // this.terminal.fit()
     };
     // TODO: put terminalRecord in redux when we implement archive video playback
     this.state = { terminalRecord: {'0': '>>Browse the broadcaster\'s terminal output in this window.'} };
   }
 
   componentWillMount() {
-    Terminal.applyAddon(fit);
+    // Terminal.applyAddon(fit);
     this.terminal = new Terminal({
       scrollback: 99999999,
       cursorBlink: true
