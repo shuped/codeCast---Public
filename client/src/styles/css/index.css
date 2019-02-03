@@ -241,7 +241,6 @@
   position: relative;
   overflow: scroll; }
   .Terminal-display .wrapper {
-    position: absolute;
     bottom: 0;
     display: flex;
     flex-wrap: nowrap; }
