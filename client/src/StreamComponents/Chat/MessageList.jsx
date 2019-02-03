@@ -1,6 +1,6 @@
 import React from 'react';
 
-function MessageList({ messages, notifications, uuid }) {
+function MessageList({ messages, notifications, uuid, children }) {
   const elems = [...messages, ...notifications];
 
   function isValidUrl(string) {
@@ -122,6 +122,7 @@ function MessageList({ messages, notifications, uuid }) {
 
   return (
     <div className="message-list-container">
+      {children}
       <div className="unreverse">
         {elemArr}
       </div>
