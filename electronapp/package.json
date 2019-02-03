@@ -4,11 +4,13 @@
   "description": "codeCast Broadcaster electron app, with xterm and react.",
   "main": "main.js",
   "scripts": {
+    "postinstall": "npm run rebuild-pty",
     "build-start": "npm run build && npm start",
     "start": "electron . --ignore-gpu-blacklist",
     "build": "webpack",
     "rebuild-pty": "electron-rebuild -f -w node-pty",
-    "sass": "sass --watch src/styles/scss/index.scss:public/styles/css/index.css"
+    "sass": "sass --watch src/styles/scss/index.scss:public/styles/css/index.css",
+    "build-prod": "cp -r . ../electron-v4/codeCast.app/Contents/Resources/app/"
   },
   "proxy": "http://localhost:8080/",
   "repository": "https://github.com/benji-leboe/codeCast",
