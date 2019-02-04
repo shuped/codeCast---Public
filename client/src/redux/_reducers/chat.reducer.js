@@ -12,7 +12,9 @@ export const chatReducer = (state = chatState, action) => {
   console.log(action.payload)
   switch(action.type) {
     case chatConstants.INCOMING_MESSAGE:
-      return {...state, messages: [...state.messages, action.payload.message] };
+      const messages = action.payload.message;
+      const arraylikePayload = Array.isArray(messages) ? messages : [messages];
+      return {...state, messages: [...state.messages, ...arraylikePayload] };
 
     case chatConstants.INCOMING_NOTIFICATION:
       return {...state, notifications: action.payload}
