@@ -16,7 +16,7 @@ function Nav() {
 						<a className="navBtn" href={AWS_S3_NATIVE_BUCKET + "codeCast.app.zip"}>
 							MacOS
 						</a>
-						<a className="navBtn" href={AWS_S3_NATIVE_BUCKET + "codeCast.exe.zip"}>
+						<a className="navBtn" href={AWS_S3_NATIVE_BUCKET + "codeCast.zip"}>
 							Windows
 						</a>
 						{/* <NavLink to="/login" className="navBtn">Windows</NavLink>
