@@ -111,8 +111,16 @@ const redux = io
         },
         'server/file_change': (type, payload) => {
           let streamID = Object.keys(socket.rooms)[1]; // socket.io/docs/server-api/#socket.rooms
-          let file = fileCache[streamID][payload.fileID]
-          socket.emit('action', { type: 'FILE_UPDATE', payload: file });
+          try {
+            let file = fileCache[streamID][payload.fileID]
+            socket.emit('action', { type: 'FILE_UPDATE', payload: file });
+          } catch (e) {
+            console.log('reference error - file ID')
+            console.log('streamid', streamID, 'dircache keys',Object.keys(dirCache), 'filecache keys', Object.keys(fileCache))
+            console.log('======')
+            console.log('payload', payload)
+            console.log('end error reporting')
+          }
         },
         'server/join': (type, payload) => {
           console.log(`Redux room ${payload.streamID} joined`);
@@ -205,8 +213,7 @@ app.route('/api/scheduledStreams/')
     // Upsert query to database might replace this
     // !!missing sad path!!
     // Think about date/time of scheduled versus started
-    const streamData = req.body;
-    const { streamID } = streamData;
+    const { streamID, ...streamData } = req.body;
 
     activeData[streamID] = {
       ...streamData
