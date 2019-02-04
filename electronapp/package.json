@@ -16,7 +16,7 @@
     "package": "electron-packager . --all --electron-version=1.8.4 --prune=true --out=release-builds --overwrite",
     "build-pack-deploy": "npm run build && electron-packager . --all --electron-version=1.8.4 --prune=true --out=release-builds --overwrite && npm run prod"
   },
-  "proxy": "http://codeCastServer-prod.us-west-2.elasticbeanstalk.com/",
+  "proxy": "http://localhost:8080/",
   "repository": "https://github.com/benji-leboe/codeCast",
   "author": "Spencer Shupe, Benji Leboe, Erik Mackie",
   "dependencies": {
