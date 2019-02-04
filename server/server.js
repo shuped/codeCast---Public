@@ -24,6 +24,7 @@ const fileCache          = {};
 const dirCache           = {};
 const pathCache          = {};
 const terminalRecord     = {};
+const chat               = [];
 
 // app.use(postgraphile(process.env.DATABASE_URL || 'postgres:///codecast', {
 //   'dynamicJson': true,
@@ -106,6 +107,7 @@ const redux = io
       const actions = {
         'server/message': (type, payload) => {
           let streamID = Object.keys(socket.rooms)[1];
+          chat[streamID].push(payload.message); // Feels bad. Implementing DB soon.
           console.log('server/message action triggered', payload, streamID);
           redux.in(streamID).emit('action', { type: 'NEW_MESSAGE', payload });
         },
@@ -122,6 +124,11 @@ const redux = io
               type: 'DIRECTORY_UPDATE',
               payload: dirCache[payload.streamID]
             });
+          };
+          if (chat[payload.streamID]) {
+            socket.emit ('action', { type: 'NEW_MESSAGE', payload: chat[payload.streamID] });
+          } else {
+            chat[payload.streamID] = [];
           };
         }
       };
