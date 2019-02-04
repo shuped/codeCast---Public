@@ -271,6 +271,8 @@
   flex-direction: column;
   align-items: center;
   margin: 3rem; }
+  .pageGrid .welcome-message p {
+    text-align: center; }
 .pageGrid .index-view {
   background-color: #777;
   width: 100vw; }
@@ -369,43 +371,50 @@
       display: block; } }
   .nav .navLogo {
     max-height: 70%;
-    max-width: 100%;
+    max-width: 360px;
     margin: 0.5em 1rem; }
     @media screen and (max-width: 450px) {
       .nav .navLogo {
         margin: 0rem 0.3rem; } }
-  .nav .login-register {
+  .nav .downloads-container {
     display: flex;
-    flex-direction: row; }
-    @media screen and (max-width: 600px) and (min-width: 450px) {
-      .nav .login-register {
-        display: block; } }
-    @media screen and (max-width: 450px) {
-      .nav .login-register {
-        display: flex;
-        justify-content: space-around; } }
-    .nav .login-register .navBtn {
-      background-color: #bbbbbb;
-      color: #4d4d4d;
-      text-decoration: none;
+    flex-direction: row;
+    font-size: 0.9rem;
+    color: white;
+    align-items: center; }
+    .nav .downloads-container .download-btns {
       display: flex;
-      justify-content: center;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      font-size: 0.75rem;
-      margin: 1.5rem 1rem;
-      width: 6rem;
-      border-radius: 4px; }
+      flex-direction: row; }
       @media screen and (max-width: 600px) and (min-width: 450px) {
-        .nav .login-register .navBtn {
-          margin: 0.1rem 3rem; } }
+        .nav .downloads-container .download-btns {
+          display: block; } }
       @media screen and (max-width: 450px) {
-        .nav .login-register .navBtn {
-          margin: 1rem; } }
-      .nav .login-register .navBtn:hover {
-        background-color: #777; }
+        .nav .downloads-container .download-btns {
+          display: flex;
+          justify-content: space-around; } }
+      .nav .downloads-container .download-btns .navBtn {
+        background-color: #bbbbbb;
+        color: #4d4d4d;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        margin: 1.5rem 1rem;
+        width: 6rem;
+        border-radius: 4px;
+        font-weight: bold; }
+        @media screen and (max-width: 600px) and (min-width: 450px) {
+          .nav .downloads-container .download-btns .navBtn {
+            margin: 0.1rem 3rem; } }
+        @media screen and (max-width: 450px) {
+          .nav .downloads-container .download-btns .navBtn {
+            margin: 1rem; } }
+        .nav .downloads-container .download-btns .navBtn:hover {
+          background-color: #777; }
 
 .Stream-Info-card div {
   color: white; }

@@ -14,49 +14,57 @@ $medium-break: 450px;
 
   .navLogo {
     max-height: 70%;
-    max-width: 100%;
+    max-width: 360px;
     margin: 0.5em 1rem;
     @media screen and (max-width: $medium-break) {
       margin: 0rem 0.3rem;
     }
   }
-
-  .login-register {
+  
+  .downloads-container {
     display: flex;
     flex-direction: row;
-
-    @media screen and (max-width: $large-break) and (min-width: $medium-break) {
-      display: block;
-    }
-    @media screen and (max-width: $medium-break) {
+    font-size: 0.9rem;
+    color: white;
+    align-items: center;
+    .download-btns {
       display: flex;
-      justify-content: space-around;
-    }
-
-    .navBtn {
-      background-color: #bbbbbb;
-      color: #4d4d4d;
-      text-decoration: none;
-      display: flex;
-      justify-content: center;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      font-size: 0.75rem;
-      margin: 1.5rem 1rem;
-      width: 6rem;
-      border-radius: 4px;
-
+      flex-direction: row;
+  
       @media screen and (max-width: $large-break) and (min-width: $medium-break) {
-        margin: 0.1rem 3rem;
+        display: block;
       }
       @media screen and (max-width: $medium-break) {
-        margin: 1rem;
+        display: flex;
+        justify-content: space-around;
       }
-
-      &:hover {
-        background-color: #777;
+  
+      .navBtn {
+        background-color: #bbbbbb;
+        color: #4d4d4d;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 0.5rem;
+        font-size: 0.75rem;
+        margin: 1.5rem 1rem;
+        width: 6rem;
+        border-radius: 4px;
+        font-weight: bold;
+  
+        @media screen and (max-width: $large-break) and (min-width: $medium-break) {
+          margin: 0.1rem 3rem;
+        }
+        @media screen and (max-width: $medium-break) {
+          margin: 1rem;
+        }
+  
+        &:hover {
+          background-color: #777;
+        }
       }
     }
   }
