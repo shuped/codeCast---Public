@@ -6,6 +6,9 @@ const uuidv1 = require('uuid/v1');
 const uuidv4 = require('uuid/v4');
 const axios = require('../../api');
 
+const platform = require('os').platform();
+const splitChar = (platform === 'win32') ? '\\' : '/';
+
 //Create promise.each function that takes array and resolver function
 Promise.each = async function(arr, fn) {
   //collect resolved promises
@@ -31,15 +34,15 @@ function resolver(promise) {
 //makes filepath from __dirname relative
 function makeRelative(fpath, root) {
   //split root and filepath to compare
-  let pathArr = fpath.split('/');
-  let rootArr = root.split('/');
+  let pathArr = fpath.split(splitChar);
+  let rootArr = root.split(splitChar);
 
   //compare path and root nodes
   let relative = pathArr.filter((node, i) => {
     return node !== rootArr[i];
   });
   //return relative path as string
-  return relative.join('/');
+  return relative.join(splitChar);
 }
 
 //returns new promise with Buffer object for async file read
@@ -57,7 +60,7 @@ async function fileReader(root, fpath, target) {
   //concat fpath array and join to root to make absolute
   let filePath;
 
-  Array.isArray(fpath) ? filePath = fpath.join('/') : filePath = fpath;
+  Array.isArray(fpath) ? filePath = fpath.join(splitChar) : filePath = fpath;
 
   let readTarget = path.join(root, filePath, target);
 
@@ -80,7 +83,7 @@ async function makeJSON(array, root, targetDir, streamID) {
     //set variable for object traversal
     let current = dirObj;
     //split filepath and assign filename to variable
-    let fpath = file.split('/');
+    let fpath = file.split(splitChar);
     let targetFile = fpath.pop();
     //list of files and extensions to ignore
     const ignore = ['.ico', '.png', '.jpg', '.DS_Store', '.svg', 
@@ -105,7 +108,7 @@ async function makeJSON(array, root, targetDir, streamID) {
             let staticID = uuidv4();
             await promises.push({ id: [fileID], promise: fileReader(root, fpath, targetFile) });
             current[staticID] = {fileNames: [targetFile], fileIDs: [fileID]};
-            pathObj[staticID] = fpath.join('/');
+            pathObj[staticID] = fpath.join(splitChar);
           }
         });
       //if child of root dir append to root object and do same as above
@@ -114,7 +117,7 @@ async function makeJSON(array, root, targetDir, streamID) {
         let staticID = uuidv4();
         await promises.push({ id: [fileID], promise: fileReader(root, fpath, targetFile) });
         current[staticID] = {fileNames: [targetFile], fileIDs: [fileID]};
-        pathObj[staticID] = fpath.join('/');
+        pathObj[staticID] = fpath.join(splitChar);
         
       }
     }

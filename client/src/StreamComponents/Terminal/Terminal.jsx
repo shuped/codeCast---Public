@@ -12,14 +12,14 @@ class Console extends Component {
     this.setTermRef = (e) => {
       this.__term = e;
       this.terminal.open(this.__term);
-      this.terminal.fit()
+      // this.terminal.fit()
     };
     // TODO: put terminalRecord in redux when we implement archive video playback
     this.state = { terminalRecord: {'0': '>>Browse the broadcaster\'s terminal output in this window.'} };
   }
 
   componentWillMount() {
-    Terminal.applyAddon(fit);
+    // Terminal.applyAddon(fit);
     this.terminal = new Terminal({
       scrollback: 99999999,
       cursorBlink: true
@@ -28,7 +28,7 @@ class Console extends Component {
 
   componentDidMount() {
     const io = socket
-    .connect('http://localhost:8080/terminal')
+    .connect('http://codeCastServer-prod.us-west-2.elasticbeanstalk.com/terminal')
     .on('terminal', (timestamp, data) => {
       this.setState({ terminalRecord: {...this.terminalRecord, [timestamp]: data} });
       this.terminal.write(data);

@@ -113,8 +113,16 @@ const redux = io
         },
         'server/file_change': (type, payload) => {
           let streamID = Object.keys(socket.rooms)[1]; // socket.io/docs/server-api/#socket.rooms
-          let file = fileCache[streamID][payload.fileID]
-          socket.emit('action', { type: 'FILE_UPDATE', payload: file });
+          try {
+            let file = fileCache[streamID][payload.fileID]
+            socket.emit('action', { type: 'FILE_UPDATE', payload: file });
+          } catch (e) {
+            console.log('reference error - file ID')
+            console.log('streamid', streamID, 'dircache keys',Object.keys(dirCache), 'filecache keys', Object.keys(fileCache))
+            console.log('======')
+            console.log('payload', payload)
+            console.log('end error reporting')
+          }
         },
         'server/join': (type, payload) => {
           console.log(`Redux room ${payload.streamID} joined`);
@@ -171,7 +179,13 @@ const terminal = io
 
     socket.on('data', (streamID, data) => {
       let now = Date.now();
-      terminalRecord[streamID][now] = data;
+      try {
+        terminalRecord[streamID][now] = data;
+      } catch (e) {
+        // This is being caused by lack of heartbeat in socket. Fix soon.
+        console.log('Reference error')
+        console.log(streamID, Object.keys(terminalRecord))
+      }
       terminal.in(streamID).emit('terminal', now, data);
     });
     
@@ -212,8 +226,7 @@ app.route('/api/scheduledStreams/')
     // Upsert query to database might replace this
     // !!missing sad path!!
     // Think about date/time of scheduled versus started
-    const streamData = req.body;
-    const { streamID } = streamData;
+    const { streamID, ...streamData } = req.body;
 
     activeData[streamID] = {
       ...streamData
@@ -325,6 +338,9 @@ app.post('/api/electron', (req, res) => {
   }
   catch (e) {
     console.log('Post to server api/electron failed:', e);
+    fileCache[streamID] = 'Something was not initialized properly. Please try again.'
+    dirCache[streamID] = 'Something was not initialized properly. Please try again.'
+    pathCache[streamID] = 'Something was not initialized properly. Please try again.'
     res.status(500).send('Post request failed /api/electron');
   }
   

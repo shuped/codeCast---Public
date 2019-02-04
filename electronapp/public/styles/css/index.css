@@ -14,7 +14,10 @@
 .dashboard .streams .info {
   text-align: center;
   line-height: 1rem;
-  padding: 0rem 2rem;
+  padding: 0rem 1rem;
+  margin: 1rem;
+  border: 1px solid white;
+  border-radius: 4px;
 }
 .dashboard .streams .imageHeader {
   width: 50px;
@@ -159,6 +162,22 @@
   justify-content: center;
   align-items: center;
 }
+.bottom-container .input-label-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.bottom-container .input-label-container .warning-label {
+  font-size: 0.7rem;
+  max-width: 300px;
+}
+.bottom-container .input-label-container input {
+  height: 1rem;
+  width: 300px;
+  margin: 1rem;
+}
 
 .youtube-container {
   display: flex;
@@ -177,10 +196,9 @@
 .launch-btn {
   width: 5rem;
   border-radius: 4px;
-  padding: 0.3rem;
-  position: absolute;
-  left: 3rem;
-  bottom: 3rem;
+  padding: 0.4rem;
+  margin-top: 1rem;
+  margin-left: 3rem;
 }
 
 .p {
@@ -215,6 +233,10 @@
 .new-stream .inputs-container .forms-container form .bottom-container {
   display: inline-flex;
   justify-content: space-between;
+}
+.new-stream .inputs-container .forms-container form .schedule-btn {
+  width: 10rem;
+  margin-left: 16px;
 }
 
 .start-scheduled {

@@ -66,7 +66,7 @@ class LiveStreamNow extends React.Component {
             <form onSubmit={this.HandleSubmit}>
 
               <div className="title-input">
-              <div classNane="">
+              <div className="">
                 <h3>Title:</h3>
                 <input type="text" placeholder="Title..." name='title' onChange={this.HandleInputChange} />
                 </div>
@@ -90,8 +90,11 @@ class LiveStreamNow extends React.Component {
               </div>
               <div className=" bottom-container">
                 <h3>Path to Project Directory:</h3>
-                <p>Copy the absolute path of the directory you want to broadcast. Note: users will have unrestricted access to files within the directory.</p>
-                <input type="text" placeholder="/Users/... or C:\..." name='path' onChange={this.HandleInputChange} />
+                <p>Copy the absolute path of the directory you want to broadcast. Note: users will have unrestricted access to files within the directory. </p>
+                <div className="input-label-container">
+                  <input type="text" placeholder="/Users/... or C:\..." name='path' onChange={this.HandleInputChange} /> 
+                  <p className="warning-label">Streaming an excessively large directory like your Downloads or Program Files may cause this application to become unusable at this time.</p>
+                </div>              
               </div>
               
               <div className="b-bottom-container">

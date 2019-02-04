@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'public/build'),
     filename: 'bundle.js',
-    publicPath: path.join(__dirname,'public/build/') // change in production to '/'
+    publicPath: "./"
   },
 
   module: {

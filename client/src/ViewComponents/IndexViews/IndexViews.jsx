@@ -25,9 +25,9 @@ function IndexViews (){
 					<Route exact path="/" render={() => (
 						<div className="welcome-message">
 							<h1>Welcome to CodeCast!</h1>
-							<p>CodeCast is a platform for streaming live videos and tutorials to anyone, anywhere.</p>
-							<p>Stream video, terminal output and your project directory, allowing you to reach and teach your viewers like never before!</p>
-							<p>Choose one of the links in the top nav to check out upcoming, past and active streams!</p>
+							<p>CodeCast is a platform for streaming live programming tutorials to any audience.</p>
+							<p>Stream video, developer console output and your project directory all in real time, allowing for a better contextual understanding of the project!</p>
+							<p>Choose one of the links in the top nav to check out upcoming, past and active streams, or download the app and start streaming!</p>
 						</div>
 					)} />
 					<Route exact path="/active" component={ ActiveStreams } className="index-view active" />
