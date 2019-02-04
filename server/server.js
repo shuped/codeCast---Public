@@ -134,7 +134,9 @@ const redux = io
             });
           };
           if (chat[payload.streamID]) {
-            socket.emit ('action', { type: 'NEW_MESSAGE', payload: chat[payload.streamID] });
+            chat[payload.streamID].map(message => {
+              socket.emit ('action', { type: 'NEW_MESSAGE', payload: { message } });
+            })
           } else {
             chat[payload.streamID] = [];
           };
