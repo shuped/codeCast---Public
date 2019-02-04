@@ -4,3 +4,4 @@ build
 directory.json
 content.json
 filepaths.json
+release-builds/

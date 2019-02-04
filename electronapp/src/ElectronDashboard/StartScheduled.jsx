@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'antd';
 import { Input, Select } from 'antd';
 import { connect } from 'react-redux';
+import axios from '../../api.js'
 import { putScheduledStream } from '../redux/ducks/streamsDuck.js'
 
 import { withRouter, Link } from 'react-router-dom';
@@ -17,27 +18,54 @@ class StartScheduled extends Component {
   constructor() {
     super();
     this.state = {
-      youtubeURL: 'Enter the URL for your youtube LiveStream here'
+      youtubeURL: 'Enter the URL for your youtube LiveStream here',
+      path: null
     };
   };
 
-  YoutubeUrlInput = (event) => {
-    this.setState({youtubeURL: event.target.value})
-  }
+  HandleInputChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value });
+    console.log(event.target, event.target.value)
+  };
+
+  // HandleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   this.props.startScheduledStream({
+  //     ...this.props.stagedStream,
+  //     ...this.state,
+  //     status: 'active'
+  //   });
+  //   // TODO: React route to Streaming view (chat?) or dashboard
+  //   ipcRenderer.send('terminalOpen', res.data.streamID, this.state.path)
+  //   console.log(this.state);
+  //   this.props.history.push('/');
+  // }
 
   HandleSubmit = (event) => {
     event.preventDefault();
+    // TODO: check form validation before terminalOpen and form submit
 
-    this.props.startScheduledStream({
-      ...this.props.stagedStream,
-      status: 'active',
-      youtubeURL: this.state.youtubeURL
-    });
-    // TODO: React route to Streaming view (chat?) or dashboard
-    ipcRenderer.send('terminalOpen', true);
-    console.log(this.state);
-    this.props.history.push('/');
-  }
+    // Post stream to server and retrive streamID on success
+    axios({
+      method: 'put',
+      url: '/api/scheduledStreams/',
+      data: {
+        ...this.props.stagedStream,
+        ...this.state,
+        status: 'active'
+      }
+    }).then((res) => {
+      console.log('Post scheduled API streams success', res);
+      // Send streamID to renderer.js for socket room
+      ipcRenderer.send('terminalOpen', res.data.streamID, this.state.path)
+      // TODO: show broadcasting view
+      this.props.history.push('/');
+    }).catch((err) => {
+      console.error('Error: Post scheduled stream rejected:', err.data);
+      // TODO: Render error element
+    })
+  };
 
   render() {  
     return (
@@ -52,11 +80,25 @@ class StartScheduled extends Component {
           <div className="forms-container">
             <form onSubmit={this.HandleSubmit}>
 
-                <div className="youtube-container">
-                  <h3 className="youtube-header">YouTube URL:</h3>
-                  <input className="url-input" type="text" placeholder='Enter Youtube Live URL' onChange={this.YoutubeUrlInput} />
-                </div>
-                <input className="btncc submit-button" type="submit" value="Go live!" />
+            <div className="youtube-container">
+                <h3>YouTube URL:</h3>
+              
+                <p>Copy the embed link to the YouTube video you wish to broadcast!</p>
+                <input type="text" placeholder="youtube.com/embed/.." name='youtubeURL' onChange={this.HandleInputChange} />
+              
+              </div>
+              <div className=" bottom-container">
+                <h3>Path to Project Directory:</h3>
+                <p>Copy the absolute path of the directory you want to broadcast. Note: users will have unrestricted access to files within the directory. </p>
+                <div className="input-label-container">
+                  <input type="text" placeholder="/Users/... or C:\..." name='path' onChange={this.HandleInputChange} /> 
+                  <p className="warning-label">Streaming an excessively large directory like your Downloads or Program Files may cause this application to become unusable at this time.</p>
+                </div>              
+              </div>
+              
+              <div className="b-bottom-container">
+                <input className="launch-btn" type="submit" value="Go live!" />
+              </div>
             </form>
           </div>
         </div>
