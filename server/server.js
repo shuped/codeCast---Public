@@ -172,7 +172,13 @@ const terminal = io
 
     socket.on('data', (streamID, data) => {
       let now = Date.now();
-      terminalRecord[streamID][now] = data;
+      try {
+        terminalRecord[streamID][now] = data;
+      } catch (e) {
+        // This is being caused by lack of heartbeat in socket. Fix soon.
+        console.log('Reference error')
+        console.log(streamID, Object.keys(terminalRecord))
+      }
       terminal.in(streamID).emit('terminal', now, data);
     });
     
@@ -325,6 +331,9 @@ app.post('/api/electron', (req, res) => {
   }
   catch (e) {
     console.log('Post to server api/electron failed:', e);
+    fileCache[streamID] = 'Something was not initialized properly. Please try again.'
+    dirCache[streamID] = 'Something was not initialized properly. Please try again.'
+    pathCache[streamID] = 'Something was not initialized properly. Please try again.'
     res.status(500).send('Post request failed /api/electron');
   }
   
