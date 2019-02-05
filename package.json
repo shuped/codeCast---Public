@@ -12,7 +12,7 @@
     "react": "npm start --prefix client",
     "electron": "npm start --prefix electronapp",
     "start": "concurrently --kill-others-on-fail 'npm run react' 'npm run server'",
-    "electron-start": "concurrently --kill-others-on-fail 'npm run server' 'wait-on http://codecastserver-prod.us-west-2.elasticbeanstalk.com/ && npm run electron'"
+    "electron-start": "concurrently --kill-others-on-fail 'npm run server' 'wait-on http://localhost:8080/ && npm run electron'"
   },
   "repository": {
     "type": "git",
