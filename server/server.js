@@ -13,7 +13,7 @@ const scheduleData     = require('./testData/scheduleData.json');
 const archiveData      = require('./testData/archiveData.json');
 
 const server           = http.listen((PORT || 8080), () => console.log('App listening on ' + (PORT || 8080)));
-const io               = require('socket.io')(server);
+const io               = require('socket.io')(server, { 'pingInterval': 2000, 'pingTimeout': 5000 });
 
 const rootPath         = path.join(__dirname, '..');
 const buildPath        = path.join(rootPath, 'client', 'build');
