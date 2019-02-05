@@ -342,8 +342,7 @@
   .stream-parent .component-container2 {
     display: grid;
     grid-template-columns: 50% 50%;
-    grid-template-areas: "Code Terminal";
-    max-height: 47.8vh; }
+    grid-template-areas: "Code Terminal"; }
     .stream-parent .component-container2 .Code-display {
       grid-column: span 6;
       position: relative;

@@ -40,7 +40,6 @@
     display: grid;
     grid-template-columns: 50% 50%;
     grid-template-areas: "Code Terminal";
-    max-height: 47.8vh;
 
     .Code-display {
       grid-column: span 6;
